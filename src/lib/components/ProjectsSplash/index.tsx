@@ -1,0 +1,1 @@
+export { ProjectsSplash } from "./ProjectsSplash";
