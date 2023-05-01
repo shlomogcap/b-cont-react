@@ -15,7 +15,7 @@ export const PageLayout = ({
       <TopBar title={title} />
       <div className="page">
         <Sidebar title="" />
-        <main>{children}</main>
+        <main className="content">{children}</main>
       </div>
       <footer className="footer">
         <p className="copy">

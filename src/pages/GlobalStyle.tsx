@@ -1,3 +1,4 @@
+import { Breakpoints } from "@/lib/components/consts/stylesConsts";
 import { createGlobalStyle } from "styled-components";
 
 type Props = {
@@ -51,6 +52,21 @@ export const GlobalStyle = createGlobalStyle<Props>`
     --box-shadow-1: 0 1rem 2rem rgba(0, 0, 0, 0.2);
     --box-shadow-2: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
     --box-shadow-3: 0.1rem 0.9rem 2rem rgba(0, 0, 0, 0.4);
+
+
+    font-size: 62.5%;
+    @media only screen and (max-width: ${Breakpoints.Phone}) {
+        font-size: 50%;
+    }
+    @media only screen and (max-width: ${Breakpoints.TabPort}) {
+        font-size: 55%;
+    }
+    @media only screen and (max-width: ${Breakpoints.TabLand}) {
+        font-size: 60%;
+    }
+    @media only screen and (min-width: ${Breakpoints.BigDesktop}) {
+        font-size: 65%;
+    }
 }
 
 /* GLOBAL RESET */
@@ -60,20 +76,16 @@ export const GlobalStyle = createGlobalStyle<Props>`
     &,
     &::before,
     &::after {
-        font-size: 62.5%;
         box-sizing: border-box;
-        @media only screen and (max-width: 75em) {
-            font-size: 60%; //1 rem = 9px, 9/16 = 50%
-        }
-        @media only screen and (max-width: 56.25em) {
-            font-size: 55%; //1 rem = 8px, 8/16 = 50%
-        }
-        @media only screen and (max-width: 37.5em) {
-            font-size: 50%; //1 rem = 8px, 8/16 = 50%
-        }
-        @media only screen and (min-width: 112.5em) {
-            font-size: 65%; //1rem = 12, 12/16
-        }
     }
+}
+body {
+    direction: var(--dir);
+    font-family: var(--def-font-family);
+    font-size: var(--def-font-size);
+    font-weight: var(--font-w-1);
+    line-height: 1.8;
+    user-select: none;
+    color:var(--color-black)
 }
 `;
