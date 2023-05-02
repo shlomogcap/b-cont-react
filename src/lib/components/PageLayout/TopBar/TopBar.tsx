@@ -7,7 +7,9 @@ export const TopBar = ({ title }: TopBarProps) => {
   return (
     <StyledTopBar>
       <Logo />
-      <div className='title'>{title}</div>
+      <div className='title'>
+        <span className='title-text'>{title}</span>
+      </div>
       <div className='user-box'>SG</div>
       <Breadcrumbs />
     </StyledTopBar>

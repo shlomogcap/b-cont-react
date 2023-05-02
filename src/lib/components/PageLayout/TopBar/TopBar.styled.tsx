@@ -20,18 +20,26 @@ export const StyledTopBar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    .heading {
-      color: var(--color-active);
-      justify-self: center;
-    }
     &-text {
-      font-size: 3.2rem;
+      justify-self: center;
+      font-size: 2rem;
       font-weight: 500;
       color: var(--color-active);
     }
   }
   & .user-box {
     grid-column: 4;
+    //TODO: replace with userImage
+    border-radius: 50%;
+    padding: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    margin-inline-end: 0.5rem;
+    color: white;
   }
   & ${StyledBreadcrumbs} {
     grid-row: 2;
