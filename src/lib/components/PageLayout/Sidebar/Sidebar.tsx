@@ -1,3 +1,6 @@
+import { DISPLAY_TEXTS } from '../../consts/displayTexts';
+import { ProjectType } from '../../consts/projectTypes';
+import { Routes } from '../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
@@ -9,45 +12,38 @@ import { StyledSidebar } from './Sidebar.styled';
 import { SidebarProps } from './Sidebar.types';
 import { SidebarLink } from './SidebarLink';
 
-const PROJECTS_ROUTE = '/app/projects';
-const VERNDORS_ROUTE = '/app/vendors';
-const SETTINGS_ROUTE = '/app/settings';
-
-enum ProjectType {
-  Residential = 'residential',
-  PublicSpace = 'publicSpace',
-  Entrepreneurship = 'entrepreneurship',
-}
+const PROJECT_TYPE_PARAM = 'projectType';
 
 export const Sidebar = ({ title }: SidebarProps) => {
+  const projectTypeTexts = DISPLAY_TEXTS.he.projectType;
   return (
     <StyledSidebar>
       <nav className='nav'>
         <SidebarLink
-          text='מגורים'
-          href={`${PROJECTS_ROUTE}?projectType=${ProjectType.Residential}`}
+          text={projectTypeTexts[ProjectType.Residential]}
+          href={`${Routes.Projects}?${PROJECT_TYPE_PARAM}=${ProjectType.Residential}`}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
-          text='ציבורי'
-          href={`${PROJECTS_ROUTE}?projectType=${ProjectType.PublicSpace}`}
+          text={projectTypeTexts[ProjectType.PublicSpace]}
+          href={`${Routes.Projects}?${PROJECT_TYPE_PARAM}=${ProjectType.PublicSpace}`}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
-          text='יזמות'
-          href={`${PROJECTS_ROUTE}?projectType=${ProjectType.Entrepreneurship}`}
+          text={projectTypeTexts[ProjectType.Entrepreneurship]}
+          href={`${Routes.Projects}?${PROJECT_TYPE_PARAM}=${ProjectType.Entrepreneurship}`}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
         <div className='hr' />
         <SidebarLink
           text='קבלנים'
-          href={VERNDORS_ROUTE}
+          href={Routes.Vendors}
           icon={<VendorsIcon />}
         />
         <div className='hr' />
         <SidebarLink
           text='הגדרות'
-          href={SETTINGS_ROUTE}
+          href={Routes.Settings}
           icon={<SettingsIcon />}
         />
       </nav>

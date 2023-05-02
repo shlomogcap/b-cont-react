@@ -1,7 +1,25 @@
+import { ReactNode } from 'react';
 import { PageLayout } from '../PageLayout';
+import { BlocksGrid } from '../commons/BlocksGrid';
+import { BlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
+import { DISPLAY_TEXTS } from '../consts/displayTexts';
+import { PROJECT_TYPES_ICON_MAPPING } from '../consts/projectTypeIconMapping';
+import { ProjectType } from '../consts/projectTypes';
+import { Routes } from '../consts/routes';
+
+const createProjectItems = (
+  iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
+): BlocksGridProps['items'] =>
+  Object.entries(iconMap).map(([id, icon]) => ({
+    id,
+    icon,
+    text: DISPLAY_TEXTS.he.projectType[id as ProjectType],
+  }));
 
 export const ProjectsSplash = () => {
   return (
-    <PageLayout title='פרוייקטים'>TODO: add projects list grid</PageLayout>
+    <PageLayout title={DISPLAY_TEXTS.he.routeNames[Routes.Projects]}>
+      <BlocksGrid items={createProjectItems(PROJECT_TYPES_ICON_MAPPING)} />
+    </PageLayout>
   );
 };
