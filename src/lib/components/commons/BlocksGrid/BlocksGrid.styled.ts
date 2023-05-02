@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { activateButtonMixin } from '../../styles/mixins/activateButton';
 
 export const StyledBlockElement = styled.div`
   display: grid;
@@ -15,8 +16,8 @@ export const StyledBlockElement = styled.div`
   cursor: pointer;
   color: var(--color-active);
   grid-auto-rows: auto;
-  /* @include activateButton();TODO: */
   transition: all 0.2s ease-in-out;
+  ${activateButtonMixin}
   .icon {
     fill: var(--color-active);
     width: 5rem;
