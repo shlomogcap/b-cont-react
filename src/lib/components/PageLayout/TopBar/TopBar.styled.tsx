@@ -15,13 +15,6 @@ export const StyledTopBar = styled.div`
   grid-template-rows: min-content 3rem;
   align-items: center;
   gap: 0.2rem 2rem;
-  & .logo {
-    grid-column: 1;
-    width: 5rem;
-    height: 5rem;
-    //TODO: replace with image
-    background-color: red;
-  }
   & .title {
     grid-column: 2;
     display: flex;
