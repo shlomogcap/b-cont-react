@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\""
   },
   "dependencies": {
     "@popperjs/core": "^2.11.7",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/firebase": "^3.2.1",
     "@types/styled-components": "^5.1.26",
-    "babel-plugin-styled-components": "^2.1.1"
+    "babel-plugin-styled-components": "^2.1.1",
+    "prettier": "2.8.8"
   }
 }

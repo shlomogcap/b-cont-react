@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function ContractsPage() {
   const { replace, query } = useRouter();
@@ -7,7 +7,7 @@ export default function ContractsPage() {
   useEffect(() => {
     if (projectId) {
       replace({
-        pathname: "/app/projects/[projectId]",
+        pathname: '/app/projects/[projectId]',
         query: { projectId },
       });
     }

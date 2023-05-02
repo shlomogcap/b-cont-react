@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { StyledBreadcrumbs } from "../Breadcrubms/Breadcrumbs.styled";
+import styled from 'styled-components';
+import { StyledBreadcrumbs } from '../Breadcrubms/Breadcrumbs.styled';
 
 export const StyledTopBar = styled.div`
   box-shadow: var(--box-shadow-light);

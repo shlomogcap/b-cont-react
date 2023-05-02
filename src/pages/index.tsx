@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function ProjectSplashPage() {
   const { replace } = useRouter();
   useEffect(() => {
     replace({
-      pathname: "/app",
+      pathname: '/app',
     });
   }, [replace]);
   return null;

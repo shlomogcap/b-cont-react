@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function SectionsPage() {
   const { replace, query } = useRouter();
   useEffect(() => {
-    const { projectId = "", contractId = "" } = query;
+    const { projectId = '', contractId = '' } = query;
     if (projectId && contractId) {
       replace({
-        pathname: "/app/projects/[projectId]/contracts/[contractId]",
+        pathname: '/app/projects/[projectId]/contracts/[contractId]',
         query: { projectId, contractId },
       });
     }

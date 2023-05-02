@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 export default function BudgetChaptersPage() {
   const { query } = useRouter();

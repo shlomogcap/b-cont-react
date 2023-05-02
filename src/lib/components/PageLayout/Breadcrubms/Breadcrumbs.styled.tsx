@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Breakpoints } from "../../consts/stylesConsts";
+import styled from 'styled-components';
+import { Breakpoints } from '../../consts/stylesConsts';
 
 export const StyledBreadcrumbs = styled.div`
   display: grid;

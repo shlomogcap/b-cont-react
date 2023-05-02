@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
-import { createPopper, Instance } from "@popperjs/core";
-import { TooltipProps } from "./Tooltip.types";
-import { StyledTooltip } from "./Tooltip.styled";
+import React, { useRef, useState, useEffect } from 'react';
+import { createPopper, Instance } from '@popperjs/core';
+import { TooltipProps } from './Tooltip.types';
+import { StyledTooltip } from './Tooltip.styled';
 
 export const Tooltip = ({ content, children }: TooltipProps) => {
   const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
@@ -27,22 +27,22 @@ export const Tooltip = ({ content, children }: TooltipProps) => {
         referenceElement.current,
         popperElement.current,
         {
-          placement: "top",
+          placement: 'top',
           modifiers: [
             {
-              name: "offset",
+              name: 'offset',
               options: {
                 offset: [0, 8],
               },
             },
             {
-              name: "preventOverflow",
+              name: 'preventOverflow',
               options: {
                 padding: 8,
               },
             },
           ],
-        }
+        },
       );
     }
   };
@@ -77,10 +77,10 @@ export const Tooltip = ({ content, children }: TooltipProps) => {
     >
       <StyledTooltip
         ref={popperElement}
-        role="tooltip"
-        style={{ display: tooltipIsOpen ? "block" : "none" }}
+        role='tooltip'
+        style={{ display: tooltipIsOpen ? 'block' : 'none' }}
       >
-        <p className="content">{content}</p>
+        <p className='content'>{content}</p>
       </StyledTooltip>
       {children}
     </div>

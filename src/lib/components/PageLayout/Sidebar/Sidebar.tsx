@@ -4,49 +4,49 @@ import {
   ProjectsEntrepreneurshipIcon,
   ProjectsResidentialIcon,
   VendorsIcon,
-} from "../../icons";
-import { StyledSidebar } from "./Sidebar.styled";
-import { SidebarProps } from "./Sidebar.types";
-import { SidebarLink } from "./SidebarLink";
+} from '../../icons';
+import { StyledSidebar } from './Sidebar.styled';
+import { SidebarProps } from './Sidebar.types';
+import { SidebarLink } from './SidebarLink';
 
-const PROJECTS_ROUTE = "/app/projects";
-const VERNDORS_ROUTE = "/app/vendors";
-const SETTINGS_ROUTE = "/app/settings";
+const PROJECTS_ROUTE = '/app/projects';
+const VERNDORS_ROUTE = '/app/vendors';
+const SETTINGS_ROUTE = '/app/settings';
 
 enum ProjectType {
-  Residential = "residential",
-  PublicSpace = "publicSpace",
-  Entrepreneurship = "entrepreneurship",
+  Residential = 'residential',
+  PublicSpace = 'publicSpace',
+  Entrepreneurship = 'entrepreneurship',
 }
 
 export const Sidebar = ({ title }: SidebarProps) => {
   return (
     <StyledSidebar>
-      <nav className="nav">
+      <nav className='nav'>
         <SidebarLink
-          text="מגורים"
+          text='מגורים'
           href={`${PROJECTS_ROUTE}?projectType=${ProjectType.Residential}`}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
-          text="ציבורי"
+          text='ציבורי'
           href={`${PROJECTS_ROUTE}?projectType=${ProjectType.PublicSpace}`}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
-          text="יזמות"
+          text='יזמות'
           href={`${PROJECTS_ROUTE}?projectType=${ProjectType.Entrepreneurship}`}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
-        <div className="hr" />
+        <div className='hr' />
         <SidebarLink
-          text="קבלנים"
+          text='קבלנים'
           href={VERNDORS_ROUTE}
           icon={<VendorsIcon />}
         />
-        <div className="hr" />
+        <div className='hr' />
         <SidebarLink
-          text="הגדרות"
+          text='הגדרות'
           href={SETTINGS_ROUTE}
           icon={<SettingsIcon />}
         />

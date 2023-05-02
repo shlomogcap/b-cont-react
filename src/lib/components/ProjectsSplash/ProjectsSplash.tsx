@@ -1,7 +1,7 @@
-import { PageLayout } from "../PageLayout";
+import { PageLayout } from '../PageLayout';
 
 export const ProjectsSplash = () => {
   return (
-    <PageLayout title="פרוייקטים">TODO: add projects list grid</PageLayout>
+    <PageLayout title='פרוייקטים'>TODO: add projects list grid</PageLayout>
   );
 };

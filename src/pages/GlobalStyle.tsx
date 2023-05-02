@@ -1,8 +1,8 @@
-import { Breakpoints } from "@/lib/components/consts/stylesConsts";
-import { createGlobalStyle } from "styled-components";
+import { Breakpoints } from '@/lib/components/consts/stylesConsts';
+import { createGlobalStyle } from 'styled-components';
 
 type Props = {
-  dir: "ltr" | "rtl";
+  dir: 'ltr' | 'rtl';
 };
 
 export const GlobalStyle = createGlobalStyle<Props>`

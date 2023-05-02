@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledTooltip = styled.div`
   cursor: context-menu;
@@ -18,7 +18,7 @@ export const StyledTooltip = styled.div`
     position: absolute;
     top: 100%;
     right: 15%;
-    content: "";
+    content: '';
     width: 0;
     height: 0;
     border-left: 1rem solid transparent;

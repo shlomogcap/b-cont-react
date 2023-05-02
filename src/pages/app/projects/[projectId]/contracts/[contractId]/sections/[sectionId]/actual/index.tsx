@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 export default function SectionActual() {
   const { query } = useRouter();
@@ -9,7 +9,7 @@ export default function SectionActual() {
       <ul>
         {Object.entries(search).map(([key, value]) => (
           <li key={key}>
-            {key} : {Array.isArray(value) ? value.join(" , ") : value}
+            {key} : {Array.isArray(value) ? value.join(' , ') : value}
           </li>
         ))}
       </ul>

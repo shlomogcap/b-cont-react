@@ -1,7 +1,7 @@
-import Link from "next/link";
-import styled from "styled-components";
-import { highlightRowMixin } from "../../styles/mixins/highlightRow";
-import { Breakpoints } from "../../consts/stylesConsts";
+import Link from 'next/link';
+import styled from 'styled-components';
+import { highlightRowMixin } from '../../styles/mixins/highlightRow';
+import { Breakpoints } from '../../consts/stylesConsts';
 
 export const StyledSidebar = styled.aside`
   grid-column: sidebar / center-start;
@@ -33,13 +33,13 @@ export const StyledSidebarLink = styled(Link)`
   grid-gap: 0.2rem 2rem;
   color: var(--color-non-active);
   cursor: pointer;
-  ${highlightRowMixin({ side: "left", trigger: "hover" })}
+  ${highlightRowMixin({ side: 'left', trigger: 'hover' })}
   &:hover {
     background-color: var(--color-bg-2);
   }
   &.active {
     color: var(--color-active);
-    ${highlightRowMixin({ side: "left", trigger: "constant" })}
+    ${highlightRowMixin({ side: 'left', trigger: 'constant' })}
   }
   & .text {
     display: none;

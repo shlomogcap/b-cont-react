@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 const onlyBottomSide = css`
   &::before {
@@ -31,8 +31,8 @@ const otherPosition = css`
 `;
 
 type HightlightRowMixinProps = {
-  side: "left" | "right" | "bottom";
-  trigger?: "hover" | "constant";
+  side: 'left' | 'right' | 'bottom';
+  trigger?: 'hover' | 'constant';
 };
 export const highlightRowMixin = ({
   trigger,
@@ -44,13 +44,13 @@ export const highlightRowMixin = ({
   &::before {
     visibility: hidden;
     opacity: 0;
-    content: "";
+    content: '';
     position: absolute;
     background: var(--color-active);
     transition: all 0.4s ease-in-out;
   }
   ${() => {
-    if (trigger === "hover") {
+    if (trigger === 'hover') {
       return css`
         &:hover::before {
           visibility: visible;
@@ -58,7 +58,7 @@ export const highlightRowMixin = ({
           height: 80% !important;
         }
       `;
-    } else if (trigger === "constant") {
+    } else if (trigger === 'constant') {
       return css`
         &::before {
           visibility: visible;
@@ -76,6 +76,6 @@ export const highlightRowMixin = ({
       `;
     }
   }}
-  ${() => (side === "right" ? rightPosition : otherPosition)}
-  ${() => (side === "bottom" ? onlyBottomSide : otherSides)}
+  ${() => (side === 'right' ? rightPosition : otherPosition)}
+  ${() => (side === 'bottom' ? onlyBottomSide : otherSides)}
 `;

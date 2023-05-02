@@ -4,8 +4,8 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from "next/document";
-import { ServerStyleSheet } from "styled-components";
+} from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -38,7 +38,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang='en'>
         <Head>{/* Add any necessary meta tags or external links here */}</Head>
         <body>
           <Main />

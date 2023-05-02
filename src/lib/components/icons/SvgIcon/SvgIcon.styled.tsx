@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { CURRENT_COLOR_CLASS_NAME } from "./SvgIcon.consts";
+import styled from 'styled-components';
+import { CURRENT_COLOR_CLASS_NAME } from './SvgIcon.consts';
 
 export const StyledSvgIcon = styled.svg`
   color: inherit;
