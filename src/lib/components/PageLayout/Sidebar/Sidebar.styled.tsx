@@ -32,6 +32,7 @@ export const StyledSidebarLink = styled(Link)`
   display: grid;
   grid-gap: 0.2rem 2rem;
   color: var(--color-non-active);
+  align-items: center;
   cursor: pointer;
   ${highlightRowMixin({ side: 'left', trigger: 'hover' })}
   &:hover {
