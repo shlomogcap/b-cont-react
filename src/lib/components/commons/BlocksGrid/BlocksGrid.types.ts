@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 type BlockElement = {
   id: string | number;
   text?: string;
-  icon?: ReactNode;
+  icon?: ReactElement;
 };
 
 export type BlocksGridProps = {
