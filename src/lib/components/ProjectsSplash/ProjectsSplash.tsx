@@ -14,6 +14,7 @@ const createProjectItems = (
     id,
     icon,
     text: DISPLAY_TEXTS.he.projectType[id as ProjectType],
+    href: `${Routes.Projects}?projectType=${id}`,
   }));
 
 export const ProjectsSplash = () => {

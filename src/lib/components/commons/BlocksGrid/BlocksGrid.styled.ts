@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { activateButtonMixin } from '../../styles/mixins/activateButton';
+import Link from 'next/link';
 
 export const StyledBlockElement = styled.div`
   display: grid;
@@ -31,4 +32,8 @@ export const StyledBlocksGrid = styled.nav`
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   padding: 2rem;
+`;
+
+export const StyledBlockGridLink = styled(Link)`
+  text-decoration: none;
 `;
