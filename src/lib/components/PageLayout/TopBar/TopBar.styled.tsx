@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StyledBreadcrumbs } from '../Breadcrubms/Breadcrumbs.styled';
+import { TOP_BAR_HEIGHT } from '../../consts/stylesConsts';
 
 export const StyledTopBar = styled.div`
   box-shadow: var(--box-shadow-light);
@@ -9,6 +10,7 @@ export const StyledTopBar = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  height: ${TOP_BAR_HEIGHT};
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 5rem 1fr auto auto;

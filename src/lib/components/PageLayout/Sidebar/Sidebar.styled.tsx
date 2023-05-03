@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import { highlightRowMixin } from '../../styles/mixins/highlightRow';
-import { Breakpoints } from '../../consts/stylesConsts';
+import { Breakpoints, TOP_BAR_HEIGHT } from '../../consts/stylesConsts';
 
 export const StyledSidebar = styled.aside`
   grid-column: sidebar / center-start;
@@ -10,7 +10,7 @@ export const StyledSidebar = styled.aside`
   grid-template-rows: 15rem 1fr;
   font: inherit;
   background-color: var(--color-white);
-  min-height: 100vh;
+  height: calc(100vh - ${TOP_BAR_HEIGHT});
   padding-top: 2rem;
 
   .hr {
