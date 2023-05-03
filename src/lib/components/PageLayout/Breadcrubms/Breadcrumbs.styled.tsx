@@ -48,12 +48,12 @@ export const StyledBreadcrumb = styled.div`
     transition: all 0.2s ease-in;
     fill: white;
   }
-  &__link:hover > &__iconList {
+  &:hover > &__iconList {
     visibility: visible;
     opacity: 1;
     width: 3rem;
   }
-  &[data-path]:hover {
+  &:hover {
     cursor: pointer;
     text-decoration: underline;
     transform: scale(1.07);

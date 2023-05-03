@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  StyledBlockElement,
-  StyledBlockGridLink,
-  StyledBlocksGrid,
-} from './BlocksGrid.styled';
+import { StyledBlockElement, StyledBlocksGrid } from './BlocksGrid.styled';
 import { BlocksGridProps } from './BlocksGrid.types';
 import { SvgIconProps } from '../../icons/SvgIcon';
+import { Link } from '../Link';
 
 export const BlocksGrid = ({ items }: BlocksGridProps) => {
   return (
@@ -18,9 +15,9 @@ export const BlocksGrid = ({ items }: BlocksGridProps) => {
           </StyledBlockElement>
         );
         return href ? (
-          <StyledBlockGridLink key={id} href={href}>
+          <Link key={id} href={href}>
             {element}
-          </StyledBlockGridLink>
+          </Link>
         ) : (
           element
         );

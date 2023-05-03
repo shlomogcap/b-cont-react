@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '../../commons/Link';
 import styled from 'styled-components';
 import { highlightRowMixin } from '../../styles/mixins/highlightRow';
 import { Breakpoints, TOP_BAR_HEIGHT } from '../../consts/stylesConsts';

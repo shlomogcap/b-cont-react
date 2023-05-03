@@ -33,7 +33,3 @@ export const StyledBlocksGrid = styled.nav`
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   padding: 2rem;
 `;
-
-export const StyledBlockGridLink = styled(Link)`
-  text-decoration: none;
-`;

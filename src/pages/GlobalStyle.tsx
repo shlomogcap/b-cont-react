@@ -89,4 +89,7 @@ body {
     user-select: none;
     color:var(--color-black)
 }
+a{
+    text-decoration: none;
+}
 `;
