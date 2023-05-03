@@ -45,6 +45,6 @@ export const StyledTopBar = styled.div`
   }
   & ${StyledBreadcrumbs} {
     grid-row: 2;
-    margin-right: 33rem;
+    margin-inline-start: 7rem;
   }
 `;

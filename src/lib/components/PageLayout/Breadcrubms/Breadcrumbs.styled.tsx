@@ -22,29 +22,24 @@ export const StyledBreadcrumbs = styled.div`
       opacity: 1;
     }
   }
+`;
+
+export const StyledBreadcrumb = styled.div`
+  color: white;
+  background-color: var(--color-active-light);
+  font: inherit;
+  font-size: 1.4rem;
+  border-radius: 1rem;
+  font-weight: 550;
+  padding: 0.2rem 1rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+  align-items: center;
   & svg.icon {
     fill: var(--color-active-light);
-  }
-  &__link {
-    color: white;
-    background-color: var(--color-active-light);
-    font: inherit;
-    font-size: 1.8rem;
-    border-radius: 1rem;
-    font-weight: 550;
-    padding: 0.2rem 1rem;
-    transition: all 0.2s;
-    white-space: nowrap;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 0.5rem;
-    align-items: center;
-    &[data-path]:hover {
-      cursor: pointer;
-      // background-color: var(--color-bg-3); //OLD_VERSION
-      text-decoration: underline; //NEW
-      transform: scale(1.07); //NEW
-    }
   }
   &__iconList {
     visibility: hidden;
@@ -57,5 +52,10 @@ export const StyledBreadcrumbs = styled.div`
     visibility: visible;
     opacity: 1;
     width: 3rem;
+  }
+  &[data-path]:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    transform: scale(1.07);
   }
 `;

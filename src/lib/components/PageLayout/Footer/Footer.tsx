@@ -1,5 +1,3 @@
-import { Breadcrumbs } from '../Breadcrubms/Breadcrumbs';
-import { Logo } from '../Logo/Logo';
 import { StyledFooter } from './Footer.styled';
 
 const APP_VERSION = '0.0.beta-0';

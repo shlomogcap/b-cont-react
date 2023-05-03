@@ -3,7 +3,7 @@ import { Logo } from '../Logo/Logo';
 import { StyledTopBar } from './TopBar.styled';
 import { TopBarProps } from './TopBar.types';
 
-export const TopBar = ({ title }: TopBarProps) => {
+export const TopBar = ({ title, breadcrumbs }: TopBarProps) => {
   return (
     <StyledTopBar>
       <Logo />
@@ -11,7 +11,7 @@ export const TopBar = ({ title }: TopBarProps) => {
         <span className='title-text'>{title}</span>
       </div>
       <div className='user-box'>SG</div>
-      <Breadcrumbs />
+      {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
     </StyledTopBar>
   );
 };
