@@ -6,7 +6,6 @@ import {
 } from './BlocksGrid.styled';
 import { BlocksGridProps } from './BlocksGrid.types';
 import { SvgIconProps } from '../../icons/SvgIcon';
-import Link from 'next/link';
 
 export const BlocksGrid = ({ items }: BlocksGridProps) => {
   return (
@@ -19,7 +18,9 @@ export const BlocksGrid = ({ items }: BlocksGridProps) => {
           </StyledBlockElement>
         );
         return href ? (
-          <StyledBlockGridLink href={href}>{element}</StyledBlockGridLink>
+          <StyledBlockGridLink key={id} href={href}>
+            {element}
+          </StyledBlockGridLink>
         ) : (
           element
         );

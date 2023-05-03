@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
 import { PageLayout } from '../PageLayout';
 import { BlocksGrid } from '../commons/BlocksGrid';
 import { BlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 import { DISPLAY_TEXTS } from '../consts/displayTexts';
 import { PROJECT_TYPES_ICON_MAPPING } from '../consts/projectTypeIconMapping';
 import { ProjectType } from '../consts/projectTypes';
-import { Routes } from '../consts/routes';
+import { PROJECT_TYPE_QUERY, Routes } from '../consts/routes';
 
 const createProjectItems = (
   iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
@@ -14,7 +13,7 @@ const createProjectItems = (
     id,
     icon,
     text: DISPLAY_TEXTS.he.projectType[id as ProjectType],
-    href: `${Routes.Projects}?projectType=${id}`,
+    href: `${Routes.Projects}?${PROJECT_TYPE_QUERY}=${id}`,
   }));
 
 export const ProjectsSplash = () => {
