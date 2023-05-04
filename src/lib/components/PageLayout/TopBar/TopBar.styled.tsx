@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { StyledBreadcrumbs } from '../Breadcrubms/Breadcrumbs.styled';
 import { TOP_BAR_HEIGHT } from '../../consts/stylesConsts';
+import { Logo } from '../Logo';
 
 export const StyledTopBar = styled.div`
   box-shadow: var(--box-shadow-light);
@@ -14,7 +15,7 @@ export const StyledTopBar = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 5rem 1fr auto auto;
-  grid-template-rows: min-content 3rem;
+  grid-template-rows: 6rem auto;
   align-items: center;
   gap: 0.2rem 2rem;
   & .title {
@@ -44,7 +45,10 @@ export const StyledTopBar = styled.div`
     color: white;
   }
   & ${StyledBreadcrumbs} {
+    grid-column: 1/-1;
     grid-row: 2;
     margin-inline-start: 7rem;
   }
 `;
+
+export const StyledLogo = styled(Logo)``;

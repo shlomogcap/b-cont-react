@@ -4,24 +4,10 @@ import { Breakpoints } from '../../consts/stylesConsts';
 export const StyledBreadcrumbs = styled.div`
   display: grid;
   grid-auto-flow: column;
-  gap: 1rem;
+  grid-column-gap: 1rem;
+  height: 100%;
   align-items: center;
-  overflow-x: scroll;
-  grid-column: 1/-1;
   justify-content: flex-start;
-  overflow-y: hidden;
-  &::-webkit-scrollbar {
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.2s ease-in-out;
-    border-radius: 1rem;
-  }
-  @media only screen and (max-width: ${Breakpoints.Phone}) {
-    &:hover::-webkit-scrollbar {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
 `;
 
 export const StyledBreadcrumb = styled.div`

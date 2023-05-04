@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Breakpoints } from '../consts/stylesConsts';
-import { scorllBarMixin } from '../styles/mixins/scrollbar';
 
 export const StyledPageLayout = styled.div`
   min-width: fit-content;
