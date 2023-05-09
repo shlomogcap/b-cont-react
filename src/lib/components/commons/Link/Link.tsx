@@ -9,7 +9,7 @@ export const Link = ({
   href,
   ...linkProps
 }: LinkProps) => (
-  <NextLink {...linkProps} href={href} passHref>
+  <NextLink {...linkProps} href={href}>
     <StyledLink className={className}>{children}</StyledLink>
   </NextLink>
 );

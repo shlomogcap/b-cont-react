@@ -13,10 +13,12 @@ export const ProjectsPage = ({ projectType }: ProjectPageProps) => {
       }
     >
       <table>
-        <tr>
-          <th>פרוייקט</th>
-          <th>תאריך התחלה</th>
-        </tr>
+        <thead>
+          <tr>
+            <th>פרוייקט</th>
+            <th>תאריך התחלה</th>
+          </tr>
+        </thead>
       </table>
     </PageLayout>
   );
