@@ -1,16 +1,25 @@
 import { ProjectsPage } from '@/lib/components/ProjectsPage/ProjectsPage';
 import { ProjectType } from '@/lib/components/consts/projectTypes';
 import { PROJECT_TYPE_QUERY } from '@/lib/components/consts/routes';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-export default function ProjectPage() {
-  const { query, replace } = useRouter();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const projectType: ProjectType | undefined = Array.isArray(
-    query[PROJECT_TYPE_QUERY],
+    ctx.query[PROJECT_TYPE_QUERY],
   )
     ? undefined
-    : (query[PROJECT_TYPE_QUERY] as ProjectType);
+    : (ctx.query[PROJECT_TYPE_QUERY] as ProjectType);
+  return {
+    props: { projectType: projectType ?? '' },
+  };
+};
+
+export default function ProjectPage({
+  projectType,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { replace } = useRouter();
   useEffect(() => {
     if (
       !projectType ||
