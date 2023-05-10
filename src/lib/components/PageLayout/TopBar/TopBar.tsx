@@ -1,8 +1,8 @@
 import { Breadcrumbs } from '../Breadcrubms/Breadcrumbs';
 import { StyledLogo, StyledTopBar } from './TopBar.styled';
-import { TopBarProps } from './TopBar.types';
+import { ITopBarProps } from './TopBar.types';
 
-export const TopBar = ({ title, breadcrumbs }: TopBarProps) => {
+export const TopBar = ({ title, breadcrumbs }: ITopBarProps) => {
   return (
     <StyledTopBar>
       <StyledLogo />

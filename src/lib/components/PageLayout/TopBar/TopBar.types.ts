@@ -1,6 +1,6 @@
-import { BreadcrumbsProps } from '../Breadcrubms/Breadcrumbs.types';
-import { PageLayoutProps } from '../PageLayout.types';
+import { IBreadcrumbsProps } from '../Breadcrubms/Breadcrumbs.types';
+import { IPageLayoutProps } from '../PageLayout.types';
 
-export type TopBarProps = Pick<PageLayoutProps, 'title'> & {
-  breadcrumbs?: BreadcrumbsProps['breadcrumbs'];
+export type ITopBarProps = Pick<IPageLayoutProps, 'title'> & {
+  breadcrumbs?: IBreadcrumbsProps['breadcrumbs'];
 };

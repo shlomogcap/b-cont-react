@@ -1,8 +1,8 @@
 import { Breadcrumb } from './Breadcrumb';
 import { StyledBreadcrumbs } from './Breadcrumbs.styled';
-import { BreadcrumbsProps } from './Breadcrumbs.types';
+import { IBreadcrumbsProps } from './Breadcrumbs.types';
 
-export const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({ breadcrumbs }: IBreadcrumbsProps) => {
   return (
     <StyledBreadcrumbs>
       {breadcrumbs.map(({ id, ...props }) => (

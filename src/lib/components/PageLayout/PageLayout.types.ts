@@ -1,10 +1,10 @@
 import {
   BreadcrumbProps,
-  BreadcrumbsProps,
+  IBreadcrumbsProps,
 } from './Breadcrubms/Breadcrumbs.types';
 
-export type PageLayoutProps = {
+export type IPageLayoutProps = {
   title?: string;
   className?: string;
-  breadcrubms?: BreadcrumbsProps['breadcrumbs'];
+  breadcrubms?: IBreadcrumbsProps['breadcrumbs'];
 };

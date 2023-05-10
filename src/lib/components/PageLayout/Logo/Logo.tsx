@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 
-type LogoProps = {
+type ILogoProps = {
   style?: CSSProperties;
   className?: string;
 };
 
-export const Logo = ({ style, className }: LogoProps) => {
+export const Logo = ({ style, className }: ILogoProps) => {
   return (
     <Image
       style={style}

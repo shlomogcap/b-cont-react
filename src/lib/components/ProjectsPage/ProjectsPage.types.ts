@@ -1,5 +1,5 @@
 import { ProjectType } from '../../consts/projectTypes';
 
-export type ProjectPageProps = {
+export type IProjectPageProps = {
   projectType?: ProjectType;
 };

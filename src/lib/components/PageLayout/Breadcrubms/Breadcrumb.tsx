@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { StyledBreadcrumb } from './Breadcrumbs.styled';
-import { BreadcrumbProps } from './Breadcrumbs.types';
+import { IBreadcrumbProps } from './Breadcrumbs.types';
 
-export const Breadcrumb = ({ text, href, navList }: BreadcrumbProps) => {
+export const Breadcrumb = ({ text, href, navList }: IBreadcrumbProps) => {
   const element = (
     <StyledBreadcrumb
       onClick={

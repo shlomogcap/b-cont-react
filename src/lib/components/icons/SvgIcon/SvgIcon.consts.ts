@@ -1,6 +1,6 @@
-import { IconSize } from './SvgIcon.types';
+import { IIconSize } from './SvgIcon.types';
 
-export const SIZE_MAP: Record<IconSize, string> = {
+export const SIZE_MAP: Record<IIconSize, string> = {
   S: '2rem',
   M: '2.4rem',
   L: '3rem',

@@ -1,9 +1,9 @@
 import { PropsWithChildren, SVGAttributes } from 'react';
 
-export type IconSize = 'S' | 'M' | 'L' | 'XL';
+export type IIconSize = 'S' | 'M' | 'L' | 'XL';
 
-export type SvgIconProps = PropsWithChildren<
+export type ISvgIconProps = PropsWithChildren<
   SVGAttributes<any> & {
-    size?: IconSize;
+    size?: IIconSize;
   }
 >;

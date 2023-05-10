@@ -1,12 +1,12 @@
-import { BlocksGridProps } from '../../commons/BlocksGrid/BlocksGrid.types';
+import { IBlocksGridProps } from '../../commons/BlocksGrid/BlocksGrid.types';
 
-export type BreadcrumbProps = {
+export type IBreadcrumbProps = {
   id: string | number;
   text: string;
   href?: string;
-  navList?: BlocksGridProps['items'];
+  navList?: IBlocksGridProps['items'];
 };
 
-export type BreadcrumbsProps = {
-  breadcrumbs: BreadcrumbProps[];
+export type IBreadcrumbsProps = {
+  breadcrumbs: IBreadcrumbProps[];
 };

@@ -1,6 +1,6 @@
-import { CURRENT_COLOR_CLASS_NAME, SvgIcon, SvgIconProps } from './SvgIcon';
+import { CURRENT_COLOR_CLASS_NAME, SvgIcon, ISvgIconProps } from './SvgIcon';
 
-export const SettingsIcon = (props: SvgIconProps) => {
+export const SettingsIcon = (props: ISvgIconProps) => {
   return (
     <SvgIcon {...props} viewBox='0 0 20 20'>
       <path

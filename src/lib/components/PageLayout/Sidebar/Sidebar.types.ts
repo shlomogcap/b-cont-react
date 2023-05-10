@@ -1,10 +1,10 @@
-import { LinkProps } from 'next/link';
-import { PageLayoutProps } from '../PageLayout.types';
+import { ILinkProps } from '../../commons/Link';
+import { IPageLayoutProps } from '../PageLayout.types';
 import { ReactNode } from 'react';
 
-export type SidebarProps = Pick<PageLayoutProps, 'title'> & {};
+export type ISidebarProps = Pick<IPageLayoutProps, 'title'> & {};
 
-export type SidebarLinkProps = LinkProps & {
+export type ISidebarLinkProps = ILinkProps & {
   text: string;
   icon?: ReactNode;
 };

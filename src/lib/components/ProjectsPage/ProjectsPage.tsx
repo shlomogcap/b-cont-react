@@ -14,7 +14,7 @@ import {
   PROJECT_DISPLAY_TEXTS,
   ProjectFields,
 } from './ProjectsPage.consts';
-import { ProjectPageProps } from './ProjectsPage.types';
+import { IProjectPageProps } from './ProjectsPage.types';
 
 const rawData = [
   {
@@ -40,7 +40,7 @@ const rawData = [
   },
 ];
 
-export const ProjectsPage = ({ projectType }: ProjectPageProps) => {
+export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
   const title = projectType
     ? DISPLAY_TEXTS.he.projectType[projectType]
     : DISPLAY_TEXTS.he.routeNames[Routes.Projects];

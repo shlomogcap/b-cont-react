@@ -9,10 +9,10 @@ import {
   VendorsIcon,
 } from '../../icons';
 import { StyledSidebar } from './Sidebar.styled';
-import { SidebarProps } from './Sidebar.types';
+import { ISidebarProps } from './Sidebar.types';
 import { SidebarLink } from './SidebarLink';
 
-export const Sidebar = ({ title }: SidebarProps) => {
+export const Sidebar = ({ title }: ISidebarProps) => {
   const projectTypeTexts = DISPLAY_TEXTS.he.projectType;
   return (
     <StyledSidebar>

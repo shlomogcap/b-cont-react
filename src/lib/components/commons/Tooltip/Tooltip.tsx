@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { createPopper, Instance } from '@popperjs/core';
-import { TooltipProps } from './Tooltip.types';
+import { ITooltipProps } from './Tooltip.types';
 import { StyledTooltip } from './Tooltip.styled';
 
-export const Tooltip = ({ content, children }: TooltipProps) => {
+export const Tooltip = ({ content, children }: ITooltipProps) => {
   const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
   const referenceElement = useRef<HTMLDivElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);

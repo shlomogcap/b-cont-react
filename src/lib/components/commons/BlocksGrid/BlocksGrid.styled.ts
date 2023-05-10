@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { activateButtonMixin } from '../../styles/mixins/activateButton';
 import Link from 'next/link';
 
-export const StyledBlockElement = styled.div`
+export const StyledIBlockElement = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;

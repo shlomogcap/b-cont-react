@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { StyledSidebarLink } from './Sidebar.styled';
-import { SidebarLinkProps } from './Sidebar.types';
+import { ISidebarLinkProps } from './Sidebar.types';
 import { Tooltip } from '../../commons/Tooltip/Tooltip';
 import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
 import { Breakpoints } from '../../../consts/stylesConsts';
 
-export const SidebarLink = ({ text, href, icon }: SidebarLinkProps) => {
+export const SidebarLink = ({ text, href, icon }: ISidebarLinkProps) => {
   const { asPath } = useRouter();
   const isActive = asPath === href;
   const isBigDesktop = useBreakpoint(`(min-width: ${Breakpoints.BigDesktop})`);

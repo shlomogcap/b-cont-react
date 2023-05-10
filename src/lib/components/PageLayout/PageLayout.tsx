@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { StyledPageLayout } from './PageLayout.styled';
-import { PageLayoutProps } from './PageLayout.types';
+import { IPageLayoutProps } from './PageLayout.types';
 import { TopBar } from './TopBar/TopBar';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
@@ -12,7 +12,7 @@ export const PageLayout = ({
   className = '',
   breadcrubms,
   children,
-}: PropsWithChildren<PageLayoutProps>) => {
+}: PropsWithChildren<IPageLayoutProps>) => {
   return (
     <StyledPageLayout className={className}>
       <TopBar

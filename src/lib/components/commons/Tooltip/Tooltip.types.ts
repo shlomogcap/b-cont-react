@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-export type TooltipProps = PropsWithChildren<{
+export type ITooltipProps = PropsWithChildren<{
   content: ReactNode;
 }>;

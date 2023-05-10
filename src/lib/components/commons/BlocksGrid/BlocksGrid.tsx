@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyledBlockElement, StyledBlocksGrid } from './BlocksGrid.styled';
-import { BlocksGridProps } from './BlocksGrid.types';
-import { SvgIconProps } from '../../icons/SvgIcon';
+import { StyledIBlockElement, StyledBlocksGrid } from './BlocksGrid.styled';
+import { IBlocksGridProps } from './BlocksGrid.types';
+import { ISvgIconProps } from '../../icons/SvgIcon';
 import { Link } from '../Link';
 
-export const BlocksGrid = ({ items }: BlocksGridProps) => {
+export const BlocksGrid = ({ items }: IBlocksGridProps) => {
   return (
     <StyledBlocksGrid>
       {items.map(({ id, text, icon, href, onClick }) => {
         const element = (
-          <StyledBlockElement key={id} onClick={onClick}>
-            {icon && React.cloneElement<SvgIconProps>(icon, { size: 'XL' })}
+          <StyledIBlockElement key={id} onClick={onClick}>
+            {icon && React.cloneElement<ISvgIconProps>(icon, { size: 'XL' })}
             {text && <div className='text'>{text}</div>}
-          </StyledBlockElement>
+          </StyledIBlockElement>
         );
         return href ? (
           <Link key={id} href={href}>

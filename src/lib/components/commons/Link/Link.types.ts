@@ -1,7 +1,7 @@
-import { LinkProps as NextLinkProps } from 'next/link';
+import { LinkProps as INextILinkProps } from 'next/link';
 import { ReactNode } from 'react';
 
-export type LinkProps = NextLinkProps & {
+export type ILinkProps = INextILinkProps & {
   className?: string;
   children: ReactNode;
 };
