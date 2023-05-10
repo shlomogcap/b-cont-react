@@ -39,7 +39,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head>{/* Add any necessary meta tags or external links here */}</Head>
+        <Head>
+          <link
+            href='https://fonts.googleapis.com/css?family=Alef:400,700|Rubik:300,400&display=swap&subset=hebrew'
+            rel='stylesheet'
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
