@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { StyledBreadcrumbs } from '../Breadcrubms/Breadcrumbs.styled';
-import { TOP_BAR_HEIGHT } from '../../consts/stylesConsts';
+import { TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
 import { Logo } from '../Logo';
 
 export const StyledTopBar = styled.div`

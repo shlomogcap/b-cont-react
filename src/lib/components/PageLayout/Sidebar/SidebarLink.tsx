@@ -3,7 +3,7 @@ import { StyledSidebarLink } from './Sidebar.styled';
 import { SidebarLinkProps } from './Sidebar.types';
 import { Tooltip } from '../../commons/Tooltip/Tooltip';
 import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
-import { Breakpoints } from '../../consts/stylesConsts';
+import { Breakpoints } from '../../../consts/stylesConsts';
 
 export const SidebarLink = ({ text, href, icon }: SidebarLinkProps) => {
   const { asPath } = useRouter();

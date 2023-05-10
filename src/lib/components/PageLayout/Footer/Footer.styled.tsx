@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FOOTER_HEIGHT } from '../../consts/stylesConsts';
+import { FOOTER_HEIGHT } from '../../../consts/stylesConsts';
 
 export const StyledFooter = styled.footer`
   background: var(--color-active-light);

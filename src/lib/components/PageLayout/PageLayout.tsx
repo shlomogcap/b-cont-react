@@ -4,8 +4,8 @@ import { PageLayoutProps } from './PageLayout.types';
 import { TopBar } from './TopBar/TopBar';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
-import { DISPLAY_TEXTS } from '../consts/displayTexts';
-import { Routes } from '../consts/routes';
+import { DISPLAY_TEXTS } from '../../consts/displayTexts';
+import { Routes } from '../../consts/routes';
 
 export const PageLayout = ({
   title,

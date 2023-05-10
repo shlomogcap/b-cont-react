@@ -4,7 +4,7 @@ import {
   ProjectsEntrepreneurshipIcon,
   ProjectsPublicSpaceIcon,
   ProjectsResidentialIcon,
-} from '../icons';
+} from '../components/icons';
 
 export const PROJECT_TYPES_ICON_MAPPING: Record<ProjectType, ReactElement> = {
   [ProjectType.Residential]: <ProjectsResidentialIcon />,

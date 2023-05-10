@@ -1,4 +1,4 @@
-import { Breakpoints } from '@/lib/components/consts/stylesConsts';
+import { Breakpoints } from '@/lib/consts/stylesConsts';
 import { scorllBarMixin } from '@/lib/components/styles/mixins/scrollbar';
 import { createGlobalStyle } from 'styled-components';
 

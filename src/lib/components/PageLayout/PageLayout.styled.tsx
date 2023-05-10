@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Breakpoints } from '../consts/stylesConsts';
+import { Breakpoints } from '../../consts/stylesConsts';
 
 export const StyledPageLayout = styled.div`
   min-width: fit-content;

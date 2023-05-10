@@ -1,7 +1,7 @@
 import { ProjectType } from './projectTypes';
 import { Routes } from './routes';
 
-type Lang = 'he' | 'en';
+export type Lang = 'he' | 'en';
 
 type DisplayTextMapping = {
   projectType: Record<ProjectType, string>;

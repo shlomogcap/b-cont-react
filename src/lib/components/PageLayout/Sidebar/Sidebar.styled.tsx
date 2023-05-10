@@ -1,7 +1,7 @@
 import { Link } from '../../commons/Link';
 import styled from 'styled-components';
 import { highlightRowMixin } from '../../styles/mixins/highlightRow';
-import { Breakpoints, TOP_BAR_HEIGHT } from '../../consts/stylesConsts';
+import { Breakpoints, TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
 
 export const StyledSidebar = styled.aside`
   grid-column: sidebar / center-start;

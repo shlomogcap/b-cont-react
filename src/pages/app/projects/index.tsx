@@ -1,6 +1,6 @@
 import { ProjectsPage } from '@/lib/components/ProjectsPage/ProjectsPage';
-import { ProjectType } from '@/lib/components/consts/projectTypes';
-import { PROJECT_TYPE_QUERY } from '@/lib/components/consts/routes';
+import { ProjectType } from '@/lib/consts/projectTypes';
+import { PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';

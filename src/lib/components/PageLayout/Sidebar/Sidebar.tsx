@@ -1,6 +1,6 @@
-import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { ProjectType } from '../../consts/projectTypes';
-import { PROJECT_TYPE_QUERY, Routes } from '../../consts/routes';
+import { DISPLAY_TEXTS } from '../../../consts/displayTexts';
+import { ProjectType } from '../../../consts/projectTypes';
+import { PROJECT_TYPE_QUERY, Routes } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,

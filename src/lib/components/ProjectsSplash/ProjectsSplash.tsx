@@ -1,10 +1,10 @@
 import { PageLayout } from '../PageLayout';
 import { BlocksGrid } from '../commons/BlocksGrid';
 import { BlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
-import { DISPLAY_TEXTS } from '../consts/displayTexts';
-import { PROJECT_TYPES_ICON_MAPPING } from '../consts/projectTypeIconMapping';
-import { ProjectType } from '../consts/projectTypes';
-import { PROJECT_TYPE_QUERY, Routes } from '../consts/routes';
+import { DISPLAY_TEXTS } from '../../consts/displayTexts';
+import { PROJECT_TYPES_ICON_MAPPING } from '../../consts/projectTypeIconMapping';
+import { ProjectType } from '../../consts/projectTypes';
+import { PROJECT_TYPE_QUERY, Routes } from '../../consts/routes';
 
 const createProjectItems = (
   iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
