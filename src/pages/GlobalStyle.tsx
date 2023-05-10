@@ -40,7 +40,10 @@ export const GlobalStyle = createGlobalStyle<Props>`
     --color-black: #000;
 
     // FONTS
-    --def-font-size: 1.6rem;
+    --font-size-small: 1.2rem;
+    --font-size-normal: 1.8rem;
+    --font-size-large: 2.2rem;
+    --font-size-xl: 2.8rem;
     --def-font-family: Rubik, "Tahoma", sans-serif;
     --font-family-1: var(--def-font-family);
     --font-family-2: Alef, "Tahoma", sans-serif;
@@ -83,7 +86,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
 body {
     direction: var(--dir);
     font-family: var(--def-font-family);
-    font-size: var(--def-font-size);
+    font-size: var(--font-size-normal);
     font-weight: var(--font-w-1);
     line-height: 1.8;
     user-select: none;

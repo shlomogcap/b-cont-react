@@ -10,7 +10,7 @@ export const StyledTooltip = styled.div`
   color: white;
   padding: 1rem;
   & .content {
-    font-size: 1.2rem;
+    font-size: var(--font-size-small);
     text-align: center;
     color: inherit;
   }

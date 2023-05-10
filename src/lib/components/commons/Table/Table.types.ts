@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
@@ -13,7 +15,7 @@ export type ITableRow<T extends string> = {
 };
 
 export type ITableProps<T extends string = string> = {
-  title: string;
+  title?: ReactNode;
   rows: ITableRow<T>[];
   columns: ITableColumn<T>[];
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   StyledTable,
+  StyledTableBar,
   StyledTableCell,
   StyledTableHeader,
   StyledTableHeaders,
@@ -18,7 +19,7 @@ export const Table = <T extends string = string>({
   );
   return (
     <StyledTable>
-      {title && <StyledTableRow>{title}</StyledTableRow>}
+      {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={templateColumns}>
         {columns.map(({ field, display }) => (
           <StyledTableHeader key={field}>{display ?? field}</StyledTableHeader>

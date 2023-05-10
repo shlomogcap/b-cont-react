@@ -9,7 +9,6 @@ export const StyledCard = styled.div`
   padding: 3rem;
   display: grid;
   gap: 1rem;
-  font-size: 2.5rem;
   align-content: flex-start;
   position: relative;
 `;
@@ -19,6 +18,7 @@ export const StyledTable = styled(StyledCard)`
   display: grid;
   padding: 1.5rem 1.5rem 2.5rem;
 `;
+
 type IStyledTableRowProps = {
   templateColumns?: string;
 };
@@ -29,12 +29,34 @@ export const StyledTableRow = styled.div<IStyledTableRowProps>`
   align-items: start;
   justify-content: start;
   grid-template-columns: ${({ templateColumns }) => templateColumns ?? 'auto'};
+  position: relative;
+  color: var(--color-gray-1);
 `;
+
+export const StyledTableBar = styled(StyledTableRow)`
+  && {
+    font-size: var(--font-size-large);
+    font-weight: 600;
+    color: var(--color-active);
+  }
+`;
+
 export const StyledTableHeaders = styled(StyledTableRow)`
   border-bottom: 3px solid var(--color-gray-3);
 `;
-export const StyledTableCell = styled.div``;
+
+export const StyledTableCell = styled.div`
+  padding: 0.5rem;
+  font-size: var(--font-size-normal);
+  overflow: visible;
+  text-overflow: ellipsis;
+  position: relative;
+  overflow-wrap: normal;
+  color: inherit;
+`;
 export const StyledTableHeader = styled(StyledTableCell)`
-  font-size: 2.2rem;
-  font-weight: 500;
+  && {
+    font-size: var(--font-size-large);
+    font-weight: 500;
+  }
 `;

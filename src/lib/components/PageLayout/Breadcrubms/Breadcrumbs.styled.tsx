@@ -13,7 +13,7 @@ export const StyledBreadcrumb = styled.div`
   color: white;
   background-color: var(--color-active-light);
   font: inherit;
-  font-size: 1.4rem;
+  font-size: var(--font-size-normal);
   border-radius: 1rem;
   font-weight: 550;
   padding: 0.2rem 1rem;

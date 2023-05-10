@@ -6,7 +6,7 @@ export const StyledIBlockElement = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
-  font-size: 2rem;
+  font-size: var(--font-size-large);
   font-weight: 500;
   background-color: white;
   padding: 2rem;

@@ -25,7 +25,7 @@ export const StyledTopBar = styled.div`
     align-items: center;
     &-text {
       justify-self: center;
-      font-size: 2rem;
+      font-size: var(--font-size-xl);
       font-weight: 500;
       color: var(--color-active);
     }
