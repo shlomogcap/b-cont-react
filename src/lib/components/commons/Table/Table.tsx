@@ -5,7 +5,7 @@ import {
   StyledTableCell,
   StyledTableHeader,
   StyledTableHeaders,
-  StyledTableRow,
+  StyledTableDataRow,
 } from './Table.styled';
 import { ITableProps } from './Table.types';
 
@@ -26,13 +26,13 @@ export const Table = <T extends string = string>({
         ))}
       </StyledTableHeaders>
       {rows.map((row) => (
-        <StyledTableRow key={row.id} templateColumns={templateColumns}>
+        <StyledTableDataRow key={row.id} templateColumns={templateColumns}>
           {columns.map(({ field }) => (
             <StyledTableCell key={`${row.id}/${field}`}>
               {row.values?.[field].value ?? ''}
             </StyledTableCell>
           ))}
-        </StyledTableRow>
+        </StyledTableDataRow>
       ))}
     </StyledTable>
   );

@@ -4,11 +4,10 @@ import styled from 'styled-components';
 export const StyledCard = styled.div`
   background-color: var(--color-white);
   border-radius: 1.8rem;
-  min-height: 20rem;
+  min-height: 10rem;
   width: 100%;
   padding: 3rem;
   display: grid;
-  gap: 1rem;
   align-content: flex-start;
   position: relative;
 `;
@@ -22,15 +21,36 @@ export const StyledTable = styled(StyledCard)`
 type IStyledTableRowProps = {
   templateColumns?: string;
 };
-export const StyledTableRow = styled.div<IStyledTableRowProps>`
+const StyledTableRow = styled.div<IStyledTableRowProps>`
   display: grid;
   grid-auto-flow: column dense;
-  grid-column-gap: 1rem;
   align-items: start;
   justify-content: start;
   grid-template-columns: ${({ templateColumns }) => templateColumns ?? 'auto'};
   position: relative;
   color: var(--color-gray-1);
+  cursor: pointer;
+`;
+
+export const StyledTableCell = styled.div`
+  padding: 0.5rem 0.8rem;
+  font-size: var(--font-size-normal);
+  overflow: visible;
+  text-overflow: ellipsis;
+  position: relative;
+  overflow-wrap: normal;
+  color: inherit;
+`;
+
+export const StyledTableDataRow = styled(StyledTableRow)`
+  border-bottom: 1px solid var(--color-gray-3);
+  &:hover {
+    transition: background-color 0.5s;
+    background-color: var(--color-gray-trs);
+  }
+  & ${StyledTableCell} {
+    border-left: 2px dotted var(--color-gray-3);
+  }
 `;
 
 export const StyledTableBar = styled(StyledTableRow)`
@@ -44,16 +64,13 @@ export const StyledTableBar = styled(StyledTableRow)`
 export const StyledTableHeaders = styled(StyledTableRow)`
   border-bottom: 3px solid var(--color-gray-3);
 `;
-
-export const StyledTableCell = styled.div`
-  padding: 0.5rem;
-  font-size: var(--font-size-normal);
-  overflow: visible;
-  text-overflow: ellipsis;
-  position: relative;
-  overflow-wrap: normal;
-  color: inherit;
+export const StyledTableTotals = styled(StyledTableRow)`
+  && {
+    border-top: 5px solid var(--color-active-trs);
+    background-color: var(--color-bg-3);
+  }
 `;
+
 export const StyledTableHeader = styled(StyledTableCell)`
   && {
     font-size: var(--font-size-large);

@@ -48,7 +48,6 @@ export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
   return (
     <PageLayout title={title}>
       <Table
-        title={title}
         columns={fieldsNamesToColumns(
           [ProjectFields.Title, ProjectFields.SDate, ProjectFields.EDate],
           PROJECT_DISPLAY_TEXTS.he,
