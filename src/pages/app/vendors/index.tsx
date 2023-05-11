@@ -1,3 +1,5 @@
-export default function VenodrsPage() {
-  return <div>Vendors List</div>;
+import { VendorsPage } from '@/lib/components/VendorsPage';
+
+export default function VendorsRoute() {
+  return <VendorsPage />;
 }

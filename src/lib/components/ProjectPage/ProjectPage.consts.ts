@@ -2,7 +2,7 @@ import {
   PROJECT_DISPLAY_TEXTS,
   ProjectActualsViews,
   ProjectMainViews,
-} from '@/lib/consts/project';
+} from '@/lib/consts/projects';
 
 export const PROJECT_MAIN_VIEW_TABS = [
   {

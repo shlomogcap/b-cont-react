@@ -1,5 +1,5 @@
 import { ID_FIELD } from '../consts/commonFields';
-import { ProjectFields } from '../consts/project';
+import { ProjectFields } from '../consts/projects';
 import { ProjectType } from '../consts/projectTypes';
 
 export const MOCK_PROJECTS_DATA = [

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from '../../commons/Card';
 import { Tabs } from '../../commons/Tabs';
 import { PROJECT_ACTUALS_VIEW_TABS } from '../ProjectPage.consts';
-import { ProjectActualsViews } from '@/lib/consts/project';
+import { ProjectActualsViews } from '@/lib/consts/projects';
 import { ProjectOverviewCard } from './ProjectOverviewCard';
 
 export const ProjectOverview = () => {

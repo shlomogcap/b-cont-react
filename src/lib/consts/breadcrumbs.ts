@@ -8,6 +8,11 @@ export const PROJECTS_BREADCRUMB: IBreadcrumbProps = {
   href: Routes.Projects,
   id: Routes.Projects,
 };
+export const VENDORS_BREADCRUMB: IBreadcrumbProps = {
+  text: DISPLAY_TEXTS.he.routeNames[Routes.Vendors],
+  href: Routes.Vendors,
+  id: Routes.Vendors,
+};
 
 export const getProjectBredcrumb = (
   projectId: string,

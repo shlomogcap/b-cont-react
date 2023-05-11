@@ -13,7 +13,7 @@ type IStyledTableRowProps = {
 const StyledTableRow = styled.div<IStyledTableRowProps>`
   display: grid;
   grid-auto-flow: column dense;
-  align-items: start;
+  align-items: stretch;
   justify-content: start;
   grid-template-columns: ${({ templateColumns }) => templateColumns ?? 'auto'};
   position: relative;
@@ -24,6 +24,7 @@ const StyledTableRow = styled.div<IStyledTableRowProps>`
 export const StyledTableCell = styled.div`
   padding: 0.5rem 0.8rem;
   font-size: var(--font-size-normal);
+  line-height: 1.2em;
   overflow: visible;
   text-overflow: ellipsis;
   position: relative;
@@ -62,7 +63,9 @@ export const StyledTableTotals = styled(StyledTableRow)`
 
 export const StyledTableHeader = styled(StyledTableCell)`
   && {
-    font-size: var(--font-size-large);
-    font-weight: 500;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;

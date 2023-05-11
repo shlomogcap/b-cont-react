@@ -5,7 +5,7 @@ import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Tabs } from '../commons/Tabs';
 import { ReactElement, ReactNode, useState } from 'react';
-import { ProjectMainViews } from '@/lib/consts/project';
+import { ProjectMainViews } from '@/lib/consts/projects';
 import { PROJECT_MAIN_VIEW_TABS } from './ProjectPage.consts';
 import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { ProjectOverview } from './projectMainViews/ProjectOverview';
