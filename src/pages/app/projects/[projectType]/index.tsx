@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<{
   };
 };
 
-export default function ProjectsRoute({
+export default function ProjectsWithTypeRoute({
   projectType,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { replace } = useRouter();

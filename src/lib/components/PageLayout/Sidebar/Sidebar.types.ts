@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 export type ISidebarProps = Pick<IPageLayoutProps, 'title'> & {};
 
-export type ISidebarLinkProps = ILinkProps & {
+export type ISidebarLinkProps = Omit<ILinkProps, 'children'> & {
   text: string;
   icon?: ReactNode;
 };

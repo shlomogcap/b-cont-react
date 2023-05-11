@@ -9,11 +9,11 @@ import { PROJECT_TYPE_QUERY, Routes } from '../../consts/routes';
 const createProjectItems = (
   iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
 ): IBlocksGridProps['items'] =>
-  Object.entries(iconMap).map(([id, icon]) => ({
-    id,
+  Object.entries(iconMap).map(([projectType, icon]) => ({
+    id: projectType,
     icon,
-    text: DISPLAY_TEXTS.he.projectType[id as ProjectType],
-    href: `${Routes.Projects}?${PROJECT_TYPE_QUERY}=${id}`,
+    text: DISPLAY_TEXTS.he.projectType[projectType as ProjectType],
+    href: `${Routes.Projects}/${projectType}`,
   }));
 
 export const ProjectsSplash = () => {

@@ -1,5 +1,9 @@
 import { ReactNode } from 'react';
 
+type IRowValues<T extends string> = {
+  [field in T]: string | number;
+};
+
 export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
@@ -7,20 +11,13 @@ export type ITableColumn<T extends string> = {
 };
 export type ITableRow<T extends string> = {
   id: string;
-  values: {
-    [field in T]: {
-      value: string | number;
-    };
-  };
-};
+} & IRowValues<T>;
 
-type IOnRowClickParams = {
-  id: string;
-};
+type IOnRowClickParams<T extends string> = ITableRow<T>;
 
 export type ITableProps<T extends string = string> = {
   title?: ReactNode;
   rows: ITableRow<T>[];
   columns: ITableColumn<T>[];
-  onRowClick?: (params: IOnRowClickParams) => void;
+  onRowClick?: (params: IOnRowClickParams<T>) => void;
 };

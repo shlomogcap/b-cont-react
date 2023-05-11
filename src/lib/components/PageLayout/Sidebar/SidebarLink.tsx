@@ -7,7 +7,7 @@ import { Breakpoints } from '../../../consts/stylesConsts';
 
 export const SidebarLink = ({ text, href, icon }: ISidebarLinkProps) => {
   const { asPath } = useRouter();
-  const isActive = asPath === href;
+  const isActive = asPath.startsWith(href.toString());
   const isBigDesktop = useBreakpoint(`(min-width: ${Breakpoints.BigDesktop})`);
   const link = (
     <StyledSidebarLink href={href} className={`${isActive ? 'active' : ''}`}>

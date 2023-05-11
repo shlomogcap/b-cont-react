@@ -1,11 +1,5 @@
 import { PageLayout } from '../PageLayout';
-import {
-  ITableRow,
-  ITableColumn,
-  Table,
-  fieldsNamesToColumns,
-  rawDataToRows,
-} from '../commons/Table';
+import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { Routes } from '../../consts/routes';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '../../consts/project';
@@ -27,13 +21,11 @@ export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
           [ProjectFields.Title, ProjectFields.SDate, ProjectFields.EDate],
           PROJECT_DISPLAY_TEXTS.he,
         )}
-        rows={rawDataToRows(
-          MOCK_PROJECTS_DATA.filter((p) => p.projectType === projectType),
-        )}
+        rows={MOCK_PROJECTS_DATA.filter((p) => p.projectType === projectType)}
         onRowClick={({ id }) =>
           router.push({
             pathname: Routes.Project,
-            query: { projectId: id },
+            query: { projectId: id, projectType },
           })
         }
       />

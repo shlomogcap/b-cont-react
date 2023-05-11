@@ -19,17 +19,17 @@ export const Sidebar = ({ title }: ISidebarProps) => {
       <nav className='nav'>
         <SidebarLink
           text={projectTypeTexts[ProjectType.Residential]}
-          href={`${Routes.Projects}?${PROJECT_TYPE_QUERY}=${ProjectType.Residential}`}
+          href={`${Routes.Projects}/${ProjectType.Residential}`}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.PublicSpace]}
-          href={`${Routes.Projects}?${PROJECT_TYPE_QUERY}=${ProjectType.PublicSpace}`}
+          href={`${Routes.Projects}/${ProjectType.PublicSpace}`}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.Entrepreneurship]}
-          href={`${Routes.Projects}?${PROJECT_TYPE_QUERY}=${ProjectType.Entrepreneurship}`}
+          href={`${Routes.Projects}/${ProjectType.Entrepreneurship}`}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
         <div className='hr' />

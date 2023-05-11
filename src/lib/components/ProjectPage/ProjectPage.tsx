@@ -7,12 +7,19 @@ import {
   getProjectBredcrumb,
 } from '@/lib/consts/breadcrumbs';
 
-export const ProjectPage = ({ projectId }: IProjectPageProps) => {
+export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const title = DISPLAY_TEXTS.he.routeNames[Routes.Projects];
+  const projectName = '';
   return (
     <PageLayout
       title={title}
-      breadcrubms={[PROJECTS_BREADCRUMB, getProjectBredcrumb(projectId)]}
+      breadcrubms={[
+        PROJECTS_BREADCRUMB,
+        {
+          text: projectName || projectId,
+          id: Routes.Project,
+        },
+      ]}
     >
       Project With ID {projectId}
     </PageLayout>

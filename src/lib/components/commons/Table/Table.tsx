@@ -28,13 +28,13 @@ export const Table = <T extends string = string>({
       </StyledTableHeaders>
       {rows.map((row) => (
         <StyledTableDataRow
-          onClick={() => onRowClick?.({ id: row.id })}
+          onClick={() => onRowClick?.({ ...row })}
           key={row.id}
           templateColumns={templateColumns}
         >
           {columns.map(({ field }) => (
             <StyledTableCell key={`${row.id}/${field}`}>
-              {row.values?.[field].value ?? ''}
+              {row?.[field] ?? ''}
             </StyledTableCell>
           ))}
         </StyledTableDataRow>
