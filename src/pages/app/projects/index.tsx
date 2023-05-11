@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-export default function ProjectPage({
+export default function ProjectsRoute({
   projectType,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { replace } = useRouter();

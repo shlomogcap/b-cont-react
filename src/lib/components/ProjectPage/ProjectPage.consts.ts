@@ -1,0 +1,70 @@
+import { Lang } from '@/lib/consts/displayTexts';
+
+export const ID_FIELD = 'id';
+
+export enum ProjectFields {
+  Title = 'title',
+  Address = 'address',
+  ProjectType = 'projectType',
+  SDate = 'sDate',
+  EDate = 'eDate',
+  NumberOfPeriods = 'numberOfPeriods',
+  Description = 'description',
+  Manager = 'manager',
+  SeniorManager = 'seniorManager',
+  Entrepreneur = 'entrepreneur',
+  Executor = 'executor',
+  NumberOfBuildings = 'numberOfBuildings',
+  Basements = 'basements',
+  NumberOfApatrments = 'numberOfApatrments',
+  Status = 'status',
+  TotalActualsSum = 'totalActualsSum',
+  TotalAgreementSum = 'totalAgreementSum',
+  DonePercentage = 'donePercentage',
+}
+
+export const PROJECT_DISPLAY_TEXTS: Record<
+  Lang,
+  Record<ProjectFields, string>
+> = {
+  he: {
+    [ProjectFields.Title]: 'פרוייקט',
+    [ProjectFields.Address]: 'מיקום',
+    [ProjectFields.ProjectType]: 'סוג פרוייקט',
+    [ProjectFields.SDate]: 'תחילת פרוייקט',
+    [ProjectFields.EDate]: 'סיום מתוכנן',
+    [ProjectFields.NumberOfPeriods]: 'מס תקופות מתוכנן',
+    [ProjectFields.Description]: 'תאור הפרוייקט',
+    [ProjectFields.Manager]: 'מנהל ביצוע',
+    [ProjectFields.SeniorManager]: 'מנהל פרוייקט בכיר',
+    [ProjectFields.Entrepreneur]: 'חברה יזמית',
+    [ProjectFields.Executor]: 'חברה מבצעת',
+    [ProjectFields.NumberOfBuildings]: 'מספר בניינים',
+    [ProjectFields.Basements]: 'מרתפים',
+    [ProjectFields.NumberOfApatrments]: 'מספר דירות',
+    [ProjectFields.Status]: 'סטטוס',
+    [ProjectFields.TotalAgreementSum]: 'סכום הסכם',
+    [ProjectFields.TotalActualsSum]: 'סכום מצטבר מאושר',
+    [ProjectFields.DonePercentage]: 'הושלם',
+  },
+  en: {
+    [ProjectFields.Title]: 'Project Name',
+    [ProjectFields.Address]: 'Location',
+    [ProjectFields.ProjectType]: 'projectType',
+    [ProjectFields.SDate]: 'sDate',
+    [ProjectFields.EDate]: 'eDate',
+    [ProjectFields.NumberOfPeriods]: 'numberOfPeriods',
+    [ProjectFields.Description]: 'description',
+    [ProjectFields.Manager]: 'manager',
+    [ProjectFields.SeniorManager]: 'seniorManager',
+    [ProjectFields.Entrepreneur]: 'entrepreneur',
+    [ProjectFields.Executor]: 'executor',
+    [ProjectFields.NumberOfBuildings]: 'numberOfBuildings',
+    [ProjectFields.Basements]: 'basements',
+    [ProjectFields.NumberOfApatrments]: 'numberOfApatrments',
+    [ProjectFields.Status]: 'status',
+    [ProjectFields.TotalAgreementSum]: 'totalAgreementSum',
+    [ProjectFields.TotalActualsSum]: 'totalActualsSum',
+    [ProjectFields.DonePercentage]: 'donePercentage',
+  },
+};

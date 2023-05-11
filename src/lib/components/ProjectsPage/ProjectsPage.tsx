@@ -7,39 +7,11 @@ import {
   rawDataToRows,
 } from '../commons/Table';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { ProjectType } from '../../consts/projectTypes';
 import { Routes } from '../../consts/routes';
-import {
-  ID_FIELD,
-  PROJECT_DISPLAY_TEXTS,
-  ProjectFields,
-} from './ProjectsPage.consts';
+import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '../../consts/project';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
-
-const rawData = [
-  {
-    [ID_FIELD]: '1',
-    [ProjectFields.Title]: 'גליל ים',
-    [ProjectFields.SDate]: '2023-01-01',
-    [ProjectFields.EDate]: '2024-01-01',
-    [ProjectFields.ProjectType]: ProjectType.Residential,
-  },
-  {
-    [ID_FIELD]: '2',
-    [ProjectFields.Title]: 'ברודצקי',
-    [ProjectFields.SDate]: '2023-05-05',
-    [ProjectFields.EDate]: '2025-05-05',
-    [ProjectFields.ProjectType]: ProjectType.Residential,
-  },
-  {
-    [ID_FIELD]: '3',
-    [ProjectFields.Title]: 'רמת גן',
-    [ProjectFields.SDate]: '2023-05-05',
-    [ProjectFields.EDate]: '2025-05-05',
-    [ProjectFields.ProjectType]: ProjectType.PublicSpace,
-  },
-];
+import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 
 export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
@@ -56,11 +28,11 @@ export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
           PROJECT_DISPLAY_TEXTS.he,
         )}
         rows={rawDataToRows(
-          rawData.filter((p) => p.projectType === projectType),
+          MOCK_PROJECTS_DATA.filter((p) => p.projectType === projectType),
         )}
         onRowClick={({ id }) =>
           router.push({
-            pathname: '/app/projects/[projectId]',
+            pathname: Routes.Project,
             query: { projectId: id },
           })
         }

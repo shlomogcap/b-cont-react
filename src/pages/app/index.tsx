@@ -1,5 +1,5 @@
 import { ProjectsSplash } from '@/lib/components/ProjectsSplash';
 
-export default function ProjectSplashPage() {
+export default function ProjectSplashRoute() {
   return <ProjectsSplash />;
 }

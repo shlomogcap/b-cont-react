@@ -1,3 +1,4 @@
+import { Routes } from '@/lib/consts/routes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -7,7 +8,7 @@ export default function ContractsPage() {
   useEffect(() => {
     if (projectId) {
       replace({
-        pathname: '/app/projects/[projectId]',
+        pathname: Routes.Project,
         query: { projectId },
       });
     }

@@ -6,6 +6,7 @@ import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { Routes } from '../../consts/routes';
+import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 
 export const PageLayout = ({
   title,
@@ -17,15 +18,7 @@ export const PageLayout = ({
     <StyledPageLayout className={className}>
       <TopBar
         title={title}
-        breadcrumbs={
-          breadcrubms ?? [
-            {
-              text: DISPLAY_TEXTS.he.routeNames[Routes.Projects],
-              href: Routes.Projects,
-              id: Routes.Projects,
-            },
-          ]
-        }
+        breadcrumbs={breadcrubms ?? [PROJECTS_BREADCRUMB]}
       />
       <div className='page'>
         <Sidebar title='' />

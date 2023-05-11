@@ -1,3 +1,4 @@
+import { Routes } from '@/lib/consts/routes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -7,7 +8,7 @@ export default function SectionsPage() {
     const { projectId = '', contractId = '' } = query;
     if (projectId && contractId) {
       replace({
-        pathname: '/app/projects/[projectId]/contracts/[contractId]',
+        pathname: Routes.Contract,
         query: { projectId, contractId },
       });
     }
