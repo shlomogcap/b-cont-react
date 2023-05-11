@@ -14,8 +14,13 @@ export type ITableRow<T extends string> = {
   };
 };
 
+type IOnRowClickParams = {
+  id: string;
+};
+
 export type ITableProps<T extends string = string> = {
   title?: ReactNode;
   rows: ITableRow<T>[];
   columns: ITableColumn<T>[];
+  onRowClick?: (params: IOnRowClickParams) => void;
 };

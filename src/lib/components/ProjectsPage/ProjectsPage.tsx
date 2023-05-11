@@ -15,6 +15,7 @@ import {
   ProjectFields,
 } from './ProjectsPage.consts';
 import { IProjectPageProps } from './ProjectsPage.types';
+import { useRouter } from 'next/router';
 
 const rawData = [
   {
@@ -41,6 +42,8 @@ const rawData = [
 ];
 
 export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
+  const router = useRouter();
+
   const title = projectType
     ? DISPLAY_TEXTS.he.projectType[projectType]
     : DISPLAY_TEXTS.he.routeNames[Routes.Projects];
@@ -55,6 +58,12 @@ export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
         rows={rawDataToRows(
           rawData.filter((p) => p.projectType === projectType),
         )}
+        onRowClick={({ id }) =>
+          router.push({
+            pathname: '/app/projects/[projectId]',
+            query: { projectId: id },
+          })
+        }
       />
     </PageLayout>
   );

@@ -13,6 +13,7 @@ export const Table = <T extends string = string>({
   rows,
   columns,
   title,
+  onRowClick,
 }: ITableProps<T>) => {
   const [templateColumns, setTemplateColumns] = useState(() =>
     columns.map(() => '1fr').join(' '),
@@ -26,7 +27,11 @@ export const Table = <T extends string = string>({
         ))}
       </StyledTableHeaders>
       {rows.map((row) => (
-        <StyledTableDataRow key={row.id} templateColumns={templateColumns}>
+        <StyledTableDataRow
+          onClick={() => onRowClick?.({ id: row.id })}
+          key={row.id}
+          templateColumns={templateColumns}
+        >
           {columns.map(({ field }) => (
             <StyledTableCell key={`${row.id}/${field}`}>
               {row.values?.[field].value ?? ''}
