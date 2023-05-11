@@ -1,7 +1,5 @@
 import { Lang } from '@/lib/consts/displayTexts';
 
-export const ID_FIELD = 'id';
-
 export enum ProjectFields {
   Title = 'title',
   Address = 'address',
