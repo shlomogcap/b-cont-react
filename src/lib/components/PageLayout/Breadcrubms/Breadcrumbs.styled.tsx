@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledBreadcrumbs = styled.div`
   display: grid;
@@ -9,7 +9,11 @@ export const StyledBreadcrumbs = styled.div`
   justify-content: flex-start;
 `;
 
-export const StyledBreadcrumb = styled.div`
+type IStyledBreadcrumbProps = {
+  actionable: boolean;
+};
+
+export const StyledBreadcrumb = styled.div<IStyledBreadcrumbProps>`
   color: white;
   background-color: var(--color-active-light);
   font: inherit;
@@ -38,9 +42,13 @@ export const StyledBreadcrumb = styled.div`
     opacity: 1;
     width: 3rem;
   }
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    transform: scale(1.07);
-  }
+  ${({ actionable }) =>
+    actionable &&
+    css`
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        transform: scale(1.07);
+      }
+    `}
 `;
