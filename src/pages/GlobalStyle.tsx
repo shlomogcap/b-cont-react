@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle<Props>`
 
     --color-non-active: #a2a2c4;
     --color-active: #234aa9;
+    --color-active-1:#6495ed;
     --color-active-light: #2349a99f;
     --color-active-trs: #2349a94d;
     --color-active-dark: #333666;

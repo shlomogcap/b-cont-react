@@ -5,6 +5,7 @@ import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { PROJECT_TYPES_ICON_MAPPING } from '../../consts/projectTypeIconMapping';
 import { ProjectType } from '../../consts/projectTypes';
 import { PROJECT_TYPE_QUERY, Routes } from '../../consts/routes';
+import { SvgIcon } from '../icons/SvgIcon';
 
 const createProjectItems = (
   iconMap: typeof PROJECT_TYPES_ICON_MAPPING,

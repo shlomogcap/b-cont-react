@@ -7,7 +7,7 @@ const onlyBottomSide = css`
     bottom: 0;
   }
   &:hover::before {
-    height: 0.2rem;
+    height: 0.2rem !important;
     width: 100%;
   }
 `;

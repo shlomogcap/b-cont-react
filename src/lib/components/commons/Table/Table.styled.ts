@@ -1,16 +1,5 @@
 import styled from 'styled-components';
-
-//TODO: move to its own file
-export const StyledCard = styled.div`
-  background-color: var(--color-white);
-  border-radius: 1.8rem;
-  min-height: 10rem;
-  width: 100%;
-  padding: 3rem;
-  display: grid;
-  align-content: flex-start;
-  position: relative;
-`;
+import { StyledCard } from '../Card';
 
 export const StyledTable = styled(StyledCard)`
   position: relative;
