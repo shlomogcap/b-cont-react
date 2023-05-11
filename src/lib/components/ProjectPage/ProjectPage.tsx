@@ -3,21 +3,26 @@ import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { Routes } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
-import { Card } from '../commons/Card';
 import { Tabs } from '../commons/Tabs';
-import { useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
+import { ProjectMainViews } from '@/lib/consts/project';
+import { PROJECT_MAIN_VIEW_TABS } from './ProjectPage.consts';
+import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
+import { ProjectOverview } from './projectMainViews/ProjectOverview';
+import { ProjectAppartments } from './projectMainViews/ProjectAppartments';
 
-enum ProjectViews {
-  Overview = 'overview',
-  Appartments = 'appartments',
-}
+const PROJECT_MAIN_VIEWS: Record<ProjectMainViews, ReactElement> = {
+  [ProjectMainViews.Overview]: <ProjectOverview />,
+  [ProjectMainViews.Appartments]: <ProjectAppartments />,
+};
 
 export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
-  const [activeTab, setActiveTab] = useState<ProjectViews>(
-    ProjectViews.Overview,
+  const [projectMainViewActiveTab, setProjectMainViewActiveTab] = useState(
+    ProjectMainViews.Overview,
   );
   const title = DISPLAY_TEXTS.he.routeNames[Routes.Projects];
-  const projectName = '';
+  const projectName =
+    MOCK_PROJECTS_DATA.find((p) => p.id === projectId)?.title ?? '';
   return (
     <PageLayout
       title={title}
@@ -29,16 +34,12 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
         },
       ]}
     >
-      Project With ID {projectId}
       <Tabs
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabs={[
-          { id: ProjectViews.Overview, text: 'פרטי הפרוייקט' },
-          { id: ProjectViews.Appartments, text: 'דירות' },
-        ]}
+        activeTab={projectMainViewActiveTab}
+        setActiveTab={setProjectMainViewActiveTab}
+        tabs={PROJECT_MAIN_VIEW_TABS}
       />
-      <Card title='פרטי הפרוייקט'>holl</Card>
+      {PROJECT_MAIN_VIEWS[projectMainViewActiveTab]}
     </PageLayout>
   );
 };
