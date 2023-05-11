@@ -1,3 +1,5 @@
-export default function SettingsSplashPage() {
-  return <div>Settings Splash Page</div>;
+import { SettingsSplash } from '@/lib/components/SettingsSplash';
+
+export default function SettingsSplashRoute() {
+  return <SettingsSplash />;
 }

@@ -21,6 +21,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [Routes.Settings]: 'הגדרות',
       [Routes.Project]: 'פרוייקט',
       [Routes.Contract]: 'חוזה',
+      [Routes.Vendor]: 'קבלן',
+      [Routes.Me]: 'המשתמש שלי',
+      [Routes.Company]: 'פרטי חברה/חברות',
+      [Routes.Budget]: 'פרקים תקציב',
     },
   },
   en: {
@@ -35,6 +39,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [Routes.Settings]: 'Settings',
       [Routes.Project]: 'Project',
       [Routes.Contract]: 'Contract',
+      [Routes.Vendor]: 'Vendor',
+      [Routes.Me]: 'Me',
+      [Routes.Company]: 'Company',
+      [Routes.Budget]: 'Budget',
     },
   },
 };

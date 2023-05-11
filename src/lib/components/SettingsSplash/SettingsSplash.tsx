@@ -2,24 +2,27 @@ import { PageLayout } from '../PageLayout';
 import { BlocksGrid } from '../commons/BlocksGrid';
 import { IBlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { PROJECT_TYPES_ICON_MAPPING } from '../../consts/projectTypeIconMapping';
 import { ProjectType } from '../../consts/projectTypes';
 import { Routes } from '../../consts/routes';
+import {
+  SETTINGS_ICON_MAPPING,
+  SettingRoutes,
+} from '@/lib/consts/settingsIconsMapping';
 
-const createProjectItems = (
-  iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
+const createBlockGridItems = (
+  iconMap: typeof SETTINGS_ICON_MAPPING,
 ): IBlocksGridProps['items'] =>
-  Object.entries(iconMap).map(([projectType, icon]) => ({
-    id: projectType,
+  Object.entries(iconMap).map(([settingsRoute, icon]) => ({
+    id: settingsRoute,
     icon,
-    text: DISPLAY_TEXTS.he.projectType[projectType as ProjectType],
-    href: `${Routes.Projects}/${projectType}`,
+    text: DISPLAY_TEXTS.he.routeNames[settingsRoute as SettingRoutes],
+    href: settingsRoute,
   }));
 
-export const ProjectsSplash = () => {
+export const SettingsSplash = () => {
   return (
     <PageLayout title={DISPLAY_TEXTS.he.routeNames[Routes.Projects]}>
-      <BlocksGrid items={createProjectItems(PROJECT_TYPES_ICON_MAPPING)} />
+      <BlocksGrid items={createBlockGridItems(SETTINGS_ICON_MAPPING)} />
     </PageLayout>
   );
 };
