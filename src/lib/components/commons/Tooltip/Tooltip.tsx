@@ -7,6 +7,7 @@ export const Tooltip = ({ content, children }: ITooltipProps) => {
   const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
   const referenceElement = useRef<HTMLDivElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
+  const arrowElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
 
   const handleMouseEnter = () => {
@@ -22,7 +23,11 @@ export const Tooltip = ({ content, children }: ITooltipProps) => {
   };
 
   const initPopper = () => {
-    if (referenceElement.current && popperElement.current) {
+    if (
+      referenceElement.current &&
+      popperElement.current &&
+      arrowElement.current
+    ) {
       popperInstance.current = createPopper(
         referenceElement.current,
         popperElement.current,
@@ -39,6 +44,13 @@ export const Tooltip = ({ content, children }: ITooltipProps) => {
               name: 'preventOverflow',
               options: {
                 padding: 8,
+              },
+            },
+            {
+              name: 'arrow',
+              options: {
+                padding: 8,
+                element: arrowElement.current,
               },
             },
           ],
@@ -81,6 +93,7 @@ export const Tooltip = ({ content, children }: ITooltipProps) => {
         style={{ display: tooltipIsOpen ? 'block' : 'none' }}
       >
         <p className='content'>{content}</p>
+        <div className='arrow' ref={arrowElement} />
       </StyledTooltip>
       {children}
     </div>

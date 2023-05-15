@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { StyledSidebarLink } from './Sidebar.styled';
 import { ISidebarLinkProps } from './Sidebar.types';
-import { Tooltip } from '../../commons/Tooltip/Tooltip';
+import { Tooltip } from '../../commons/Tooltip';
 import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
 import { Breakpoints } from '../../../consts/stylesConsts';
 

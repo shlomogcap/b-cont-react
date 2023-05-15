@@ -11,6 +11,7 @@
     "npm:outdated": "npx -y npm-check-updates"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.0",
     "@popperjs/core": "^2.11.7",
     "@types/node": "18.16.6",
     "@types/react": "18.2.6",
@@ -23,8 +24,10 @@
     "next-firebase-auth": "^0.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "styled-components": "^5.3.10",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/firebase": "^3.2.1",
