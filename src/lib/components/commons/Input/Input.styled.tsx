@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { StyledDropdownField } from './inputs/DropdownInput/DropdownInput.styled';
 
 type IStyledInputControlProps = {
   isTextOnly?: boolean;
@@ -16,16 +17,18 @@ export const StyledInputLabel = styled.label`
   justify-content: space-between;
 `;
 
-export const StyledInputField = styled.input`
+export const InputStyles = css`
   font: inherit;
   font-size: 1.8rem;
-  padding: 1.5rem;
+  padding: 1.2rem;
   font-weight: var(--font-w-2);
   border: none;
   border-bottom: 1px solid lightgray;
   outline: none;
   text-overflow: ellipsis;
   transition: all 0.2s ease-in-out;
+  width: 100%;
+  height: 5.5rem;
 
   &:read-only {
     cursor: context-menu;
@@ -44,6 +47,10 @@ export const StyledInputField = styled.input`
     background: none;
     border-bottom: 0.5px solid var(--color-gray-3);
   }
+`;
+
+export const StyledInputField = styled.input`
+  ${InputStyles}
 `;
 
 export const StyledInputControl = styled.div<IStyledInputControlProps>`

@@ -3,13 +3,23 @@ import { Routes } from './routes';
 
 export type Lang = 'he' | 'en';
 
+export enum IButtonTexts {
+  Save,
+  Cancel,
+}
+
 type DisplayTextMapping = {
   projectType: Record<ProjectType, string>;
   routeNames: Record<Routes, string>;
+  buttons: Record<IButtonTexts, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    buttons: {
+      [IButtonTexts.Save]: 'שמור',
+      [IButtonTexts.Cancel]: 'בטל שינויים',
+    },
     projectType: {
       [ProjectType.Residential]: 'מגורים',
       [ProjectType.PublicSpace]: 'ציבורי',
@@ -43,6 +53,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [Routes.Me]: 'Me',
       [Routes.Company]: 'Company',
       [Routes.Budget]: 'Budget',
+    },
+    buttons: {
+      [IButtonTexts.Save]: 'Save',
+      [IButtonTexts.Cancel]: 'Cancel',
     },
   },
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Breakpoints } from '../../consts/stylesConsts';
+import { Breakpoints, FOOTER_HEIGHT } from '../../consts/stylesConsts';
 
 export const StyledPageLayout = styled.div`
   min-width: fit-content;
@@ -17,5 +17,6 @@ export const StyledPageLayout = styled.div`
     display: grid;
     gap: 1rem;
     align-content: flex-start;
+    margin-bottom: ${FOOTER_HEIGHT};
   }
 `;

@@ -5,6 +5,7 @@ export const StyledTable = styled(StyledCard)`
   position: relative;
   display: grid;
   padding: 1.5rem 1.5rem 2.5rem;
+  min-height: 30rem;
 `;
 
 type IStyledTableRowProps = {

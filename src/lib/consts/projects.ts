@@ -63,8 +63,8 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectFields.DonePercentage]: 'הושלם',
     },
     mainViews: {
-      [ProjectMainViews.Overview]: 'פרטי הפרוייקט',
-      [ProjectMainViews.Appartments]: 'דירות',
+      [ProjectMainViews.Overview]: 'דשבורד פרוייקט',
+      [ProjectMainViews.Appartments]: 'אינדקס תכולת פרוייקט',
     },
     actualViews: {
       [ProjectActualsViews.Confirms]: 'סטטוס אישורים',

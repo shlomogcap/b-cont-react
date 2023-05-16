@@ -1,6 +1,6 @@
 import { PROJECT_DISPLAY_TEXTS, ProjectMainViews } from '@/lib/consts/projects';
 import { Card } from '../../commons/Card';
-import { ProjectForm } from './ProjectForm';
+import { ProjectForm } from '../../ProjectForm/ProjectForm';
 
 export const ProjectOverviewCard = () => {
   return (

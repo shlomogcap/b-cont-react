@@ -19,7 +19,7 @@ export const ${name} = (props: I${name}Props) => {
   return <></>;
 };" > "${path}/${name}/${name}.tsx"
 
-echo "export type ${name}Props = {};" > "${path}/${name}/${name}.types.ts"
+echo "export type I${name}Props = {};" > "${path}/${name}/${name}.types.ts"
 
 echo "import styled from 'styled-components';
 

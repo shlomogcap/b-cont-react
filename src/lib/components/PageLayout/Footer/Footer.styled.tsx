@@ -11,6 +11,6 @@ export const StyledFooter = styled.footer`
   justify-content: space-between;
   grid-template-columns: 1fr max-content;
   padding: 3rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 `;

@@ -3,7 +3,11 @@ import { createPopper, Instance } from '@popperjs/core';
 import { ITooltipProps } from './Tooltip.types';
 import { StyledTooltip } from './Tooltip.styled';
 
-export const Tooltip = ({ content, children }: ITooltipProps) => {
+export const Tooltip = ({
+  content,
+  disableTooltip,
+  children,
+}: ITooltipProps) => {
   const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
   const referenceElement = useRef<HTMLDivElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
@@ -90,7 +94,7 @@ export const Tooltip = ({ content, children }: ITooltipProps) => {
       <StyledTooltip
         ref={popperElement}
         role='tooltip'
-        style={{ display: tooltipIsOpen ? 'block' : 'none' }}
+        style={{ display: tooltipIsOpen && !disableTooltip ? 'block' : 'none' }}
       >
         <p className='content'>{content}</p>
         <div className='arrow' ref={arrowElement} />
