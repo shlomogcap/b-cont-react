@@ -7,15 +7,26 @@ export enum IButtonTexts {
   Save,
   Cancel,
 }
+export enum ITableStates {
+  NoRows,
+  Loading,
+  Error,
+}
 
 type DisplayTextMapping = {
   projectType: Record<ProjectType, string>;
   routeNames: Record<Routes, string>;
   buttons: Record<IButtonTexts, string>;
+  table: Record<ITableStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    table: {
+      [ITableStates.NoRows]: 'לא נמצאו נתונים',
+      [ITableStates.Loading]: 'טוען...',
+      [ITableStates.Error]: 'אירעה שגיאה',
+    },
     buttons: {
       [IButtonTexts.Save]: 'שמור',
       [IButtonTexts.Cancel]: 'בטל שינויים',
@@ -38,6 +49,11 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     },
   },
   en: {
+    table: {
+      [ITableStates.NoRows]: 'No Rows',
+      [ITableStates.Loading]: 'Loading...',
+      [ITableStates.Error]: 'An Error Has Occured',
+    },
     projectType: {
       [ProjectType.Residential]: 'Residential',
       [ProjectType.PublicSpace]: 'Public Space',

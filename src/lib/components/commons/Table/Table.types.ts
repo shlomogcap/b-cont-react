@@ -4,10 +4,12 @@ type IRowValues<T extends string> = {
   [field in T]: string | number;
 };
 
+export type ITableColumnType = 'string' | 'number' | 'percentage' | 'date';
+
 export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
-  type?: 'string' | 'number' | 'percentage' | 'date';
+  type?: ITableColumnType;
 };
 export type ITableRow<T extends string> = {
   id: string;

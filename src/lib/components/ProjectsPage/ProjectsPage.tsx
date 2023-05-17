@@ -18,7 +18,15 @@ export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
     <PageLayout title={title}>
       <Table
         columns={fieldsNamesToColumns(
-          [ProjectFields.Title, ProjectFields.SDate, ProjectFields.EDate],
+          [
+            ProjectFields.Title,
+            ProjectFields.ProjectType,
+            { field: ProjectFields.SDate, type: 'date' },
+            { field: ProjectFields.EDate, type: 'date' },
+            { field: ProjectFields.TotalAgreementSum, type: 'number' },
+            { field: ProjectFields.TotalActualsSum, type: 'number' },
+            ProjectFields.Address,
+          ],
           PROJECT_DISPLAY_TEXTS.he.fields,
         )}
         rows={MOCK_PROJECTS_DATA.filter((p) => p.projectType === projectType)}

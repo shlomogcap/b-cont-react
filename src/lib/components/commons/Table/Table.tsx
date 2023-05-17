@@ -8,6 +8,9 @@ import {
   StyledTableDataRow,
 } from './Table.styled';
 import { ITableProps } from './Table.types';
+import { EmptyState } from '../EmptyState';
+import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
+import { getDisplayValue } from './Table.utils';
 
 export const Table = <T extends string = string>({
   rows,
@@ -15,13 +18,10 @@ export const Table = <T extends string = string>({
   title,
   onRowClick,
 }: ITableProps<T>) => {
-  const [templateColumns, setTemplateColumns] = useState(() =>
-    columns.map(() => '1fr').join(' '),
-  );
   return (
     <StyledTable>
       {title && <StyledTableBar>{title}</StyledTableBar>}
-      <StyledTableHeaders templateColumns={templateColumns}>
+      <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display }) => (
           <StyledTableHeader key={field}>{display ?? field}</StyledTableHeader>
         ))}
@@ -30,15 +30,18 @@ export const Table = <T extends string = string>({
         <StyledTableDataRow
           onClick={() => onRowClick?.({ ...row })}
           key={row.id}
-          templateColumns={templateColumns}
+          templateColumns={columns.map(() => '1fr').join(' ')}
         >
-          {columns.map(({ field }) => (
+          {columns.map(({ field, type }) => (
             <StyledTableCell key={`${row.id}/${field}`}>
-              {row?.[field] ?? ''}
+              {getDisplayValue({ value: row?.[field], type }) ?? ''}
             </StyledTableCell>
           ))}
         </StyledTableDataRow>
       ))}
+      {rows.length === 0 && (
+        <EmptyState content={DISPLAY_TEXTS.he.table[ITableStates.NoRows]} />
+      )}
     </StyledTable>
   );
 };
