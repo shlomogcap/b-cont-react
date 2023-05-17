@@ -1,10 +1,10 @@
-import { ProjectFields } from '@/lib/consts/projects';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { validationTexts } from '@/lib/consts/validationTexts';
 import Z from 'zod';
-import { ProjectType } from '@/lib/consts/projectTypes';
-import { ProjectStatus } from '@/lib/consts/projectStatus';
+import { ProjectType } from '@/lib/consts/projects/ProjectType';
 import { ProjectFormValues } from './ProjectForm.types';
+import { ProjectFields } from '@/lib/consts/projects';
+import { ProjectStatus } from '@/lib/consts/projects/ProjectStatus';
 
 export const projectFormSchema = Z.object({
   [ProjectFields.Title]: Z.string({

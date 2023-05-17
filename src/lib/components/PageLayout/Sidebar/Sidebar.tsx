@@ -1,5 +1,5 @@
 import { DISPLAY_TEXTS } from '../../../consts/displayTexts';
-import { ProjectType } from '../../../consts/projectTypes';
+import { ProjectType } from '../../../consts/projects/ProjectType';
 import { PROJECT_TYPE_QUERY, Routes } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,

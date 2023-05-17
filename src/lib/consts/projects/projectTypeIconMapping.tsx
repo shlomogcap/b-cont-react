@@ -1,10 +1,10 @@
-import { ReactElement, ReactNode } from 'react';
-import { ProjectType } from './projectTypes';
+import { ReactElement } from 'react';
+import { ProjectType } from './ProjectType';
 import {
   ProjectsEntrepreneurshipIcon,
   ProjectsPublicSpaceIcon,
   ProjectsResidentialIcon,
-} from '../components/icons';
+} from '../../components/icons';
 
 export const PROJECT_TYPES_ICON_MAPPING: Record<ProjectType, ReactElement> = {
   [ProjectType.Residential]: <ProjectsResidentialIcon />,

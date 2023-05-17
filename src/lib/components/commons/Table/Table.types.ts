@@ -14,6 +14,7 @@ export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
   type?: ITableColumnType;
+  options?: { text: string; value: string }[];
 };
 export type ITableRow<T extends string> = {
   id: string;

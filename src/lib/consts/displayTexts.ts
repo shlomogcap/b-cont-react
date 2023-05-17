@@ -1,4 +1,3 @@
-import { ProjectType } from './projectTypes';
 import { Routes } from './routes';
 
 export type Lang = 'he' | 'en';
@@ -14,7 +13,6 @@ export enum ITableStates {
 }
 
 type DisplayTextMapping = {
-  projectType: Record<ProjectType, string>;
   routeNames: Record<Routes, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
@@ -30,11 +28,6 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     buttons: {
       [IButtonTexts.Save]: 'שמור',
       [IButtonTexts.Cancel]: 'בטל שינויים',
-    },
-    projectType: {
-      [ProjectType.Residential]: 'מגורים',
-      [ProjectType.PublicSpace]: 'ציבורי',
-      [ProjectType.Entrepreneurship]: 'יזמות',
     },
     routeNames: {
       [Routes.Projects]: 'פרוייקטים',
@@ -53,11 +46,6 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ITableStates.NoRows]: 'No Rows',
       [ITableStates.Loading]: 'Loading...',
       [ITableStates.Error]: 'An Error Has Occured',
-    },
-    projectType: {
-      [ProjectType.Residential]: 'Residential',
-      [ProjectType.PublicSpace]: 'Public Space',
-      [ProjectType.Entrepreneurship]: 'Entrepreneurship',
     },
     routeNames: {
       [Routes.Projects]: 'Projects',

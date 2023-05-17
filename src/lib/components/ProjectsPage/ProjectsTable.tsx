@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
+import { ProjectType } from '@/lib/consts/projects/ProjectType';
 
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
@@ -17,7 +18,11 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
       columns={fieldsNamesToColumns(
         [
           ProjectFields.Title,
-          ProjectFields.ProjectType,
+          {
+            field: ProjectFields.ProjectType,
+            type: 'list',
+            options: [{ text: PROJECT_DISPLAY_TEXTS.he., value: ProjectType.Entrepreneurship }],
+          },
           { field: ProjectFields.SDate, type: 'date' },
           { field: ProjectFields.EDate, type: 'date' },
           { field: ProjectFields.TotalAgreementSum, type: 'number' },

@@ -2,7 +2,7 @@ import { PageLayout } from '../PageLayout';
 import { BlocksGrid } from '../commons/BlocksGrid';
 import { IBlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { ProjectType } from '../../consts/projectTypes';
+import { ProjectType } from '../../consts/projects/ProjectType';
 import { Routes } from '../../consts/routes';
 import {
   SETTINGS_ICON_MAPPING,

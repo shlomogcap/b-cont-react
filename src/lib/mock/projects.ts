@@ -1,6 +1,6 @@
 import { ID_FIELD } from '../consts/commonFields';
 import { ProjectFields } from '../consts/projects';
-import { ProjectType } from '../consts/projectTypes';
+import { ProjectType } from '../consts/projects/ProjectType';
 
 export const MOCK_PROJECTS_DATA = [
   {

@@ -1,43 +1,12 @@
-import { Lang } from '@/lib/consts/displayTexts';
-
-export enum ProjectFields {
-  Title = 'title',
-  Address = 'address',
-  ProjectType = 'projectType',
-  SDate = 'sDate',
-  EDate = 'eDate',
-  NumberOfPeriods = 'numberOfPeriods',
-  Description = 'description',
-  Manager = 'manager',
-  SeniorManager = 'seniorManager',
-  Entrepreneur = 'entrepreneur',
-  Executor = 'executor',
-  NumberOfBuildings = 'numberOfBuildings',
-  Basements = 'basements',
-  NumberOfApatrments = 'numberOfApatrments',
-  Status = 'status',
-  TotalActualsSum = 'totalActualsSum',
-  TotalAgreementSum = 'totalAgreementSum',
-  DonePercentage = 'donePercentage',
-}
-
-export enum ProjectMainViews {
-  Overview = 'overview',
-  Appartments = 'appartments',
-}
-
-export enum ProjectActualsViews {
-  Confirms = 'confirms',
-  Accounts = 'accounts',
-  Contracts = 'contracts',
-  Attachments = 'attachments',
-  OddJobs = 'oddJobs',
-}
+import { ProjectActualsViews, ProjectFields, ProjectMainViews } from '.';
+import { Lang } from '../displayTexts';
+import { ProjectType } from './ProjectType';
 
 type DisplayTextMapping = {
   fields: Record<ProjectFields, string>;
   mainViews: Record<ProjectMainViews, string>;
   actualViews: Record<ProjectActualsViews, string>;
+  projectTypes: Record<ProjectType, string>;
 };
 
 export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -73,6 +42,11 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectActualsViews.Attachments]: 'צרופות',
       [ProjectActualsViews.OddJobs]: 'עבודות קטנות',
     },
+    projectTypes: {
+      [ProjectType.Residential]: 'מגורים',
+      [ProjectType.PublicSpace]: 'ציבורי',
+      [ProjectType.Entrepreneurship]: 'יזמות',
+    },
   },
   en: {
     fields: {
@@ -105,6 +79,11 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectActualsViews.Contracts]: 'Contracts',
       [ProjectActualsViews.Attachments]: 'Attachments',
       [ProjectActualsViews.OddJobs]: 'Oddjobs',
+    },
+    projectTypes: {
+      [ProjectType.Residential]: 'Residential',
+      [ProjectType.PublicSpace]: 'Public Space',
+      [ProjectType.Entrepreneurship]: 'Entrepreneurship',
     },
   },
 };

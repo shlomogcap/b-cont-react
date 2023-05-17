@@ -1,4 +1,4 @@
-import { ProjectType } from '@/lib/consts/projectTypes';
+import { ProjectType } from '@/lib/consts/projects/ProjectType';
 
 export type IProjectPageProps = {
   projectType: ProjectType;
