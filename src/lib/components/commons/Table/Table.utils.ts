@@ -25,6 +25,8 @@ export const getDisplayValue = ({ value, type }: IGetDisplayValueProps) => {
       return Number(value).toLocaleString();
     case 'date':
       return value ? dayjs(value).format('DD/MM/YYYY') : '';
+    case 'list':
+      return value;
     default:
       return value;
   }

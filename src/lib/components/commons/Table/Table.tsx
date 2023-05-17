@@ -6,6 +6,7 @@ import {
   StyledTableHeader,
   StyledTableHeaders,
   StyledTableDataRow,
+  StyledTableTotals,
 } from './Table.styled';
 import { ITableProps } from './Table.types';
 import { EmptyState } from '../EmptyState';
@@ -14,6 +15,7 @@ import { getDisplayValue } from './Table.utils';
 
 export const Table = <T extends string = string>({
   rows,
+  totals,
   columns,
   title,
   onRowClick,
@@ -23,7 +25,9 @@ export const Table = <T extends string = string>({
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display }) => (
-          <StyledTableHeader key={field}>{display ?? field}</StyledTableHeader>
+          <StyledTableHeader key={`headers/${field}`}>
+            {display ?? field}
+          </StyledTableHeader>
         ))}
       </StyledTableHeaders>
       {rows.map((row) => (
@@ -41,6 +45,15 @@ export const Table = <T extends string = string>({
       ))}
       {rows.length === 0 && (
         <EmptyState content={DISPLAY_TEXTS.he.table[ITableStates.NoRows]} />
+      )}
+      {totals && (
+        <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
+          {columns.map(({ field, type }) => (
+            <StyledTableCell key={`totals/${field}`}>
+              {getDisplayValue({ value: totals?.[field], type }) ?? ''}
+            </StyledTableCell>
+          ))}
+        </StyledTableTotals>
       )}
     </StyledTable>
   );
