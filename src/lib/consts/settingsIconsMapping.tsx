@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { HomeIcon } from '../components/icons/HomeIcon';
 import { PaymentsIcon } from '../components/icons/PaymentsIcon';
 import { ProfileIcon } from '../components/icons/ProfileIcon';
-import { Routes } from './routes';
+import { Routes } from './Routes';
 
 export type SettingRoutes = Extract<
   Routes,

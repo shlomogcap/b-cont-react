@@ -1,5 +1,5 @@
 import { Table, fieldsNamesToColumns } from '../commons/Table';
-import { Routes } from '../../consts/routes';
+import { Routes } from '../../consts/Routes';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '../../consts/projects';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';

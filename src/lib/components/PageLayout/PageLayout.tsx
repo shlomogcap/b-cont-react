@@ -5,7 +5,7 @@ import { TopBar } from './TopBar/TopBar';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/routes';
+import { Routes } from '../../consts/Routes';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 
 export const PageLayout = ({

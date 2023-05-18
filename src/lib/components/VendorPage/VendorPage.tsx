@@ -1,6 +1,6 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/routes';
+import { Routes } from '../../consts/Routes';
 import {
   PROJECTS_BREADCRUMB,
   VENDORS_BREADCRUMB,

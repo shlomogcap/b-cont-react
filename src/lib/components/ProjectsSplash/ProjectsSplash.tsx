@@ -4,7 +4,7 @@ import { IBlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { PROJECT_TYPES_ICON_MAPPING } from '../../consts/projects/projectTypeIconMapping';
 import { ProjectType } from '../../consts/projects/ProjectType';
-import { Routes } from '../../consts/routes';
+import { Routes } from '../../consts/Routes';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 
 const createProjectItems = (

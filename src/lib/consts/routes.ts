@@ -4,6 +4,7 @@ export const CONTRACT_ID_QUERY = 'contractId';
 export const VENDOR_ID_QUERY = 'vendorId';
 
 export enum Routes {
+  App = '/app',
   Projects = '/app/projects',
   Vendors = '/app/vendors',
   Settings = '/app/settings',

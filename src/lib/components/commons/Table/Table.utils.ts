@@ -1,9 +1,5 @@
 import dayjs from 'dayjs';
-import {
-  IGetDisplayValueProps,
-  ITableColumn,
-  ITableColumnType,
-} from './Table.types';
+import { IGetDisplayValueProps, ITableColumn } from './Table.types';
 
 export const fieldsNamesToColumns = <T extends string>(
   fieldsNames: (T | ITableColumn<T>)[],

@@ -1,7 +1,7 @@
 import { PageLayout } from '../PageLayout';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes, VENDOR_ID_QUERY } from '../../consts/routes';
+import { Routes, VENDOR_ID_QUERY } from '../../consts/Routes';
 import { IVendorsPageProps } from './VendorsPage.types';
 import { useRouter } from 'next/router';
 import { MOCK_VENDORS_DATA } from '@/lib/mock/vendors';

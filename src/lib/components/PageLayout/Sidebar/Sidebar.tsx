@@ -1,6 +1,6 @@
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import { ProjectType } from '../../../consts/projects/ProjectType';
-import { Routes } from '../../../consts/routes';
+import { Routes } from '../../../consts/Routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
