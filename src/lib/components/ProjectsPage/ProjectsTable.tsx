@@ -21,7 +21,14 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           {
             field: ProjectFields.ProjectType,
             type: 'list',
-            options: [{ text: PROJECT_DISPLAY_TEXTS.he., value: ProjectType.Entrepreneurship }],
+            options: [
+              ProjectType.Residential,
+              ProjectType.Entrepreneurship,
+              ProjectType.PublicSpace,
+            ].map((projectType) => ({
+              text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
+              value: projectType,
+            })),
           },
           { field: ProjectFields.SDate, type: 'date' },
           { field: ProjectFields.EDate, type: 'date' },

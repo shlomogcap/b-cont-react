@@ -1,6 +1,6 @@
-import { DISPLAY_TEXTS } from '../../../consts/displayTexts';
+import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import { ProjectType } from '../../../consts/projects/ProjectType';
-import { PROJECT_TYPE_QUERY, Routes } from '../../../consts/routes';
+import { Routes } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
@@ -13,7 +13,7 @@ import { ISidebarProps } from './Sidebar.types';
 import { SidebarLink } from './SidebarLink';
 
 export const Sidebar = ({ title }: ISidebarProps) => {
-  const projectTypeTexts = DISPLAY_TEXTS.he.projectType;
+  const projectTypeTexts = PROJECT_DISPLAY_TEXTS.he.projectTypes;
   return (
     <StyledSidebar>
       <nav className='nav'>

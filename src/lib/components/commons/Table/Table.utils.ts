@@ -1,5 +1,9 @@
 import dayjs from 'dayjs';
-import { ITableColumn, ITableColumnType } from './Table.types';
+import {
+  IGetDisplayValueProps,
+  ITableColumn,
+  ITableColumnType,
+} from './Table.types';
 
 export const fieldsNamesToColumns = <T extends string>(
   fieldsNames: (T | ITableColumn<T>)[],
@@ -14,19 +18,18 @@ export const fieldsNamesToColumns = <T extends string>(
           display: displayTexts[fieldName.field],
         },
   );
-
-type IGetDisplayValueProps = {
-  value: any;
-  type?: ITableColumnType;
-};
-export const getDisplayValue = ({ value, type }: IGetDisplayValueProps) => {
+export const getDisplayValue = ({
+  value,
+  type,
+  options,
+}: IGetDisplayValueProps) => {
   switch (type) {
     case 'number':
       return Number(value).toLocaleString();
     case 'date':
       return value ? dayjs(value).format('DD/MM/YYYY') : '';
     case 'list':
-      return value;
+      return options?.find(({ value }) => value === value)?.text ?? '';
     default:
       return value;
   }

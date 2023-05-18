@@ -10,12 +10,21 @@ export type ITableColumnType =
   | 'date'
   | 'list';
 
+export type ITableColumnOption = { text: string; value: string };
+
 export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
   type?: ITableColumnType;
-  options?: { text: string; value: string }[];
+  options?: ITableColumnOption[];
 };
+
+export type IGetDisplayValueProps = {
+  value: any;
+  type?: ITableColumnType;
+  options?: ITableColumnOption[];
+};
+
 export type ITableRow<T extends string> = {
   id: string;
 } & IRowValues<T>;

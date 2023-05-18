@@ -1,4 +1,6 @@
-import { ProjectActualsViews, ProjectFields, ProjectMainViews } from '.';
+import { ProjectFields } from './ProjectFields';
+import { ProjectMainViews } from './ProjectMainView';
+import { ProjectActualsViews } from './ProjectActualsViews';
 import { Lang } from '../displayTexts';
 import { ProjectType } from './ProjectType';
 

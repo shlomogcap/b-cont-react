@@ -5,6 +5,7 @@ import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { PROJECT_TYPES_ICON_MAPPING } from '../../consts/projects/projectTypeIconMapping';
 import { ProjectType } from '../../consts/projects/ProjectType';
 import { Routes } from '../../consts/routes';
+import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 
 const createProjectItems = (
   iconMap: typeof PROJECT_TYPES_ICON_MAPPING,
@@ -12,7 +13,7 @@ const createProjectItems = (
   Object.entries(iconMap).map(([projectType, icon]) => ({
     id: projectType,
     icon,
-    text: DISPLAY_TEXTS.he.projectType[projectType as ProjectType],
+    text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType as ProjectType],
     href: `${Routes.Projects}/${projectType}`,
   }));
 

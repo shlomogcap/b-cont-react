@@ -36,9 +36,9 @@ export const Table = <T extends string = string>({
           key={row.id}
           templateColumns={columns.map(() => '1fr').join(' ')}
         >
-          {columns.map(({ field, type }) => (
+          {columns.map(({ field, ...rest }) => (
             <StyledTableCell key={`${row.id}/${field}`}>
-              {getDisplayValue({ value: row?.[field], type }) ?? ''}
+              {getDisplayValue({ value: row?.[field], ...rest }) ?? ''}
             </StyledTableCell>
           ))}
         </StyledTableDataRow>
@@ -48,9 +48,9 @@ export const Table = <T extends string = string>({
       )}
       {totals && (
         <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
-          {columns.map(({ field, type }) => (
+          {columns.map(({ field, ...rest }) => (
             <StyledTableCell key={`totals/${field}`}>
-              {getDisplayValue({ value: totals?.[field], type }) ?? ''}
+              {getDisplayValue({ value: totals?.[field], ...rest }) ?? ''}
             </StyledTableCell>
           ))}
         </StyledTableTotals>

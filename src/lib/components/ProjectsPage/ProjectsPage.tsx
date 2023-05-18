@@ -4,12 +4,13 @@ import { Routes } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
 import { ProjectsTable } from './ProjectsTable';
+import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 
 export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
 
   const title = projectType
-    ? DISPLAY_TEXTS.he.projectType[projectType]
+    ? PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]
     : DISPLAY_TEXTS.he.routeNames[Routes.Projects];
 
   return (
