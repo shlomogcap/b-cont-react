@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { IButtonProps } from './Button.types';
+import { activateButtonMixin } from '../../styles/mixins/activateButton';
 
 export const StyledButton = styled.button<IButtonProps>`
   font: inherit;
@@ -20,14 +21,7 @@ export const StyledButton = styled.button<IButtonProps>`
   font-weight: 500;
   position: relative;
   transition: all 0.2s;
-  &:hover:not(:disabled) {
-    transform: translateY(-0.2rem);
-    box-shadow: var(--box-shadow-1);
-  }
-  &:active:not(:disabled) {
-    transform: translateY(0);
-    box-shadow: var(--box-shadow-light);
-  }
+  ${activateButtonMixin}
   &:disabled {
     cursor: not-allowed;
     background-color: var(--color-gray-2);
