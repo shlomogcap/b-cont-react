@@ -3,18 +3,18 @@ import { Routes } from '../../consts/Routes';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '../../consts/projects';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
-import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 import { ProjectType } from '@/lib/consts/projects/ProjectType';
+import { useProjectsContext } from '@/lib/context/projectsContext';
 
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
-
-  const rows = MOCK_PROJECTS_DATA.filter((p) => p.projectType === projectType);
-
+  const { data, isLoading } = useProjectsContext();
+  const rows = data.filter((p) => p.projectType === projectType);
   return (
     <Table
+      loading={isLoading}
       columns={fieldsNamesToColumns(
         [
           ProjectFields.Title,

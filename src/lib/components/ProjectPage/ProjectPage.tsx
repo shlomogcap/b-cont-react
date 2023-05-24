@@ -4,25 +4,25 @@ import { Routes } from '../../consts/Routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Tabs } from '../commons/Tabs';
-import { ReactElement, ReactNode, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { ProjectMainViews } from '@/lib/consts/projects';
 import { PROJECT_MAIN_VIEW_TABS } from './ProjectPage.consts';
-import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { ProjectOverview } from './projectMainViews/ProjectOverview';
 import { ProjectAppartments } from './projectMainViews/ProjectAppartments';
+import { useProjectsContext } from '@/lib/context/projectsContext';
 
 const PROJECT_MAIN_VIEWS: Record<ProjectMainViews, ReactElement> = {
   [ProjectMainViews.Overview]: <ProjectOverview />,
   [ProjectMainViews.Appartments]: <ProjectAppartments />,
 };
 
-export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
+export const ProjectPage = ({ projectId }: IProjectPageProps) => {
   const [projectMainViewActiveTab, setProjectMainViewActiveTab] = useState(
     ProjectMainViews.Overview,
   );
   const title = DISPLAY_TEXTS.he.routeNames[Routes.Projects];
-  const projectName =
-    MOCK_PROJECTS_DATA.find((p) => p.id === projectId)?.title ?? '';
+  const { data } = useProjectsContext();
+  const projectName = String(data.find((p) => p.id === projectId)?.title ?? '');
   return (
     <PageLayout
       title={title}

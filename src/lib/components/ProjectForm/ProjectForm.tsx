@@ -1,5 +1,9 @@
-import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
-import React from 'react';
+import {
+  PROJECT_DISPLAY_TEXTS,
+  ProjectDoc,
+  ProjectFields,
+} from '@/lib/consts/projects';
+import React, { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormFooter } from '../commons/Form';
@@ -14,11 +18,11 @@ import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
 import {
   DUMMY_OPTIONS,
   PROJECT_FORM_DEFAULT_VALUES,
-  projectFormSchema,
 } from './ProjectForm.consts';
-import { ProjectFormValues } from './ProjectForm.types';
+import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
 import { useCalcEDateByPeriodsAndSDate } from './hooks/useCalcEDateByPeriodsAndSDate';
+import { useProjectsContext } from '@/lib/context/projectsContext';
 
 const ProjectFormFields = () => {
   const calcPeriods = useCalcPeriods();
@@ -97,14 +101,26 @@ const ProjectFormFields = () => {
   );
 };
 
-export const ProjectForm = () => {
-  const form = useForm<ProjectFormValues>({
-    resolver: zodResolver(projectFormSchema),
+export const ProjectForm = ({ id }: IProjectFormProps) => {
+  const isEditMode = Boolean(id);
+  const { data: projects, isLoading } = useProjectsContext();
+  const form = useForm<IProjectFormValues>({
+    resolver: zodResolver(ProjectDoc),
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+  const { reset } = form;
 
-  const onSubmit = (data: ProjectFormValues) => {
+  useEffect(() => {
+    if (isEditMode && !isLoading) {
+      const project = projects.find((project) => project.id === id);
+      if (project !== undefined) {
+        reset(project);
+      }
+    }
+  }, [isLoading, isEditMode, reset, id, projects]);
+
+  const onSubmit = (data: IProjectFormValues) => {
     console.log(data);
   };
   const onError = (error: any) => {
