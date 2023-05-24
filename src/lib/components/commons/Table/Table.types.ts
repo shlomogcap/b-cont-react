@@ -34,7 +34,7 @@ type IOnRowClickParams<T extends string> = ITableRow<T>;
 export type ITableProps<T extends string = string> = {
   title?: ReactNode;
   rows: ITableRow<T>[];
-  totals?: Omit<ITableRow<T>, 'id'>;
+  totals?: Partial<ITableRow<T>>;
   columns: ITableColumn<T>[];
   onRowClick?: (params: IOnRowClickParams<T>) => void;
   loading?: boolean;
