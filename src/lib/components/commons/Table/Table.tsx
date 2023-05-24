@@ -12,6 +12,7 @@ import { ITableProps } from './Table.types';
 import { EmptyState } from '../EmptyState';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
+import { FilterPanel } from '../FilterPanel';
 
 export const Table = <T extends string = string>({
   rows,
@@ -22,6 +23,7 @@ export const Table = <T extends string = string>({
 }: ITableProps<T>) => {
   return (
     <StyledTable>
+      <FilterPanel />
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display }) => (
