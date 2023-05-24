@@ -18,6 +18,7 @@ export const Table = <T extends string = string>({
   totals,
   columns,
   title,
+  loading,
   onRowClick,
 }: ITableProps<T>) => {
   return (
@@ -30,23 +31,25 @@ export const Table = <T extends string = string>({
           </StyledTableHeader>
         ))}
       </StyledTableHeaders>
-      {rows.map((row) => (
-        <StyledTableDataRow
-          onClick={() => onRowClick?.({ ...row })}
-          key={row.id}
-          templateColumns={columns.map(() => '1fr').join(' ')}
-        >
-          {columns.map(({ field, ...rest }) => (
-            <StyledTableCell key={`${row.id}/${field}`}>
-              {getDisplayValue({ value: row?.[field], ...rest }) ?? ''}
-            </StyledTableCell>
-          ))}
-        </StyledTableDataRow>
-      ))}
-      {rows.length === 0 && (
+      {!loading &&
+        rows.map((row) => (
+          <StyledTableDataRow
+            onClick={() => onRowClick?.({ ...row })}
+            key={row.id}
+            templateColumns={columns.map(() => '1fr').join(' ')}
+          >
+            {columns.map(({ field, ...rest }) => (
+              <StyledTableCell key={`${row.id}/${field}`}>
+                {getDisplayValue({ value: row?.[field], ...rest }) ?? ''}
+              </StyledTableCell>
+            ))}
+          </StyledTableDataRow>
+        ))}
+      {!loading && rows.length === 0 && (
         <EmptyState content={DISPLAY_TEXTS.he.table[ITableStates.NoRows]} />
       )}
-      {totals && (
+      {loading && <EmptyState animation='pulse' content={'Loading...'} />}
+      {!loading && totals && (
         <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
           {columns.map(({ field, ...rest }) => (
             <StyledTableCell key={`totals/${field}`}>
