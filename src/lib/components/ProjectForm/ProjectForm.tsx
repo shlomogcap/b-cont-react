@@ -1,4 +1,5 @@
 import {
+  IProjectDoc,
   PROJECT_DISPLAY_TEXTS,
   ProjectDoc,
   ProjectFields,
@@ -28,6 +29,10 @@ import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
 import { useCalcEDateByPeriodsAndSDate } from './hooks/useCalcEDateByPeriodsAndSDate';
 import { useProjectsContext } from '@/lib/context/projectsContext';
+import firebase from '@firebase';
+import { useRouter } from 'next/router';
+import { PROJECT_ID_QUERY, Routes } from '@/lib/consts/Routes';
+import { prepareFormData } from './ProjectForm.utils';
 
 const ProjectFormFields = () => {
   const calcPeriods = useCalcPeriods();
@@ -108,6 +113,7 @@ const ProjectFormFields = () => {
 
 export const ProjectForm = ({ id }: IProjectFormProps) => {
   const isEditMode = Boolean(id);
+  const router = useRouter();
   const { data: projects, isLoading } = useProjectsContext();
   const form = useForm<IProjectFormValues>({
     resolver: zodResolver(ProjectDoc),
@@ -125,14 +131,38 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     }
   }, [isLoading, isEditMode, reset, id, projects]);
 
-  const onSubmit: SubmitHandler<IProjectFormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IProjectFormValues> = async (data) => {
+    const preparedData = prepareFormData(data);
+    if (isEditMode) {
+      try {
+        await firebase.firestore().doc(`projects/${id}`).set(preparedData);
+        //TODO: promt success...
+      } catch (err) {
+        //TODO: promt error...
+        console.error(err);
+      }
+      return;
+    }
+    try {
+      const res = await firebase
+        .firestore()
+        .collection('projects')
+        .add(preparedData);
+      //TODO: promt success
+      router.push({
+        pathname: Routes.Project,
+        query: { [PROJECT_ID_QUERY]: res.id },
+      });
+    } catch (err) {
+      //TODO: promt error...
+      console.error(err);
+    }
   };
   const onError: SubmitErrorHandler<IProjectFormValues> = (errors) => {
+    //TODO: promt error...
     console.log('ERROR:', errors);
   };
   const abortChanges = () => {
-    console.log('TODO: abort all changes');
     form.reset(PROJECT_FORM_DEFAULT_VALUES);
   };
 
