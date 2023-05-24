@@ -4,7 +4,12 @@ import {
   ProjectFields,
 } from '@/lib/consts/projects';
 import React, { useEffect } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormFooter } from '../commons/Form';
 import {
@@ -120,11 +125,11 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     }
   }, [isLoading, isEditMode, reset, id, projects]);
 
-  const onSubmit = (data: IProjectFormValues) => {
+  const onSubmit: SubmitHandler<IProjectFormValues> = (data) => {
     console.log(data);
   };
-  const onError = (error: any) => {
-    console.log('ERROR:', error);
+  const onError: SubmitErrorHandler<IProjectFormValues> = (errors) => {
+    console.log('ERROR:', errors);
   };
   const abortChanges = () => {
     console.log('TODO: abort all changes');

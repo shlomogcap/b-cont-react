@@ -1,0 +1,12 @@
+import { ProjectPage } from '@/lib/components/ProjectPage/ProjectPage';
+import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/Routes';
+import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { useRouter } from 'next/router';
+import React from 'react';
+
+export default function ProjectRoute() {
+  const { query } = useRouter();
+  return (
+    <ProjectPage projectType={queryParamToString(query, PROJECT_TYPE_QUERY)} />
+  );
+}
