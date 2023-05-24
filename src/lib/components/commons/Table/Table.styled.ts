@@ -26,7 +26,7 @@ export const StyledTableCell = styled.div`
   padding: 0.5rem 0.8rem;
   font-size: var(--font-size-normal);
   line-height: 1.2em;
-  overflow: visible;
+  overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
   overflow-wrap: normal;
@@ -66,7 +66,5 @@ export const StyledTableHeader = styled(StyledTableCell)`
   && {
     font-weight: 600;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 `;
