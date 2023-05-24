@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 type IRowValues<T extends string> = {
-  [field in T]?: string | number;
+  [field in T]?: unknown;
 };
 export type ITableColumnType =
   | 'string'
@@ -37,4 +37,5 @@ export type ITableProps<T extends string = string> = {
   totals?: Omit<ITableRow<T>, 'id'>;
   columns: ITableColumn<T>[];
   onRowClick?: (params: IOnRowClickParams<T>) => void;
+  loading?: boolean;
 };
