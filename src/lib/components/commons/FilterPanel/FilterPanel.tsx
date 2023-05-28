@@ -5,7 +5,6 @@ import { ProjectFormValues } from '../../ProjectForm';
 import { projectFormSchema } from '../../ProjectForm/ProjectForm.consts';
 import { PROJECT_FORM_DEFAULT_VALUES } from '../../ProjectForm/ProjectForm.consts';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SvgIcon } from '../../icons/SvgIcon';
 import {
   StyledFilterPanel,
   StyledFilterControlDiv,
