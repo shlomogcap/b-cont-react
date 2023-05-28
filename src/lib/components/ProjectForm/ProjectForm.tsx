@@ -20,7 +20,11 @@ import {
   TextInput,
 } from '../commons/Input';
 import { Button } from '../commons/Button';
-import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
+import {
+  DISPLAY_TEXTS,
+  IButtonTexts,
+  IToastType,
+} from '@/lib/consts/displayTexts';
 import {
   DUMMY_OPTIONS,
   PROJECT_FORM_DEFAULT_VALUES,
@@ -33,6 +37,7 @@ import firebase from '@firebase';
 import { useRouter } from 'next/router';
 import { PROJECT_ID_QUERY, Routes } from '@/lib/consts/Routes';
 import { prepareFormData } from './ProjectForm.utils';
+import { toast } from 'react-toastify';
 
 const ProjectFormFields = () => {
   const calcPeriods = useCalcPeriods();
@@ -136,7 +141,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     if (isEditMode) {
       try {
         await firebase.firestore().doc(`projects/${id}`).set(preparedData);
-        //TODO: promt success...
+        toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
       } catch (err) {
         //TODO: promt error...
         console.error(err);
@@ -148,7 +153,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
         .firestore()
         .collection('projects')
         .add(preparedData);
-      //TODO: promt success
+      toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
       router.push({
         pathname: Routes.Project,
         query: { [PROJECT_ID_QUERY]: res.id },

@@ -1,4 +1,4 @@
-import { Routes } from './Routes';
+import { Routes } from './routes';
 
 export type Lang = 'he' | 'en';
 
@@ -11,15 +11,24 @@ export enum ITableStates {
   Loading,
   Error,
 }
+export enum IToastType {
+  AddingNewDoc,
+  SavingDocData,
+}
 
 type DisplayTextMapping = {
-  routeNames: Record<Routes, string>;
+  toasts: Record<IToastType, string>;
+  routeNames: Record<Exclude<Routes, Routes.App>, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    toasts: {
+      [IToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
+      [IToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
+    },
     table: {
       [ITableStates.NoRows]: 'לא נמצאו נתונים',
       [ITableStates.Loading]: 'טוען...',
@@ -42,6 +51,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     },
   },
   en: {
+    toasts: {
+      [IToastType.AddingNewDoc]: 'Data Added Succefully',
+      [IToastType.SavingDocData]: 'Data Saved Succefully',
+    },
     table: {
       [ITableStates.NoRows]: 'No Rows',
       [ITableStates.Loading]: 'Loading...',
