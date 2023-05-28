@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { StyledButton } from '../Button';
+import { IStyledFilterProps } from './FilterPanel.types';
 
-type IStyledFilterProps = {
-justify?: string;
-width?: string; 
-isButtonGroup?: boolean;
-}
+
 
 export const StyledFilterPanel = styled.div`
             display: grid;
