@@ -12,10 +12,16 @@ export enum ITableStates {
   Error,
 }
 
+export enum IFilterButtonStates {
+  Active,
+  InActive,
+}
+
 type DisplayTextMapping = {
   routeNames: Record<Routes, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
+  filterButton: Record<IFilterButtonStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -40,6 +46,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [Routes.Company]: 'פרטי חברה/חברות',
       [Routes.Budget]: 'פרקים תקציב',
     },
+    filterButton: {
+      [IFilterButtonStates.Active]: 'פעיל',
+      [IFilterButtonStates.InActive]: 'לא פעיל',
+    },
   },
   en: {
     table: {
@@ -61,6 +71,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     buttons: {
       [IButtonTexts.Save]: 'Save',
       [IButtonTexts.Cancel]: 'Cancel',
+    },
+    filterButton: {
+      [IFilterButtonStates.Active]: 'Active',
+      [IFilterButtonStates.InActive]: 'In Active',
     },
   },
 };
