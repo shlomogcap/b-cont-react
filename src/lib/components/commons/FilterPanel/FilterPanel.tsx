@@ -13,6 +13,7 @@ import {
 import { StatusState } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIcon } from '../../icons/FilterIcon';
+import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
 
 export const FilterPanel = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -47,7 +48,7 @@ export const FilterPanel = () => {
                 }
                 onClick={() => setStatus(true)}
               >
-                פעיל
+                {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.Active]}
               </StyledFilterButton>
               <StyledFilterButton
                 isButtonGroup={true}
@@ -56,7 +57,7 @@ export const FilterPanel = () => {
                 }
                 onClick={() => setStatus(false)}
               >
-                לא פעיל
+                {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.InActive]}
               </StyledFilterButton>
             </StyledFilterControlDiv>
 
