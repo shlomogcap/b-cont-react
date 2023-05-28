@@ -20,7 +20,7 @@ export const StyledFilterPanel = styled.div`
 export const StyledFilterControlDiv= styled.div<IStyledFilterProps>`
 display:flex;
 flex-wrap: wrap;
-gap:2%;
+gap:0.2rem;
 justify-content: ${({justify}) => justify ?? 'space-evenly'};
 margin:2% 0
 `;
