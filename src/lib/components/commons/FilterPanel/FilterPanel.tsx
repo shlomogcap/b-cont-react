@@ -32,7 +32,7 @@ export const FilterPanel = () => {
           setShowFilters(!showFilters);
         }}
         isActive={showFilters}
-      ></FilterIcon>
+      />
       <FormProvider {...form}>
         {showFilters && (
           <StyledFilterPanel>
@@ -43,32 +43,18 @@ export const FilterPanel = () => {
               <StyledFilterButton
                 isButtonGroup={true}
                 variant={
-                  status === 'cancel'
-                    ? 'secondary'
-                    : status
-                    ? 'primary'
-                    : 'secondary'
+                  status === 'cancel' || !status ? 'secondary' : 'primary'
                 }
-                onClick={() =>
-                  setStatus(!status ? true : status === true ? 'cancel' : true)
-                }
+                onClick={() => setStatus(true)}
               >
                 פעיל
               </StyledFilterButton>
               <StyledFilterButton
                 isButtonGroup={true}
                 variant={
-                  status === 'cancel'
-                    ? 'secondary'
-                    : !status
-                    ? 'primary'
-                    : 'secondary'
+                  status === 'cancel' || status ? 'secondary' : 'primary'
                 }
-                onClick={() =>
-                  setStatus(
-                    status ? false : status === false ? 'cancel' : false,
-                  )
-                }
+                onClick={() => setStatus(false)}
               >
                 לא פעיל
               </StyledFilterButton>
