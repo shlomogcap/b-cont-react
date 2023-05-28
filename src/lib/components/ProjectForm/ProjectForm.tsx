@@ -141,7 +141,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     if (isEditMode) {
       try {
         const docRef = doc(firestore, `projects/${id}`);
-        await setDoc(docRef, preparedData);
+        await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
       } catch (err) {
         //TODO: promt error...
