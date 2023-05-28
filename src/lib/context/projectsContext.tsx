@@ -6,7 +6,8 @@ import {
   useState,
 } from 'react';
 import { IProjectDoc } from '../consts/projects/ProjectDoc';
-import firebase from '@firebase';
+import { firestore } from '@firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 type IProjectsContext = {
   data: IProjectDoc[];
@@ -32,9 +33,10 @@ export const ProjectsProvider = ({
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const collectionRef = firebase.firestore().collection('projects');
+    const collectionRef = collection(firestore, 'projects');
 
-    const unsubscribe = collectionRef.onSnapshot(
+    const unsubscribe = onSnapshot(
+      collectionRef,
       (snapshot) => {
         setIsLoading(true);
 

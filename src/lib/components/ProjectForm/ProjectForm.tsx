@@ -1,5 +1,4 @@
 import {
-  IProjectDoc,
   PROJECT_DISPLAY_TEXTS,
   ProjectDoc,
   ProjectFields,
@@ -33,9 +32,10 @@ import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
 import { useCalcEDateByPeriodsAndSDate } from './hooks/useCalcEDateByPeriodsAndSDate';
 import { useProjectsContext } from '@/lib/context/projectsContext';
-import firebase from '@firebase';
+import { firestore } from '@firebase';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { PROJECT_ID_QUERY, Routes } from '@/lib/consts/Routes';
+import { PROJECT_ID_QUERY, Routes } from '@/lib/consts/routes';
 import { prepareFormData } from './ProjectForm.utils';
 import { toast } from 'react-toastify';
 
@@ -140,7 +140,8 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     const preparedData = prepareFormData(data);
     if (isEditMode) {
       try {
-        await firebase.firestore().doc(`projects/${id}`).set(preparedData);
+        const docRef = doc(firestore, `projects/${id}`);
+        await setDoc(docRef, preparedData);
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
       } catch (err) {
         //TODO: promt error...
@@ -149,10 +150,8 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       return;
     }
     try {
-      const res = await firebase
-        .firestore()
-        .collection('projects')
-        .add(preparedData);
+      const collectionRef = collection(firestore, 'projects');
+      const res = await addDoc(collectionRef, preparedData);
       toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
       router.push({
         pathname: Routes.Project,
