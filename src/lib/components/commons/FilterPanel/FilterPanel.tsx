@@ -13,6 +13,7 @@ import {
 } from './FilterPanel.styled';
 import { StatusState } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
+import { FilterIcon } from '../../icons/FilterIcon';
 
 export const FilterPanel = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -26,17 +27,13 @@ export const FilterPanel = () => {
 
   return (
     <>
-      <SvgIcon
+      <FilterIcon
         size='S'
         onClick={() => {
           setShowFilters(!showFilters);
         }}
-      >
-        <use
-          href={`/img/icons.svg#icon-filter-${showFilters ? 'open' : 'close'}`}
-        ></use>
-      </SvgIcon>
-
+        isActive={showFilters}
+      ></FilterIcon>
       <FormProvider {...form}>
         {showFilters && (
           <StyledFilterPanel>
