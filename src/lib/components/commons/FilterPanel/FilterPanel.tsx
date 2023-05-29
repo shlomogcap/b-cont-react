@@ -62,9 +62,7 @@ export const FilterPanel = () => {
             </StyledFilterControlDiv>
 
             <StyledFilterControlDiv>
-              <p style={{ flexBasis: '100%' }}>
-                {PROJECT_DISPLAY_TEXTS.he.fields.sDate}
-              </p>
+              <p>{PROJECT_DISPLAY_TEXTS.he.fields.sDate}</p>
               <DateInput
                 label={'מ'}
                 name={`${ProjectFields.SDate} sDateFilter`}
@@ -76,9 +74,7 @@ export const FilterPanel = () => {
             </StyledFilterControlDiv>
 
             <StyledFilterControlDiv>
-              <p style={{ flexBasis: '100%' }}>
-                {PROJECT_DISPLAY_TEXTS.he.fields.eDate}
-              </p>
+              <p>{PROJECT_DISPLAY_TEXTS.he.fields.eDate}</p>
               <DateInput
                 label={'מ'}
                 name={`${ProjectFields.SDate} eDate`}
