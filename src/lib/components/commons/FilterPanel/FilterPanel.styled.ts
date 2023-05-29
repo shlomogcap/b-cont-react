@@ -15,15 +15,16 @@ export const StyledFilterPanel = styled.div`
   box-shadow: var(--box-shadow-1);
 `;
 
+export const StyledFilterItemCaption = styled.p`
+  flex-basis: 100%;
+`;
+
 export const StyledFilterControlDiv = styled.div<IStyledFilterProps>`
   display: flex;
   flex-wrap: wrap;
   gap: 0.2rem;
   justify-content: ${({ justify }) => justify ?? 'space-evenly'};
   margin: 2% 0;
-  & p {
-    flex-basis: 100%;
-  }
 `;
 
 export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
