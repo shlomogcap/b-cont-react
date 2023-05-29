@@ -1,8 +1,7 @@
 import { PropsWithChildren, useState } from 'react';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
 import { useForm, FormProvider } from 'react-hook-form';
-import { ProjectFormValues } from '../../ProjectForm';
-import { projectFormSchema } from '../../ProjectForm/ProjectForm.consts';
+import { ProjectDoc, IProjectDoc } from '../../../consts/projects';
 import { PROJECT_FORM_DEFAULT_VALUES } from '../../ProjectForm/ProjectForm.consts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -11,7 +10,7 @@ import {
   StyledFilterButton,
   StyledFilterItemCaption,
 } from './FilterPanel.styled';
-import { IFilterPanelButtonProps, IStatusState } from './FilterPanel.types';
+import { IFilterPanelButtonProps } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
@@ -34,8 +33,8 @@ const FilterPanelButton = ({
 
 export const FilterPanel = () => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
-  const form = useForm<ProjectFormValues>({
-    resolver: zodResolver(projectFormSchema),
+  const form = useForm<IProjectDoc>({
+    resolver: zodResolver(ProjectDoc),
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
