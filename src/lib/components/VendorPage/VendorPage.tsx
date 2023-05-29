@@ -1,6 +1,6 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/Routes';
+import { Routes } from '../../consts/routes';
 import { VENDORS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { IVendorPageProps } from './VendorPage.types';
 import { useVendorsContext } from '@/lib/context/vendorsContext';

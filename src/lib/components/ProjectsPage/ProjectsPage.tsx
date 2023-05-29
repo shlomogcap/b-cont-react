@@ -1,6 +1,6 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/Routes';
+import { Routes } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { ProjectsTable } from './ProjectsTable';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';

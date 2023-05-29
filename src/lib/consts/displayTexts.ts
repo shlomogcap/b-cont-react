@@ -1,4 +1,4 @@
-import { Routes } from './routes';
+import { Routes } from './routes/Routes';
 
 export type Lang = 'he' | 'en';
 

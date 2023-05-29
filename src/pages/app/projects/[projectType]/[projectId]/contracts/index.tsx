@@ -1,4 +1,4 @@
-import { Routes } from '@/lib/consts/Routes';
+import { Routes } from '@/lib/consts/routes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

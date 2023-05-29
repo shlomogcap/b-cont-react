@@ -1,15 +1,11 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/Routes';
+import { Routes } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Tabs } from '../commons/Tabs';
 import { ReactElement, useState } from 'react';
-import {
-  PROJECT_DISPLAY_TEXTS,
-  ProjectMainViews,
-  ProjectType,
-} from '@/lib/consts/projects';
+import { PROJECT_DISPLAY_TEXTS, ProjectMainViews } from '@/lib/consts/projects';
 import { PROJECT_MAIN_VIEW_TABS } from './ProjectPage.consts';
 import { ProjectOverview } from './projectMainViews/ProjectOverview';
 import { ProjectAppartments } from './projectMainViews/ProjectAppartments';

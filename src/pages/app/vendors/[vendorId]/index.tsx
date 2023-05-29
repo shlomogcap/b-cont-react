@@ -1,5 +1,5 @@
 import { VendorPage } from '@/lib/components/VendorPage/VendorPage';
-import { VENDOR_ID_QUERY } from '@/lib/consts/Routes';
+import { VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useRouter } from 'next/router';
 import React from 'react';
