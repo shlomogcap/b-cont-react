@@ -1,15 +1,17 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/Routes';
+import { IRoutesNames } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Tabs } from '../commons/Tabs';
-import { ReactElement, ReactNode, useState } from 'react';
-import { ProjectMainViews } from '@/lib/consts/projects';
+import { ReactElement, useState } from 'react';
+import { PROJECT_DISPLAY_TEXTS, ProjectMainViews } from '@/lib/consts/projects';
 import { PROJECT_MAIN_VIEW_TABS } from './ProjectPage.consts';
-import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { ProjectOverview } from './projectMainViews/ProjectOverview';
 import { ProjectAppartments } from './projectMainViews/ProjectAppartments';
+import { useProjectsContext } from '@/lib/context/projectsContext';
+import { Card } from '../commons/Card';
+import { ProjectForm } from '../ProjectForm';
 
 const PROJECT_MAIN_VIEWS: Record<ProjectMainViews, ReactElement> = {
   [ProjectMainViews.Overview]: <ProjectOverview />,
@@ -20,26 +22,35 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const [projectMainViewActiveTab, setProjectMainViewActiveTab] = useState(
     ProjectMainViews.Overview,
   );
-  const title = DISPLAY_TEXTS.he.routeNames[Routes.Projects];
-  const projectName =
-    MOCK_PROJECTS_DATA.find((p) => p.id === projectId)?.title ?? '';
+  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects];
+  const { data } = useProjectsContext();
+  const project = projectId ? data.find((p) => p.id === projectId) : null;
+  const isEditMode = Boolean(project);
   return (
     <PageLayout
       title={title}
       breadcrubms={[
         PROJECTS_BREADCRUMB,
         {
-          text: projectName || projectId,
-          id: Routes.Project,
+          text: isEditMode ? String(project?.title || projectId) : `+ ${title}`,
+          id: IRoutesNames.Project,
         },
       ]}
     >
-      <Tabs
-        activeTab={projectMainViewActiveTab}
-        setActiveTab={setProjectMainViewActiveTab}
-        tabs={PROJECT_MAIN_VIEW_TABS}
-      />
-      {PROJECT_MAIN_VIEWS[projectMainViewActiveTab]}
+      {isEditMode ? (
+        <>
+          <Tabs
+            activeTab={projectMainViewActiveTab}
+            setActiveTab={setProjectMainViewActiveTab}
+            tabs={PROJECT_MAIN_VIEW_TABS}
+          />
+          {PROJECT_MAIN_VIEWS[projectMainViewActiveTab]}
+        </>
+      ) : (
+        <Card title={PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType)}>
+          <ProjectForm />
+        </Card>
+      )}
     </PageLayout>
   );
 };

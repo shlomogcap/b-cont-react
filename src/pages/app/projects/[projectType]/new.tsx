@@ -7,9 +7,6 @@ import React from 'react';
 export default function ProjectRoute() {
   const { query } = useRouter();
   return (
-    <ProjectPage
-      projectId={queryParamToString(query, PROJECT_ID_QUERY)}
-      projectType={queryParamToString(query, PROJECT_TYPE_QUERY)}
-    />
+    <ProjectPage projectType={queryParamToString(query, PROJECT_TYPE_QUERY)} />
   );
 }

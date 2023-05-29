@@ -1,40 +1,6 @@
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
-import { validationTexts } from '@/lib/consts/validationTexts';
-import Z from 'zod';
-import { ProjectType } from '@/lib/consts/projects/ProjectType';
-import { ProjectFormValues } from './ProjectForm.types';
+import { IProjectFormValues } from './ProjectForm.types';
 import { ProjectFields } from '@/lib/consts/projects';
-import { ProjectStatus } from '@/lib/consts/projects/ProjectStatus';
-
-export const projectFormSchema = Z.object({
-  [ProjectFields.Title]: Z.string({
-    required_error: validationTexts.REQUIRED,
-  })
-    .nonempty(validationTexts.REQUIRED)
-    .min(4, validationTexts.TOO_SHORT),
-  [ProjectFields.Address]: Z.string().optional(),
-  [ProjectFields.SDate]: Z.coerce.date().optional(),
-  [ProjectFields.NumberOfPeriods]: Z.coerce
-    .number()
-    .min(12, validationTexts.TOO_LOW)
-    .max(100, validationTexts.TOO_HIGH)
-    .optional(),
-  [ProjectFields.EDate]: Z.coerce.date().optional(),
-  [ProjectFields.Description]: Z.string().optional(),
-  [ProjectFields.Manager]: Z.string().optional(),
-  [ProjectFields.SeniorManager]: Z.string().optional(),
-  [ProjectFields.Executor]: Z.string().optional(),
-  [ProjectFields.Entrepreneur]: Z.string().optional(),
-  [ProjectFields.ProjectType]: Z.nativeEnum(ProjectType).optional(),
-  [ProjectFields.NumberOfBuildings]: Z.coerce
-    .number()
-    .min(1, validationTexts.TOO_LOW)
-    .max(20, validationTexts.TOO_HIGH)
-    .optional(),
-  [ProjectFields.Basements]: Z.coerce.number().optional(),
-  [ProjectFields.NumberOfApatrments]: Z.coerce.number().optional(),
-  [ProjectFields.Status]: Z.nativeEnum(ProjectStatus).optional(),
-});
 
 export const DUMMY_OPTIONS: IDropdownInputProps['options'] = [
   { text: 'Foo', value: 'foo' },
@@ -42,7 +8,7 @@ export const DUMMY_OPTIONS: IDropdownInputProps['options'] = [
   { text: 'Baz', value: 'baz' },
 ];
 
-export const PROJECT_FORM_DEFAULT_VALUES: ProjectFormValues = {
+export const PROJECT_FORM_DEFAULT_VALUES: IProjectFormValues = {
   [ProjectFields.Title]: '',
   [ProjectFields.Address]: '',
   // [ProjectFields.SDate]: '',

@@ -1,9 +1,11 @@
-export const PROJECT_TYPE_QUERY = 'projectType';
-export const PROJECT_ID_QUERY = 'projectId';
-export const CONTRACT_ID_QUERY = 'contractId';
-export const VENDOR_ID_QUERY = 'vendorId';
+import {
+  CONTRACT_ID_QUERY,
+  PROJECT_ID_QUERY,
+  PROJECT_TYPE_QUERY,
+  VENDOR_ID_QUERY,
+} from './queryParams';
 
-export enum Routes {
+export enum IRoutesNames {
   App = '/app',
   Projects = '/app/projects',
   Vendors = '/app/vendors',

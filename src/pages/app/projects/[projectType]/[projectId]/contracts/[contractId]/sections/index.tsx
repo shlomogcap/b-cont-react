@@ -1,4 +1,4 @@
-import { Routes } from '@/lib/consts/Routes';
+import { IRoutesNames } from '@/lib/consts/routes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export default function SectionsPage() {
     const { projectId = '', contractId = '' } = query;
     if (projectId && contractId) {
       replace({
-        pathname: Routes.Contract,
+        pathname: IRoutesNames.Contract,
         query: { projectId, contractId },
       });
     }
