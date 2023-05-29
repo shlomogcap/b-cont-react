@@ -17,7 +17,7 @@ import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 
 export const FilterPanel = () => {
-  const [showFilters, setShowFilters] = useState(false);
+  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const [status, setStatus] = useState<StatusState>('cancel');
 
   const form = useForm<ProjectFormValues>({
@@ -29,10 +29,10 @@ export const FilterPanel = () => {
     //TODO: when filteres are active make color var(--color-active)}
     size: 'S',
     onClick: () => {
-      setShowFilters((prev) => !prev);
+      setIsFilterPanelOpen((prev) => !prev);
     },
   };
-  const filterIcon = showFilters ? (
+  const filterIcon = isFilterPanelOpen ? (
     <FilterIconOpen {...filterIconProps} />
   ) : (
     <FilterIconClose {...filterIconProps} />
@@ -42,7 +42,7 @@ export const FilterPanel = () => {
     <>
       {filterIcon}
       <FormProvider {...form}>
-        {showFilters && (
+        {isFilterPanelOpen && (
           <StyledFilterPanel>
             <StyledFilterControlDiv>
               <p style={{ flexBasis: '100%' }}>
@@ -95,7 +95,7 @@ export const FilterPanel = () => {
               <StyledFilterButton
                 width='25%'
                 variant='primary'
-                onClick={() => setShowFilters(!showFilters)}
+                onClick={() => setIsFilterPanelOpen(!isFilterPanelOpen)}
               >
                 סנן
               </StyledFilterButton>
