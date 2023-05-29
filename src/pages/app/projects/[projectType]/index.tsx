@@ -28,7 +28,7 @@ export default function ProjectsWithTypeRoute({
       Object.values(ProjectType).every((t) => t !== projectType)
     ) {
       replace({
-        pathname: Routes.App,
+        pathname: IRoutesNames.App,
       });
     }
   }, [replace, projectType]);

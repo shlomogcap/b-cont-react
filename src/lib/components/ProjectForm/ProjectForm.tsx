@@ -35,7 +35,7 @@ import { useProjectsContext } from '@/lib/context/projectsContext';
 import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { PROJECT_ID_QUERY, Routes } from '@/lib/consts/routes';
+import { PROJECT_ID_QUERY, IRoutesNames } from '@/lib/consts/routes';
 import { prepareFormData } from './ProjectForm.utils';
 import { toast } from 'react-toastify';
 
@@ -154,7 +154,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       const res = await addDoc(collectionRef, preparedData);
       toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
       router.push({
-        pathname: Routes.Project,
+        pathname: IRoutesNames.Project,
         query: { [PROJECT_ID_QUERY]: res.id },
       });
     } catch (err) {

@@ -1,6 +1,6 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes } from '../../consts/routes';
+import { IRoutesNames } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Tabs } from '../commons/Tabs';
@@ -22,7 +22,7 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const [projectMainViewActiveTab, setProjectMainViewActiveTab] = useState(
     ProjectMainViews.Overview,
   );
-  const title = DISPLAY_TEXTS.he.routeNames[Routes.Projects];
+  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects];
   const { data } = useProjectsContext();
   const project = projectId ? data.find((p) => p.id === projectId) : null;
   const isEditMode = Boolean(project);
@@ -33,7 +33,7 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
         PROJECTS_BREADCRUMB,
         {
           text: isEditMode ? String(project?.title || projectId) : `+ ${title}`,
-          id: Routes.Project,
+          id: IRoutesNames.Project,
         },
       ]}
     >

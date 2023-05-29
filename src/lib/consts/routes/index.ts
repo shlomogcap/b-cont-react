@@ -1,2 +1,2 @@
-export * from './Routes';
+export * from './RoutesNames';
 export * from './queryParams';

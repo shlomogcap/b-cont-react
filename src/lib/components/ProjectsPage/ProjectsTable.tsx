@@ -1,5 +1,5 @@
 import { Table, fieldsNamesToColumns } from '../commons/Table';
-import { Routes } from '../../consts/routes';
+import { IRoutesNames } from '../../consts/routes';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '../../consts/projects';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
@@ -44,7 +44,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           rows.length < 2
             ? '-'
             : `${rows.length.toLocaleString()} ${
-                DISPLAY_TEXTS.he.routeNames[Routes.Projects]
+                DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects]
               }`,
         [ProjectFields.TotalAgreementSum]: sumBy(
           rows,
@@ -57,7 +57,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
       }}
       onRowClick={({ id }) =>
         router.push({
-          pathname: Routes.Project,
+          pathname: IRoutesNames.Project,
           query: { projectId: id, projectType },
         })
       }

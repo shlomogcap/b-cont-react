@@ -1,4 +1,4 @@
-import { Routes } from '@/lib/consts/routes';
+import { IRoutesNames } from '@/lib/consts/routes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export default function ContractsPage() {
   useEffect(() => {
     if (projectId) {
       replace({
-        pathname: Routes.Project,
+        pathname: IRoutesNames.Project,
         query: { projectId },
       });
     }

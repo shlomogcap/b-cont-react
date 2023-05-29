@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import { VENDOR_DISPLAY_TEXTS, VendorFields } from '@/lib/consts/vendors';
-import { Routes, VENDOR_ID_QUERY } from '@/lib/consts/routes';
+import { IRoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 
 export const VendorsTable = () => {
@@ -31,12 +31,12 @@ export const VendorsTable = () => {
           rows.length < 2
             ? '-'
             : `${rows.length.toLocaleString()} ${
-                DISPLAY_TEXTS.he.routeNames[Routes.Vendors]
+                DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors]
               }`,
       }}
       onRowClick={({ id }) =>
         router.push({
-          pathname: Routes.Vendor,
+          pathname: IRoutesNames.Vendor,
           query: { [VENDOR_ID_QUERY]: id },
         })
       }
