@@ -17,7 +17,7 @@ export const VendorsTable = () => {
           VendorFields.CompanyNumber,
           VendorFields.CommercialName,
           VendorFields.CompanExternalNumber,
-          VendorFields.TaxesEndDate,
+          { field: VendorFields.TaxesEndDate, type: 'date' },
           VendorFields.TaxPercent,
           VendorFields.Phone,
           VendorFields.Email,
