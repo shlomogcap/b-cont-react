@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ProjectFormValues } from '../../ProjectForm';
@@ -9,60 +9,71 @@ import {
   StyledFilterPanel,
   StyledFilterControlDiv,
   StyledFilterButton,
+  StyledFilterItemCaption,
 } from './FilterPanel.styled';
-import { StatusState } from './FilterPanel.types';
+import { IFilterPanelButtonProps, IStatusState } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
-import { FilterIcon } from '../../icons/FilterIcon';
+import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
+import { ISvgIconProps } from '../../icons/SvgIcon';
+
+const FilterPanelButton = ({
+  children,
+}: PropsWithChildren<IFilterPanelButtonProps>) => {
+  const [isFiltered, setIsFiltered] = useState(false);
+  return (
+    <StyledFilterButton
+      isButtonGroup
+      variant={isFiltered ? 'primary' : 'secondary'}
+      onClick={() => setIsFiltered((prev) => !prev)}
+    >
+      {children}
+    </StyledFilterButton>
+  );
+};
 
 export const FilterPanel = () => {
-  const [showFilters, setShowFilters] = useState(false);
-  const [status, setStatus] = useState<StatusState>('cancel');
-
+  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+  const filterIconProps: ISvgIconProps = {
+    //TODO: when filteres are active make color var(--color-active)}
+    size: 'S',
+    onClick: () => {
+      setIsFilterPanelOpen((prev) => !prev);
+    },
+  };
+  const filterIcon = isFilterPanelOpen ? (
+    <FilterIconOpen {...filterIconProps} />
+  ) : (
+    <FilterIconClose {...filterIconProps} />
+  );
 
   return (
     <>
-      <FilterIcon
-        size='S'
-        onClick={() => {
-          setShowFilters(!showFilters);
-        }}
-        isActive={showFilters}
-      />
+      {filterIcon}
       <FormProvider {...form}>
-        {showFilters && (
+        {isFilterPanelOpen && (
           <StyledFilterPanel>
             <StyledFilterControlDiv>
-              <p style={{ flexBasis: '100%' }}>
+              <StyledFilterItemCaption>
                 {PROJECT_DISPLAY_TEXTS.he.fields.status}
-              </p>
-              <StyledFilterButton
-                isButtonGroup={true}
-                variant={
-                  status === 'cancel' || !status ? 'secondary' : 'primary'
-                }
-                onClick={() => setStatus(true)}
-              >
+              </StyledFilterItemCaption>
+              <FilterPanelButton>
                 {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.Active]}
-              </StyledFilterButton>
-              <StyledFilterButton
-                isButtonGroup={true}
-                variant={
-                  status === 'cancel' || status ? 'secondary' : 'primary'
-                }
-                onClick={() => setStatus(false)}
-              >
+              </FilterPanelButton>
+              <FilterPanelButton>
                 {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.InActive]}
-              </StyledFilterButton>
+              </FilterPanelButton>
             </StyledFilterControlDiv>
 
             <StyledFilterControlDiv>
-              <p>{PROJECT_DISPLAY_TEXTS.he.fields.sDate}</p>
+              <StyledFilterItemCaption>
+                {PROJECT_DISPLAY_TEXTS.he.fields.sDate}
+              </StyledFilterItemCaption>
               <DateInput
                 label={'מ'}
                 name={`${ProjectFields.SDate} sDateFilter`}
@@ -74,7 +85,9 @@ export const FilterPanel = () => {
             </StyledFilterControlDiv>
 
             <StyledFilterControlDiv>
-              <p>{PROJECT_DISPLAY_TEXTS.he.fields.eDate}</p>
+              <StyledFilterItemCaption>
+                {PROJECT_DISPLAY_TEXTS.he.fields.eDate}
+              </StyledFilterItemCaption>
               <DateInput
                 label={'מ'}
                 name={`${ProjectFields.SDate} eDate`}
@@ -88,7 +101,7 @@ export const FilterPanel = () => {
               <StyledFilterButton
                 width='25%'
                 variant='primary'
-                onClick={() => setShowFilters(!showFilters)}
+                onClick={() => setIsFilterPanelOpen(false)}
               >
                 סנן
               </StyledFilterButton>
@@ -96,7 +109,7 @@ export const FilterPanel = () => {
                 width='20%'
                 variant='danger'
                 onClick={() => {
-                  setStatus('cancel');
+                  setIsFilterPanelOpen(false);
                   form.reset();
                 }}
               >
