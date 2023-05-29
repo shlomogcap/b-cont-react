@@ -1,6 +1,15 @@
-import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
-import React from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import {
+  PROJECT_DISPLAY_TEXTS,
+  ProjectDoc,
+  ProjectFields,
+} from '@/lib/consts/projects';
+import React, { useEffect } from 'react';
+import {
+  useForm,
+  FormProvider,
+  SubmitHandler,
+  SubmitErrorHandler,
+} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormFooter } from '../commons/Form';
 import {
@@ -10,15 +19,25 @@ import {
   TextInput,
 } from '../commons/Input';
 import { Button } from '../commons/Button';
-import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
+import {
+  DISPLAY_TEXTS,
+  IButtonTexts,
+  IToastType,
+} from '@/lib/consts/displayTexts';
 import {
   DUMMY_OPTIONS,
   PROJECT_FORM_DEFAULT_VALUES,
-  projectFormSchema,
 } from './ProjectForm.consts';
-import { ProjectFormValues } from './ProjectForm.types';
+import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
 import { useCalcEDateByPeriodsAndSDate } from './hooks/useCalcEDateByPeriodsAndSDate';
+import { useProjectsContext } from '@/lib/context/projectsContext';
+import { firestore } from '@firebase';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { useRouter } from 'next/router';
+import { PROJECT_ID_QUERY, IRoutesNames } from '@/lib/consts/routes';
+import { prepareFormData } from './ProjectForm.utils';
+import { toast } from 'react-toastify';
 
 const ProjectFormFields = () => {
   const calcPeriods = useCalcPeriods();
@@ -97,21 +116,57 @@ const ProjectFormFields = () => {
   );
 };
 
-export const ProjectForm = () => {
-  const form = useForm<ProjectFormValues>({
-    resolver: zodResolver(projectFormSchema),
+export const ProjectForm = ({ id }: IProjectFormProps) => {
+  const isEditMode = Boolean(id);
+  const router = useRouter();
+  const { data: projects, isLoading } = useProjectsContext();
+  const form = useForm<IProjectFormValues>({
+    resolver: zodResolver(ProjectDoc),
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+  const { reset } = form;
 
-  const onSubmit = (data: ProjectFormValues) => {
-    console.log(data);
+  useEffect(() => {
+    if (isEditMode && !isLoading) {
+      const project = projects.find((project) => project.id === id);
+      if (project !== undefined) {
+        reset(project);
+      }
+    }
+  }, [isLoading, isEditMode, reset, id, projects]);
+
+  const onSubmit: SubmitHandler<IProjectFormValues> = async (data) => {
+    const preparedData = prepareFormData(data);
+    if (isEditMode) {
+      try {
+        const docRef = doc(firestore, `projects/${id}`);
+        await setDoc(docRef, preparedData, { merge: true });
+        toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
+      } catch (err) {
+        //TODO: promt error...
+        console.error(err);
+      }
+      return;
+    }
+    try {
+      const collectionRef = collection(firestore, 'projects');
+      const res = await addDoc(collectionRef, preparedData);
+      toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
+      router.push({
+        pathname: IRoutesNames.Project,
+        query: { [PROJECT_ID_QUERY]: res.id },
+      });
+    } catch (err) {
+      //TODO: promt error...
+      console.error(err);
+    }
   };
-  const onError = (error: any) => {
-    console.log('ERROR:', error);
+  const onError: SubmitErrorHandler<IProjectFormValues> = (errors) => {
+    //TODO: promt error...
+    console.log('ERROR:', errors);
   };
   const abortChanges = () => {
-    console.log('TODO: abort all changes');
     form.reset(PROJECT_FORM_DEFAULT_VALUES);
   };
 

@@ -9,6 +9,7 @@ type DisplayTextMapping = {
   mainViews: Record<ProjectMainViews, string>;
   actualViews: Record<ProjectActualsViews, string>;
   projectTypes: Record<ProjectType, string>;
+  getAddNewText: (projectType: ProjectType) => string;
 };
 
 export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -49,6 +50,8 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectType.PublicSpace]: 'ציבורי',
       [ProjectType.Entrepreneurship]: 'יזמות',
     },
+    getAddNewText: (projectType) =>
+      `+ פרוייקט [${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]}]`,
   },
   en: {
     fields: {
@@ -87,5 +90,7 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectType.PublicSpace]: 'Public Space',
       [ProjectType.Entrepreneurship]: 'Entrepreneurship',
     },
+    getAddNewText: (projectType) =>
+      `+ project [${PROJECT_DISPLAY_TEXTS.en.projectTypes[projectType]}]`,
   },
 };

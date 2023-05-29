@@ -1,6 +1,8 @@
+import { IProjectDoc } from '@/lib/consts/projects';
 import Z from 'zod';
-import { projectFormSchema } from './ProjectForm.consts';
 
-export type IProjectFormProps = {};
+export type IProjectFormProps = {
+  id?: string;
+};
 
-export type ProjectFormValues = Z.infer<typeof projectFormSchema>;
+export type IProjectFormValues = IProjectDoc;

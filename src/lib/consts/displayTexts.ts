@@ -1,4 +1,4 @@
-import { Routes } from './Routes';
+import { IRoutesNames } from './routes';
 
 export type Lang = 'he' | 'en';
 
@@ -11,15 +11,24 @@ export enum ITableStates {
   Loading,
   Error,
 }
+export enum IToastType {
+  AddingNewDoc,
+  SavingDocData,
+}
 
 type DisplayTextMapping = {
-  routeNames: Record<Routes, string>;
+  toasts: Record<IToastType, string>;
+  routeNames: Record<Exclude<IRoutesNames, IRoutesNames.App>, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    toasts: {
+      [IToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
+      [IToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
+    },
     table: {
       [ITableStates.NoRows]: 'לא נמצאו נתונים',
       [ITableStates.Loading]: 'טוען...',
@@ -30,33 +39,37 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IButtonTexts.Cancel]: 'בטל שינויים',
     },
     routeNames: {
-      [Routes.Projects]: 'פרוייקטים',
-      [Routes.Vendors]: 'קבלנים',
-      [Routes.Settings]: 'הגדרות',
-      [Routes.Project]: 'פרוייקט',
-      [Routes.Contract]: 'חוזה',
-      [Routes.Vendor]: 'קבלן',
-      [Routes.Me]: 'המשתמש שלי',
-      [Routes.Company]: 'פרטי חברה/חברות',
-      [Routes.Budget]: 'פרקים תקציב',
+      [IRoutesNames.Projects]: 'פרוייקטים',
+      [IRoutesNames.Vendors]: 'קבלנים',
+      [IRoutesNames.Settings]: 'הגדרות',
+      [IRoutesNames.Project]: 'פרוייקט',
+      [IRoutesNames.Contract]: 'חוזה',
+      [IRoutesNames.Vendor]: 'קבלן',
+      [IRoutesNames.Me]: 'המשתמש שלי',
+      [IRoutesNames.Company]: 'פרטי חברה/חברות',
+      [IRoutesNames.Budget]: 'פרקים תקציב',
     },
   },
   en: {
+    toasts: {
+      [IToastType.AddingNewDoc]: 'Data Added Succefully',
+      [IToastType.SavingDocData]: 'Data Saved Succefully',
+    },
     table: {
       [ITableStates.NoRows]: 'No Rows',
       [ITableStates.Loading]: 'Loading...',
       [ITableStates.Error]: 'An Error Has Occured',
     },
     routeNames: {
-      [Routes.Projects]: 'Projects',
-      [Routes.Vendors]: 'Vendors',
-      [Routes.Settings]: 'Settings',
-      [Routes.Project]: 'Project',
-      [Routes.Contract]: 'Contract',
-      [Routes.Vendor]: 'Vendor',
-      [Routes.Me]: 'Me',
-      [Routes.Company]: 'Company',
-      [Routes.Budget]: 'Budget',
+      [IRoutesNames.Projects]: 'Projects',
+      [IRoutesNames.Vendors]: 'Vendors',
+      [IRoutesNames.Settings]: 'Settings',
+      [IRoutesNames.Project]: 'Project',
+      [IRoutesNames.Contract]: 'Contract',
+      [IRoutesNames.Vendor]: 'Vendor',
+      [IRoutesNames.Me]: 'Me',
+      [IRoutesNames.Company]: 'Company',
+      [IRoutesNames.Budget]: 'Budget',
     },
     buttons: {
       [IButtonTexts.Save]: 'Save',

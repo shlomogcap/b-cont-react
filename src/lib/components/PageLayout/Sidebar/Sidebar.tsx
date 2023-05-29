@@ -1,6 +1,6 @@
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import { ProjectType } from '../../../consts/projects/ProjectType';
-import { Routes } from '../../../consts/Routes';
+import { IRoutesNames } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
@@ -19,29 +19,29 @@ export const Sidebar = ({ title }: ISidebarProps) => {
       <nav className='nav'>
         <SidebarLink
           text={projectTypeTexts[ProjectType.Residential]}
-          href={`${Routes.Projects}/${ProjectType.Residential}`}
+          href={`${IRoutesNames.Projects}/${ProjectType.Residential}`}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.PublicSpace]}
-          href={`${Routes.Projects}/${ProjectType.PublicSpace}`}
+          href={`${IRoutesNames.Projects}/${ProjectType.PublicSpace}`}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.Entrepreneurship]}
-          href={`${Routes.Projects}/${ProjectType.Entrepreneurship}`}
+          href={`${IRoutesNames.Projects}/${ProjectType.Entrepreneurship}`}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
         <div className='hr' />
         <SidebarLink
           text='קבלנים'
-          href={Routes.Vendors}
+          href={IRoutesNames.Vendors}
           icon={<VendorsIcon />}
         />
         <div className='hr' />
         <SidebarLink
           text='הגדרות'
-          href={Routes.Settings}
+          href={IRoutesNames.Settings}
           icon={<SettingsIcon />}
         />
       </nav>

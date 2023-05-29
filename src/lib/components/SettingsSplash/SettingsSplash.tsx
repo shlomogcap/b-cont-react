@@ -3,7 +3,7 @@ import { BlocksGrid } from '../commons/BlocksGrid';
 import { IBlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { ProjectType } from '../../consts/projects/ProjectType';
-import { Routes } from '../../consts/Routes';
+import { IRoutesNames } from '../../consts/routes';
 import {
   SETTINGS_ICON_MAPPING,
   SettingRoutes,
@@ -21,7 +21,7 @@ const createBlockGridItems = (
 
 export const SettingsSplash = () => {
   return (
-    <PageLayout title={DISPLAY_TEXTS.he.routeNames[Routes.Projects]}>
+    <PageLayout title={DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects]}>
       <BlocksGrid items={createBlockGridItems(SETTINGS_ICON_MAPPING)} />
     </PageLayout>
   );
