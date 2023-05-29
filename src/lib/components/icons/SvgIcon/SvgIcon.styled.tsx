@@ -7,6 +7,7 @@ export const StyledSvgIcon = styled.svg`
   justify-content: center;
   align-items: center;
   backface-visibility: hidden;
+  color: var(--color-non-active);
   & .${CURRENT_COLOR_CLASS_NAME} {
     fill: currentColor;
   }

@@ -12,8 +12,9 @@ import {
 } from './FilterPanel.styled';
 import { StatusState } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
-import { FilterIcon } from '../../icons/FilterIcon';
+import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
+import { ISvgIconProps } from '../../icons/SvgIcon';
 
 export const FilterPanel = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -24,16 +25,22 @@ export const FilterPanel = () => {
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+  const filterIconProps: ISvgIconProps = {
+    //TODO: when filteres are active make color var(--color-active)}
+    size: 'S',
+    onClick: () => {
+      setShowFilters((prev) => !prev);
+    },
+  };
+  const filterIcon = showFilters ? (
+    <FilterIconOpen {...filterIconProps} />
+  ) : (
+    <FilterIconClose {...filterIconProps} />
+  );
 
   return (
     <>
-      <FilterIcon
-        size='S'
-        onClick={() => {
-          setShowFilters(!showFilters);
-        }}
-        isActive={showFilters}
-      />
+      {filterIcon}
       <FormProvider {...form}>
         {showFilters && (
           <StyledFilterPanel>
