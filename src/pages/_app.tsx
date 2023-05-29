@@ -4,6 +4,7 @@ import { GlobalStyle } from './GlobalStyle';
 import { ProjectsProvider } from '@/lib/context/projectsContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { VendorsProvider } from '@/lib/context/vendorsContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,8 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyle dir='rtl' />
       <ProjectsProvider>
-        <ToastContainer position='top-center' />
-        <Component {...pageProps} />
+        <VendorsProvider>
+          <ToastContainer position='top-center' />
+          <Component {...pageProps} />
+        </VendorsProvider>
       </ProjectsProvider>
     </>
   );

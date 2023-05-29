@@ -1,12 +1,11 @@
 import { PageLayout } from '../PageLayout';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { Routes, VENDOR_ID_QUERY } from '../../consts/Routes';
 import { IVendorsPageProps } from './VendorsPage.types';
 import { useRouter } from 'next/router';
-import { MOCK_VENDORS_DATA } from '@/lib/mock/vendors';
-import { VENDOR_DISPLAY_TEXTS, VendorFields } from '@/lib/consts/vendors';
 import { VENDORS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
+import { VendorsTable } from '../VendorPage/VendorsTable';
+import { Routes } from '@/lib/consts/routes';
 
 export const VendorsPage = (_props: IVendorsPageProps) => {
   const router = useRouter();
@@ -15,29 +14,7 @@ export const VendorsPage = (_props: IVendorsPageProps) => {
 
   return (
     <PageLayout title={title} breadcrubms={[VENDORS_BREADCRUMB]}>
-      <Table
-        columns={fieldsNamesToColumns(
-          [
-            VendorFields.Title,
-            VendorFields.CompanyNumber,
-            VendorFields.CommercialName,
-            VendorFields.CompanExternalNumber,
-            VendorFields.TaxesEndDate,
-            VendorFields.TaxPercent,
-            VendorFields.Phone,
-            VendorFields.Email,
-            VendorFields.Status,
-          ],
-          VENDOR_DISPLAY_TEXTS.he.fields,
-        )}
-        rows={MOCK_VENDORS_DATA as any}
-        onRowClick={({ id }) =>
-          router.push({
-            pathname: Routes.Vendor,
-            query: { [VENDOR_ID_QUERY]: id },
-          })
-        }
-      />
+      <VendorsTable />
     </PageLayout>
   );
 };
