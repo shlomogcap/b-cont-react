@@ -7,9 +7,11 @@ import {
 import { MOCK_PROJECTS_ACCOUNTS_DATA } from '@/lib/mock/projectAccounts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
+import { useVendorsContext } from '@/lib/context/vendorsContext';
 
 export const ProjectAccounts = (props: IProjectAccountsProps) => {
   const { data: contracts } = useProjectContractsContext();
+  const { data: vendors } = useVendorsContext();
   return (
     <Table
       columns={fieldsNamesToColumns(
@@ -20,7 +22,12 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
               contracts.find(({ id }) => row[field] === id)?.title ??
               FALLBACK_BROKEN_REF_TEXT,
           },
-          IProjectAccountsFields.Vendor,
+          {
+            field: IProjectAccountsFields.Vendor,
+            getValue: ({ row, field }) =>
+              vendors.find(({ id }) => row[field] === id)?.title ??
+              FALLBACK_BROKEN_REF_TEXT,
+          },
           { field: IProjectAccountsFields.AccumulatedTotal, type: 'number' },
           { field: IProjectAccountsFields.AccumulatedHisotry, type: 'number' },
           { field: IProjectAccountsFields.AccountAdditions, type: 'number' },
