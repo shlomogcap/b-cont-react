@@ -3,12 +3,14 @@ import { IProjectContractsProps } from './ProjectContracts.types';
 import {
   CONTRACTS_DISPLAY_TEXTS,
   IContractFields,
-  IContractStatus,
-  IContractType,
 } from '@/lib/consts/contracts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
+import {
+  CONTRACT_STATUS_OPTIONS,
+  CONTRACT_TYPE_OPTIONS,
+} from './ProjectContracts.consts';
 
 export const ProjectContracts = (props_: IProjectContractsProps) => {
   const { data: rows, isLoading } = useProjectContractsContext();
@@ -22,12 +24,7 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
           {
             field: IContractFields.Status,
             type: 'list',
-            options: [IContractStatus.Active, IContractStatus.Active].map(
-              (contractStatus) => ({
-                text: CONTRACTS_DISPLAY_TEXTS.he.contractStatus[contractStatus],
-                value: contractStatus,
-              }),
-            ),
+            options: CONTRACT_STATUS_OPTIONS,
           },
           {
             field: IContractFields.VendorRef,
@@ -40,16 +37,7 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
           {
             field: IContractFields.ContractType,
             type: 'list',
-            options: [
-              IContractType.Pauschal,
-              IContractType.Amount,
-              IContractType.Rent,
-              IContractType.Invoice,
-              IContractType.Kitchen,
-            ].map((contractType) => ({
-              text: CONTRACTS_DISPLAY_TEXTS.he.contractType[contractType],
-              value: contractType,
-            })),
+            options: CONTRACT_TYPE_OPTIONS,
           },
         ],
         CONTRACTS_DISPLAY_TEXTS.he.fields,

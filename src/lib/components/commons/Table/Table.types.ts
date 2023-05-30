@@ -10,7 +10,10 @@ export type ITableColumnType =
   | 'date'
   | 'list';
 
-export type ITableColumnOption = { text: string; value: string };
+export type ITableColumnOption = {
+  text: string;
+  value: string;
+};
 
 type IGetColumnValueFunctionArgs<T extends string> = {
   row: ITableRow<T>;
