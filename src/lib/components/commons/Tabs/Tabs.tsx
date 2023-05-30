@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Link } from '../Link';
 import { ACTIVE_TAB_CLASS_NAME } from './Tabs.consts';
 import { StyledTabElement, StyledTabs } from './Tabs.styled';
@@ -21,11 +22,15 @@ export const Tabs = <T extends string>({
   activeTab,
   setActiveTab,
 }: ITabsProps<T>) => {
+  const tabsRef = useRef<HTMLDivElement>(null);
   return (
-    <StyledTabs>
+    <StyledTabs ref={tabsRef}>
       {tabs.map(({ id, text }) => (
         <Tab
-          onClick={() => setActiveTab(id)}
+          onClick={() => {
+            setActiveTab(id);
+            tabsRef.current?.scrollIntoView();
+          }}
           text={text}
           key={id}
           isActive={activeTab === id}
