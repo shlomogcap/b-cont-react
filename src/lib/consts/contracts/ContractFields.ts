@@ -2,6 +2,8 @@ export enum IContractFields {
   Title = 'title',
   Description = 'description',
   VendorRef = 'vendorRef',
+  ActualsStatus = 'actualsStatus',
+  BudgetbudgetaryItem = 'budgetbudgetaryItem',
   TotalAgreementSum = 'totalAgreementSum',
   PaymentDelay = 'paymentDelay',
   DelayPercentage = 'delayPercentage',

@@ -40,7 +40,7 @@ export const Table = <T extends string = string>({
             {columns.map(({ field, getValue, ...rest }) => (
               <StyledTableCell key={`${row.id}/${field}`}>
                 {getDisplayValue({
-                  value: getValue?.({ row }) ?? row?.[field],
+                  value: getValue?.({ row, field }) ?? row?.[field],
                   ...rest,
                 }) ?? ''}
               </StyledTableCell>

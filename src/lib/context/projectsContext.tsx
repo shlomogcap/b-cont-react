@@ -8,6 +8,7 @@ import {
 import { IProjectDoc } from '../consts/projects/ProjectDoc';
 import { firestore } from '@firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 type IProjectsContext = {
   data: IProjectDoc[];

@@ -14,6 +14,7 @@ export type ITableColumnOption = { text: string; value: string };
 
 type IGetColumnValueFunctionArgs<T extends string> = {
   row: ITableRow<T>;
+  field: T;
 };
 
 type IGetColumnValueFunction<T extends string> = (

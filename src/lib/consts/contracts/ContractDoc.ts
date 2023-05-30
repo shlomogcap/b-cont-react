@@ -9,6 +9,7 @@ export const ContractDoc = Z.object({
   })
     .nonempty(validationTexts.REQUIRED)
     .min(4, validationTexts.TOO_SHORT),
+  [IContractFields.Description]: Z.string().optional(),
 });
 
 export type IContractDoc = WithIdField<Z.infer<typeof ContractDoc>>;

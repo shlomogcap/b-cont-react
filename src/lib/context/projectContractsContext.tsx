@@ -8,6 +8,7 @@ import {
 import { firestore } from '@firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { IContractDoc } from '../consts/contracts';
+import { toast } from 'react-toastify';
 
 type IProjectContractsContext = {
   data: IContractDoc[];
@@ -35,7 +36,6 @@ export const ProjectContractsProvider = ({
   const [data, setData] = useState<IContractDoc[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-
   useEffect(() => {
     const collectionRef = collection(
       firestore,
@@ -82,6 +82,7 @@ export const ProjectContractsProvider = ({
       },
       (error) => {
         setError(`Error fetching Contracts for Project ${projectId}`);
+        toast.error(`Error Fetching Project Contracts: ${error.message}`);
         setIsLoading(false);
         console.error(error);
       },
