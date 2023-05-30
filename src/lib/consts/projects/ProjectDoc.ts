@@ -2,7 +2,7 @@ import Z from 'zod';
 import { WithIdField } from '@/lib/utils/WithIdField';
 import { ProjectFields } from './ProjectFields';
 import { ProjectType } from './ProjectType';
-import { ProjectStatus } from './ProjectStatus';
+import { IProjectStatus } from './ProjectStatus';
 import {
   OPTIONAL_DATE_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
@@ -37,7 +37,7 @@ export const ProjectDoc = Z.object({
     .optional(),
   [ProjectFields.Basements]: OPTIONAL_NUMBER_SCHEMA,
   [ProjectFields.NumberOfApatrments]: OPTIONAL_NUMBER_SCHEMA,
-  [ProjectFields.Status]: Z.nativeEnum(ProjectStatus).optional(),
+  [ProjectFields.Status]: Z.nativeEnum(IProjectStatus).optional(),
 });
 
 export type IProjectDoc = WithIdField<Z.infer<typeof ProjectDoc>>;
