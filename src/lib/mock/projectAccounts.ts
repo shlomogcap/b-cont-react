@@ -1,6 +1,6 @@
 import { ITableRow } from '../components/commons/Table';
 import { ID_FIELD } from '../consts/commonFields';
-import { IProjectAccountsFields } from '../consts/projectAccounts';
+import { IProjectAccountsFields } from '../consts/accounts';
 
 export const MOCK_PROJECTS_ACCOUNTS_DATA: ITableRow<IProjectAccountsFields>[] =
   [

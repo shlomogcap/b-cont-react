@@ -4,4 +4,8 @@ export enum IContractActualStatus {
   MissingSeniorManagerConfirm = 'missingSeniorManagerConfirm',
   InCareOfAccounting = 'inCareOfAccounting',
   InCareOfFinancing = 'inCareOfFinancing',
+  MovedToDelayRelease = 'movedToDelayRelease',
+  DelayNotReleased = 'delayNotReleased',
+  DelayReleased = 'delayReleased',
+  LackOfClaimsReceived = 'lackOfClaimsReceived',
 }

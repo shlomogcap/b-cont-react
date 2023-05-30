@@ -3,7 +3,7 @@ export enum VendorFields {
   CommercialName = 'commercialName',
   CompanyNumber = 'companyNumber',
   CompanExternalNumber = 'companExternalNumber',
-  CompanyType = 'CompanyType',
+  CompanyType = 'companyType',
   Phone = 'phone',
   Email = 'email',
   TaxPercent = 'taxPercent',

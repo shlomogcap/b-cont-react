@@ -1,4 +1,5 @@
 import { Lang } from '../displayTexts';
+import { IContractActualStatus } from './ContractActualStatus';
 import { IContractFields } from './ContractFields';
 import { IContractStatus } from './ContractStatus';
 import { IContractType } from './ContractType';
@@ -7,6 +8,7 @@ type DisplayTextMapping = {
   fields: Record<IContractFields, string>;
   contractType: Record<IContractType, string>;
   contractStatus: Record<IContractStatus, string>;
+  contractActualsStatus: Record<IContractActualStatus, string>;
 };
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -42,6 +44,18 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractStatus.Active]: 'פעיל',
       [IContractStatus.NonActive]: 'לא פעיל',
     },
+    contractActualsStatus: {
+      [IContractActualStatus.None]: '---',
+      [IContractActualStatus.MissingProjectManagerConfirm]:
+        'חסר אישור מ.פרוייקט',
+      [IContractActualStatus.MissingSeniorManagerConfirm]: 'חסר אישור מנכ״ל',
+      [IContractActualStatus.InCareOfAccounting]: 'בטיפול הנה״ח',
+      [IContractActualStatus.InCareOfFinancing]: 'בטיפול כספים',
+      [IContractActualStatus.MovedToDelayRelease]: 'עבר לשחרור עכבון',
+      [IContractActualStatus.DelayNotReleased]: 'לא שוחרר עכבון',
+      [IContractActualStatus.DelayReleased]: 'שוחרר עכבון',
+      [IContractActualStatus.LackOfClaimsReceived]: 'התקבל העדר תביעות',
+    },
   },
   en: {
     fields: {
@@ -74,6 +88,20 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     contractStatus: {
       [IContractStatus.Active]: 'Active',
       [IContractStatus.NonActive]: 'Not Active',
+    },
+    contractActualsStatus: {
+      [IContractActualStatus.None]: 'None',
+      [IContractActualStatus.MissingProjectManagerConfirm]:
+        'Missing Project Manager Approval',
+      [IContractActualStatus.MissingSeniorManagerConfirm]:
+        'Missing Senior Manager Approval',
+      [IContractActualStatus.InCareOfAccounting]: 'In Care Of Accounting',
+      [IContractActualStatus.InCareOfFinancing]: 'In Care Of Financing',
+      [IContractActualStatus.MovedToDelayRelease]: 'Moved To Delay Release',
+      [IContractActualStatus.DelayNotReleased]: 'Delay Pending Release',
+      [IContractActualStatus.DelayReleased]: 'Delay Release',
+      [IContractActualStatus.LackOfClaimsReceived]:
+        'A Lack Of Claims Was Received',
     },
   },
 };

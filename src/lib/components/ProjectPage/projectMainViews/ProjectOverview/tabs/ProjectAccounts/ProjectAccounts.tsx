@@ -3,7 +3,7 @@ import { IProjectAccountsProps } from './ProjectAccounts.types';
 import {
   IProjectAccountsFields,
   PROJECT_ACCOUNTS_DISPLAY_TEXTS,
-} from '@/lib/consts/projectAccounts';
+} from '@/lib/consts/accounts';
 import { MOCK_PROJECTS_ACCOUNTS_DATA } from '@/lib/mock/projectAccounts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
