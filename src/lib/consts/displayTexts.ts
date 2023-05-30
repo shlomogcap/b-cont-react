@@ -16,9 +16,13 @@ export enum IToastType {
   SavingDocData,
 }
 
-export enum IFilterButtonStates {
+export enum IFilterPanelStates {
   Active,
   InActive,
+  From,
+  To,
+  Filter,
+  Clear,
 }
 
 type DisplayTextMapping = {
@@ -26,7 +30,7 @@ type DisplayTextMapping = {
   routeNames: Record<Exclude<IRoutesNames, IRoutesNames.App>, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
-  filterButton: Record<IFilterButtonStates, string>;
+  filterPanel: Record<IFilterPanelStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -55,9 +59,13 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IRoutesNames.Company]: 'פרטי חברה/חברות',
       [IRoutesNames.Budget]: 'פרקים תקציב',
     },
-    filterButton: {
-      [IFilterButtonStates.Active]: 'פעיל',
-      [IFilterButtonStates.InActive]: 'לא פעיל',
+    filterPanel: {
+      [IFilterPanelStates.Active]: 'פעיל',
+      [IFilterPanelStates.InActive]: 'לא פעיל',
+      [IFilterPanelStates.From]: 'מ',
+      [IFilterPanelStates.To]: 'עד',
+      [IFilterPanelStates.Filter]: 'סנן',
+      [IFilterPanelStates.Clear]: 'נקה',
     },
   },
   en: {
@@ -85,9 +93,13 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IButtonTexts.Save]: 'Save',
       [IButtonTexts.Cancel]: 'Cancel',
     },
-    filterButton: {
-      [IFilterButtonStates.Active]: 'Active',
-      [IFilterButtonStates.InActive]: 'In Active',
+    filterPanel: {
+      [IFilterPanelStates.Active]: 'Active',
+      [IFilterPanelStates.InActive]: 'Not Active',
+      [IFilterPanelStates.From]: 'From',
+      [IFilterPanelStates.To]: 'To',
+      [IFilterPanelStates.Filter]: 'Filter',
+      [IFilterPanelStates.Clear]: 'Clear',
     },
   },
 };

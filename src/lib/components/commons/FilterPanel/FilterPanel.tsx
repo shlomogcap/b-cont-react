@@ -13,7 +13,7 @@ import {
 import { IFilterPanelButtonProps } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
-import { DISPLAY_TEXTS, IFilterButtonStates } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 
 const FilterPanelButton = ({
@@ -62,10 +62,10 @@ export const FilterPanel = () => {
                 {PROJECT_DISPLAY_TEXTS.he.fields.status}
               </StyledFilterItemCaption>
               <FilterPanelButton>
-                {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.Active]}
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Active]}
               </FilterPanelButton>
               <FilterPanelButton>
-                {DISPLAY_TEXTS.he.filterButton[IFilterButtonStates.InActive]}
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.InActive]}
               </FilterPanelButton>
             </StyledFilterControlDiv>
 
@@ -74,11 +74,11 @@ export const FilterPanel = () => {
                 {PROJECT_DISPLAY_TEXTS.he.fields.sDate}
               </StyledFilterItemCaption>
               <DateInput
-                label={'מ'}
+                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
                 name={`${ProjectFields.SDate} sDateFilter`}
               ></DateInput>
               <DateInput
-                label={'עד'}
+                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
                 name={`${ProjectFields.EDate} sDateFilter`}
               ></DateInput>
             </StyledFilterControlDiv>
@@ -88,11 +88,11 @@ export const FilterPanel = () => {
                 {PROJECT_DISPLAY_TEXTS.he.fields.eDate}
               </StyledFilterItemCaption>
               <DateInput
-                label={'מ'}
+                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
                 name={`${ProjectFields.SDate} eDate`}
               ></DateInput>
               <DateInput
-                label={'עד'}
+                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
                 name={`${ProjectFields.EDate} eDate`}
               ></DateInput>
             </StyledFilterControlDiv>
@@ -102,7 +102,7 @@ export const FilterPanel = () => {
                 variant='primary'
                 onClick={() => setIsFilterPanelOpen(false)}
               >
-                סנן
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
               </StyledFilterButton>
               <StyledFilterButton
                 width='20%'
@@ -112,7 +112,7 @@ export const FilterPanel = () => {
                   form.reset();
                 }}
               >
-                נקה
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
               </StyledFilterButton>
             </StyledFilterControlDiv>
           </StyledFilterPanel>
