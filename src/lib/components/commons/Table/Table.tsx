@@ -37,9 +37,12 @@ export const Table = <T extends string = string>({
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
-            {columns.map(({ field, ...rest }) => (
+            {columns.map(({ field, getValue, ...rest }) => (
               <StyledTableCell key={`${row.id}/${field}`}>
-                {getDisplayValue({ value: row?.[field], ...rest }) ?? ''}
+                {getDisplayValue({
+                  value: getValue?.({ row }) ?? row?.[field],
+                  ...rest,
+                }) ?? ''}
               </StyledTableCell>
             ))}
           </StyledTableDataRow>

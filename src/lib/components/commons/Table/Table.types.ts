@@ -12,11 +12,20 @@ export type ITableColumnType =
 
 export type ITableColumnOption = { text: string; value: string };
 
+type IGetColumnValueFunctionArgs<T extends string> = {
+  row: ITableRow<T>;
+};
+
+type IGetColumnValueFunction<T extends string> = (
+  args: IGetColumnValueFunctionArgs<T>,
+) => string | number;
+
 export type ITableColumn<T extends string> = {
   field: T;
   display?: string;
   type?: ITableColumnType;
   options?: ITableColumnOption[];
+  getValue?: IGetColumnValueFunction<T>;
 };
 
 export type IGetDisplayValueProps = {

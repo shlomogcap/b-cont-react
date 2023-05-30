@@ -11,7 +11,10 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
     <Table
       columns={fieldsNamesToColumns(
         [
-          IProjectAccountsFields.Contract,
+          {
+            field: IProjectAccountsFields.Contract,
+            getValue: ({ row }) => `TODO: get contract by id->${row.id}`,
+          },
           IProjectAccountsFields.Vendor,
           { field: IProjectAccountsFields.AccumulatedTotal, type: 'number' },
           { field: IProjectAccountsFields.AccumulatedHisotry, type: 'number' },
