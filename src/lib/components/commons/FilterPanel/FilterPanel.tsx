@@ -52,9 +52,9 @@ export const FilterPanel = () => {
   );
 
   return (
-    <>
-      {filterIcon}
+    <div>
       <FormProvider {...form}>
+        {filterIcon}
         {isFilterPanelOpen && (
           <StyledFilterPanel>
             <StyledFilterControlDiv>
@@ -118,6 +118,6 @@ export const FilterPanel = () => {
           </StyledFilterPanel>
         )}
       </FormProvider>
-    </>
+    </div>
   );
 };
