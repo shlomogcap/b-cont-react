@@ -37,6 +37,7 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
         ],
         PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.fields,
       )}
+      //TODO: model this data in database and resolve the data from there... (e.g. part of contract ?)
       rows={MOCK_PROJECTS_ACCOUNTS_DATA}
     />
   );
