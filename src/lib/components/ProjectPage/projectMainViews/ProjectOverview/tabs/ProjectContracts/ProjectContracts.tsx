@@ -8,6 +8,7 @@ import {
 } from '@/lib/consts/contracts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
+import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
 
 export const ProjectContracts = (props_: IProjectContractsProps) => {
   const { data: rows, isLoading } = useProjectContractsContext();
@@ -30,8 +31,9 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
           },
           {
             field: IContractFields.VendorRef,
-            getValue: ({ row }) =>
-              vendors.find(({ id }) => row.id === id)?.title ?? '---',
+            getValue: ({ row, field }) =>
+              vendors.find(({ id }) => row[field] === id)?.title ??
+              FALLBACK_BROKEN_REF_TEXT,
           },
           IContractFields.BudgetbudgetaryItem,
           { field: IContractFields.TotalAgreementSum, type: 'number' },

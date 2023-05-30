@@ -5,15 +5,20 @@ import {
   PROJECT_ACCOUNTS_DISPLAY_TEXTS,
 } from '@/lib/consts/projectAccounts';
 import { MOCK_PROJECTS_ACCOUNTS_DATA } from '@/lib/mock/projectAccounts';
+import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
+import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
 
 export const ProjectAccounts = (props: IProjectAccountsProps) => {
+  const { data: contracts } = useProjectContractsContext();
   return (
     <Table
       columns={fieldsNamesToColumns(
         [
           {
             field: IProjectAccountsFields.Contract,
-            getValue: ({ row }) => `TODO: get contract by id->${row.id}`,
+            getValue: ({ row, field }) =>
+              contracts.find(({ id }) => row[field] === id)?.title ??
+              FALLBACK_BROKEN_REF_TEXT,
           },
           IProjectAccountsFields.Vendor,
           { field: IProjectAccountsFields.AccumulatedTotal, type: 'number' },
