@@ -56,6 +56,23 @@ export const FilterPanel = () => {
     },
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      popperElement.current &&
+      !popperElement.current?.contains(event.target as Node) &&
+      !(event.target instanceof SVGElement)
+    ) {
+      setIsFilterPanelOpen(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const initPopper = useCallback(() => {
     if (
       isFilterPanelOpen &&
@@ -84,7 +101,6 @@ export const FilterPanel = () => {
         },
       );
     }
-    console.log(popperInstance.current);
   }, [isFilterPanelOpen]);
 
   const destroyPopper = () => {
