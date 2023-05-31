@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CURRENT_COLOR_CLASS_NAME } from './SvgIcon.consts';
+import { CURRENT_COLOR_CLASS_NAME, POINTER } from './SvgIcon.consts';
 
 export const StyledSvgIcon = styled.svg`
   color: inherit;
@@ -10,5 +10,8 @@ export const StyledSvgIcon = styled.svg`
   color: var(--color-non-active);
   & .${CURRENT_COLOR_CLASS_NAME} {
     fill: currentColor;
+  }
+  & .${POINTER} {
+    cursor: pointer;
   }
 `;

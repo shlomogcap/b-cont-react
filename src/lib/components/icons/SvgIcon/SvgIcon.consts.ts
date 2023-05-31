@@ -8,3 +8,5 @@ export const SIZE_MAP: Record<IIconSize, string> = {
 };
 
 export const CURRENT_COLOR_CLASS_NAME = 'current-color-svg';
+
+export const POINTER = 'pointer';
