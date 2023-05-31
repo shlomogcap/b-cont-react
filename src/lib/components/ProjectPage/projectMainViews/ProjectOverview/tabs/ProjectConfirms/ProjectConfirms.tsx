@@ -3,7 +3,7 @@ import { ITableColumn, Table } from '@/lib/components/commons/Table';
 import { PROJECT_ACCOUNTS_DISPLAY_TEXTS } from '@/lib/consts/accounts';
 import { IAccountConfirms } from '@/lib/consts/accounts/AccountConfirms';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
-import { VENDOR_DISPLAY_TEXTS, VendorFields } from '@/lib/consts/vendors';
+import { VENDOR_DISPLAY_TEXTS, IVendorFields } from '@/lib/consts/vendors';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import {
@@ -34,21 +34,21 @@ export const ProjectConfirms = (props: IProjectConfirmsProps) => {
     },
     {
       field: IContractFields.VendorRef,
-      fieldPath: `${IContractFields.VendorRef}.${VendorFields.Title}`,
+      fieldPath: `${IContractFields.VendorRef}.${IVendorFields.Title}`,
       display: 'קבלן מבצע', //TODO: locate in DisplayText object
       getValue: ({ row }) =>
         vendors.find((vendor) => vendor.id === row.vendorRef)?.[
-          VendorFields.Title
+          IVendorFields.Title
         ] ?? FALLBACK_BROKEN_REF_TEXT,
     },
     {
       field: IContractFields.VendorRef,
-      fieldPath: `${IContractFields.VendorRef}.${VendorFields.CompanExternalNumber}`,
+      fieldPath: `${IContractFields.VendorRef}.${IVendorFields.CompanExternalNumber}`,
       display:
-        VENDOR_DISPLAY_TEXTS.he.fields[VendorFields.CompanExternalNumber],
+        VENDOR_DISPLAY_TEXTS.he.fields[IVendorFields.CompanExternalNumber],
       getValue: ({ row }) =>
         vendors.find((vendor) => vendor.id === row.vendorRef)?.[
-          VendorFields.CompanExternalNumber
+          IVendorFields.CompanExternalNumber
         ] ?? FALLBACK_BROKEN_REF_TEXT,
     },
     {
