@@ -35,6 +35,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## branch names:
 
+## typescript naming convention:
+
+- use ITypeName with the I prefix for every type in the project , i.e.:
+
+```ts
+type Foo = string; // this is wrong 👎
+type IFoo = string; // this should be the convention 👍
+```
+
 ## DB Tree:
 
 adding to the project an `db/**` folder which represet the data modeling in the database.
