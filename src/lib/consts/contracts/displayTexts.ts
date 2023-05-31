@@ -32,6 +32,7 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractFields.EWorkDate]: 'סיום עבודה',
       [IContractFields.DonePercentage]: 'אחוז ביצוע',
       [IContractFields.TotalActualsSum]: 'סכום ביצוע',
+      [IContractFields.CurrentAccountPeriod]: 'חשבון נוכחי',
     },
     contractType: {
       [IContractType.Pauschal]: 'פאושלי',
@@ -77,6 +78,7 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractFields.EWorkDate]: 'End Date',
       [IContractFields.DonePercentage]: 'Done Percentage',
       [IContractFields.TotalActualsSum]: 'Total Actuals Sum',
+      [IContractFields.CurrentAccountPeriod]: 'Current Account',
     },
     contractType: {
       [IContractType.Pauschal]: 'Pauschal',
