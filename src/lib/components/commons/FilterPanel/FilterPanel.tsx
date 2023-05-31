@@ -1,4 +1,10 @@
-import { PropsWithChildren, useState } from 'react';
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
 import { useForm, FormProvider } from 'react-hook-form';
 import { ProjectDoc, IProjectDoc } from '../../../consts/projects';
@@ -15,6 +21,7 @@ import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
 import { ISvgIconProps } from '../../icons/SvgIcon';
+import { createPopper, Instance } from '@popperjs/core';
 
 const FilterPanelButton = ({
   children,
@@ -32,19 +39,66 @@ const FilterPanelButton = ({
 };
 
 export const FilterPanel = () => {
-  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
+  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState<Boolean>(false);
   const form = useForm<IProjectDoc>({
     resolver: zodResolver(ProjectDoc),
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
+  const referenceElement = useRef<HTMLDivElement>(null);
+  const popperElement = useRef<HTMLDivElement>(null);
+  const popperInstance = useRef<Instance | null>(null);
   const filterIconProps: ISvgIconProps = {
     //TODO: when filteres are active make color var(--color-active)}
     size: 'S',
-    onClick: () => {
+    onClick: (e) => {
       setIsFilterPanelOpen((prev) => !prev);
     },
   };
+
+  const initPopper = useCallback(() => {
+    if (
+      isFilterPanelOpen &&
+      referenceElement.current &&
+      popperElement.current
+    ) {
+      popperInstance.current = createPopper(
+        referenceElement.current,
+        popperElement.current,
+        {
+          placement: 'bottom-end',
+          modifiers: [
+            {
+              name: 'flip',
+              options: {
+                fallbackPlacements: ['bottom-end', 'top-start', 'top-end'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                boundary: 'viewport',
+              },
+            },
+          ],
+        },
+      );
+    }
+    console.log(popperInstance.current);
+  }, [isFilterPanelOpen]);
+
+  const destroyPopper = () => {
+    if (popperInstance.current) {
+      popperInstance.current.destroy();
+      popperInstance.current = null;
+    }
+  };
+
+  useEffect(() => {
+    initPopper();
+    return () => destroyPopper();
+  }, [initPopper]);
+
   const filterIcon = isFilterPanelOpen ? (
     <FilterIconOpen {...filterIconProps} />
   ) : (
@@ -52,11 +106,11 @@ export const FilterPanel = () => {
   );
 
   return (
-    <div>
+    <div ref={referenceElement}>
       <FormProvider {...form}>
         {filterIcon}
         {isFilterPanelOpen && (
-          <StyledFilterPanel>
+          <StyledFilterPanel ref={popperElement}>
             <StyledFilterControlDiv>
               <StyledFilterItemCaption>
                 {PROJECT_DISPLAY_TEXTS.he.fields.status}
