@@ -31,6 +31,7 @@ export const ContractDoc = Z.object({
   [IContractFields.DonePercentage]: OPTIONAL_NUMBER_SCHEMA,
   [IContractFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
   [IContractFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [IContractFields.CurrentAccountPeriod]: OPTIONAL_STRING_SCHEMA,
 });
 
 export type IContractDoc = WithIdField<Z.infer<typeof ContractDoc>>;

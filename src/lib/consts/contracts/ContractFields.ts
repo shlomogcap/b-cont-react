@@ -17,4 +17,5 @@ export enum IContractFields {
   ContractType = 'contractType',
   DonePercentage = 'donePercentage',
   TotalActualsSum = 'totalActualsSum',
+  CurrentAccountPeriod = 'currentAccountPeriod',
 }
