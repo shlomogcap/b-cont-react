@@ -6,10 +6,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -38,3 +34,50 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## branch names:
+
+## DB Tree:
+
+adding to the project an `db/**` folder which represet the data modeling in the database.
+if the model is change run `tree db` so and update this block (tree represtation of db model):
+
+```
+.
+├── clients
+│   └── [clientDoc]
+│       ├── companies
+│       │   └── [companyDoc]
+│       ├── settings
+│       │   └── [settingDoc]
+│       │       └── budgeChapters
+│       │           └── [budgetChapterDoc]
+│       │               └── budgetItems
+│       │                   └── [budgetItemDoc]
+│       └── usersRoles
+│           └── [userRolesDoc]
+├── projects
+│   └── [projectDoc]
+│       ├── appartments
+│       │   └── [appartmentDoc]
+│       ├── attachments
+│       │   └── [attachmentDoc]
+│       ├── buildings
+│       │   └── [buildingDoc]
+│       │       └── floors
+│       │           └── [floorDoc]
+│       ├── contracts
+│       │   └── [contractDoc]
+│       │       ├── accounts
+│       │       │   └── [accountDoc]
+│       │       └── sections
+│       │           └── [sectionDoc]
+│       │               └── milestones
+│       │                   └── [milestoneDoc]
+│       └── oddJobs
+│           └── [oddJobDoc]
+├── users
+│   └── [userDoc]
+└── vendors
+    └── [vendorDoc]
+        └── contacts
+            └── [contactDoc]
+```
