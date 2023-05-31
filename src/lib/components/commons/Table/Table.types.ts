@@ -26,6 +26,7 @@ type IGetColumnValueFunction<T extends string> = (
 
 export type ITableColumn<T extends string> = {
   field: T;
+  fieldPath?: string;
   display?: string;
   type?: ITableColumnType;
   options?: ITableColumnOption[];

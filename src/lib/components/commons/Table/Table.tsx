@@ -37,8 +37,8 @@ export const Table = <T extends string = string>({
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
-            {columns.map(({ field, getValue, ...rest }) => (
-              <StyledTableCell key={`${row.id}/${field}`}>
+            {columns.map(({ field, fieldPath, getValue, ...rest }) => (
+              <StyledTableCell key={`${row.id}/${fieldPath ?? field}`}>
                 {getDisplayValue({
                   value: getValue?.({ row, field }) ?? row?.[field],
                   ...rest,
@@ -53,8 +53,8 @@ export const Table = <T extends string = string>({
       {loading && <EmptyState animation='pulse' content={'Loading...'} />}
       {!loading && totals && (
         <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
-          {columns.map(({ field, ...rest }) => (
-            <StyledTableCell key={`totals/${field}`}>
+          {columns.map(({ field, fieldPath, ...rest }) => (
+            <StyledTableCell key={`totals/${field ?? fieldPath}`}>
               {getDisplayValue({ value: totals?.[field], ...rest }) ?? ''}
             </StyledTableCell>
           ))}
