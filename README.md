@@ -33,7 +33,29 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+---
+
 ## branch names:
+
+- branch main is locked (which mean can’t push to it at all)
+- branches name should be prefixed with (dev,hotfix,feature) and suffix with `-[a-z0-9_-]{3,}` , e.g:
+  - `dev-123-ab`
+  - `dev-a_b`
+  - `hotfix-123abc`
+- merge to main only after PR approval , then branch is deleted automatically
+
+to get started , go to main branch (locally):
+
+```bash
+git pull (to make sure you aligned with origin/main)
+git checkout -b dev-example-01
+git add . # add your changes to staging area
+git commit -m 'changes...' # commit changes
+```
+
+publish branch
+open pull request
+etc…
 
 ## typescript naming convention:
 
