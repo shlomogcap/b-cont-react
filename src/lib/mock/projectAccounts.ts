@@ -1,11 +1,11 @@
 import { ITableRow } from '../components/commons/Table';
-import { CommonFields } from '../consts/commonFields';
+import { ICommonFields } from '../consts/commonFields';
 import { IProjectAccountsFields } from '../consts/accounts';
 
 export const MOCK_PROJECTS_ACCOUNTS_DATA: ITableRow<IProjectAccountsFields>[] =
   [
     {
-      [CommonFields.Id]: '1',
+      [ICommonFields.Id]: '1',
       [IProjectAccountsFields.Contract]: '1',
       [IProjectAccountsFields.Vendor]: '1',
       [IProjectAccountsFields.AccumulatedTotal]: 63_000,
@@ -20,7 +20,7 @@ export const MOCK_PROJECTS_ACCOUNTS_DATA: ITableRow<IProjectAccountsFields>[] =
       [IProjectAccountsFields.PaidPercentage]: 0.53,
     },
     {
-      [CommonFields.Id]: '2',
+      [ICommonFields.Id]: '2',
       [IProjectAccountsFields.Contract]: '2',
       [IProjectAccountsFields.Vendor]: '2',
       [IProjectAccountsFields.AccumulatedTotal]: 120_425,

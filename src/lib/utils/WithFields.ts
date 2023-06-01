@@ -1,7 +1,7 @@
-import { CommonFields } from '../consts/commonFields';
+import { ICommonFields } from '../consts/commonFields';
 
-export type WithIdField<T extends {}> = T & { [CommonFields.Id]: string };
+export type WithIdField<T extends {}> = T & { [ICommonFields.Id]: string };
 
 export type WithCommonFields<T extends {}> = T & {
-  [key in CommonFields]?: string;
+  [key in ICommonFields]?: string;
 };

@@ -1,4 +1,4 @@
-export enum CommonFields {
+export enum ICommonFields {
   Id = 'id',
   CreatedAt = 'createdAt',
   CreatedBy = 'createdBy',

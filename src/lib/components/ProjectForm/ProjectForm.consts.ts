@@ -1,4 +1,3 @@
-import { CommonFields } from '@/lib/consts/commonFields';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { IProjectFormValues } from './ProjectForm.types';
 import { ProjectFields } from '@/lib/consts/projects';
