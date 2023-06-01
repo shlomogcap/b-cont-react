@@ -1,3 +1,4 @@
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 
 type IRowValues<T extends string> = {
@@ -10,13 +11,27 @@ export type ITableColumnType =
   | 'date'
   | 'list';
 
-export type ITableColumnOption = { text: string; value: string };
+export type ITableColumnOption = {
+  text: string;
+  value: string;
+};
+
+type IGetColumnValueFunctionArgs<T extends string> = {
+  row: ITableRow<T>;
+  field: T;
+};
+
+type IGetColumnValueFunction<T extends string> = (
+  args: IGetColumnValueFunctionArgs<T>,
+) => string | number;
 
 export type ITableColumn<T extends string> = {
   field: T;
+  fieldPath?: string;
   display?: string;
   type?: ITableColumnType;
   options?: ITableColumnOption[];
+  getValue?: IGetColumnValueFunction<T>;
 };
 
 export type IGetDisplayValueProps = {
@@ -25,9 +40,7 @@ export type IGetDisplayValueProps = {
   options?: ITableColumnOption[];
 };
 
-export type ITableRow<T extends string> = {
-  id: string;
-} & IRowValues<T>;
+export type ITableRow<T extends string> = WithCommonFields<IRowValues<T>>;
 
 type IOnRowClickParams<T extends string> = ITableRow<T>;
 

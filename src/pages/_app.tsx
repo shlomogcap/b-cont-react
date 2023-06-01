@@ -1,10 +1,11 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { GlobalStyle } from './GlobalStyle';
+import GlobalStyle from './GlobalStyle';
 import { ProjectsProvider } from '@/lib/context/projectsContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { VendorsProvider } from '@/lib/context/vendorsContext';
+import { UsersProvider } from '@/lib/context/usersContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,12 +17,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <GlobalStyle dir='rtl' />
-      <ProjectsProvider>
-        <VendorsProvider>
-          <ToastContainer position='top-center' />
-          <Component {...pageProps} />
-        </VendorsProvider>
-      </ProjectsProvider>
+      <UsersProvider>
+        <ProjectsProvider>
+          <VendorsProvider>
+            <ToastContainer position='top-center' />
+            <Component {...pageProps} />
+          </VendorsProvider>
+        </ProjectsProvider>
+      </UsersProvider>
     </>
   );
 }

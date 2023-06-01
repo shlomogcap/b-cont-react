@@ -6,10 +6,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -37,4 +33,89 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+---
+
 ## branch names:
+
+- branch main is locked (which mean can’t push to it at all)
+- branches name should be prefixed with (dev,hotfix,feature) and suffix with `-[a-z0-9_-]{3,}` , e.g:
+  - `dev-123-ab`
+  - `dev-a_b`
+  - `hotfix-123abc`
+- merge to main only after PR approval , then branch is deleted automatically
+
+to get started , go to main branch (locally):
+
+```bash
+git pull (to make sure you aligned with origin/main)
+git checkout -b dev-example-01
+git add . # add your changes to staging area
+git commit -m 'changes...' # commit changes
+```
+
+publish branch
+open pull request
+etc…
+
+## typescript naming convention:
+
+- use ITypeName with the I prefix for every type in the project , i.e.:
+
+```ts
+type Foo = string; // this is wrong 👎
+type IFoo = string; // this should be the convention 👍
+```
+
+- use EEnumName with the E prefix for every enum in the project , i.e.:
+
+```ts
+enum Foo = {A,B}; // this is wrong 👎
+type EFoo = {A,B}; // this should be the convention 👍
+```
+
+## DB Tree:
+
+adding to the project an `db/**` folder which represet the data modeling in the database.
+if the model is change run `tree db` so and update this block (tree represtation of db model):
+
+```
+.
+├── clients
+│   └── [clientDoc]
+│       ├── companies
+│       │   └── [companyDoc]
+│       ├── settings
+│       │   └── [settingDoc]
+│       │       └── budgeChapters
+│       │           └── [budgetChapterDoc]
+│       │               └── budgetItems
+│       │                   └── [budgetItemDoc]
+│       └── usersRoles
+│           └── [userRolesDoc]
+├── projects
+│   └── [projectDoc]
+│       ├── appartments
+│       │   └── [appartmentDoc]
+│       ├── attachments
+│       │   └── [attachmentDoc]
+│       ├── buildings
+│       │   └── [buildingDoc]
+│       │       └── floors
+│       │           └── [floorDoc]
+│       ├── contracts
+│       │   └── [contractDoc]
+│       │       ├── accounts
+│       │       │   └── [accountDoc]
+│       │       └── sections
+│       │           └── [sectionDoc]
+│       │               └── milestones
+│       │                   └── [milestoneDoc]
+│       └── oddJobs
+│           └── [oddJobDoc]
+├── users
+│   └── [userDoc]
+└── vendors
+    └── [vendorDoc]
+        └── contacts
+            └── [contactDoc]
+```

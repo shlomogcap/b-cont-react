@@ -22,6 +22,10 @@ export const getDisplayValue = ({
   switch (type) {
     case 'number':
       return Number(value).toLocaleString();
+    case 'percentage':
+      return Number(value).toLocaleString(navigator.languages, {
+        style: 'percent',
+      });
     case 'date':
       return value ? dayjs(value).format('DD/MM/YYYY') : '';
     case 'list':

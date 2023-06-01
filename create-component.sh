@@ -8,6 +8,7 @@ touch "${path}/${name}/${name}.styled.ts"
 touch "${path}/${name}/${name}.tsx"
 touch "${path}/${name}/${name}.types.ts"
 touch "${path}/${name}/${name}.utils.ts"
+touch "${path}/${name}/${name}.consts.ts"
 touch "${path}/${name}/index.ts"
 
 echo "Folder structure created at ${path}/${name}"
@@ -26,6 +27,7 @@ echo "import styled from 'styled-components';
 export const Styled${name} = styled.div\`\`;" > "${path}/${name}/${name}.styled.ts"
 
 echo "export { ${name} } from './${name}';
+
 export * from './${name}.types';" > "${path}/${name}/index.ts"
 
 

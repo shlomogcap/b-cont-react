@@ -1,9 +1,9 @@
-export enum VendorFields {
+export enum IVendorFields {
   Title = 'title',
   CommercialName = 'commercialName',
   CompanyNumber = 'companyNumber',
   CompanExternalNumber = 'companExternalNumber',
-  CompanyType = 'CompanyType',
+  CompanyType = 'companyType',
   Phone = 'phone',
   Email = 'email',
   TaxPercent = 'taxPercent',
