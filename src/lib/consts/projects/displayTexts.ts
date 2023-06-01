@@ -1,19 +1,19 @@
 import { ProjectFields } from './ProjectFields';
-import { ProjectMainViews } from './ProjectMainView';
-import { ProjectActualsViews } from './ProjectActualsViews';
+import { EProjectViews } from './ProjectViews';
 import { Lang } from '../displayTexts';
 import { ProjectType } from './ProjectType';
 
 type DisplayTextMapping = {
   fields: Record<ProjectFields, string>;
-  mainViews: Record<ProjectMainViews, string>;
-  actualViews: Record<ProjectActualsViews, string>;
+  tabs: Record<EProjectViews, string>;
+  projectPageTitle: string;
   projectTypes: Record<ProjectType, string>;
   getAddNewText: (projectType: ProjectType) => string;
 };
 
 export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    projectPageTitle: 'דשבורד פרוייקט',
     fields: {
       [ProjectFields.Title]: 'פרוייקט',
       [ProjectFields.Address]: 'מיקום',
@@ -34,16 +34,13 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectFields.TotalActualsSum]: 'סכום מצטבר מאושר',
       [ProjectFields.DonePercentage]: 'הושלם',
     },
-    mainViews: {
-      [ProjectMainViews.Overview]: 'דשבורד פרוייקט',
-      [ProjectMainViews.Appartments]: 'אינדקס תכולת פרוייקט',
-    },
-    actualViews: {
-      [ProjectActualsViews.Confirms]: 'סטטוס אישורים',
-      [ProjectActualsViews.Accounts]: 'סטטוס חשבונות',
-      [ProjectActualsViews.Contracts]: 'פרטי חוזים',
-      [ProjectActualsViews.Attachments]: 'צרופות',
-      [ProjectActualsViews.OddJobs]: 'עבודות קטנות',
+    tabs: {
+      [EProjectViews.Confirms]: 'סטטוס אישורים',
+      [EProjectViews.Accounts]: 'סטטוס חשבונות',
+      [EProjectViews.Contracts]: 'פרטי חוזים',
+      [EProjectViews.Attachments]: 'צרופות',
+      [EProjectViews.OddJobs]: 'עבודות קטנות',
+      [EProjectViews.Appartments]: 'דירות',
     },
     projectTypes: {
       [ProjectType.Residential]: 'מגורים',
@@ -54,6 +51,7 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       `+ פרוייקט [${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]}]`,
   },
   en: {
+    projectPageTitle: 'Project Dashboard',
     fields: {
       [ProjectFields.Title]: 'Project Name',
       [ProjectFields.Address]: 'Location',
@@ -74,16 +72,13 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectFields.TotalActualsSum]: 'totalActualsSum',
       [ProjectFields.DonePercentage]: 'donePercentage',
     },
-    mainViews: {
-      [ProjectMainViews.Overview]: 'Overview',
-      [ProjectMainViews.Appartments]: 'Appartments',
-    },
-    actualViews: {
-      [ProjectActualsViews.Confirms]: 'Confirms',
-      [ProjectActualsViews.Accounts]: 'Accounts',
-      [ProjectActualsViews.Contracts]: 'Contracts',
-      [ProjectActualsViews.Attachments]: 'Attachments',
-      [ProjectActualsViews.OddJobs]: 'Oddjobs',
+    tabs: {
+      [EProjectViews.Confirms]: 'Confirms',
+      [EProjectViews.Accounts]: 'Accounts',
+      [EProjectViews.Contracts]: 'Contracts',
+      [EProjectViews.Attachments]: 'Attachments',
+      [EProjectViews.OddJobs]: 'Odd Jobs',
+      [EProjectViews.Appartments]: 'Appartments',
     },
     projectTypes: {
       [ProjectType.Residential]: 'Residential',
