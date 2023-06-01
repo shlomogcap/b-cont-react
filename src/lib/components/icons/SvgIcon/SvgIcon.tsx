@@ -1,7 +1,7 @@
 import { StyledSvgIcon } from './SvgIcon.styled';
 import { SIZE_MAP } from './SvgIcon.consts';
 import { ISvgIconProps } from './SvgIcon.types';
-import { Ref, RefObject, forwardRef } from 'react';
+import { Ref, forwardRef } from 'react';
 
 export const SvgIcon = forwardRef(
   (
