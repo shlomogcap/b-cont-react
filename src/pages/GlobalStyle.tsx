@@ -1,5 +1,4 @@
 import { Breakpoints } from '@/lib/consts/stylesConsts';
-import { scorllBarMixin } from '@/lib/components/styles/mixins/scrollbar';
 import { createGlobalStyle } from 'styled-components';
 
 type Props = {

@@ -1,3 +1,4 @@
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 
 type IRowValues<T extends string> = {
@@ -39,9 +40,7 @@ export type IGetDisplayValueProps = {
   options?: ITableColumnOption[];
 };
 
-export type ITableRow<T extends string> = {
-  id: string;
-} & IRowValues<T>;
+export type ITableRow<T extends string> = WithCommonFields<IRowValues<T>>;
 
 type IOnRowClickParams<T extends string> = ITableRow<T>;
 

@@ -1,1 +1,7 @@
-export const ID_FIELD = 'id';
+export enum CommonFields {
+  Id = 'id',
+  CreatedAt = 'createdAt',
+  CreatedBy = 'createdBy',
+  UpdatedAt = 'updatedAt',
+  UpdatedBy = 'updatedBy',
+}

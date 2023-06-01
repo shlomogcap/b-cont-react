@@ -1,4 +1,4 @@
-import { ID_FIELD } from '@/lib/consts/commonFields';
+import { CommonFields } from '@/lib/consts/commonFields';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { IProjectFormValues } from './ProjectForm.types';
 import { ProjectFields } from '@/lib/consts/projects';
@@ -10,7 +10,6 @@ export const DUMMY_OPTIONS: IDropdownInputProps['options'] = [
 ];
 
 export const PROJECT_FORM_DEFAULT_VALUES: IProjectFormValues = {
-  [ID_FIELD]: '',
   [ProjectFields.Title]: '',
   [ProjectFields.Address]: '',
   // [ProjectFields.SDate]: '',

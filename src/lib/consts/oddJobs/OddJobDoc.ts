@@ -1,5 +1,5 @@
 import Z from 'zod';
-import { WithIdField } from '@/lib/utils/WithIdField';
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { IOddJobsFields } from './OddJobsFields';
 import {
   OPTIONAL_STRING_SCHEMA,
@@ -14,4 +14,4 @@ export const OddJobDoc = Z.object({
   [IOddJobsFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
 });
 
-export type IOddJobDoc = WithIdField<Z.infer<typeof OddJobDoc>>;
+export type IOddJobDoc = WithCommonFields<Z.infer<typeof OddJobDoc>>;

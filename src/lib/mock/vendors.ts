@@ -1,10 +1,10 @@
-import { ID_FIELD } from '../consts/commonFields';
+import { CommonFields } from '../consts/commonFields';
 import { ICompanyType } from '../consts/companyTypes';
 import { IVendorFields } from '../consts/vendors';
 
 export const MOCK_VENDORS_DATA = [
   {
-    [ID_FIELD]: '1',
+    [CommonFields.Id]: '1',
     [IVendorFields.Title]: 'אמניב',
     [IVendorFields.CommercialName]: 'אמניב',
     [IVendorFields.CompanyNumber]: '561506876',
@@ -19,7 +19,7 @@ export const MOCK_VENDORS_DATA = [
     [IVendorFields.Status]: 'פעיל',
   },
   {
-    [ID_FIELD]: '2',
+    [CommonFields.Id]: '2',
     [IVendorFields.Title]: 'דוחובוני',
     [IVendorFields.CompanyNumber]: '561506876',
     [IVendorFields.CompanExternalNumber]: '8964565',
@@ -33,7 +33,7 @@ export const MOCK_VENDORS_DATA = [
     [IVendorFields.Status]: 'פעיל',
   },
   {
-    [ID_FIELD]: '3',
+    [CommonFields.Id]: '3',
     [IVendorFields.Title]: 'א.א. אביבי מטבחים (2004) בעמ',
     [IVendorFields.CompanyNumber]: '561506876',
     [IVendorFields.CompanExternalNumber]: '986546',

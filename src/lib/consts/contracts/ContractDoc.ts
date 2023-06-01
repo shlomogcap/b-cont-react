@@ -1,5 +1,5 @@
 import Z from 'zod';
-import { WithIdField } from '@/lib/utils/WithIdField';
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { IContractFields } from './ContractFields';
 import {
   OPTIONAL_DATE_SCHEMA,
@@ -34,4 +34,4 @@ export const ContractDoc = Z.object({
   [IContractFields.CurrentAccountPeriod]: OPTIONAL_STRING_SCHEMA,
 });
 
-export type IContractDoc = WithIdField<Z.infer<typeof ContractDoc>>;
+export type IContractDoc = WithCommonFields<Z.infer<typeof ContractDoc>>;

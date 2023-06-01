@@ -1,5 +1,5 @@
 import { ITableRow } from '../components/commons/Table';
-import { ID_FIELD } from '../consts/commonFields';
+import { CommonFields } from '../consts/commonFields';
 import {
   IContractFields,
   IContractActualStatus,
@@ -15,7 +15,7 @@ type WithPathField<T> = T & { [PATH_FIELD]: string };
 export const MOCK_CONTRACTS_DATA: WithPathField<ITableRow<IContractFields>>[] =
   [
     {
-      [ID_FIELD]: '1',
+      [CommonFields.Id]: '1',
       [PATH_FIELD]: 'projects/1',
       [IContractFields.Title]: 'חיפוי וריצוף מדוקק',
       [IContractFields.Description]: '',
@@ -37,7 +37,7 @@ export const MOCK_CONTRACTS_DATA: WithPathField<ITableRow<IContractFields>>[] =
       [IContractFields.TotalActualsSum]: 63_000,
     },
     {
-      [ID_FIELD]: '2',
+      [CommonFields.Id]: '2',
       [PATH_FIELD]: 'projects/1',
       [IContractFields.Title]: 'מיזוג אוויר',
       [IContractFields.Description]: '',

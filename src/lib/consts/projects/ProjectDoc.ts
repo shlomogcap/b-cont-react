@@ -1,5 +1,5 @@
 import Z from 'zod';
-import { WithIdField } from '@/lib/utils/WithIdField';
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ProjectFields } from './ProjectFields';
 import { ProjectType } from './ProjectType';
 import { IProjectStatus } from './ProjectStatus';
@@ -40,4 +40,4 @@ export const ProjectDoc = Z.object({
   [ProjectFields.Status]: Z.nativeEnum(IProjectStatus).optional(),
 });
 
-export type IProjectDoc = WithIdField<Z.infer<typeof ProjectDoc>>;
+export type IProjectDoc = WithCommonFields<Z.infer<typeof ProjectDoc>>;
