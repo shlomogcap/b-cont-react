@@ -66,6 +66,13 @@ type Foo = string; // this is wrong 👎
 type IFoo = string; // this should be the convention 👍
 ```
 
+- use EEnumName with the E prefix for every enum in the project , i.e.:
+
+```ts
+enum Foo = {A,B}; // this is wrong 👎
+type EFoo = {A,B}; // this should be the convention 👍
+```
+
 ## DB Tree:
 
 adding to the project an `db/**` folder which represet the data modeling in the database.
