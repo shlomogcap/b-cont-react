@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { GlobalStyle } from './GlobalStyle';
+import GlobalStyle from './GlobalStyle';
 import { ProjectsProvider } from '@/lib/context/projectsContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

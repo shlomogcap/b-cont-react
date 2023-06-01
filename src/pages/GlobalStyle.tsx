@@ -6,7 +6,7 @@ type Props = {
   dir: 'ltr' | 'rtl';
 };
 
-export const GlobalStyle = createGlobalStyle<Props>`
+const GlobalStyle = createGlobalStyle<Props>`
     :root {
     //LANGUGE
     --dir: ${({ dir }) => dir};
@@ -97,3 +97,5 @@ a{
     text-decoration: none;
 }
 `;
+
+export default GlobalStyle;
