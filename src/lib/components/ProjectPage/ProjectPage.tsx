@@ -12,6 +12,7 @@ import { ProjectAppartments } from './projectMainViews/ProjectAppartments';
 import { useProjectsContext } from '@/lib/context/projectsContext';
 import { Card } from '../commons/Card';
 import { ProjectForm } from '../ProjectForm';
+import { EmptyState } from '../commons/EmptyState';
 
 const PROJECT_MAIN_VIEWS: Record<ProjectMainViews, ReactElement> = {
   [ProjectMainViews.Overview]: <ProjectOverview />,
@@ -19,6 +20,7 @@ const PROJECT_MAIN_VIEWS: Record<ProjectMainViews, ReactElement> = {
 };
 
 export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
+  const { isLoading } = useProjectsContext();
   const [projectMainViewActiveTab, setProjectMainViewActiveTab] = useState(
     ProjectMainViews.Overview,
   );
@@ -26,30 +28,38 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const { data } = useProjectsContext();
   const project = projectId ? data.find((p) => p.id === projectId) : null;
   const isEditMode = Boolean(project);
+  const pageBody = isEditMode ? (
+    <>
+      <Tabs
+        activeTab={projectMainViewActiveTab}
+        setActiveTab={setProjectMainViewActiveTab}
+        tabs={PROJECT_MAIN_VIEW_TABS}
+      />
+      {PROJECT_MAIN_VIEWS[projectMainViewActiveTab]}
+    </>
+  ) : (
+    <Card title={PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType)}>
+      <ProjectForm />
+    </Card>
+  );
+  const projectBreadCrumbText = isEditMode
+    ? String(project?.title || projectId)
+    : `+ ${title}`;
   return (
     <PageLayout
       title={title}
       breadcrubms={[
         PROJECTS_BREADCRUMB,
         {
-          text: isEditMode ? String(project?.title || projectId) : `+ ${title}`,
+          text: isLoading ? '---' : projectBreadCrumbText,
           id: IRoutesNames.Project,
         },
       ]}
     >
-      {isEditMode ? (
-        <>
-          <Tabs
-            activeTab={projectMainViewActiveTab}
-            setActiveTab={setProjectMainViewActiveTab}
-            tabs={PROJECT_MAIN_VIEW_TABS}
-          />
-          {PROJECT_MAIN_VIEWS[projectMainViewActiveTab]}
-        </>
+      {isLoading ? (
+        <EmptyState animation='pulse' content={'Loading...'} />
       ) : (
-        <Card title={PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType)}>
-          <ProjectForm />
-        </Card>
+        pageBody
       )}
     </PageLayout>
   );

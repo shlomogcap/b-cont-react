@@ -6,8 +6,9 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { IVendorDoc } from '../consts/vendors';
+import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
 type IVendorsContext = {
   data: IVendorDoc[];
@@ -35,50 +36,12 @@ export const VendorsProvider = ({
   useEffect(() => {
     const collectionRef = collection(firestore, 'vendors');
 
-    const unsubscribe = onSnapshot(
+    const unsubscribe = onSnapshotHandler({
       collectionRef,
-      (snapshot) => {
-        setIsLoading(true);
-
-        if (snapshot.size === 0) {
-          setData([]);
-          setIsLoading(false);
-        } else {
-          snapshot.docChanges().forEach((change) => {
-            const docData = {
-              ...change.doc.data(),
-              id: change.doc.id,
-            } as IVendorDoc;
-            switch (change.type) {
-              case 'added':
-                setData((prevData) => [...prevData, docData]);
-                break;
-              case 'modified':
-                setData((prevData) =>
-                  prevData.map((item) =>
-                    item.id === docData.id ? docData : item,
-                  ),
-                );
-                break;
-              case 'removed':
-                setData((prevData) =>
-                  prevData.filter((item) => item.id !== docData.id),
-                );
-                break;
-              default:
-                break;
-            }
-          });
-
-          setIsLoading(false);
-        }
-      },
-      (error) => {
-        setError('Error fetching projects');
-        setIsLoading(false);
-        console.error(error);
-      },
-    );
+      setIsLoading,
+      setData,
+      setError,
+    });
 
     return () => unsubscribe();
   }, []);

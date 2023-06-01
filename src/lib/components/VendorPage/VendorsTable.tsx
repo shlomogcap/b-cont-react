@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
-import { VENDOR_DISPLAY_TEXTS, VendorFields } from '@/lib/consts/vendors';
+import { VENDOR_DISPLAY_TEXTS, IVendorFields } from '@/lib/consts/vendors';
 import { IRoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 
@@ -13,21 +13,21 @@ export const VendorsTable = () => {
       loading={isLoading}
       columns={fieldsNamesToColumns(
         [
-          VendorFields.Title,
-          VendorFields.CompanyNumber,
-          VendorFields.CommercialName,
-          VendorFields.CompanExternalNumber,
-          { field: VendorFields.TaxesEndDate, type: 'date' },
-          VendorFields.TaxPercent,
-          VendorFields.Phone,
-          VendorFields.Email,
-          VendorFields.Status,
+          IVendorFields.Title,
+          IVendorFields.CompanyNumber,
+          IVendorFields.CommercialName,
+          IVendorFields.CompanExternalNumber,
+          { field: IVendorFields.TaxesEndDate, type: 'date' },
+          IVendorFields.TaxPercent,
+          IVendorFields.Phone,
+          IVendorFields.Email,
+          IVendorFields.Status,
         ],
         VENDOR_DISPLAY_TEXTS.he.fields,
       )}
       rows={rows}
       totals={{
-        [VendorFields.Title]:
+        [IVendorFields.Title]:
           rows.length < 2
             ? '-'
             : `${rows.length.toLocaleString()} ${

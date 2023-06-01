@@ -1,6 +1,6 @@
 import { ProjectsPage } from '@/lib/components/ProjectsPage/ProjectsPage';
 import { ProjectType } from '@/lib/consts/projects/ProjectType';
-import { PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
+import { IRoutesNames, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';

@@ -1,5 +1,5 @@
-import { Card } from '@/lib/components/commons/Card';
+import { ProjectAttachments } from './ProjectAttachments/ProjectAttachments';
 
 export const ProjectAttachmentsCard = () => {
-  return <Card>Project Attachments Card</Card>;
+  return <ProjectAttachments />;
 };

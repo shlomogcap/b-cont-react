@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 
 type Data = {
@@ -12,13 +12,9 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
   try {
-    const projectsColRef = collection(firestore, 'projects');
-    for (const project of MOCK_PROJECTS_DATA) {
-      const q = query(projectsColRef, where('id', '==', project.id));
-      const isEmpty = (await getDocs(q)).empty;
-      if (isEmpty) {
-        addDoc(projectsColRef, project);
-      }
+    for (const { id, ...vendorData } of MOCK_PROJECTS_DATA) {
+      const docRef = doc(firestore, `projects/${id}`);
+      setDoc(docRef, vendorData, { merge: true });
     }
     res.status(200).json({ success: true });
   } catch (e) {

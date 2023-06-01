@@ -1,38 +1,43 @@
 import Z from 'zod';
-import { WithIdField } from '@/lib/utils/WithIdField';
+import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ProjectFields } from './ProjectFields';
-import { validationTexts } from '../validationTexts';
 import { ProjectType } from './ProjectType';
-import { ProjectStatus } from './ProjectStatus';
+import { IProjectStatus } from './ProjectStatus';
+import {
+  OPTIONAL_DATE_SCHEMA,
+  OPTIONAL_NUMBER_SCHEMA,
+  OPTIONAL_STRING_SCHEMA,
+  TITLE_FIELD_SCHEMA,
+} from '../validation/validationSchema';
+import {
+  IErrorMessage,
+  VALIDATION_DISPLAY_TEXTS,
+} from '../validation/displayTexts';
 
 export const ProjectDoc = Z.object({
-  [ProjectFields.Title]: Z.string({
-    required_error: validationTexts.REQUIRED,
-  })
-    .nonempty(validationTexts.REQUIRED)
-    .min(4, validationTexts.TOO_SHORT),
-  [ProjectFields.Address]: Z.string().optional(),
-  [ProjectFields.SDate]: Z.coerce.date().optional(),
+  [ProjectFields.Title]: TITLE_FIELD_SCHEMA,
+  [ProjectFields.Address]: OPTIONAL_STRING_SCHEMA,
+  [ProjectFields.SDate]: OPTIONAL_DATE_SCHEMA,
   [ProjectFields.NumberOfPeriods]: Z.coerce
     .number()
-    .min(12, validationTexts.TOO_LOW)
-    .max(100, validationTexts.TOO_HIGH)
+    .min(12, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooLow])
+    .max(100, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooHigh])
     .optional(),
-  [ProjectFields.EDate]: Z.coerce.date().optional(),
-  [ProjectFields.Description]: Z.string().optional(),
-  [ProjectFields.Manager]: Z.string().optional(),
-  [ProjectFields.SeniorManager]: Z.string().optional(),
-  [ProjectFields.Executor]: Z.string().optional(),
-  [ProjectFields.Entrepreneur]: Z.string().optional(),
+  [ProjectFields.EDate]: OPTIONAL_DATE_SCHEMA,
+  [ProjectFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [ProjectFields.Manager]: OPTIONAL_STRING_SCHEMA,
+  [ProjectFields.SeniorManager]: OPTIONAL_STRING_SCHEMA,
+  [ProjectFields.Executor]: OPTIONAL_STRING_SCHEMA,
+  [ProjectFields.Entrepreneur]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.ProjectType]: Z.nativeEnum(ProjectType).optional(),
   [ProjectFields.NumberOfBuildings]: Z.coerce
     .number()
-    .min(1, validationTexts.TOO_LOW)
-    .max(20, validationTexts.TOO_HIGH)
+    .min(1, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooLow])
+    .max(20, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooHigh])
     .optional(),
-  [ProjectFields.Basements]: Z.coerce.number().optional(),
-  [ProjectFields.NumberOfApatrments]: Z.coerce.number().optional(),
-  [ProjectFields.Status]: Z.nativeEnum(ProjectStatus).optional(),
+  [ProjectFields.Basements]: OPTIONAL_NUMBER_SCHEMA,
+  [ProjectFields.NumberOfApatrments]: OPTIONAL_NUMBER_SCHEMA,
+  [ProjectFields.Status]: Z.nativeEnum(IProjectStatus).optional(),
 });
 
-export type IProjectDoc = WithIdField<Z.infer<typeof ProjectDoc>>;
+export type IProjectDoc = WithCommonFields<Z.infer<typeof ProjectDoc>>;

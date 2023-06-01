@@ -1,41 +1,41 @@
 import { Lang } from '@/lib/consts/displayTexts';
-import { VendorFields } from './VendorFields';
+import { IVendorFields } from './VendorFields';
 
 type DisplayTextMapping = {
-  fields: Record<VendorFields, string>;
+  fields: Record<IVendorFields, string>;
 };
 
 export const VENDOR_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
     fields: {
-      [VendorFields.Title]: 'חברה',
-      [VendorFields.CommercialName]: 'שם מסחרי',
-      [VendorFields.CompanyNumber]: 'ח.פ.',
-      [VendorFields.CompanExternalNumber]: 'מספר ספק בסאפ',
-      [VendorFields.CompanyType]: 'סוג עוסק',
-      [VendorFields.Phone]: 'טלפון',
-      [VendorFields.Email]: 'אימייל',
-      [VendorFields.TaxesEndDate]: 'תוקף ניכוי מס במקור',
-      [VendorFields.TaxPercent]: '% ניכוי מס',
-      [VendorFields.Address]: 'כתובת',
-      [VendorFields.Description]: 'הערות',
-      [VendorFields.Status]: 'סטטוס',
+      [IVendorFields.Title]: 'חברה',
+      [IVendorFields.CommercialName]: 'שם מסחרי',
+      [IVendorFields.CompanyNumber]: 'ח.פ.',
+      [IVendorFields.CompanExternalNumber]: 'קוד בסאפ',
+      [IVendorFields.CompanyType]: 'סוג עוסק',
+      [IVendorFields.Phone]: 'טלפון',
+      [IVendorFields.Email]: 'אימייל',
+      [IVendorFields.TaxesEndDate]: 'תוקף ניכוי מס במקור',
+      [IVendorFields.TaxPercent]: '% ניכוי מס',
+      [IVendorFields.Address]: 'כתובת',
+      [IVendorFields.Description]: 'הערות',
+      [IVendorFields.Status]: 'סטטוס',
     },
   },
   en: {
     fields: {
-      [VendorFields.Title]: 'Title',
-      [VendorFields.CommercialName]: 'Commercial Name',
-      [VendorFields.CompanyNumber]: 'Company Number',
-      [VendorFields.CompanExternalNumber]: 'Company Ex. Number',
-      [VendorFields.CompanyType]: 'Company Type',
-      [VendorFields.Phone]: 'Phone',
-      [VendorFields.Email]: 'Email',
-      [VendorFields.TaxesEndDate]: 'Taxes End Date',
-      [VendorFields.TaxPercent]: 'Tax Percent',
-      [VendorFields.Address]: 'Address',
-      [VendorFields.Description]: 'Description',
-      [VendorFields.Status]: 'Status',
+      [IVendorFields.Title]: 'Title',
+      [IVendorFields.CommercialName]: 'Commercial Name',
+      [IVendorFields.CompanyNumber]: 'Company Number',
+      [IVendorFields.CompanExternalNumber]: 'Company Ex. Number',
+      [IVendorFields.CompanyType]: 'Company Type',
+      [IVendorFields.Phone]: 'Phone',
+      [IVendorFields.Email]: 'Email',
+      [IVendorFields.TaxesEndDate]: 'Taxes End Date',
+      [IVendorFields.TaxPercent]: 'Tax Percent',
+      [IVendorFields.Address]: 'Address',
+      [IVendorFields.Description]: 'Description',
+      [IVendorFields.Status]: 'Status',
     },
   },
 };

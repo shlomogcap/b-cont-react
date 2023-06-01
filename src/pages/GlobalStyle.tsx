@@ -1,12 +1,11 @@
 import { Breakpoints } from '@/lib/consts/stylesConsts';
-import { scorllBarMixin } from '@/lib/components/styles/mixins/scrollbar';
 import { createGlobalStyle } from 'styled-components';
 
 type Props = {
   dir: 'ltr' | 'rtl';
 };
 
-export const GlobalStyle = createGlobalStyle<Props>`
+const GlobalStyle = createGlobalStyle<Props>`
     :root {
     //LANGUGE
     --dir: ${({ dir }) => dir};
@@ -97,3 +96,5 @@ a{
     text-decoration: none;
 }
 `;
+
+export default GlobalStyle;
