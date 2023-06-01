@@ -1,7 +1,7 @@
 import {
   IProjectDoc,
   ProjectFields,
-  ProjectStatus,
+  IProjectStatus,
 } from '@/lib/consts/projects';
 import {
   FilterPanel,
@@ -27,7 +27,7 @@ export const ProjectFilterPanel = () => {
     defaultValues: {
       sDate: { from: '', to: '' },
       eDate: { from: '', to: '' },
-      status: [ProjectStatus.Active],
+      status: [IProjectStatus.Active],
     },
     mode: 'onSubmit',
   });
