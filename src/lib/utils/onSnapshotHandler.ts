@@ -1,8 +1,4 @@
-import {
-  CollectionReference,
-  DocumentData,
-  onSnapshot,
-} from 'firebase/firestore';
+import { CollectionReference, onSnapshot } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 

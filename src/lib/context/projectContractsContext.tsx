@@ -6,9 +6,9 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import { IContractDoc } from '../consts/contracts';
-import { toast } from 'react-toastify';
+import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
 type IProjectContractsContext = {
   data: IContractDoc[];
@@ -42,51 +42,12 @@ export const ProjectContractsProvider = ({
       `projects/${projectId}/contracts`,
     );
 
-    const unsubscribe = onSnapshot(
+    const unsubscribe = onSnapshotHandler({
       collectionRef,
-      (snapshot) => {
-        setIsLoading(true);
-
-        if (snapshot.size === 0) {
-          setData([]);
-          setIsLoading(false);
-        } else {
-          snapshot.docChanges().forEach((change) => {
-            const docData = {
-              ...change.doc.data(),
-              id: change.doc.id,
-            } as IContractDoc;
-            switch (change.type) {
-              case 'added':
-                setData((prevData) => [...prevData, docData]);
-                break;
-              case 'modified':
-                setData((prevData) =>
-                  prevData.map((item) =>
-                    item.id === docData.id ? docData : item,
-                  ),
-                );
-                break;
-              case 'removed':
-                setData((prevData) =>
-                  prevData.filter((item) => item.id !== docData.id),
-                );
-                break;
-              default:
-                break;
-            }
-          });
-
-          setIsLoading(false);
-        }
-      },
-      (error) => {
-        setError(`Error fetching Contracts for Project ${projectId}`);
-        toast.error(`Error Fetching Project Contracts: ${error.message}`);
-        setIsLoading(false);
-        console.error(error);
-      },
-    );
+      setIsLoading,
+      setData,
+      setError,
+    });
 
     return () => unsubscribe();
   }, [projectId]);
