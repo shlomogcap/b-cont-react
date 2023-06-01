@@ -21,7 +21,9 @@ export default function ProjectRoute({
   return (
     <ProjectContractsProvider projectId={projectId}>
       <ProjectOddJobsProvider projectId={projectId}>
-        <ProjectPage projectId={projectId} projectType={projectType} />
+        <ProjectContractsProvider projectId={projectId}>
+          <ProjectPage projectId={projectId} projectType={projectType} />
+        </ProjectContractsProvider>
       </ProjectOddJobsProvider>
     </ProjectContractsProvider>
   );
