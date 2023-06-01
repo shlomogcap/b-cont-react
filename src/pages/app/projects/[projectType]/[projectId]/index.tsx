@@ -3,6 +3,7 @@ import { ProjectContractsCard } from '@/lib/components/ProjectPage/projectMainVi
 import { ProjectType } from '@/lib/consts/projects';
 import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { ProjectContractsProvider } from '@/lib/context/projectContractsContext';
+import { ProjectOddJobsProvider } from '@/lib/context/projectOddJobsContext';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -19,7 +20,9 @@ export default function ProjectRoute({
 }: IProjectRouteProps) {
   return (
     <ProjectContractsProvider projectId={projectId}>
-      <ProjectPage projectId={projectId} projectType={projectType} />
+      <ProjectOddJobsProvider projectId={projectId}>
+        <ProjectPage projectId={projectId} projectType={projectType} />
+      </ProjectOddJobsProvider>
     </ProjectContractsProvider>
   );
 }
