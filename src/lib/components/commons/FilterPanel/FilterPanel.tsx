@@ -52,6 +52,7 @@ export const FilterPanel = () => {
     //TODO: when filteres are active make color var(--color-active)}
     size: 'S',
     onClick: (e) => {
+      e.stopPropagation();
       setIsFilterPanelOpen((prev) => !prev);
     },
   };
@@ -60,7 +61,7 @@ export const FilterPanel = () => {
     if (
       popperElement.current &&
       !popperElement.current?.contains(event.target as Node) &&
-      !(event.target instanceof SVGElement)
+      !referenceElement.current?.contains(event.target as Node)
     ) {
       setIsFilterPanelOpen(false);
     }
