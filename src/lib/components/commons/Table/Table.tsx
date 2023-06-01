@@ -20,10 +20,11 @@ export const Table = <T extends string = string>({
   title,
   loading,
   onRowClick,
+  tableFilter,
 }: ITableProps<T>) => {
   return (
     <StyledTable>
-      <FilterPanel />
+      {tableFilter}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display }) => (

@@ -7,6 +7,7 @@ import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 import { ProjectType } from '@/lib/consts/projects/ProjectType';
 import { useProjectsContext } from '@/lib/context/projectsContext';
+import { ProjectFilterPanel } from './ProjectsTableFilter';
 
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
@@ -14,6 +15,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const rows = data.filter((p) => p.projectType === projectType);
   return (
     <Table
+      tableFilter={<ProjectFilterPanel />}
       loading={isLoading}
       columns={fieldsNamesToColumns(
         [
