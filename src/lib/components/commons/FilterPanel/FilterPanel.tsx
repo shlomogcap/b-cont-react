@@ -116,9 +116,9 @@ export const FilterPanel = () => {
   }, [initPopper]);
 
   const filterIcon = isFilterPanelOpen ? (
-    <FilterIconOpen {...filterIconProps} />
+    <FilterIconOpen ref={referenceElement} {...filterIconProps} />
   ) : (
-    <FilterIconClose {...filterIconProps} />
+    <FilterIconClose ref={referenceElement} {...filterIconProps} />
   );
 
   return (
