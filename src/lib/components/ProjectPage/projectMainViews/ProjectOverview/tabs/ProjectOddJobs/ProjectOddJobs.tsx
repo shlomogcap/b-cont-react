@@ -13,6 +13,20 @@ export const ProjectOddJobs = (props: IProjectOddJobsProps) => {
       display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Title],
     },
     {
+      field: IOddJobsFields.InvoiceNumber,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.InvoiceNumber],
+    },
+    {
+      field: IOddJobsFields.InvoiceDate,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.InvoiceDate],
+      type: 'date',
+    },
+    {
+      field: IOddJobsFields.SumBeforeTax,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.SumBeforeTax],
+      type: 'number',
+    },
+    {
       field: IOddJobsFields.Description,
       display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Description],
     },
@@ -21,6 +35,22 @@ export const ProjectOddJobs = (props: IProjectOddJobsProps) => {
       display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Status],
       type: 'list',
       options: ODD_JOBS_STATUS_OPTIONS,
+    },
+    {
+      field: IOddJobsFields.ApprovalSumBeforeTax,
+      display:
+        ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.ApprovalSumBeforeTax],
+      type: 'number',
+    },
+    {
+      field: IOddJobsFields.PaymentDue,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.PaymentDue],
+      type: 'number',
+    },
+    {
+      field: IOddJobsFields.PaymentDate,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.PaymentDate],
+      type: 'date',
     },
   ];
   return <Table loading={isLoading} columns={columns} rows={oddJobs} />;
