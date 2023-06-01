@@ -6,17 +6,17 @@ import {
   useState,
 } from 'react';
 import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
-import { useForm, FormProvider } from 'react-hook-form';
-import { ProjectDoc, IProjectDoc } from '../../../consts/projects';
-import { PROJECT_FORM_DEFAULT_VALUES } from '../../ProjectForm/ProjectForm.consts';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useFormContext } from 'react-hook-form';
 import {
   StyledFilterPanel,
   StyledFilterControlDiv,
   StyledFilterButton,
   StyledFilterItemCaption,
 } from './FilterPanel.styled';
-import { IFilterPanelButtonProps } from './FilterPanel.types';
+import {
+  IFilterPanelButtonProps,
+  IFilterPanelProps,
+} from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
@@ -38,16 +38,13 @@ const FilterPanelButton = ({
   );
 };
 
-export const FilterPanel = () => {
-  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState<Boolean>(false);
-  const form = useForm<IProjectDoc>({
-    resolver: zodResolver(ProjectDoc),
-    defaultValues: PROJECT_FORM_DEFAULT_VALUES,
-    mode: 'onSubmit',
-  });
-  const referenceElement = useRef<HTMLDivElement>(null);
+export const FilterPanel = ({ filters }: IFilterPanelProps) => {
+  const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
+  const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
+  const { reset } = useFormContext();
+
   const filterIconProps: ISvgIconProps = {
     //TODO: when filteres are active make color var(--color-active)}
     size: 'S',
@@ -123,72 +120,77 @@ export const FilterPanel = () => {
   );
 
   return (
-    <div ref={referenceElement}>
-      <FormProvider {...form}>
-        {filterIcon}
-        {isFilterPanelOpen && (
-          <StyledFilterPanel ref={popperElement}>
-            <StyledFilterControlDiv>
-              <StyledFilterItemCaption>
-                {PROJECT_DISPLAY_TEXTS.he.fields.status}
-              </StyledFilterItemCaption>
-              <FilterPanelButton>
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Active]}
-              </FilterPanelButton>
-              <FilterPanelButton>
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.InActive]}
-              </FilterPanelButton>
-            </StyledFilterControlDiv>
-
-            <StyledFilterControlDiv>
-              <StyledFilterItemCaption>
-                {PROJECT_DISPLAY_TEXTS.he.fields.sDate}
-              </StyledFilterItemCaption>
-              <DateInput
-                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
-                name={`${ProjectFields.SDate} sDateFilter`}
-              ></DateInput>
-              <DateInput
-                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
-                name={`${ProjectFields.EDate} sDateFilter`}
-              ></DateInput>
-            </StyledFilterControlDiv>
-
-            <StyledFilterControlDiv>
-              <StyledFilterItemCaption>
-                {PROJECT_DISPLAY_TEXTS.he.fields.eDate}
-              </StyledFilterItemCaption>
-              <DateInput
-                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
-                name={`${ProjectFields.SDate} eDate`}
-              ></DateInput>
-              <DateInput
-                label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
-                name={`${ProjectFields.EDate} eDate`}
-              ></DateInput>
-            </StyledFilterControlDiv>
-            <StyledFilterControlDiv justify='flex-end'>
-              <StyledFilterButton
-                width='25%'
-                variant='primary'
-                onClick={() => setIsFilterPanelOpen(false)}
-              >
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
-              </StyledFilterButton>
-              <StyledFilterButton
-                width='20%'
-                variant='danger'
-                onClick={() => {
-                  setIsFilterPanelOpen(false);
-                  form.reset();
-                }}
-              >
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
-              </StyledFilterButton>
-            </StyledFilterControlDiv>
-          </StyledFilterPanel>
-        )}
-      </FormProvider>
+    <div>
+      {filterIcon}
+      {isFilterPanelOpen && (
+        <StyledFilterPanel ref={popperElement}>
+          {filters.map(({ type, field }) => {
+            {
+              if (type === 'buttons')
+                return (
+                  <StyledFilterControlDiv>
+                    <StyledFilterItemCaption>
+                      {PROJECT_DISPLAY_TEXTS.he.fields.status}
+                    </StyledFilterItemCaption>
+                    <FilterPanelButton>
+                      {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Active]}
+                    </FilterPanelButton>
+                    <FilterPanelButton>
+                      {
+                        DISPLAY_TEXTS.he.filterPanel[
+                          IFilterPanelStates.InActive
+                        ]
+                      }
+                    </FilterPanelButton>
+                  </StyledFilterControlDiv>
+                );
+            }
+            {
+              if (type === 'date')
+                return (
+                  <StyledFilterControlDiv>
+                    <StyledFilterItemCaption>
+                      {field === 'sDate'
+                        ? PROJECT_DISPLAY_TEXTS.he.fields.sDate
+                        : PROJECT_DISPLAY_TEXTS.he.fields.eDate}
+                    </StyledFilterItemCaption>
+                    <DateInput
+                      label={
+                        DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]
+                      }
+                      name={`${field}.from`}
+                    ></DateInput>
+                    <DateInput
+                      label={
+                        DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]
+                      }
+                      name={`${field}.to `}
+                    ></DateInput>
+                  </StyledFilterControlDiv>
+                );
+            }
+          })}
+          <StyledFilterControlDiv justify='flex-end'>
+            <StyledFilterButton
+              width='25%'
+              variant='primary'
+              onClick={() => setIsFilterPanelOpen(false)}
+            >
+              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
+            </StyledFilterButton>
+            <StyledFilterButton
+              width='20%'
+              variant='danger'
+              onClick={() => {
+                setIsFilterPanelOpen(false);
+                reset();
+              }}
+            >
+              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
+            </StyledFilterButton>
+          </StyledFilterControlDiv>
+        </StyledFilterPanel>
+      )}
     </div>
   );
 };
