@@ -1,4 +1,4 @@
-import { NewProjectPage } from '@/lib/components/ProjectPage/NewProject';
+import { NewProjectPage } from '@/lib/components/ProjectPage/NewProjectPage';
 import { PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useRouter } from 'next/router';
