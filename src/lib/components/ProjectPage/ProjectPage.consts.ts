@@ -1,39 +1,28 @@
-import {
-  PROJECT_DISPLAY_TEXTS,
-  ProjectActualsViews,
-  ProjectMainViews,
-} from '@/lib/consts/projects';
+import { PROJECT_DISPLAY_TEXTS, EProjectViews } from '@/lib/consts/projects';
 
-export const PROJECT_MAIN_VIEW_TABS = [
+export const PROJECT_VIEW_TABS = [
   {
-    id: ProjectMainViews.Overview,
-    text: PROJECT_DISPLAY_TEXTS.he.mainViews[ProjectMainViews.Overview],
+    id: EProjectViews.Confirms,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.Confirms],
   },
   {
-    id: ProjectMainViews.Appartments,
-    text: PROJECT_DISPLAY_TEXTS.he.mainViews[ProjectMainViews.Appartments],
-  },
-];
-
-export const PROJECT_ACTUALS_VIEW_TABS = [
-  {
-    id: ProjectActualsViews.Confirms,
-    text: PROJECT_DISPLAY_TEXTS.he.actualViews[ProjectActualsViews.Confirms],
+    id: EProjectViews.Accounts,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.Accounts],
   },
   {
-    id: ProjectActualsViews.Accounts,
-    text: PROJECT_DISPLAY_TEXTS.he.actualViews[ProjectActualsViews.Accounts],
+    id: EProjectViews.Contracts,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.Contracts],
   },
   {
-    id: ProjectActualsViews.Contracts,
-    text: PROJECT_DISPLAY_TEXTS.he.actualViews[ProjectActualsViews.Contracts],
+    id: EProjectViews.Attachments,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.Attachments],
   },
   {
-    id: ProjectActualsViews.Attachments,
-    text: PROJECT_DISPLAY_TEXTS.he.actualViews[ProjectActualsViews.Attachments],
+    id: EProjectViews.OddJobs,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.OddJobs],
   },
   {
-    id: ProjectActualsViews.OddJobs,
-    text: PROJECT_DISPLAY_TEXTS.he.actualViews[ProjectActualsViews.OddJobs],
+    id: EProjectViews.Appartments,
+    text: PROJECT_DISPLAY_TEXTS.he.tabs[EProjectViews.Appartments],
   },
 ];

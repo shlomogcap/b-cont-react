@@ -1,5 +1,5 @@
 import { ProjectPage } from '@/lib/components/ProjectPage/ProjectPage';
-import { ProjectContractsCard } from '@/lib/components/ProjectPage/projectMainViews/ProjectOverview/tabs';
+import { ProjectContractsCard } from '@/lib/components/ProjectPage/projectTabs/ProjectOverview/tabs';
 import { ProjectType } from '@/lib/consts/projects';
 import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { ProjectContractsProvider } from '@/lib/context/projectContractsContext';
