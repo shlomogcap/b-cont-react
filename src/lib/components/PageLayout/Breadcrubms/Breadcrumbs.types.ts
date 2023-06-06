@@ -10,3 +10,8 @@ export type IBreadcrumbProps = {
 export type IBreadcrumbsProps = {
   breadcrumbs: IBreadcrumbProps[];
 };
+
+export type IStyledBreadcrumbProps = {
+  actionable: boolean;
+  hasArrow: boolean;
+};
