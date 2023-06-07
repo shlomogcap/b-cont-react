@@ -1,12 +1,14 @@
 import { Lang } from '../displayTexts';
 import { IContractActualStatus } from './ContractActualStatus';
 import { IContractFields } from './ContractFields';
+import { IContractStage } from './ContractStage';
 import { IContractStatus } from './ContractStatus';
 import { IContractType } from './ContractType';
 
 type DisplayTextMapping = {
   fields: Record<IContractFields, string>;
   contractType: Record<IContractType, string>;
+  contractStage: Record<IContractStage, string>;
   contractStatus: Record<IContractStatus, string>;
   contractActualsStatus: Record<IContractActualStatus, string>;
 };
@@ -33,6 +35,11 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractFields.DonePercentage]: 'אחוז ביצוע',
       [IContractFields.TotalActualsSum]: 'סכום ביצוע',
       [IContractFields.CurrentAccountPeriod]: 'חשבון נוכחי',
+    },
+    contractStage: {
+      [IContractStage.Plan]: 'תכנון',
+      [IContractStage.Actual]: 'ביצוע',
+      [IContractStage.Billing]: 'כספים',
     },
     contractType: {
       [IContractType.Pauschal]: 'פאושלי',
@@ -88,6 +95,11 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractType.Rent]: 'Rent',
       [IContractType.Invoice]: 'Invoice',
       [IContractType.Kitchen]: 'Kitchen',
+    },
+    contractStage: {
+      [IContractStage.Plan]: 'Plan',
+      [IContractStage.Actual]: 'Actual',
+      [IContractStage.Billing]: 'Billing',
     },
     contractStatus: {
       [IContractStatus.Plan]: 'Plan',

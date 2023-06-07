@@ -10,10 +10,12 @@ import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { PropsWithChildren } from 'react';
 import { useContractContext } from '@/lib/context/contractContext';
 import { IContractFields } from '@/lib/consts/contracts';
+import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 
 export const ContractPage = ({
   projectId,
   projectType,
+  stage,
   children,
 }: PropsWithChildren<IContractPageProps>) => {
   const { isLoading } = useProjectsContext();
@@ -29,6 +31,7 @@ export const ContractPage = ({
     projectType,
     IRoutesNames.ProjectsWithType,
   );
+  const contractStageBreadcrumb = useContractStageBreadcrumb(stage);
 
   const projectsNavList = useProjectNavList({
     projects,
@@ -50,6 +53,7 @@ export const ContractPage = ({
           text: contract?.[IContractFields.Title] ?? '---',
           id: IRoutesNames.Contract,
         },
+        contractStageBreadcrumb,
       ]}
     >
       {isLoading ? (
