@@ -34,7 +34,7 @@ const FilterPanelButton = ({
   const { setValue, watch } = useFormContext();
   const fieldValues: string[] = watch(field) ?? [];
   const isActive = fieldValues.includes(currentValue);
-  console.log(watch(field), isActive, children);
+  console.log(watch());
   return (
     <StyledFilterButton
       isButtonGroup
@@ -101,7 +101,7 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
   const popperInstance = useRef<Instance | null>(null);
   const { reset } = useFormContext();
   const filterIconProps: ISvgIconProps = {
-    size: 'S',
+    size: 'M',
     onClick: (e) => {
       e.stopPropagation();
       setIsFilterPanelOpen((prev) => !prev);
