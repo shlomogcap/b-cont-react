@@ -1,5 +1,5 @@
 import { PageLayout } from '../PageLayout';
-import { DISPLAY_TEXTS } from '../../consts/displayTexts';
+import { DISPLAY_TEXTS, ITableStates } from '../../consts/displayTexts';
 import {
   IRoutesNames,
   PROJECT_ID_QUERY,
@@ -59,7 +59,10 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
       ]}
     >
       {isLoading ? (
-        <EmptyState animation='pulse' content={'Loading...'} />
+        <EmptyState
+          animation='pulse'
+          content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+        />
       ) : (
         <ProjectOverview />
       )}
