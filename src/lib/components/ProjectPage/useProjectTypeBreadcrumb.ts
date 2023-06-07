@@ -1,7 +1,7 @@
 import { PROJECT_DISPLAY_TEXTS, ProjectType } from '@/lib/consts/projects';
 import { IBreadcrumbProps } from '../PageLayout/Breadcrubms';
 import { useRouter } from 'next/router';
-import { IRoutesNames, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
+import { PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 
 export const useProjectTypeBreadcrumb = (

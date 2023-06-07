@@ -42,7 +42,9 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractType.Kitchen]: 'מטבחים ושיש',
     },
     contractStatus: {
+      [IContractStatus.Plan]: 'בהקמה',
       [IContractStatus.Active]: 'פעיל',
+      [IContractStatus.Done]: 'הסתיים',
       [IContractStatus.NonActive]: 'לא פעיל',
     },
     contractActualsStatus: {
@@ -88,7 +90,9 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IContractType.Kitchen]: 'Kitchen',
     },
     contractStatus: {
+      [IContractStatus.Plan]: 'Plan',
       [IContractStatus.Active]: 'Active',
+      [IContractStatus.Done]: 'Done',
       [IContractStatus.NonActive]: 'Not Active',
     },
     contractActualsStatus: {

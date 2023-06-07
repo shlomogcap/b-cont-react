@@ -1,17 +1,21 @@
-import { PageLayout } from '../PageLayout';
-import { DISPLAY_TEXTS, ITableStates } from '../../consts/displayTexts';
-import { IRoutesNames } from '../../consts/routes';
-import { IProjectPageProps } from './ProjectPage.types';
-import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
-import { ProjectOverview } from './ProjectOverview';
 import { useProjectsContext } from '@/lib/context/projectsContext';
-import { EmptyState } from '../commons/EmptyState';
-import { useProjectTypeBreadcrumb } from './useProjectTypeBreadcrumb';
+import { IContractPageProps } from './ContractPage.types';
+import { PageLayout } from '../PageLayout';
+import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
+import { useProjectTypeBreadcrumb } from '../ProjectPage/useProjectTypeBreadcrumb';
+import { IRoutesNames } from '@/lib/consts/routes';
 import { useProjectNavList } from '@/lib/hooks/useProjectNavList';
+import { EmptyState } from '../commons/EmptyState';
+import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
+import { PropsWithChildren } from 'react';
 
-export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
+export const ContractPage = ({
+  projectId,
+  projectType,
+  children,
+}: PropsWithChildren<IContractPageProps>) => {
   const { isLoading } = useProjectsContext();
-  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.ProjectsWithType];
+  const title = 'CONTRACT PAGE';
   const { data: projects } = useProjectsContext();
   const project = projectId ? projects.find((p) => p.id === projectId) : null;
   const projectBreadCrumbText = String(project?.title || projectId);
@@ -45,7 +49,7 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
           content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
         />
       ) : (
-        <ProjectOverview />
+        children
       )}
     </PageLayout>
   );
