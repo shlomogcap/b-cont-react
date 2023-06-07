@@ -6,7 +6,7 @@ import { IVendorPageProps } from './VendorPage.types';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 
 export const VendorPage = ({ vendorId }: IVendorPageProps) => {
-  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects];
+  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendor];
   const { data } = useVendorsContext();
   const vendor = data.find((p) => p.id === vendorId);
   return (

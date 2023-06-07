@@ -3,10 +3,10 @@ import { DISPLAY_TEXTS } from './displayTexts';
 import { ProjectType } from './projects/ProjectType';
 import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY, IRoutesNames } from './routes';
 
-export const PROJECTS_BREADCRUMB: IBreadcrumbProps = {
-  text: DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects],
-  href: IRoutesNames.Projects,
-  id: IRoutesNames.Projects,
+export const APP_BREADCRUMB: IBreadcrumbProps = {
+  text: DISPLAY_TEXTS.he.routeNames[IRoutesNames.App],
+  href: IRoutesNames.App,
+  id: IRoutesNames.App,
 };
 export const VENDORS_BREADCRUMB: IBreadcrumbProps = {
   text: DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors],

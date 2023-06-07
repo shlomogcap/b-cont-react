@@ -6,22 +6,28 @@ import {
   PROJECT_TYPE_QUERY,
 } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
-import { PROJECTS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
+import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { ProjectOverview } from './ProjectOverview';
 import { useProjectsContext } from '@/lib/context/projectsContext';
 import { EmptyState } from '../commons/EmptyState';
 import { ProjectFields } from '@/lib/consts/projects';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { useRouter } from 'next/router';
+import { useProjectTypeBreadcrumb } from './useProjectTypeBreadcrumb';
 
-export const ProjectPage = ({ projectId }: IProjectPageProps) => {
+export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const { isLoading } = useProjectsContext();
-  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects];
+  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.ProjectsWithType];
   const { data } = useProjectsContext();
   const project = projectId ? data.find((p) => p.id === projectId) : null;
   const projectBreadCrumbText = String(project?.title || projectId);
   const router = useRouter();
   const { closeModal } = useModalContext();
+
+  const projectsTypeBreadCrumb = useProjectTypeBreadcrumb(
+    projectType,
+    IRoutesNames.ProjectsWithType,
+  );
 
   const projectsNavList = data
     .filter(({ id }) => id !== projectId)
@@ -43,7 +49,8 @@ export const ProjectPage = ({ projectId }: IProjectPageProps) => {
     <PageLayout
       title={title}
       breadcrubms={[
-        PROJECTS_BREADCRUMB,
+        APP_BREADCRUMB,
+        projectsTypeBreadCrumb,
         {
           text: isLoading ? '---' : projectBreadCrumbText,
           id: IRoutesNames.Project,

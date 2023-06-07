@@ -44,7 +44,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           rows.length < 2
             ? '-'
             : `${rows.length.toLocaleString()} ${
-                DISPLAY_TEXTS.he.routeNames[IRoutesNames.Projects]
+                DISPLAY_TEXTS.he.routeNames[IRoutesNames.ProjectsWithType]
               }`,
         [ProjectFields.TotalAgreementSum]: sumBy(
           rows,

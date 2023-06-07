@@ -18,7 +18,7 @@ export enum IToastType {
 
 type DisplayTextMapping = {
   toasts: Record<IToastType, string>;
-  routeNames: Record<Exclude<IRoutesNames, IRoutesNames.App>, string>;
+  routeNames: Record<IRoutesNames, string>;
   buttons: Record<IButtonTexts, string>;
   table: Record<ITableStates, string>;
 };
@@ -39,6 +39,8 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IButtonTexts.Cancel]: 'בטל שינויים',
     },
     routeNames: {
+      [IRoutesNames.App]: 'פרוייקטים',
+      [IRoutesNames.ProjectsWithType]: 'פרוייקטים',
       [IRoutesNames.Projects]: 'פרוייקטים',
       [IRoutesNames.Vendors]: 'קבלנים',
       [IRoutesNames.Settings]: 'הגדרות',
@@ -61,7 +63,9 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ITableStates.Error]: 'An Error Has Occured',
     },
     routeNames: {
+      [IRoutesNames.App]: 'Projects',
       [IRoutesNames.Projects]: 'Projects',
+      [IRoutesNames.ProjectsWithType]: 'Projects',
       [IRoutesNames.Vendors]: 'Vendors',
       [IRoutesNames.Settings]: 'Settings',
       [IRoutesNames.Project]: 'Project',

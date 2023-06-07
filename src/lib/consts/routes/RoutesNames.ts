@@ -7,7 +7,8 @@ import {
 
 export enum IRoutesNames {
   App = '/app',
-  Projects = '/app/projects',
+  Projects = `/app/projects`,
+  ProjectsWithType = `/app/projects/[${PROJECT_TYPE_QUERY}]`,
   Vendors = '/app/vendors',
   Settings = '/app/settings',
   Project = `/app/projects/[${PROJECT_TYPE_QUERY}]/[${PROJECT_ID_QUERY}]`,

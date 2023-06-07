@@ -1,6 +1,6 @@
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import { ProjectType } from '../../../consts/projects/ProjectType';
-import { IRoutesNames } from '../../../consts/routes';
+import { IRoutesNames, PROJECT_TYPE_QUERY } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
@@ -19,17 +19,26 @@ export const Sidebar = ({ title }: ISidebarProps) => {
       <nav className='nav'>
         <SidebarLink
           text={projectTypeTexts[ProjectType.Residential]}
-          href={`${IRoutesNames.Projects}/${ProjectType.Residential}`}
+          href={IRoutesNames.ProjectsWithType.replace(
+            `[${PROJECT_TYPE_QUERY}]`,
+            ProjectType.Residential,
+          )}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.PublicSpace]}
-          href={`${IRoutesNames.Projects}/${ProjectType.PublicSpace}`}
+          href={IRoutesNames.ProjectsWithType.replace(
+            `[${PROJECT_TYPE_QUERY}]`,
+            ProjectType.PublicSpace,
+          )}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
           text={projectTypeTexts[ProjectType.Entrepreneurship]}
-          href={`${IRoutesNames.Projects}/${ProjectType.Entrepreneurship}`}
+          href={IRoutesNames.ProjectsWithType.replace(
+            `[${PROJECT_TYPE_QUERY}]`,
+            ProjectType.Entrepreneurship,
+          )}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
         <div className='hr' />
