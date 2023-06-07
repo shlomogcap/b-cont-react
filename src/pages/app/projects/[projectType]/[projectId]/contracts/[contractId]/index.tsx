@@ -1,6 +1,12 @@
 import { IContractFields, IContractStatus } from '@/lib/consts/contracts';
-import { IRoutesNames } from '@/lib/consts/routes';
+import {
+  CONTRACT_ID_QUERY,
+  IRoutesNames,
+  PROJECT_ID_QUERY,
+  PROJECT_TYPE_QUERY,
+} from '@/lib/consts/routes';
 import { firestore } from '@/lib/firebase';
+import { replaceQueryParams } from '@/lib/utils/replaceParams';
 import { doc, getDoc } from 'firebase/firestore';
 import { GetServerSideProps } from 'next';
 
@@ -20,10 +26,15 @@ export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
     contract.data()?.[IContractFields.Status] === IContractStatus.Plan
       ? 'plan'
       : accountStage;
+  const destination = `${replaceQueryParams(IRoutesNames.Contract, query, [
+    PROJECT_ID_QUERY,
+    PROJECT_TYPE_QUERY,
+    CONTRACT_ID_QUERY,
+  ])}/${contractStage}`;
   return {
     props: {},
     redirect: {
-      destination: `/app/projects/${query.projectId}/${query.projectType}/contracts/${query.contractId}/${contractStage}`,
+      destination,
       permanent: false,
     },
   };
