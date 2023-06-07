@@ -11,6 +11,7 @@ import {
 import { StyledSidebar } from './Sidebar.styled';
 import { ISidebarProps } from './Sidebar.types';
 import { SidebarLink } from './SidebarLink';
+import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 
 export const Sidebar = ({ title }: ISidebarProps) => {
   const projectTypeTexts = PROJECT_DISPLAY_TEXTS.he.projectTypes;
@@ -43,13 +44,13 @@ export const Sidebar = ({ title }: ISidebarProps) => {
         />
         <div className='hr' />
         <SidebarLink
-          text='קבלנים'
+          text={DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors]}
           href={IRoutesNames.Vendors}
           icon={<VendorsIcon />}
         />
         <div className='hr' />
         <SidebarLink
-          text='הגדרות'
+          text={DISPLAY_TEXTS.he.routeNames[IRoutesNames.Settings]}
           href={IRoutesNames.Settings}
           icon={<SettingsIcon />}
         />
