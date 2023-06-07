@@ -1,11 +1,45 @@
-import { useRouter } from 'next/router';
+import { IContractFields, IContractStatus } from '@/lib/consts/contracts';
+import {
+  CONTRACT_ID_QUERY,
+  IRoutesNames,
+  PROJECT_ID_QUERY,
+  PROJECT_TYPE_QUERY,
+} from '@/lib/consts/routes';
+import { firestore } from '@/lib/firebase';
+import { replaceQueryParams } from '@/lib/utils/replaceParams';
+import { doc, getDoc } from 'firebase/firestore';
+import { GetServerSideProps } from 'next';
 
-export default function ContractPage() {
-  const { query } = useRouter();
-  return (
-    <div>
-      Contract Page with Id {query.contractId} <br />
-      TODO: nav to contract stage (plan,actual,billing based on status logic)
-    </div>
+export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
+  const contractRef = doc(
+    firestore,
+    `project/${query.projectId}/contracts/${query.contractId}`,
   );
+  const contract = await getDoc(contractRef);
+  if (!contract.exists) {
+    return {
+      notFound: true,
+    };
+  }
+  const accountStage: 'billing' | 'actual' = 'actual';
+  const contractStage =
+    contract.data()?.[IContractFields.Status] === IContractStatus.Plan
+      ? 'plan'
+      : accountStage;
+  const destination = `${replaceQueryParams(IRoutesNames.Contract, query, [
+    PROJECT_ID_QUERY,
+    PROJECT_TYPE_QUERY,
+    CONTRACT_ID_QUERY,
+  ])}/${contractStage}`;
+  return {
+    props: {},
+    redirect: {
+      destination,
+      permanent: false,
+    },
+  };
+};
+
+export default function ContractRoute() {
+  return null;
 }

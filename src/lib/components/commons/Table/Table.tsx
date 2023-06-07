@@ -48,9 +48,16 @@ export const Table = <T extends string = string>({
           </StyledTableDataRow>
         ))}
       {!loading && rows.length === 0 && (
-        <EmptyState content={DISPLAY_TEXTS.he.table[ITableStates.NoRows]} />
+        <EmptyState
+          content={DISPLAY_TEXTS.he.tableStates[ITableStates.NoRows]}
+        />
       )}
-      {loading && <EmptyState animation='pulse' content={'Loading...'} />}
+      {loading && (
+        <EmptyState
+          animation='pulse'
+          content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+        />
+      )}
       {!loading && totals && (
         <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
           {columns.map(({ field, fieldPath, ...rest }) => (

@@ -40,7 +40,7 @@ export const StyledModalTitle = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  background: cornflowerblue;
+  background: var(--color-active-light);
   border-radius: 1rem 1rem 0 0;
   color: #f8f8f8;
   padding: 1rem;
