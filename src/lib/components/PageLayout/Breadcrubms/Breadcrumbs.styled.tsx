@@ -20,7 +20,8 @@ export const StyledNavListArrow = styled(TriangleArrowIcon)`
 
 export const StyledBreadcrumb = styled.div<IStyledBreadcrumbProps>`
   color: white;
-  background-color: var(--color-active-light);
+  background-color: ${({ actionable }) =>
+    actionable ? 'var(--color-active)' : 'var(--color-active-light)'};
   font: inherit;
   font-size: var(--font-size-normal);
   border-radius: 1rem;
