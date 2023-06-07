@@ -7,6 +7,7 @@ import { IContractType } from './ContractType';
 
 type DisplayTextMapping = {
   fields: Record<IContractFields, string>;
+  contractFormTitle: string;
   contractType: Record<IContractType, string>;
   contractStage: Record<IContractStage, string>;
   contractStatus: Record<IContractStatus, string>;
@@ -15,6 +16,7 @@ type DisplayTextMapping = {
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    contractFormTitle: 'פרטי החוזה',
     fields: {
       [IContractFields.Title]: 'חוזה',
       [IContractFields.Description]: 'תיאור',
@@ -68,6 +70,7 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     },
   },
   en: {
+    contractFormTitle: 'Contract Details',
     fields: {
       [IContractFields.Title]: 'Contract',
       [IContractFields.Description]: 'Description',

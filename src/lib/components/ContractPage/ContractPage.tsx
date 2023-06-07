@@ -9,8 +9,13 @@ import { EmptyState } from '../commons/EmptyState';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { PropsWithChildren } from 'react';
 import { useContractContext } from '@/lib/context/contractContext';
-import { IContractFields } from '@/lib/consts/contracts';
+import {
+  CONTRACTS_DISPLAY_TEXTS,
+  IContractFields,
+} from '@/lib/consts/contracts';
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
+import { Card } from '../commons/Card';
+import { ContractForm } from '../ContractForm';
 
 export const ContractPage = ({
   projectId,
@@ -62,7 +67,12 @@ export const ContractPage = ({
           content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
         />
       ) : (
-        children
+        <>
+          <Card title={CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}>
+            <ContractForm id={contract?.id!} />
+          </Card>
+          {children}
+        </>
       )}
     </PageLayout>
   );
