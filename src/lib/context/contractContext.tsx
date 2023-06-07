@@ -54,7 +54,7 @@ export const ContractProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const contractPath = `/projects/${projectId}/contract/${contractId}`;
+  const contractPath = `/projects/${projectId}/contracts/${contractId}`;
   useEffect(() => {
     const contractSubscription = onSnapshot(
       doc(firestore, contractPath),

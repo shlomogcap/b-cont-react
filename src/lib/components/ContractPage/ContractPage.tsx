@@ -8,6 +8,8 @@ import { useProjectNavList } from '@/lib/hooks/useProjectNavList';
 import { EmptyState } from '../commons/EmptyState';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { PropsWithChildren } from 'react';
+import { useContractContext } from '@/lib/context/contractContext';
+import { IContractFields } from '@/lib/consts/contracts';
 
 export const ContractPage = ({
   projectId,
@@ -17,6 +19,9 @@ export const ContractPage = ({
   const { isLoading } = useProjectsContext();
   const title = 'CONTRACT PAGE';
   const { data: projects } = useProjectsContext();
+  const {
+    data: { contract },
+  } = useContractContext();
   const project = projectId ? projects.find((p) => p.id === projectId) : null;
   const projectBreadCrumbText = String(project?.title || projectId);
 
@@ -40,6 +45,10 @@ export const ContractPage = ({
           text: isLoading ? '---' : projectBreadCrumbText,
           id: IRoutesNames.Project,
           navList: projectsNavList,
+        },
+        {
+          text: contract?.[IContractFields.Title] ?? '---',
+          id: IRoutesNames.Contract,
         },
       ]}
     >
