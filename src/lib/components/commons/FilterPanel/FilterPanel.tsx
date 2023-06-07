@@ -5,7 +5,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import { PROJECT_DISPLAY_TEXTS, ProjectFields } from '@/lib/consts/projects';
+import {
+  PROJECT_DISPLAY_TEXTS,
+  IFilterPanelStates,
+} from '@/lib/consts/projects';
 import { useFormContext } from 'react-hook-form';
 import {
   StyledFilterPanel,
@@ -14,39 +17,90 @@ import {
   StyledFilterItemCaption,
 } from './FilterPanel.styled';
 import {
+  IFilterItemOption,
   IFilterPanelButtonProps,
   IFilterPanelProps,
 } from './FilterPanel.types';
 import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
-import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 import { createPopper, Instance } from '@popperjs/core';
 
 const FilterPanelButton = ({
+  field,
   children,
+  currentValue,
 }: PropsWithChildren<IFilterPanelButtonProps>) => {
-  const [isFiltered, setIsFiltered] = useState(false);
+  const { setValue, watch } = useFormContext();
+  const fieldValues: string[] = watch(field) ?? [];
+  const isActive = fieldValues.includes(currentValue);
+  console.log(watch(field), isActive, children);
   return (
     <StyledFilterButton
       isButtonGroup
-      variant={isFiltered ? 'primary' : 'secondary'}
-      onClick={() => setIsFiltered((prev) => !prev)}
+      onClick={() => {
+        setValue(
+          field,
+          isActive
+            ? fieldValues.filter((value) => value !== currentValue)
+            : [...fieldValues, currentValue],
+        );
+      }}
+      variant={isActive ? 'primary' : 'secondary'}
     >
       {children}
     </StyledFilterButton>
   );
 };
+type IFilterButtonsControlProps<T extends string = string> = {
+  label: string;
+  field: string;
+  options: IFilterItemOption<T>[];
+};
+const FilterButtonsControl = ({
+  label,
+  field,
+  options,
+}: IFilterButtonsControlProps) => {
+  return (
+    <StyledFilterControlDiv>
+      <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
+      {options.map(({ value, text }) => (
+        <FilterPanelButton key={value} field={field} currentValue={value}>
+          {text}
+        </FilterPanelButton>
+      ))}
+    </StyledFilterControlDiv>
+  );
+};
 
-export const FilterPanel = ({ filters }: IFilterPanelProps) => {
+const FilterDatesControl = ({
+  label,
+  field,
+}: {
+  label: string;
+  field: string;
+}) => (
+  <StyledFilterControlDiv>
+    <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
+    <DateInput
+      label={PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
+      name={`${field}.from`}
+    />
+    <DateInput
+      label={PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
+      name={`${field}.to`}
+    />
+  </StyledFilterControlDiv>
+);
+
+export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
   const { reset } = useFormContext();
-
   const filterIconProps: ISvgIconProps = {
-    //TODO: when filteres are active make color var(--color-active)}
     size: 'S',
     onClick: (e) => {
       e.stopPropagation();
@@ -124,50 +178,21 @@ export const FilterPanel = ({ filters }: IFilterPanelProps) => {
       {filterIcon}
       {isFilterPanelOpen && (
         <StyledFilterPanel ref={popperElement}>
-          {filters.map(({ type, field }) => {
-            {
-              if (type === 'buttons')
+          {filters.map(({ type, field, options = [] }) => {
+            const label: string = displayTexts[field];
+            switch (type) {
+              case 'buttons':
                 return (
-                  <StyledFilterControlDiv>
-                    <StyledFilterItemCaption>
-                      {PROJECT_DISPLAY_TEXTS.he.fields.status}
-                    </StyledFilterItemCaption>
-                    <FilterPanelButton>
-                      {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Active]}
-                    </FilterPanelButton>
-                    <FilterPanelButton>
-                      {
-                        DISPLAY_TEXTS.he.filterPanel[
-                          IFilterPanelStates.InActive
-                        ]
-                      }
-                    </FilterPanelButton>
-                  </StyledFilterControlDiv>
+                  <FilterButtonsControl
+                    label={label}
+                    field={field}
+                    options={options}
+                  />
                 );
-            }
-            {
-              if (type === 'date')
-                return (
-                  <StyledFilterControlDiv>
-                    <StyledFilterItemCaption>
-                      {field === 'sDate'
-                        ? PROJECT_DISPLAY_TEXTS.he.fields.sDate
-                        : PROJECT_DISPLAY_TEXTS.he.fields.eDate}
-                    </StyledFilterItemCaption>
-                    <DateInput
-                      label={
-                        DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]
-                      }
-                      name={`${field}.from`}
-                    ></DateInput>
-                    <DateInput
-                      label={
-                        DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]
-                      }
-                      name={`${field}.to `}
-                    ></DateInput>
-                  </StyledFilterControlDiv>
-                );
+              case 'date':
+                return <FilterDatesControl label={label} field={field} />;
+              default:
+                return null;
             }
           })}
           <StyledFilterControlDiv justify='flex-end'>
@@ -176,7 +201,7 @@ export const FilterPanel = ({ filters }: IFilterPanelProps) => {
               variant='primary'
               onClick={() => setIsFilterPanelOpen(false)}
             >
-              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
+              {PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
             </StyledFilterButton>
             <StyledFilterButton
               width='20%'
@@ -186,7 +211,7 @@ export const FilterPanel = ({ filters }: IFilterPanelProps) => {
                 reset();
               }}
             >
-              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
+              {PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
             </StyledFilterButton>
           </StyledFilterControlDiv>
         </StyledFilterPanel>
