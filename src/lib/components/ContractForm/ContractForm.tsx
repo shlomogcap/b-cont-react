@@ -82,17 +82,24 @@ const ContractFormFields = () => {
       <NumberInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.PaymentDelay]}
         name={IContractFields.PaymentDelay}
+        onlyInteger
+        max={365}
       />
       <DropdownInput
         options={CONTRACT_TYPE_OPTIONS}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.ContractType]}
         name={IContractFields.ContractType}
       />
+      {/* TODO: make percentageInput */}
       <NumberInput
         label={
           CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.DelayPercentage]
         }
         name={IContractFields.DelayPercentage}
+        numericFormatProps={{
+          suffix: '%',
+        }}
+        max={25}
       />
       <DateInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.SWorkDate]}
