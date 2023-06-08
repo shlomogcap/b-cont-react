@@ -41,8 +41,12 @@ import {
   IS_INDEXED_OPTIONS,
 } from './ContractForm.consts';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { useVendorsContext } from '@/lib/context/vendorsContext';
+import { IVendorFields } from '@/lib/consts/vendors';
+import { ICommonFields } from '@/lib/consts/commonFields';
 
 const ContractFormFields = () => {
+  const { data: vendors } = useVendorsContext();
   return (
     <>
       <TextInput
@@ -51,7 +55,10 @@ const ContractFormFields = () => {
         name={IContractFields.Title}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={vendors.map((v) => ({
+          text: v[IVendorFields.Title],
+          value: String(v[ICommonFields.Id]),
+        }))}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.VendorRef]}
         name={IContractFields.VendorRef}
       />
