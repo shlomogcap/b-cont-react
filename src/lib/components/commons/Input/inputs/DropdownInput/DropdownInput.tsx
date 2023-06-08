@@ -109,7 +109,7 @@ export const DropdownInput = ({ options, ...props }: IDropdownInputProps) => {
         <StyledDropdownList ref={popperElement} aria-labelledby={listId}>
           {options.map(({ value, text }) => (
             <StyledDropdownListItem
-              key={value}
+              key={String(value)}
               data-value={value}
               onClick={() => setValue(props.name, value, { shouldDirty: true })}
             >

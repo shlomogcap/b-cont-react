@@ -33,7 +33,6 @@ import { PROJECT_ID_QUERY, IRoutesNames } from '@/lib/consts/routes';
 import { prepareFormData } from './ContractForm.utils';
 import { toast } from 'react-toastify';
 import { useContractContext } from '@/lib/context/contractContext';
-import { DUMMY_OPTIONS } from '../ProjectForm/ProjectForm.consts';
 import {
   CONTRACT_FORM_DEFAULT_VALUES,
   CONTRACT_STATUS_OPTIONS,
@@ -44,6 +43,7 @@ import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import { IVendorFields } from '@/lib/consts/vendors';
 import { ICommonFields } from '@/lib/consts/commonFields';
+import { FirebaseError } from 'firebase/app';
 
 const ContractFormFields = () => {
   const { data: vendors } = useVendorsContext();
@@ -146,7 +146,11 @@ export const ContractForm = ({ id }: IContractFormProps) => {
         await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
       } catch (err) {
-        //TODO: promt error...
+        toast.error(
+          err instanceof FirebaseError
+            ? err.message
+            : JSON.stringify(err ?? { error: 'Unexpected Error' }),
+        );
         console.error(err);
       }
       return;
