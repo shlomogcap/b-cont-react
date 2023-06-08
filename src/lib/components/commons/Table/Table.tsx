@@ -18,14 +18,15 @@ export const Table = <T extends string = string>({
   columns,
   title,
   loading,
+  className,
   onRowClick,
 }: ITableProps<T>) => {
   return (
-    <StyledTable>
+    <StyledTable className={className}>
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
-        {columns.map(({ field, display }) => (
-          <StyledTableHeader key={`headers/${field}`}>
+        {columns.map(({ field, display, fieldPath }) => (
+          <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
             {display ?? field}
           </StyledTableHeader>
         ))}
