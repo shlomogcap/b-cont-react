@@ -9,10 +9,11 @@ import { firestore } from '@firebase';
 import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IContractDoc } from '../consts/contracts';
+import { ISectionDoc } from '../consts/sections';
 
 type IContractData = {
   contract: IContractDoc | null;
-  sections: { title: string }[];
+  sections: ISectionDoc[];
   accounts: { title: string }[];
 };
 
@@ -56,6 +57,8 @@ export const ContractProvider = ({
 
   const contractPath = `/projects/${projectId}/contracts/${contractId}`;
   useEffect(() => {
+    console.log('CONTRACT CHANNEL OPEN:');
+
     const contractSubscription = onSnapshot(
       doc(firestore, contractPath),
       (snapshot) => {

@@ -15,16 +15,25 @@ export enum IToastType {
   AddingNewDoc,
   SavingDocData,
 }
+export enum IBoolean {
+  False,
+  True,
+}
 
 type DisplayTextMapping = {
   toasts: Record<IToastType, string>;
   routeNames: Record<IRoutesNames, string>;
   buttons: Record<IButtonTexts, string>;
+  boolean: Record<IBoolean, string>;
   tableStates: Record<ITableStates, string>;
 };
 
 export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
+    boolean: {
+      [IBoolean.False]: 'לא',
+      [IBoolean.True]: 'כן',
+    },
     toasts: {
       [IToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
       [IToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
@@ -53,6 +62,10 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     },
   },
   en: {
+    boolean: {
+      [IBoolean.False]: 'No',
+      [IBoolean.True]: 'Yes',
+    },
     toasts: {
       [IToastType.AddingNewDoc]: 'Data Added Succefully',
       [IToastType.SavingDocData]: 'Data Saved Succefully',

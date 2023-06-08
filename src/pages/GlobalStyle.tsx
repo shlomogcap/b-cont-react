@@ -39,6 +39,10 @@ const GlobalStyle = createGlobalStyle<Props>`
     --color-white: #fff;
     --color-black: #000;
 
+    --color-report-main:#c4d79b;
+    --color-report-secondary:#6495edab;
+    --color-report-tertiary:#6495edab;
+
     // FONTS
     --font-size-small: 1.2rem;
     --font-size-normal: 1.8rem;

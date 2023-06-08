@@ -28,7 +28,7 @@ export const StyledDropdownListItem = styled.div`
   font-size: 2rem;
   display: grid;
   align-items: center;
-  justify-items: flex-end;
+  justify-items: flex-start;
   padding: 1rem 2rem;
   grid-auto-flow: column;
   gap: 1rem;
@@ -46,11 +46,11 @@ export const StyledDropdownField = styled.div`
 `;
 
 export const StyledDropdownTag = styled.div`
-  font-size: var(--font-size-small);
   display: grid;
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
+  line-height: 1;
 `;
 
 export const StyledRemoveIcon = styled(XIcon)`

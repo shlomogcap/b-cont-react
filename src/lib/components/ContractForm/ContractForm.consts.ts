@@ -5,12 +5,13 @@ import {
   IContractType,
 } from '@/lib/consts/contracts';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
+import { DISPLAY_TEXTS, IBoolean } from '@/lib/consts/displayTexts';
 
 export const CONTRACT_FORM_DEFAULT_VALUES = {};
 
 export const IS_INDEXED_OPTIONS: IDropdownInputProps['options'] = [
-  { value: true, text: 'Yes' },
-  { value: false, text: 'No' },
+  { value: true, text: DISPLAY_TEXTS.he.boolean[IBoolean.True] },
+  { value: false, text: DISPLAY_TEXTS.he.boolean[IBoolean.False] },
 ];
 
 export const CONTRACT_STATUS_OPTIONS: IDropdownInputProps['options'] =

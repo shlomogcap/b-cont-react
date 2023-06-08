@@ -33,7 +33,6 @@ import { PROJECT_ID_QUERY, IRoutesNames } from '@/lib/consts/routes';
 import { prepareFormData } from './ContractForm.utils';
 import { toast } from 'react-toastify';
 import { useContractContext } from '@/lib/context/contractContext';
-import { DUMMY_OPTIONS } from '../ProjectForm/ProjectForm.consts';
 import {
   CONTRACT_FORM_DEFAULT_VALUES,
   CONTRACT_STATUS_OPTIONS,
@@ -41,8 +40,13 @@ import {
   IS_INDEXED_OPTIONS,
 } from './ContractForm.consts';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { useVendorsContext } from '@/lib/context/vendorsContext';
+import { IVendorFields } from '@/lib/consts/vendors';
+import { ICommonFields } from '@/lib/consts/commonFields';
+import { FirebaseError } from 'firebase/app';
 
 const ContractFormFields = () => {
+  const { data: vendors } = useVendorsContext();
   return (
     <>
       <TextInput
@@ -51,7 +55,10 @@ const ContractFormFields = () => {
         name={IContractFields.Title}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={vendors.map((v) => ({
+          text: v[IVendorFields.Title],
+          value: String(v[ICommonFields.Id]),
+        }))}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.VendorRef]}
         name={IContractFields.VendorRef}
       />
@@ -75,17 +82,24 @@ const ContractFormFields = () => {
       <NumberInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.PaymentDelay]}
         name={IContractFields.PaymentDelay}
+        onlyInteger
+        max={365}
       />
       <DropdownInput
         options={CONTRACT_TYPE_OPTIONS}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.ContractType]}
         name={IContractFields.ContractType}
       />
+      {/* TODO: make percentageInput */}
       <NumberInput
         label={
           CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.DelayPercentage]
         }
         name={IContractFields.DelayPercentage}
+        numericFormatProps={{
+          suffix: '%',
+        }}
+        max={25}
       />
       <DateInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.SWorkDate]}
@@ -139,7 +153,11 @@ export const ContractForm = ({ id }: IContractFormProps) => {
         await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
       } catch (err) {
-        //TODO: promt error...
+        toast.error(
+          err instanceof FirebaseError
+            ? err.message
+            : JSON.stringify(err ?? { error: 'Unexpected Error' }),
+        );
         console.error(err);
       }
       return;
