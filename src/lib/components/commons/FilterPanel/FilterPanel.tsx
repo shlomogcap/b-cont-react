@@ -34,7 +34,6 @@ const FilterPanelButton = ({
   const { setValue, watch } = useFormContext();
   const fieldValues: string[] = watch(field) ?? [];
   const isActive = fieldValues.includes(currentValue);
-  console.log(watch());
   return (
     <StyledFilterButton
       isButtonGroup
@@ -99,9 +98,10 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
-  const { reset } = useFormContext();
+  const { reset, watch, formState } = useFormContext();
   const filterIconProps: ISvgIconProps = {
     size: 'M',
+    isFiltersActive: formState.isDirty || Boolean(watch('status').length),
     onClick: (e) => {
       e.stopPropagation();
       setIsFilterPanelOpen((prev) => !prev);
