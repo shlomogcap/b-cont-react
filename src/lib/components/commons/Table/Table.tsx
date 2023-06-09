@@ -12,6 +12,8 @@ import { EmptyState } from '../EmptyState';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
 import { FilterPanel } from '../FilterPanel';
+import { Badge } from '../Badge';
+import { useFormContext } from 'react-hook-form';
 
 export const Table = <T extends string = string>({
   rows,
@@ -22,6 +24,9 @@ export const Table = <T extends string = string>({
   onRowClick,
   tableFilterProps,
 }: ITableProps<T>) => {
+  const { formState } = useFormContext();
+  const dirtyFields = formState.dirtyFields;
+  console.log(Boolean(dirtyFields.sDate));
   return (
     <StyledTable>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
@@ -29,6 +34,7 @@ export const Table = <T extends string = string>({
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display }) => (
           <StyledTableHeader key={`headers/${field}`}>
+            {dirtyFields[field] && <Badge columnBadge />}
             {display ?? field}
           </StyledTableHeader>
         ))}

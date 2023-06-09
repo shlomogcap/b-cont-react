@@ -1,1 +1,3 @@
-export type IBadgeProps = {};
+export type IBadgeProps = {
+  columnBadge?: boolean;
+};
