@@ -93,7 +93,12 @@ const FilterDatesControl = ({
   </StyledFilterControlDiv>
 );
 
-export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
+export const FilterPanel = ({
+  filters,
+  displayTexts,
+  filterTable,
+  clearFilterTable,
+}: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
@@ -199,7 +204,10 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
             <StyledFilterButton
               width='25%'
               variant='primary'
-              onClick={() => setIsFilterPanelOpen(false)}
+              onClick={() => {
+                setIsFilterPanelOpen(false);
+                filterTable();
+              }}
             >
               {PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
             </StyledFilterButton>
@@ -208,6 +216,7 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
               variant='danger'
               onClick={() => {
                 setIsFilterPanelOpen(false);
+                clearFilterTable();
                 reset();
               }}
             >

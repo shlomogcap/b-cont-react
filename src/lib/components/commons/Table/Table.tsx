@@ -26,7 +26,6 @@ export const Table = <T extends string = string>({
 }: ITableProps<T>) => {
   const { formState } = useFormContext();
   const dirtyFields = formState.dirtyFields;
-  console.log(Boolean(dirtyFields.sDate));
   return (
     <StyledTable>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}

@@ -17,11 +17,14 @@ import {
   projectFilterSchema,
   projectsTableFilters,
 } from './ProjectsPage.consts';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
   const rows = data.filter((p) => p.projectType === projectType);
+  const [filteredRows, setFilteredRows] = useState([]);
   const form = useForm<IProjectFilterDoc>({
     resolver: zodResolver(projectFilterSchema),
     defaultValues: {
@@ -31,6 +34,38 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     },
     mode: 'onSubmit',
   });
+  const { formState, watch } = form;
+  const filterRows = () => {
+    for (const field in formState.dirtyFields) {
+      switch (field) {
+        case 'sDate':
+          setFilteredRows(
+            rows.filter((row) => {
+              return (
+                dayjs(row[field]).isAfter(dayjs(watch(field).from)) ||
+                dayjs(row[field]).isBefore(dayjs(watch(field).to))
+              );
+            }),
+          );
+        case 'eDate':
+          setFilteredRows(
+            rows.filter((row) => {
+              return (
+                dayjs(row[field]).isAfter(dayjs(watch(field).from)) ||
+                dayjs(row[field]).isBefore(dayjs(watch(field).to))
+              );
+            }),
+          );
+        default:
+          break;
+      }
+    }
+  };
+
+  const clearFilter = () => {
+    setFilteredRows([]);
+  };
+
   return (
     <FormProvider {...form}>
       <Table
@@ -38,6 +73,8 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           filters: projectsTableFilters,
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
           status: IProjectStatus,
+          filterTable: filterRows,
+          clearFilterTable: clearFilter,
         }}
         loading={isLoading}
         columns={fieldsNamesToColumns(
@@ -63,7 +100,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           ],
           PROJECT_DISPLAY_TEXTS.he.fields,
         )}
-        rows={rows}
+        rows={!filteredRows.length ? rows : filteredRows}
         totals={{
           [ProjectFields.Title]:
             rows.length < 2
