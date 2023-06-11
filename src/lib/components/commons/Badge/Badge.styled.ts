@@ -13,6 +13,6 @@ export const StyledBadge = styled.span`
 export const StyledColumnBadge = styled(StyledBadge)`
   width: 0.5rem;
   height: 0.5rem;
-  top: 0rem;
-  right: 0rem;
+  top: 0;
+  right: 0;
 `;

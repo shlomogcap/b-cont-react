@@ -4,12 +4,7 @@ import { IBadgeProps } from './Badge.types';
 
 export const Badge = ({
   children,
-  ...props
+  columnBadge,
 }: PropsWithChildren<IBadgeProps>) => {
-  const { columnBadge } = props;
-  return columnBadge ? (
-    <StyledColumnBadge {...props}>{children}</StyledColumnBadge>
-  ) : (
-    <StyledBadge {...props}>{children}</StyledBadge>
-  );
+  return columnBadge ? <StyledColumnBadge /> : <StyledBadge />;
 };

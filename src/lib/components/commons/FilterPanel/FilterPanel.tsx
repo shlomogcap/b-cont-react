@@ -25,6 +25,7 @@ import { DateInput } from '../Input/inputs/DateInput';
 import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 import { createPopper, Instance } from '@popperjs/core';
+import { Badge } from '../Badge';
 
 const FilterPanelButton = ({
   field,
@@ -99,9 +100,9 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
   const { reset, watch, formState } = useFormContext();
+  const isFiltersActive = formState.isDirty || Boolean(watch('status').length);
   const filterIconProps: ISvgIconProps = {
     size: 'M',
-    isFiltersActive: formState.isDirty || Boolean(watch('status').length),
     onClick: (e) => {
       e.stopPropagation();
       setIsFilterPanelOpen((prev) => !prev);
@@ -175,6 +176,7 @@ export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
 
   return (
     <div>
+      {isFiltersActive && <Badge />}
       {filterIcon}
       {isFilterPanelOpen && (
         <StyledFilterPanel ref={popperElement}>
