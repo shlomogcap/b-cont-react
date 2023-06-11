@@ -14,10 +14,21 @@ import {
   CONTRACTS_DISPLAY_TEXTS,
   IContractFields,
 } from '@/lib/consts/contracts';
+import { useRouter } from 'next/router';
+import {
+  CONTRACT_ID_QUERY,
+  IRoutesNames,
+  PROJECT_ID_QUERY,
+  PROJECT_TYPE_QUERY,
+} from '@/lib/consts/routes';
+import { queryParamToString } from '@/lib/utils/queryParamToString';
 
-export const ProjectConfirms = (props: IProjectConfirmsProps) => {
+export const ProjectConfirms = (_: IProjectConfirmsProps) => {
   const { data: contracts, isLoading } = useProjectContractsContext();
   const { data: vendors } = useVendorsContext();
+  const router = useRouter();
+  const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
+  const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
 
   const projectConfirmsColumns: ITableColumn<
     IContractFields | IAccountConfirms
@@ -35,7 +46,7 @@ export const ProjectConfirms = (props: IProjectConfirmsProps) => {
     {
       field: IContractFields.VendorRef,
       fieldPath: `${IContractFields.VendorRef}.${IVendorFields.Title}`,
-      display: 'קבלן מבצע', //TODO: locate in DisplayText object
+      display: CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.VendorRef],
       getValue: ({ row }) =>
         vendors.find((vendor) => vendor.id === row.vendorRef)?.[
           IVendorFields.Title
@@ -108,6 +119,16 @@ export const ProjectConfirms = (props: IProjectConfirmsProps) => {
       loading={isLoading}
       columns={projectConfirmsColumns}
       rows={contracts}
+      onRowClick={({ id }) =>
+        router.push({
+          pathname: IRoutesNames.Contract,
+          query: {
+            [PROJECT_TYPE_QUERY]: projectType,
+            [PROJECT_ID_QUERY]: projectId,
+            [CONTRACT_ID_QUERY]: id,
+          },
+        })
+      }
     />
   );
 };

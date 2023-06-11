@@ -1,4 +1,7 @@
 import styled, { css } from 'styled-components';
+import { StyledSvgIcon } from '../../icons/SvgIcon/SvgIcon.styled';
+import { TriangleArrowIcon } from '../../icons/TriangleArrowIcon';
+import { IStyledBreadcrumbProps } from './Breadcrumbs.types';
 
 export const StyledBreadcrumbs = styled.div`
   display: grid;
@@ -9,13 +12,16 @@ export const StyledBreadcrumbs = styled.div`
   justify-content: flex-start;
 `;
 
-type IStyledBreadcrumbProps = {
-  actionable: boolean;
-};
+export const StyledNavListArrow = styled(TriangleArrowIcon)`
+  transition: all 0.2s ease-in;
+  visibility: hidden;
+  width: 0;
+`;
 
 export const StyledBreadcrumb = styled.div<IStyledBreadcrumbProps>`
   color: white;
-  background-color: var(--color-active-light);
+  background-color: ${({ actionable }) =>
+    actionable ? 'var(--color-active)' : 'var(--color-active-light)'};
   font: inherit;
   font-size: var(--font-size-normal);
   border-radius: 1rem;
@@ -27,28 +33,26 @@ export const StyledBreadcrumb = styled.div<IStyledBreadcrumbProps>`
   grid-auto-flow: column;
   gap: 0.5rem;
   align-items: center;
-  & svg.icon {
-    fill: var(--color-active-light);
-  }
-  &__iconList {
-    visibility: hidden;
-    opacity: 0;
-    width: 0;
-    transition: all 0.2s ease-in;
-    fill: white;
-  }
-  &:hover > &__iconList {
-    visibility: visible;
-    opacity: 1;
-    width: 3rem;
-  }
-  ${({ actionable }) =>
+  ${({ actionable, hasArrow }) =>
     actionable &&
+    !hasArrow &&
     css`
       &:hover {
         cursor: pointer;
         text-decoration: underline;
         transform: scale(1.07);
+      }
+    `}
+  ${({ hasArrow }) =>
+    hasArrow &&
+    css`
+      &:hover {
+        cursor: pointer;
+        transform: scaleX(calc(100% + 1rem));
+      }
+      &:hover ${StyledNavListArrow} {
+        visibility: visible;
+        width: 2rem;
       }
     `}
 `;

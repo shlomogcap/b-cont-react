@@ -1,7 +1,7 @@
 import { ProjectType } from '../../consts/projects';
 
 export type IProjectPageProps = {
-  projectType?: ProjectType;
+  projectType: ProjectType;
 };
 
 export type IProjectFilterDoc = {

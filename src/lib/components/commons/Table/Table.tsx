@@ -21,18 +21,19 @@ export const Table = <T extends string = string>({
   columns,
   title,
   loading,
+  className,
   onRowClick,
   tableFilterProps,
 }: ITableProps<T>) => {
   const { formState } = useFormContext();
   const dirtyFields = formState.dirtyFields;
   return (
-    <StyledTable>
+    <StyledTable className={className}>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
-        {columns.map(({ field, display }) => (
-          <StyledTableHeader key={`headers/${field}`}>
+        {columns.map(({ field, display, fieldPath }) => (
+          <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
             {dirtyFields[field] && <Badge columnBadge />}
             {display ?? field}
           </StyledTableHeader>
@@ -56,9 +57,16 @@ export const Table = <T extends string = string>({
           </StyledTableDataRow>
         ))}
       {!loading && rows.length === 0 && (
-        <EmptyState content={DISPLAY_TEXTS.he.table[ITableStates.NoRows]} />
+        <EmptyState
+          content={DISPLAY_TEXTS.he.tableStates[ITableStates.NoRows]}
+        />
       )}
-      {loading && <EmptyState animation='pulse' content={'Loading...'} />}
+      {loading && (
+        <EmptyState
+          animation='pulse'
+          content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+        />
+      )}
       {!loading && totals && (
         <StyledTableTotals templateColumns={columns.map(() => '1fr').join(' ')}>
           {columns.map(({ field, fieldPath, ...rest }) => (

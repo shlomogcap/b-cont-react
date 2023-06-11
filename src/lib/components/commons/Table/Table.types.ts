@@ -53,4 +53,5 @@ export type ITableProps<T extends string = string> = {
   onRowClick?: (params: IOnRowClickParams<T>) => void;
   loading?: boolean;
   tableFilterProps?: IFilterPanelProps<T>;
+  className?: string;
 };

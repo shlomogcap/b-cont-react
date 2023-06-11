@@ -15,7 +15,7 @@ export const BlocksGrid = ({ items }: IBlocksGridProps) => {
           </StyledIBlockElement>
         );
         return href ? (
-          <Link key={id} href={href}>
+          <Link key={id} href={href} onClick={onClick}>
             {element}
           </Link>
         ) : (
