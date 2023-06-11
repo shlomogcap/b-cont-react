@@ -1,6 +1,7 @@
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { IRoutesNames } from '../../consts/routes';
 import {
+  IProjectDoc,
   IProjectStatus,
   PROJECT_DISPLAY_TEXTS,
   ProjectFields,
@@ -17,14 +18,14 @@ import {
   projectFilterSchema,
   projectsTableFilters,
 } from './ProjectsPage.consts';
-import { useState } from 'react';
 import dayjs from 'dayjs';
-
+import { IFilterItemType } from '../commons/FilterPanel';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+dayjs.extend(isSameOrAfter, isSameOrBefore);
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
-  const rows = data.filter((p) => p.projectType === projectType);
-  const [filteredRows, setFilteredRows] = useState([]);
   const form = useForm<IProjectFilterDoc>({
     resolver: zodResolver(projectFilterSchema),
     defaultValues: {
@@ -34,38 +35,35 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     },
     mode: 'onSubmit',
   });
-  const { formState, watch } = form;
-  const filterRows = () => {
-    for (const field in formState.dirtyFields) {
-      switch (field) {
-        case 'sDate':
-          setFilteredRows(
-            rows.filter((row) => {
-              return (
-                dayjs(row[field]).isAfter(dayjs(watch(field).from)) ||
-                dayjs(row[field]).isBefore(dayjs(watch(field).to))
-              );
-            }),
-          );
-        case 'eDate':
-          setFilteredRows(
-            rows.filter((row) => {
-              return (
-                dayjs(row[field]).isAfter(dayjs(watch(field).from)) ||
-                dayjs(row[field]).isBefore(dayjs(watch(field).to))
-              );
-            }),
-          );
+
+  const { watch } = form;
+  const watchedFields = watch();
+  const filterByFilterPanel = (row: IProjectDoc) => {
+    for (const field in watchedFields) {
+      const tableColumnFilter = projectsTableFilters.find(
+        (t) => t.field === field,
+      );
+      switch (tableColumnFilter?.type) {
+        case IFilterItemType.Date:
+          const [from, to] = [`${field}.from`, `${field}.to`];
+          const [fromValue, toValue] = watch([from, to]);
+          if (fromValue || toValue) {
+            return (
+              dayjs(row[field]).isSameOrAfter(dayjs(fromValue)) ||
+              dayjs(row[field]).isSameOrBefore(dayjs(toValue))
+            );
+          }
+        case IFilterItemType.Buttons:
+          break;
         default:
           break;
       }
     }
+    return true;
   };
-
-  const clearFilter = () => {
-    setFilteredRows([]);
-  };
-
+  const rows = data
+    .filter((p) => p.projectType === projectType)
+    .filter(filterByFilterPanel);
   return (
     <FormProvider {...form}>
       <Table
@@ -73,8 +71,6 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           filters: projectsTableFilters,
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
           status: IProjectStatus,
-          filterTable: filterRows,
-          clearFilterTable: clearFilter,
         }}
         loading={isLoading}
         columns={fieldsNamesToColumns(
@@ -100,7 +96,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           ],
           PROJECT_DISPLAY_TEXTS.he.fields,
         )}
-        rows={!filteredRows.length ? rows : filteredRows}
+        rows={rows}
         totals={{
           [ProjectFields.Title]:
             rows.length < 2

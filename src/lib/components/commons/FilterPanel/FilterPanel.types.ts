@@ -22,8 +22,6 @@ export type IFilterPanelProps<T extends string = string> = {
   filters: IFilterItem<T>[];
   displayTexts: Record<T, string>;
   status: any;
-  filterTable: any;
-  clearFilterTable: any;
 };
 export type IFilterPanelButtonProps<
   T extends string = string,
