@@ -6,6 +6,7 @@ import {
   IModalProviderProps,
 } from './ModalProvider.types';
 import { SwitchRouteModal } from '@/lib/components/SwitchRouteModal';
+import { ContractSectionFormModal } from '@/lib/components/ContractSectionForm/ContractSectionForm';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -14,10 +15,12 @@ const ModalContext = createContext<IModalContext>({
 
 export const useModalContext = () => useContext(ModalContext);
 
-const renderModal = ({ name, ...modalProps }: IModalData) => {
-  switch (name) {
+const renderModal = (modalData: IModalData) => {
+  switch (modalData.name) {
     case EModalName.SwitchRoute:
-      return <SwitchRouteModal {...modalProps} />;
+      return <SwitchRouteModal {...modalData} />;
+    case EModalName.SectionForm:
+      return <ContractSectionFormModal {...modalData} />;
     default:
       return null;
   }

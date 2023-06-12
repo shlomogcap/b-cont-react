@@ -49,6 +49,7 @@ export const StyledTableBar = styled(StyledTableRow)`
     font-size: var(--font-size-large);
     font-weight: 600;
     color: var(--color-active);
+    justify-content: stretch;
   }
 `;
 

@@ -12,11 +12,19 @@ type DisplayTextMapping = {
   contractStage: Record<IContractStage, string>;
   contractStatus: Record<IContractStatus, string>;
   contractActualsStatus: Record<IContractActualStatus, string>;
+  addNewContractText: string;
+  addNewWorkspaceText: string;
+  addNewSectionGroupText: string;
+  addNewSectionText: string;
 };
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
     contractFormTitle: 'פרטי החוזה',
+    addNewContractText: '+ סעיף',
+    addNewWorkspaceText: '+ איזור עבודה',
+    addNewSectionGroupText: '+ קבוצה',
+    addNewSectionText: '+ סעיף',
     fields: {
       [IContractFields.Title]: 'חוזה',
       [IContractFields.Description]: 'תיאור',
@@ -71,6 +79,10 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   },
   en: {
     contractFormTitle: 'Contract Details',
+    addNewContractText: '+ Contract',
+    addNewWorkspaceText: '+ Workspace',
+    addNewSectionGroupText: '+ Group',
+    addNewSectionText: '+ Section',
     fields: {
       [IContractFields.Title]: 'Contract',
       [IContractFields.Description]: 'Description',
