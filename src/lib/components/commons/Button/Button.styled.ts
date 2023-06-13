@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 import { IButtonProps } from './Button.types';
-import { activateButtonMixin } from '../../styles/mixins/activateButton';
+import {
+  activateButtonMixin,
+  resetActivateButtonMixin,
+} from '../../styles/mixins/activateButton';
 
 export const StyledButton = styled.button<IButtonProps>`
   font: inherit;
@@ -40,4 +43,8 @@ export const StyledButton = styled.button<IButtonProps>`
         `;
     }
   }}
+`;
+
+export const StyledButtonMenuButton = styled(StyledButton)`
+  ${resetActivateButtonMixin}
 `;

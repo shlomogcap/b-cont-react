@@ -1,30 +1,32 @@
 import { PropsWithChildren } from 'react';
 import { OptionsList } from '../OptionsList';
 import { useOptionsListContext } from '../OptionsList/OptionsList.provider';
-import { StyledButton } from './Button.styled';
-import { IButtonMenuProps, IButtonProps } from './Button.types';
+import { StyledButton, StyledButtonMenuButton } from './Button.styled';
+import { IButtonMenuButtonProps, IButtonMenuProps } from './Button.types';
 
-const ButtonMenuButton = ({ children }: PropsWithChildren<{}>) => {
+const ButtonMenuButton = ({
+  ...buttonProps
+}: PropsWithChildren<IButtonMenuButtonProps>) => {
   const { openList } = useOptionsListContext();
   return (
-    <StyledButton
+    <StyledButtonMenuButton
+      {...buttonProps}
       onClick={(e) => {
         e.stopPropagation();
         openList();
       }}
-    >
-      {children}
-    </StyledButton>
+    />
   );
 };
 
 export const ButtonMenu = ({
   children,
   options,
+  className,
 }: PropsWithChildren<IButtonMenuProps>) => {
   return (
     <OptionsList options={options}>
-      <ButtonMenuButton>{children}</ButtonMenuButton>
+      <ButtonMenuButton className={className}>{children}</ButtonMenuButton>
     </OptionsList>
   );
 };

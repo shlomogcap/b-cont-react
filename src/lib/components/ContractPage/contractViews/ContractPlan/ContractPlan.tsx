@@ -9,6 +9,7 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { CONTRACTS_DISPLAY_TEXTS } from '@/lib/consts/contracts';
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
+import { TriangleArrowIcon } from '@/lib/components/icons/TriangleArrowIcon';
 
 export const ContractPlan = (props: IContractPlanProps) => {
   const { showModal } = useModalContext();
@@ -37,7 +38,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                   }),
               }))}
             >
-              הוסף
+              <TriangleArrowIcon direction='down' />
             </ButtonMenu>
           </StyledActionsRow>
         }

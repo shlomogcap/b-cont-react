@@ -50,7 +50,7 @@ const OptionsListInner = ({
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  });
 
   const initPopper = useCallback(() => {
     if (isListOpen && referenceElement.current && popperElement.current) {

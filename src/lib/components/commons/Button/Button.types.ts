@@ -6,3 +6,4 @@ export type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export type IButtonMenuProps = IButtonProps & IOptionsListProps;
+export type IButtonMenuButtonProps = IButtonProps;

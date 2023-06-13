@@ -9,7 +9,8 @@ export const StyledList = styled.div`
   transition: all 0.2s;
   display: grid;
   width: 100%;
-  min-width: fit-content;
+  width: fit-content;
+  min-width: 20rem;
   border-radius: 1rem;
   background-color: var(--color-white);
   color: var(--color-non-active);
