@@ -1,7 +1,6 @@
 import { IReportTableSection } from '@/lib/components/ReportTable';
 import { ITableColumn } from '@/lib/components/commons/Table';
-import { ESectionFields } from '@/lib/consts/sections/SectionFields';
-import { SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections/displayTexts';
+import { ESectionFields, SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections';
 
 export const CONTRACT_SECTIONS_COLUMNS: ITableColumn<ESectionFields>[] = [
   {

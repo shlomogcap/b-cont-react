@@ -12,4 +12,6 @@ export enum ESectionFields {
   ItemsCount = 'itemsCount',
   TotalSum = 'totalSum',
   Description = 'description',
+  WorkspaceAreaRef = 'workspaceAreaRef',
+  WorkspaceGroupRef = 'workspaceGroupRef',
 }

@@ -1,12 +1,15 @@
 import Z from 'zod';
 import { IErrorMessage, VALIDATION_DISPLAY_TEXTS } from './displayTexts';
 
-export const TITLE_FIELD_SCHEMA = Z.string({
+export const REQUIRED_STRING_SCHEMA = Z.string({
   required_error:
     VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.Required],
-})
-  .nonempty(VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.Required])
-  .min(4, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooShort]);
+}).nonempty(VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.Required]);
+
+export const TITLE_FIELD_SCHEMA = REQUIRED_STRING_SCHEMA.min(
+  4,
+  VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooShort],
+);
 
 export const OPTIONAL_STRING_SCHEMA = Z.string().optional();
 export const OPTIONAL_BOOLEAN_SCHEMA = Z.boolean().optional();

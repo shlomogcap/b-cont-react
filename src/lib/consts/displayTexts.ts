@@ -5,6 +5,7 @@ export type Lang = 'he' | 'en';
 export enum IButtonTexts {
   Save,
   Cancel,
+  Add,
 }
 export enum ITableStates {
   NoRows,
@@ -46,6 +47,7 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     buttons: {
       [IButtonTexts.Save]: 'שמור',
       [IButtonTexts.Cancel]: 'בטל שינויים',
+      [IButtonTexts.Add]: 'הוספה',
     },
     routeNames: {
       [IRoutesNames.App]: 'פרוייקטים',
@@ -91,6 +93,7 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     buttons: {
       [IButtonTexts.Save]: 'Save',
       [IButtonTexts.Cancel]: 'Cancel',
+      [IButtonTexts.Add]: 'Add',
     },
   },
 };

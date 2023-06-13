@@ -24,7 +24,8 @@ export const SectionDoc = Z.object({
   [ESectionFields.ItemsCount]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalSum]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [ESectionFields.WorkspacePath]: OPTIONAL_STRING_SCHEMA,
+  [ESectionFields.WorkspaceAreaRef]: OPTIONAL_STRING_SCHEMA,
+  [ESectionFields.WorkspaceGroupRef]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.DonePercentage]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
 });

@@ -1,8 +1,12 @@
 import { Lang } from '../displayTexts';
+import { ESectionCalculationMethod } from './SectionCalculationMethod';
+import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionFields } from './SectionFields';
 
 type DisplayTextMapping = {
   fields: Record<ESectionFields, string>;
+  calculationMethod: Record<ESectionCalculationMethod, string>;
+  calculationType: Record<ESectionCalculationType, string>;
 };
 
 export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -10,6 +14,8 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
     fields: {
       [ESectionFields.Title]: 'סעיף',
       [ESectionFields.OrderIndex]: '# סעיף',
+      [ESectionFields.WorkspaceAreaRef]: 'איזור עבודה',
+      [ESectionFields.WorkspaceGroupRef]: 'קבוצת סעיפים',
       [ESectionFields.CalculationMethod]: 'שיטת חישוב',
       [ESectionFields.AmountType]: 'סוג יח׳',
       [ESectionFields.CalculationType]: 'סוג אבן דרך',
@@ -22,11 +28,22 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ESectionFields.TotalSum]: 'סהכ',
       [ESectionFields.Description]: 'תיאור',
     },
+    calculationMethod: {
+      [ESectionCalculationMethod.Pauschal]: 'פאושלי',
+      [ESectionCalculationMethod.Amount]: 'כמותי',
+      [ESectionCalculationMethod.Apartments]: 'דירות',
+    },
+    calculationType: {
+      [ESectionCalculationType.Numeric]: 'כמויות',
+      [ESectionCalculationType.Percentage]: 'אחוזים',
+    },
   },
   en: {
     fields: {
       [ESectionFields.Title]: 'Section',
       [ESectionFields.OrderIndex]: '# Index',
+      [ESectionFields.WorkspaceAreaRef]: 'Workspace Area',
+      [ESectionFields.WorkspaceGroupRef]: 'Workspace Group',
       [ESectionFields.CalculationMethod]: 'Calculation Method',
       [ESectionFields.AmountType]: 'Amount Type',
       [ESectionFields.CalculationType]: 'Calculation Type',
@@ -38,6 +55,15 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ESectionFields.ItemsCount]: 'Items Count',
       [ESectionFields.TotalSum]: 'Total Sum',
       [ESectionFields.Description]: 'Description',
+    },
+    calculationMethod: {
+      [ESectionCalculationMethod.Pauschal]: 'Pauschal',
+      [ESectionCalculationMethod.Amount]: 'Amount',
+      [ESectionCalculationMethod.Apartments]: 'Apartments',
+    },
+    calculationType: {
+      [ESectionCalculationType.Numeric]: 'Numeric',
+      [ESectionCalculationType.Percentage]: 'Percentage',
     },
   },
 };
