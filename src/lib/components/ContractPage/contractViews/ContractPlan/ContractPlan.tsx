@@ -8,6 +8,7 @@ import { StyledActionsRow } from './ContractPlan.styled';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { CONTRACTS_DISPLAY_TEXTS } from '@/lib/consts/contracts';
+import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
 
 export const ContractPlan = (props: IContractPlanProps) => {
   const { showModal } = useModalContext();
@@ -21,8 +22,23 @@ export const ContractPlan = (props: IContractPlanProps) => {
         title={
           <StyledActionsRow>
             <Button onClick={() => showModal({ name: EModalName.SectionForm })}>
-              {CONTRACTS_DISPLAY_TEXTS.he.addNewSectionText}
+              {CONTRACTS_DISPLAY_TEXTS.he.addNewItems.section}
             </Button>
+            <ButtonMenu
+              options={Object.entries(
+                CONTRACTS_DISPLAY_TEXTS.he.addNewItems,
+              ).map(([key, text]) => ({
+                text,
+                value: key,
+                onOptionClick: () =>
+                  showModal({
+                    name: EModalName.SectionForm,
+                    openTab: key as any,
+                  }),
+              }))}
+            >
+              הוסף
+            </ButtonMenu>
           </StyledActionsRow>
         }
         columns={CONTRACT_SECTIONS_COLUMNS}

@@ -1,8 +1,13 @@
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
-export type IContractSectionFormProps = {};
+export type IContractSectionFormModalProps = {
+  openTab?: 'section' | 'workspace' | 'sectionsGroup';
+};
 
-export type IContractSectionFormModalProps = {};
+export type IContractSectionFormProps = Pick<
+  IContractSectionFormModalProps,
+  'openTab'
+>;
 
 export type IContractSectionFormModalData = IContractSectionFormModalProps & {
   name: EModalName.SectionForm;

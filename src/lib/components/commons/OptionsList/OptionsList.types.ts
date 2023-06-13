@@ -17,7 +17,9 @@ export type IOptionsListProps = {
 
 export type IOptionsListContext = {
   isListOpen: boolean;
-  setIsListOpen: Dispatch<SetStateAction<boolean>>;
+  openList: () => void;
+  closeList: () => void;
+  toggleList: () => void;
 };
 
 export type IOptionsListProviderProps = {

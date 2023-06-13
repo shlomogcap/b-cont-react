@@ -33,8 +33,7 @@ const OptionsListInner = ({
   const referenceElement = useRef<HTMLDivElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
-  const { isListOpen, setIsListOpen } = useOptionsListContext();
-  const toggleList = () => setIsListOpen((prevState) => !prevState);
+  const { isListOpen, closeList, toggleList } = useOptionsListContext();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -42,7 +41,7 @@ const OptionsListInner = ({
       !popperElement.current?.contains(event.target as Node) &&
       !referenceElement.current?.contains(event.target as Node)
     ) {
-      setIsListOpen(false);
+      closeList();
     }
   };
 

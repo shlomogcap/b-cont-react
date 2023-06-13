@@ -1,12 +1,9 @@
 import { Modal } from '../commons/Modal';
 import { IContractSectionFormModalData } from './ContractSectionForm.types';
-import {
-  IContractSectionFormModalProps,
-  IContractSectionFormProps,
-} from './ContractSectionForm.types';
+import { IContractSectionFormProps } from './ContractSectionForm.types';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => {
-  return <>TODO: create contract section form</>;
+  return <>TODO: create contract section form ({props.openTab})</>;
 };
 
 export const ContractSectionFormModal = (
@@ -14,7 +11,7 @@ export const ContractSectionFormModal = (
 ) => {
   return (
     <Modal>
-      <ContractSectionForm />
+      <ContractSectionForm {...props} />
     </Modal>
   );
 };
