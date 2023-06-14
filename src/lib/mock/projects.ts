@@ -1,5 +1,5 @@
 import { ICommonFields } from '../consts/commonFields';
-import { ProjectFields } from '../consts/projects';
+import { IProjectStatus, ProjectFields } from '../consts/projects';
 import { ProjectType } from '../consts/projects/ProjectType';
 
 export const MOCK_PROJECTS_DATA = [
@@ -12,6 +12,7 @@ export const MOCK_PROJECTS_DATA = [
     [ProjectFields.TotalAgreementSum]: 200_000_000,
     [ProjectFields.TotalActualsSum]: 150_000_000,
     [ProjectFields.Address]: '',
+    [ProjectFields.Status]: IProjectStatus.Active,
   },
   {
     [ICommonFields.Id]: '2',
@@ -22,6 +23,7 @@ export const MOCK_PROJECTS_DATA = [
     [ProjectFields.TotalAgreementSum]: 200_000_000,
     [ProjectFields.TotalActualsSum]: 150_000_000,
     [ProjectFields.Address]: '',
+    [ProjectFields.Status]: IProjectStatus.NonActive,
   },
   {
     [ICommonFields.Id]: '3',
@@ -32,5 +34,6 @@ export const MOCK_PROJECTS_DATA = [
     [ProjectFields.TotalAgreementSum]: 200_000_000,
     [ProjectFields.TotalActualsSum]: 150_000_000,
     [ProjectFields.Address]: '',
+    [ProjectFields.Status]: IProjectStatus.Active,
   },
 ];
