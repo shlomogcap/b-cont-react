@@ -96,7 +96,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
             return isSameOrBefore(fieldValue, toValue);
           }
         case IFilterItemType.Buttons:
-          break;
+          return value.includes(row[field]);
         default:
           break;
       }
