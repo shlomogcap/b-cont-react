@@ -105,16 +105,17 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   };
 
   const updateActiveFilterFields = () => {
-    const activeFields = {};
+    const activeFilterFields = {};
     Object.keys(watchedFields).forEach((field) => {
+      const filterField = watchedFields[field];
       if (
-        watchedFields[field].length ||
-        Object.values(watchedFields[field]).some((value) => value.length)
+        filterField.length ||
+        Object.values(filterField).some((value: string) => value.length)
       ) {
-        activeFields[field] = true;
+        activeFilterFields[field] = true;
       }
     });
-    setActiveFilters({ ...activeFields });
+    setActiveFilters({ ...activeFilterFields });
   };
 
   useEffect(() => {

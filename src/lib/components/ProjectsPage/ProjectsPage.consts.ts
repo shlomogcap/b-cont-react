@@ -6,16 +6,12 @@ import {
   PROJECT_DISPLAY_TEXTS,
   ProjectFields,
 } from '@/lib/consts/projects';
-
-export const dateFilterSchema = Z.object({
-  from: OPTIONAL_DATE_SCHEMA,
-  to: OPTIONAL_DATE_SCHEMA,
-});
+import { dateFilterSchema } from '../commons/FilterPanel/FilterPanel.consts';
 
 export const projectFilterSchema = Z.object({
-  status: Z.array(Z.nativeEnum(IProjectStatus)),
-  sDate: dateFilterSchema,
-  eDate: dateFilterSchema,
+  [ProjectFields.Status]: Z.array(Z.nativeEnum(IProjectStatus)),
+  [ProjectFields.SDate]: dateFilterSchema,
+  [ProjectFields.EDate]: dateFilterSchema,
 });
 
 export const projectsTableFilters: IFilterItem<ProjectFields>[] = [
