@@ -9,3 +9,7 @@ export type IProjectFilterDoc = {
   [ProjectFields.SDate]: { from: Date | string; to: Date | string };
   [ProjectFields.EDate]: { from: Date | string; to: Date | string };
 };
+
+export interface IProjectKey {
+  [key: string]: any;
+}
