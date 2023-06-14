@@ -12,20 +12,54 @@ import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 import { ProjectType } from '@/lib/consts/projects/ProjectType';
 import { useProjectsContext } from '@/lib/context/projectsContext';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   projectFilterSchema,
   projectsTableFilters,
 } from './ProjectsPage.consts';
-import dayjs from 'dayjs';
 import { IFilterItemType } from '../commons/FilterPanel';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-dayjs.extend(isSameOrAfter, isSameOrBefore);
+import {
+  isBetween,
+  isSameOrAfter,
+  isSameOrBefore,
+} from '@/lib/utils/dateUtils';
+import { useEffect, useState } from 'react';
+
+const columns = fieldsNamesToColumns(
+  [
+    ProjectFields.Title,
+    {
+      field: ProjectFields.ProjectType,
+      type: 'list',
+      options: [
+        ProjectType.Residential,
+        ProjectType.Entrepreneurship,
+        ProjectType.PublicSpace,
+      ].map((projectType) => ({
+        text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
+        value: projectType,
+      })),
+    },
+    { field: ProjectFields.SDate, type: 'date' },
+    { field: ProjectFields.EDate, type: 'date' },
+    { field: ProjectFields.TotalAgreementSum, type: 'number' },
+    { field: ProjectFields.TotalActualsSum, type: 'number' },
+    ProjectFields.Address,
+  ],
+  PROJECT_DISPLAY_TEXTS.he.fields,
+);
+
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
+  const [activeFilters, setActiveFilters] = useState(
+    Object.values(columns).reduce(
+      (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
+      {},
+    ),
+  );
+
   const form = useForm<IProjectFilterDoc>({
     resolver: zodResolver(projectFilterSchema),
     defaultValues: {
@@ -36,8 +70,9 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     mode: 'onSubmit',
   });
 
-  const { watch } = form;
-  const watchedFields = watch();
+  const { control } = form;
+  const watchedFields = useWatch({ control });
+
   const filterByFilterPanel = (row: IProjectDoc) => {
     return Object.entries(watchedFields).every(([field, value]) => {
       const tableColumnFilter = projectsTableFilters.find(
@@ -68,7 +103,24 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
       return true;
     });
   };
+
+  const updateActiveFilterFields = () => {
+    const activeFields = {};
+    Object.keys(watchedFields).forEach((field) => {
+      if (
+        watchedFields[field].length ||
+        Object.values(watchedFields[field]).some((value) => value.length)
+      ) {
+        activeFields[field] = true;
+      }
+    });
+    setActiveFilters({ ...activeFields });
   };
+
+  useEffect(() => {
+    updateActiveFilterFields();
+  }, [watchedFields]);
+
   const rows = data
     .filter((p) => p.projectType === projectType)
     .filter(filterByFilterPanel);
@@ -79,31 +131,10 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           filters: projectsTableFilters,
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
           status: IProjectStatus,
+          activeFilters,
         }}
         loading={isLoading}
-        columns={fieldsNamesToColumns(
-          [
-            ProjectFields.Title,
-            {
-              field: ProjectFields.ProjectType,
-              type: 'list',
-              options: [
-                ProjectType.Residential,
-                ProjectType.Entrepreneurship,
-                ProjectType.PublicSpace,
-              ].map((projectType) => ({
-                text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
-                value: projectType,
-              })),
-            },
-            { field: ProjectFields.SDate, type: 'date' },
-            { field: ProjectFields.EDate, type: 'date' },
-            { field: ProjectFields.TotalAgreementSum, type: 'number' },
-            { field: ProjectFields.TotalActualsSum, type: 'number' },
-            ProjectFields.Address,
-          ],
-          PROJECT_DISPLAY_TEXTS.he.fields,
-        )}
+        columns={columns}
         rows={rows}
         totals={{
           [ProjectFields.Title]:

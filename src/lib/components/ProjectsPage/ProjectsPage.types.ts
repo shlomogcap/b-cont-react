@@ -1,11 +1,11 @@
-import { ProjectType } from '../../consts/projects';
+import { ProjectFields, ProjectType } from '../../consts/projects';
 
 export type IProjectPageProps = {
   projectType: ProjectType;
 };
 
 export type IProjectFilterDoc = {
-  status: string[];
-  sDate: { from: Date | string; to: Date | string };
-  eDate: { from: Date | string; to: Date | string };
+  [ProjectFields.Status]: string[];
+  [ProjectFields.SDate]: { from: Date | string; to: Date | string };
+  [ProjectFields.EDate]: { from: Date | string; to: Date | string };
 };

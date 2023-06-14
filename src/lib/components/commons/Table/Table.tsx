@@ -25,8 +25,7 @@ export const Table = <T extends string = string>({
   onRowClick,
   tableFilterProps,
 }: ITableProps<T>) => {
-  const { formState } = useFormContext();
-  const dirtyFields = formState.dirtyFields;
+  const { activeFilters } = tableFilterProps;
   return (
     <StyledTable className={className}>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
@@ -34,7 +33,7 @@ export const Table = <T extends string = string>({
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display, fieldPath }) => (
           <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
-            {dirtyFields[field] && <Badge columnBadge />}
+            {activeFilters[field] && <Badge columnBadge />}
             {display ?? field}
           </StyledTableHeader>
         ))}

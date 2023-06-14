@@ -94,13 +94,19 @@ const FilterDatesControl = ({
   </StyledFilterControlDiv>
 );
 
-export const FilterPanel = ({ filters, displayTexts }: IFilterPanelProps) => {
+export const FilterPanel = ({
+  filters,
+  displayTexts,
+  activeFilters,
+}: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
   const { reset, watch, formState } = useFormContext();
-  const isFiltersActive = formState.isDirty || Boolean(watch('status').length);
+  const isFiltersActive = Object.values(activeFilters).some(
+    (value) => value === true,
+  );
   const filterIconProps: ISvgIconProps = {
     size: 'M',
     onClick: (e) => {

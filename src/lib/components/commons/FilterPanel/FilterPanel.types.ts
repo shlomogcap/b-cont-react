@@ -1,6 +1,6 @@
 // import { IProjectStatus } from '@/lib/consts/projects';
 
-import { IProjectStatus } from '@/lib/consts/projects';
+import { IProjectStatus, ProjectFields } from '@/lib/consts/projects';
 
 export enum IFilterItemType {
   Date = 'date',
@@ -22,6 +22,7 @@ export type IFilterPanelProps<T extends string = string> = {
   filters: IFilterItem<T>[];
   displayTexts: Record<T, string>;
   status: any;
+  activeFilters: any;
 };
 export type IFilterPanelButtonProps<
   T extends string = string,
