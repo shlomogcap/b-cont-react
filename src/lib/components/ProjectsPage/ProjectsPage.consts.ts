@@ -25,7 +25,7 @@ export const projectsTableFilters: IFilterItem<ProjectFields>[] = [
     options: Object.values(IProjectStatus).map((value) => ({
       value,
       text: PROJECT_DISPLAY_TEXTS.he.projectStatus[value],
-    })) as any /*TODO: fix that generic issue*/,
+    })),
   },
   {
     type: IFilterItemType.Date,

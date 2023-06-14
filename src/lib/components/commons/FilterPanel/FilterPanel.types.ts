@@ -1,22 +1,23 @@
-// import { IProjectStatus } from '@/lib/consts/projects';
-
-import { IProjectStatus, ProjectFields } from '@/lib/consts/projects';
-
 export enum IFilterItemType {
   Date = 'date',
   Buttons = 'buttons',
 }
 
-export type IFilterItemOption<T extends string = string> = {
+export type IFilterItemOption = {
   text: string;
-  value: T;
+  value: string | boolean | number;
 };
 
-export type IFilterItem<T extends string = string> = {
-  type: IFilterItemType;
-  field: T;
-  options?: IFilterItemOption<T>[];
-};
+export type IFilterItem<T extends string = string> =
+  | {
+      type: IFilterItemType.Date;
+      field: T;
+    }
+  | {
+      type: IFilterItemType.Buttons;
+      field: T;
+      options: IFilterItemOption[];
+    };
 
 export type IFilterPanelProps<T extends string = string> = {
   filters: IFilterItem<T>[];
