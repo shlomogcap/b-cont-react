@@ -39,27 +39,35 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const { watch } = form;
   const watchedFields = watch();
   const filterByFilterPanel = (row: IProjectDoc) => {
-    for (const field in watchedFields) {
+    return Object.entries(watchedFields).every(([field, value]) => {
       const tableColumnFilter = projectsTableFilters.find(
         (t) => t.field === field,
       );
       switch (tableColumnFilter?.type) {
         case IFilterItemType.Date:
-          const [from, to] = [`${field}.from`, `${field}.to`];
-          const [fromValue, toValue] = watch([from, to]);
-          if (fromValue || toValue) {
-            return (
-              dayjs(row[field]).isSameOrAfter(dayjs(fromValue)) ||
-              dayjs(row[field]).isSameOrBefore(dayjs(toValue))
-            );
+          const [fromValue, toValue] = [value?.from, value?.to];
+          const fieldValue: string = row[field] ?? '';
+
+          if ((!fromValue && !toValue) || !fieldValue) {
+            return true;
+          }
+          if (fromValue && toValue) {
+            return isBetween(fieldValue, fromValue, toValue);
+          }
+          if (fromValue) {
+            return isSameOrAfter(fieldValue, fromValue);
+          }
+          if (toValue) {
+            return isSameOrBefore(fieldValue, toValue);
           }
         case IFilterItemType.Buttons:
           break;
         default:
           break;
       }
-    }
-    return true;
+      return true;
+    });
+  };
   };
   const rows = data
     .filter((p) => p.projectType === projectType)
