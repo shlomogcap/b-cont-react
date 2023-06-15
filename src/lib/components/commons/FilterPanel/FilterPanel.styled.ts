@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button';
 import { IStyledFilterProps } from './FilterPanel.types';
 
@@ -22,8 +22,9 @@ export const StyledFilterItemCaption = styled.p`
 export const StyledFilterControlDiv = styled.div<IStyledFilterProps>`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.2rem;
-  justify-content: ${({ justify }) => justify ?? 'space-evenly'};
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+  justify-content: ${({ justify }) => justify ?? 'center'};
   margin: 2% 0;
 `;
 
@@ -31,6 +32,19 @@ export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
   width: ${({ width }) => width ?? '50%'};
 
   height: 35px;
+  ${({ isButtonGroup }) =>
+    isButtonGroup &&
+    css`
+      border-radius: 0;
+      &:last-of-type {
+        border-end-end-radius: 0.8rem;
+        border-start-end-radius: 0.8rem;
+      }
+      &:first-of-type {
+        border-end-start-radius: 0.8rem;
+        border-start-start-radius: 0.8rem;
+      }
+    `}
   border: ${({ isButtonGroup }) =>
     isButtonGroup ? '1px solid var(--color-active-light)' : 'none'};
   &:hover {
