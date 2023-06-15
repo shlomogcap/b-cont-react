@@ -14,6 +14,7 @@ import {
 } from './FilterPanel.styled';
 import {
   IFilterItemOption,
+  IFilterItemType,
   IFilterPanelButtonProps,
   IFilterPanelProps,
 } from './FilterPanel.types';
@@ -52,7 +53,7 @@ const FilterPanelButton = ({
 type IFilterButtonsControlProps<T extends string = string> = {
   label: string;
   field: string;
-  options: IFilterItemOption<T>[];
+  options: IFilterItemOption[];
 };
 const FilterButtonsControl = ({
   label,
@@ -186,7 +187,7 @@ export const FilterPanel = ({
           {filters.map(({ type, field, options = [] }) => {
             const label: string = displayTexts[field];
             switch (type) {
-              case 'buttons':
+              case IFilterItemType.Buttons:
                 return (
                   <FilterButtonsControl
                     label={label}
@@ -194,7 +195,7 @@ export const FilterPanel = ({
                     options={options}
                   />
                 );
-              case 'date':
+              case IFilterItemType.Date:
                 return <FilterDatesControl label={label} field={field} />;
               default:
                 return null;
