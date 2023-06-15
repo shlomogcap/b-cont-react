@@ -5,10 +5,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import {
-  PROJECT_DISPLAY_TEXTS,
-  IFilterPanelStates,
-} from '@/lib/consts/projects';
 import { useFormContext } from 'react-hook-form';
 import {
   StyledFilterPanel,
@@ -26,6 +22,7 @@ import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 import { createPopper, Instance } from '@popperjs/core';
 import { Badge } from '../Badge';
+import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
 
 const FilterPanelButton = ({
   field,
@@ -84,11 +81,11 @@ const FilterDatesControl = ({
   <StyledFilterControlDiv>
     <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
     <DateInput
-      label={PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
+      label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
       name={`${field}.from`}
     />
     <DateInput
-      label={PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
+      label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
       name={`${field}.to`}
     />
   </StyledFilterControlDiv>
@@ -103,7 +100,7 @@ export const FilterPanel = ({
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
-  const { reset, watch, formState } = useFormContext();
+  const { reset } = useFormContext();
   const isFiltersActive = Object.values(activeFilters).some(
     (value) => value === true,
   );
@@ -211,7 +208,7 @@ export const FilterPanel = ({
                 setIsFilterPanelOpen(false);
               }}
             >
-              {PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
+              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
             </StyledFilterButton>
             <StyledFilterButton
               width='20%'
@@ -221,7 +218,7 @@ export const FilterPanel = ({
                 reset();
               }}
             >
-              {PROJECT_DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
+              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
             </StyledFilterButton>
           </StyledFilterControlDiv>
         </StyledFilterPanel>

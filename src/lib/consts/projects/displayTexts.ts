@@ -4,18 +4,8 @@ import { Lang } from '../displayTexts';
 import { ProjectType } from './ProjectType';
 import { IProjectStatus } from './ProjectStatus';
 
-export enum IFilterPanelStates {
-  Active,
-  InActive,
-  From,
-  To,
-  Filter,
-  Clear,
-}
-
 type DisplayTextMapping = {
   fields: Record<ProjectFields, string>;
-  filterPanel: Record<IFilterPanelStates, string>;
   tabs: Record<EProjectViews, string>;
   projectPageTitle: string;
   projectTypes: Record<ProjectType, string>;
@@ -49,14 +39,6 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectFields.TotalAgreementSum]: 'סכום הסכם',
       [ProjectFields.TotalActualsSum]: 'סכום מצטבר מאושר',
       [ProjectFields.DonePercentage]: 'הושלם',
-    },
-    filterPanel: {
-      [IFilterPanelStates.Active]: 'פעיל',
-      [IFilterPanelStates.InActive]: 'לא פעיל',
-      [IFilterPanelStates.From]: 'מ',
-      [IFilterPanelStates.To]: 'עד',
-      [IFilterPanelStates.Filter]: 'סנן',
-      [IFilterPanelStates.Clear]: 'נקה',
     },
     tabs: {
       [EProjectViews.Confirms]: 'סטטוס אישורים',
@@ -99,14 +81,6 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ProjectFields.TotalAgreementSum]: 'totalAgreementSum',
       [ProjectFields.TotalActualsSum]: 'totalActualsSum',
       [ProjectFields.DonePercentage]: 'donePercentage',
-    },
-    filterPanel: {
-      [IFilterPanelStates.Active]: 'Active',
-      [IFilterPanelStates.InActive]: 'Not Active',
-      [IFilterPanelStates.From]: 'From',
-      [IFilterPanelStates.To]: 'To',
-      [IFilterPanelStates.Filter]: 'Filter',
-      [IFilterPanelStates.Clear]: 'Clear',
     },
     tabs: {
       [EProjectViews.Confirms]: 'Confirms',

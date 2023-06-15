@@ -1,4 +1,4 @@
-import Z from 'zod';
+import Z, { ZodType } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ProjectFields } from './ProjectFields';
 import { ProjectType } from './ProjectType';
@@ -13,8 +13,9 @@ import {
   IErrorMessage,
   VALIDATION_DISPLAY_TEXTS,
 } from '../validation/displayTexts';
+import { IProjectKey } from '@/lib/components/ProjectsPage';
 
-export const ProjectDoc = Z.object({
+export const ProjectDoc: ZodType<any, any, any> & IProjectKey = Z.object({
   [ProjectFields.Title]: TITLE_FIELD_SCHEMA,
   [ProjectFields.Address]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.SDate]: OPTIONAL_DATE_SCHEMA,

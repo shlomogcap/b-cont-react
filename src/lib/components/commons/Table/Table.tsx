@@ -13,7 +13,6 @@ import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
 import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
-import { useFormContext } from 'react-hook-form';
 
 export const Table = <T extends string = string>({
   rows,
@@ -25,7 +24,6 @@ export const Table = <T extends string = string>({
   onRowClick,
   tableFilterProps,
 }: ITableProps<T>) => {
-  const { activeFilters } = tableFilterProps;
   return (
     <StyledTable className={className}>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
@@ -33,7 +31,7 @@ export const Table = <T extends string = string>({
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display, fieldPath }) => (
           <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
-            {activeFilters[field] && <Badge columnBadge />}
+            {tableFilterProps?.activeFilters[field] && <Badge columnBadge />}
             {display ?? field}
           </StyledTableHeader>
         ))}

@@ -6,7 +6,11 @@ import {
   PROJECT_DISPLAY_TEXTS,
   ProjectFields,
 } from '../../consts/projects';
-import { IProjectFilterDoc, IProjectPageProps } from './ProjectsPage.types';
+import {
+  IProjectFilterDoc,
+  IProjectKey,
+  IProjectPageProps,
+} from './ProjectsPage.types';
 import { useRouter } from 'next/router';
 import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
@@ -71,7 +75,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   });
 
   const { control } = form;
-  const watchedFields = useWatch({ control });
+  const watchedFields: IProjectKey = useWatch({ control });
 
   const filterByFilterPanel = (row: IProjectDoc) => {
     return Object.entries(watchedFields).every(([field, value]) => {
@@ -80,7 +84,8 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
       );
       switch (tableColumnFilter?.type) {
         case IFilterItemType.Date:
-          const [fromValue, toValue] = [value?.from, value?.to];
+          const object = value as IProjectFilterDoc[ProjectFields.SDate];
+          const [fromValue, toValue] = [object.from, object.to];
           const fieldValue: string = row[field] ?? '';
 
           if ((!fromValue && !toValue) || !fieldValue) {
@@ -96,7 +101,8 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
             return isSameOrBefore(fieldValue, toValue);
           }
         case IFilterItemType.Buttons:
-          break;
+          const array = value as string[];
+          return array.includes(row[field]);
         default:
           break;
       }
@@ -105,16 +111,17 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   };
 
   const updateActiveFilterFields = () => {
-    const activeFields = {};
+    const activeFilterFields: IProjectKey = {};
     Object.keys(watchedFields).forEach((field) => {
+      const filterField = watchedFields[field];
       if (
-        watchedFields[field].length ||
-        Object.values(watchedFields[field]).some((value) => value.length)
+        filterField.length ||
+        Object.values(filterField).some((value: any) => value.length)
       ) {
-        activeFields[field] = true;
+        activeFilterFields[field] = true;
       }
     });
-    setActiveFilters({ ...activeFields });
+    setActiveFilters({ ...activeFilterFields });
   };
 
   useEffect(() => {
