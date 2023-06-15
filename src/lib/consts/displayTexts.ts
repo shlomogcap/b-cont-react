@@ -26,7 +26,8 @@ export enum IFilterPanelStates {
   From,
   To,
   Filter,
-  Clear,
+  Reset,
+  Close,
 }
 
 type DisplayTextMapping = {
@@ -76,7 +77,8 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IFilterPanelStates.From]: 'מ',
       [IFilterPanelStates.To]: 'עד',
       [IFilterPanelStates.Filter]: 'סנן',
-      [IFilterPanelStates.Clear]: 'נקה',
+      [IFilterPanelStates.Reset]: 'אפס',
+      [IFilterPanelStates.Close]: 'סגור',
     },
   },
   en: {
@@ -116,7 +118,8 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IFilterPanelStates.From]: 'From',
       [IFilterPanelStates.To]: 'To',
       [IFilterPanelStates.Filter]: 'Filter',
-      [IFilterPanelStates.Clear]: 'Clear',
+      [IFilterPanelStates.Reset]: 'Reset',
+      [IFilterPanelStates.Close]: 'Close',
     },
   },
 };
