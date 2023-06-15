@@ -13,7 +13,8 @@ import {
   StyledFilterItemCaption,
 } from './FilterPanel.styled';
 import {
-  IFilterItemOption,
+  IFilterButtonsControlProps,
+  IFilterDatesControlProps,
   IFilterItemType,
   IFilterPanelButtonProps,
   IFilterPanelProps,
@@ -24,6 +25,7 @@ import { ISvgIconProps } from '../../icons/SvgIcon';
 import { createPopper, Instance } from '@popperjs/core';
 import { Badge } from '../Badge';
 import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
+import Draggable from 'react-draggable';
 
 const FilterPanelButton = ({
   field,
@@ -31,14 +33,15 @@ const FilterPanelButton = ({
   currentValue,
 }: PropsWithChildren<IFilterPanelButtonProps>) => {
   const { setValue, watch } = useFormContext();
-  const fieldValues: string[] = watch(field) ?? [];
-  const isActive = fieldValues.includes(currentValue);
+  const fieldValuePath = `${field}.value`;
+  const fieldValues: string[] = watch(fieldValuePath) ?? [];
+  const isActive = fieldValues?.includes(currentValue);
   return (
     <StyledFilterButton
       isButtonGroup
       onClick={() => {
         setValue(
-          field,
+          fieldValuePath,
           isActive
             ? fieldValues.filter((value) => value !== currentValue)
             : [...fieldValues, currentValue],
@@ -50,11 +53,7 @@ const FilterPanelButton = ({
     </StyledFilterButton>
   );
 };
-type IFilterButtonsControlProps<T extends string = string> = {
-  label: string;
-  field: string;
-  options: IFilterItemOption[];
-};
+
 const FilterButtonsControl = ({
   label,
   field,
@@ -72,22 +71,16 @@ const FilterButtonsControl = ({
   );
 };
 
-const FilterDatesControl = ({
-  label,
-  field,
-}: {
-  label: string;
-  field: string;
-}) => (
+const FilterDatesControl = ({ label, field }: IFilterDatesControlProps) => (
   <StyledFilterControlDiv>
     <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
     <DateInput
       label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
-      name={`${field}.from`}
+      name={`${field}.value.from`}
     />
     <DateInput
       label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
-      name={`${field}.to`}
+      name={`${field}.value.to`}
     />
   </StyledFilterControlDiv>
 );
@@ -101,7 +94,7 @@ export const FilterPanel = ({
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
-  const { reset } = useFormContext();
+  const { reset, formState } = useFormContext();
   const isFiltersActive = Object.values(activeFilters).some(
     (value) => value === true,
   );
@@ -177,52 +170,53 @@ export const FilterPanel = ({
   ) : (
     <FilterIconClose ref={referenceElement} {...filterIconProps} />
   );
-
   return (
     <div>
       {isFiltersActive && <Badge />}
       {filterIcon}
       {isFilterPanelOpen && (
-        <StyledFilterPanel ref={popperElement}>
-          {filters.map(({ type, field, options = [] }) => {
-            const label: string = displayTexts[field];
-            switch (type) {
-              case IFilterItemType.Buttons:
-                return (
-                  <FilterButtonsControl
-                    label={label}
-                    field={field}
-                    options={options}
-                  />
-                );
-              case IFilterItemType.Date:
-                return <FilterDatesControl label={label} field={field} />;
-              default:
-                return null;
-            }
-          })}
-          <StyledFilterControlDiv justify='flex-end'>
-            <StyledFilterButton
-              width='25%'
-              variant='primary'
-              onClick={() => {
-                setIsFilterPanelOpen(false);
-              }}
-            >
-              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Filter]}
-            </StyledFilterButton>
-            <StyledFilterButton
-              width='20%'
-              variant='danger'
-              onClick={() => {
-                setIsFilterPanelOpen(false);
-                reset();
-              }}
-            >
-              {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Clear]}
-            </StyledFilterButton>
-          </StyledFilterControlDiv>
-        </StyledFilterPanel>
+        <Draggable>
+          <StyledFilterPanel ref={popperElement}>
+            {filters.map(({ type, field, options = [] }) => {
+              const label: string = displayTexts[field];
+              switch (type) {
+                case IFilterItemType.Buttons:
+                  return (
+                    <FilterButtonsControl
+                      label={label}
+                      field={field}
+                      options={options}
+                    />
+                  );
+                case IFilterItemType.Date:
+                  return <FilterDatesControl label={label} field={field} />;
+                default:
+                  return null;
+              }
+            })}
+            <StyledFilterControlDiv justify='flex-end'>
+              <StyledFilterButton
+                width='25%'
+                variant='primary'
+                onClick={() => {
+                  setIsFilterPanelOpen(false);
+                }}
+              >
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Close]}
+              </StyledFilterButton>
+              <StyledFilterButton
+                width='20%'
+                variant='danger'
+                onClick={() => {
+                  setIsFilterPanelOpen(false);
+                  reset(formState.defaultValues);
+                }}
+              >
+                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Reset]}
+              </StyledFilterButton>
+            </StyledFilterControlDiv>
+          </StyledFilterPanel>
+        </Draggable>
       )}
     </div>
   );
