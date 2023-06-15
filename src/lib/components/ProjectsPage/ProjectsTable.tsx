@@ -1,4 +1,4 @@
-import { Table, fieldsNamesToColumns } from '../commons/Table';
+import { Table } from '../commons/Table';
 import { IRoutesNames } from '../../consts/routes';
 import {
   IProjectDoc,
@@ -6,59 +6,29 @@ import {
   PROJECT_DISPLAY_TEXTS,
   ProjectFields,
 } from '../../consts/projects';
-import {
-  IProjectFilterDoc,
-  IProjectKey,
-  IProjectPageProps,
-} from './ProjectsPage.types';
+import { IProjectFilterDoc, IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
 import { sumBy } from 'lodash-es';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
-import { ProjectType } from '@/lib/consts/projects/ProjectType';
 import { useProjectsContext } from '@/lib/context/projectsContext';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   projectFilterSchema,
+  projectsTableColumns,
   projectsTableFilters,
 } from './ProjectsPage.consts';
-import { IFilterItemType } from '../commons/FilterPanel';
 import {
-  isBetween,
-  isSameOrAfter,
-  isSameOrBefore,
-} from '@/lib/utils/dateUtils';
+  filterByFilterPanel,
+  getDefaultFilterValues,
+} from '../commons/FilterPanel';
 import { useEffect, useState } from 'react';
-
-const columns = fieldsNamesToColumns(
-  [
-    ProjectFields.Title,
-    {
-      field: ProjectFields.ProjectType,
-      type: 'list',
-      options: [
-        ProjectType.Residential,
-        ProjectType.Entrepreneurship,
-        ProjectType.PublicSpace,
-      ].map((projectType) => ({
-        text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
-        value: projectType,
-      })),
-    },
-    { field: ProjectFields.SDate, type: 'date' },
-    { field: ProjectFields.EDate, type: 'date' },
-    { field: ProjectFields.TotalAgreementSum, type: 'number' },
-    { field: ProjectFields.TotalActualsSum, type: 'number' },
-    ProjectFields.Address,
-  ],
-  PROJECT_DISPLAY_TEXTS.he.fields,
-);
 
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
   const [activeFilters, setActiveFilters] = useState(
-    Object.values(columns).reduce(
+    Object.values(projectsTableColumns).reduce(
       (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
       {},
     ),
@@ -66,71 +36,29 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
 
   const form = useForm<IProjectFilterDoc>({
     resolver: zodResolver(projectFilterSchema),
-    defaultValues: {
-      status: [IProjectStatus.Active],
-      sDate: { from: '', to: '' },
-      eDate: { from: '', to: '' },
-    },
+    defaultValues: getDefaultFilterValues(projectsTableFilters),
     mode: 'onSubmit',
   });
 
   const { control } = form;
-  const watchedFields: IProjectKey = useWatch({ control });
+  const watchedFields = useWatch({ control });
 
-  const filterByFilterPanel = (row: IProjectDoc) => {
-    return Object.entries(watchedFields).every(([field, value]) => {
-      const tableColumnFilter = projectsTableFilters.find(
-        (t) => t.field === field,
-      );
-      switch (tableColumnFilter?.type) {
-        case IFilterItemType.Date:
-          const object = value as IProjectFilterDoc[ProjectFields.SDate];
-          const [fromValue, toValue] = [object.from, object.to];
-          const fieldValue: string = row[field] ?? '';
-
-          if ((!fromValue && !toValue) || !fieldValue) {
-            return true;
-          }
-          if (fromValue && toValue) {
-            return isBetween(fieldValue, fromValue, toValue);
-          }
-          if (fromValue) {
-            return isSameOrAfter(fieldValue, fromValue);
-          }
-          if (toValue) {
-            return isSameOrBefore(fieldValue, toValue);
-          }
-        case IFilterItemType.Buttons:
-          const array = value as string[];
-          return array.includes(row[field]);
-        default:
-          break;
-      }
-      return true;
-    });
-  };
-
-  const updateActiveFilterFields = () => {
-    const activeFilterFields: IProjectKey = {};
-    Object.keys(watchedFields).forEach((field) => {
-      const filterField = watchedFields[field];
+  useEffect(() => {
+    const activeFilterFields: Partial<Record<ProjectFields, boolean>> = {};
+    Object.entries(watchedFields).forEach(([field, { value }]) => {
       if (
-        filterField.length ||
-        Object.values(filterField).some((value: any) => value.length)
+        (Array.isArray(value) && value.length > 0) ||
+        (typeof value === 'object' && Object.values(value).some(Boolean))
       ) {
-        activeFilterFields[field] = true;
+        activeFilterFields[field as ProjectFields] = true;
       }
     });
     setActiveFilters({ ...activeFilterFields });
-  };
-
-  useEffect(() => {
-    updateActiveFilterFields();
   }, [watchedFields]);
 
-  const rows = data
+  const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
-    .filter(filterByFilterPanel);
+    .filter((r) => filterByFilterPanel(r, watchedFields as any)); //TODO: fix that type assertion
   return (
     <FormProvider {...form}>
       <Table
@@ -141,8 +69,8 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           activeFilters,
         }}
         loading={isLoading}
-        columns={columns}
         rows={rows}
+        columns={projectsTableColumns as any} //TODO: fix this type assertion
         totals={{
           [ProjectFields.Title]:
             rows.length < 2

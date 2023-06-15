@@ -3,36 +3,49 @@ export enum IFilterItemType {
   Buttons = 'buttons',
 }
 
-export type IFilterItemOption = {
+export type IFilterItemOption<V extends string = string> = {
   text: string;
-  value: string;
+  value: V;
 };
 
-export type IFilterItem<T extends string = string> =
+export type IDateFilterValue = {
+  from?: Date | string;
+  to?: Date | string;
+};
+
+export type IFilterItem<T extends string = string, V extends string = string> =
   | {
       type: IFilterItemType.Date;
       field: T;
-      defatulValue?: {
-        from: string;
-        to: string;
-      };
+      defaultValue?: IDateFilterValue;
       options?: undefined;
     }
   | {
       type: IFilterItemType.Buttons;
       field: T;
-      options: IFilterItemOption[];
-      defatulValue?: string[];
+      options: IFilterItemOption<V>[];
+      defaultValue?: V[];
     };
 
-const buttonsFilter: IFilterItem = {
-  field: 'blah',
-  type: IFilterItemType.Buttons,
-  options: [],
+export type IFilterValues =
+  | {
+      type: IFilterItemType.Date;
+      value: IDateFilterValue;
+    }
+  | {
+      type: IFilterItemType.Buttons;
+      value: string[];
+    };
+
+export type IFilterButtonsControlProps = {
+  label: string;
+  field: string;
+  options: IFilterItemOption[];
 };
-const dateFilter: IFilterItem = {
-  field: 'blah',
-  type: IFilterItemType.Date,
+
+export type IFilterDatesControlProps = {
+  label: string;
+  field: string;
 };
 
 export type IFilterPanelProps<T extends string = string> = {

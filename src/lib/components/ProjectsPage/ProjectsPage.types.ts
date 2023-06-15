@@ -1,15 +1,10 @@
 import { ProjectFields, ProjectType } from '../../consts/projects';
+import { IFilterItemType } from '../commons/FilterPanel';
+import Z from 'zod';
+import { projectFilterSchema } from './ProjectsPage.consts';
 
 export type IProjectPageProps = {
   projectType: ProjectType;
 };
 
-export type IProjectFilterDoc = {
-  [ProjectFields.Status]: string[];
-  [ProjectFields.SDate]: { from: Date | string; to: Date | string };
-  [ProjectFields.EDate]: { from: Date | string; to: Date | string };
-};
-
-export interface IProjectKey {
-  [key: string]: any;
-}
+export type IProjectFilterDoc = Z.infer<typeof projectFilterSchema>;

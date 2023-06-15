@@ -13,9 +13,8 @@ import {
   IErrorMessage,
   VALIDATION_DISPLAY_TEXTS,
 } from '../validation/displayTexts';
-import { IProjectKey } from '@/lib/components/ProjectsPage';
 
-export const ProjectDoc: ZodType<any, any, any> & IProjectKey = Z.object({
+export const ProjectDoc = Z.object({
   [ProjectFields.Title]: TITLE_FIELD_SCHEMA,
   [ProjectFields.Address]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.SDate]: OPTIONAL_DATE_SCHEMA,
