@@ -1,4 +1,4 @@
-import Z from 'zod';
+import Z, { ZodType } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ProjectFields } from './ProjectFields';
 import { ProjectType } from './ProjectType';

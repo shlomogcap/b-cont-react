@@ -1,5 +1,6 @@
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
+import { IFilterPanelProps } from '../FilterPanel';
 
 type IRowValues<T extends string> = {
   [field in T]?: unknown;
@@ -51,5 +52,6 @@ export type ITableProps<T extends string = string> = {
   columns: ITableColumn<T>[];
   onRowClick?: (params: IOnRowClickParams<T>) => void;
   loading?: boolean;
+  tableFilterProps?: IFilterPanelProps<T>;
   className?: string;
 };
