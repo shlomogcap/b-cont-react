@@ -2,7 +2,7 @@ import { Lang } from '../displayTexts';
 import { IOddJobStatus } from './OddJobStatus';
 import { IOddJobsFields } from './OddJobsFields';
 
-type DisplayTextMapping = {
+type TDisplayTextMapping = {
   fields: Record<IOddJobsFields, string>;
   status: Record<IOddJobStatus, string>;
 };

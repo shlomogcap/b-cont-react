@@ -40,4 +40,4 @@ export const ProjectDoc = Z.object({
   [ProjectFields.Status]: Z.nativeEnum(IProjectStatus).optional(),
 });
 
-export type IProjectDoc = WithCommonFields<Z.infer<typeof ProjectDoc>>;
+export type TProjectDoc = WithCommonFields<Z.infer<typeof ProjectDoc>>;

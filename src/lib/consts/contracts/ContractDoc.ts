@@ -36,4 +36,4 @@ export const ContractDoc = Z.object({
   [IContractFields.CurrentAccountPeriod]: OPTIONAL_STRING_SCHEMA,
 });
 
-export type IContractDoc = WithCommonFields<Z.infer<typeof ContractDoc>>;
+export type TContractDoc = WithCommonFields<Z.infer<typeof ContractDoc>>;

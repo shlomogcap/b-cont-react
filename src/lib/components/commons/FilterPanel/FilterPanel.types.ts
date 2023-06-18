@@ -3,17 +3,17 @@ export enum EFilterItemType {
   Buttons = 'buttons',
 }
 
-export type IFilterItemOption<V extends string = string> = {
+export type TFilterItemOption<V extends string = string> = {
   text: string;
   value: V;
 };
 
-export type IDateFilterValue = {
+export type TDateFilterValue = {
   from?: Date | string;
   to?: Date | string;
 };
 
-export type IFilterItem<T extends string = string, V extends string = string> =
+export type TFilterItem<T extends string = string, V extends string = string> =
   | {
       type: IFilterItemType.Date;
       field: T;
@@ -27,7 +27,7 @@ export type IFilterItem<T extends string = string, V extends string = string> =
       defaultValue?: V[];
     };
 
-export type IFilterValues =
+export type TFilterValues =
   | {
       type: IFilterItemType.Date;
       value: IDateFilterValue;
@@ -37,24 +37,24 @@ export type IFilterValues =
       value: string[];
     };
 
-export type IFilterButtonsControlProps = {
+export type TFilterButtonsControlProps = {
   label: string;
   field: string;
   options: IFilterItemOption[];
 };
 
-export type IFilterDatesControlProps = {
+export type TFilterDatesControlProps = {
   label: string;
   field: string;
 };
 
-export type IFilterPanelProps<T extends string = string> = {
+export type TFilterPanelProps<T extends string = string> = {
   filters: IFilterItem<T>[];
   displayTexts: Record<T, string>;
   status: any;
   activeFilters: any;
 };
-export type IFilterPanelButtonProps<
+export type TFilterPanelButtonProps<
   T extends string = string,
   V extends string = string,
 > = {
@@ -62,7 +62,7 @@ export type IFilterPanelButtonProps<
   currentValue: V;
 };
 
-export type IStyledFilterProps = {
+export type TStyledFilterProps = {
   isFiltered?: boolean;
   justify?: string;
   width?: string;

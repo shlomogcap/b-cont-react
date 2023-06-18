@@ -1,9 +1,9 @@
 import { FormHTMLAttributes } from 'react';
 
-export type IFormProps = FormHTMLAttributes<HTMLFormElement> & {
+export type TFormProps = FormHTMLAttributes<HTMLFormElement> & {
   className?: string;
 };
 
-export type IFormFooterProps = {
+export type TFormFooterProps = {
   className?: string;
 };

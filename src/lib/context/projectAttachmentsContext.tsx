@@ -10,13 +10,13 @@ import { collection } from 'firebase/firestore';
 import { IProjectAttachmentDoc } from '../consts/projectAttachments';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
-type IProjectAttachmentsContext = {
+type TProjectAttachmentsContext = {
   data: IProjectAttachmentDoc[];
   isLoading: boolean;
   error: string;
 };
 
-type IProjectAttachmentsProviderProps = {
+type TProjectAttachmentsProviderProps = {
   projectId: string;
 };
 

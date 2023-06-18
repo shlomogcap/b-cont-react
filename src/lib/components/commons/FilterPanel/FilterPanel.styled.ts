@@ -36,11 +36,11 @@ export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
     isButtonGroup &&
     css`
       border-radius: 0;
-      &:last-of-type {
+      &:last-of-type T{
         border-end-end-radius: 0.8rem;
         border-start-end-radius: 0.8rem;
       }
-      &:first-of-type {
+      &:first-of-type T{
         border-end-start-radius: 0.8rem;
         border-start-start-radius: 0.8rem;
       }

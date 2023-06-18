@@ -1,1 +1,1 @@
-export type IProjectAccountsProps = {};
+export type TProjectAccountsProps = {};

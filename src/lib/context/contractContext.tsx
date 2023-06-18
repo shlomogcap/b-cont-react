@@ -11,19 +11,19 @@ import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IContractDoc } from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
 
-type IContractData = {
+type TContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
   accounts: { title: string }[];
 };
 
-type IContractContext = {
+type TContractContext = {
   data: IContractData;
   isLoading: boolean;
   error: string;
 };
 
-type IContractProviderProps = {
+type TContractProviderProps = {
   projectId: string;
   contractId: string;
 };

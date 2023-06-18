@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react';
 
-export type ITooltipProps = PropsWithChildren<{
+export type TTooltipProps = PropsWithChildren<{
   content: ReactNode;
   disableTooltip?: boolean;
 }>;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { StyledDropdownField } from './inputs/DropdownInput/DropdownInput.styled';
 
-type IStyledInputControlProps = {
+type TStyledInputControlProps = {
   isTextOnly?: boolean;
   hasError?: boolean;
 };

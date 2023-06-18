@@ -1,11 +1,11 @@
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { IBlocksGridProps } from '../commons/BlocksGrid/BlocksGrid.types';
 
-export type ISwitchRouteModalProps = {
+export type TSwitchRouteModalProps = {
   items: IBlocksGridProps['items'];
   segmentName?: string;
 };
 
-export type ISwitchRouteModalData = ISwitchRouteModalProps & {
+export type TSwitchRouteModalData = ISwitchRouteModalProps & {
   name: EModalName.SwitchRoute;
 };

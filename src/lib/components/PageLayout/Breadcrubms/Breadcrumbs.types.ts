@@ -1,17 +1,17 @@
 import { IBlocksGridProps } from '../../commons/BlocksGrid/BlocksGrid.types';
 
-export type IBreadcrumbProps = {
+export type TBreadcrumbProps = {
   id: string | number;
   text: string;
   href?: string;
   navList?: IBlocksGridProps['items'];
 };
 
-export type IBreadcrumbsProps = {
+export type TBreadcrumbsProps = {
   breadcrumbs: IBreadcrumbProps[];
 };
 
-export type IStyledBreadcrumbProps = {
+export type TStyledBreadcrumbProps = {
   actionable: boolean;
   hasArrow: boolean;
 };

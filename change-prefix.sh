@@ -4,13 +4,13 @@
 SOURCE_DIR="./src/lib"
 
 #Define the type of object you want to modify
-OBJECT="enum"
+OBJECT="type"
 
 #Define Preffix you want to get rid of
 OLD_PREFIX="I"
 
 #Define the new Preffix you want
-NEW_PREFIX="E"
+NEW_PREFIX="T"
 
 # Find all source code files with .tsx or .ts extension
 FILES=$(find "$SOURCE_DIR" -type f \( -name "*.tsx" -o -name "*.ts" \))

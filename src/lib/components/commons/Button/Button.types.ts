@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
 
-export type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary' | 'danger';
 };

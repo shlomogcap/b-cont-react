@@ -8,7 +8,7 @@ export const StyledTable = styled(StyledCard)`
   min-height: 30rem;
 `;
 
-type IStyledTableRowProps = {
+type TStyledTableRowProps = {
   templateColumns?: string;
 };
 const StyledTableRow = styled.div<IStyledTableRowProps>`

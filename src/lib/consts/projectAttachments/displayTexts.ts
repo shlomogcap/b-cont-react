@@ -2,7 +2,7 @@ import { Lang } from '../displayTexts';
 import { IProjectAttahcmentStatus } from './ProjectAttachmentStatus';
 import { IProjectAttahcmentFields } from './ProjectAttachmentFields';
 
-type DisplayTextMapping = {
+type TDisplayTextMapping = {
   fields: Record<IProjectAttahcmentFields, string>;
   status: Record<IProjectAttahcmentStatus, string>;
 };

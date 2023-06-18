@@ -10,13 +10,13 @@ import { collection } from 'firebase/firestore';
 import { IVendorDoc } from '../consts/vendors';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
-type IVendorsContext = {
+type TVendorsContext = {
   data: IVendorDoc[];
   isLoading: boolean;
   error: string;
 };
 
-type IVendorsProviderProps = {};
+type TVendorsProviderProps = {};
 
 const VendorsContext = createContext<IVendorsContext>({
   data: [],

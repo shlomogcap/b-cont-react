@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 
-export type IModalProps = {
+export type TModalProps = {
   title?: ReactNode;
   className?: string;
   disabledOutsideClick?: boolean;
 };
 
-export type IStyledModalProps = {
+export type TStyledModalProps = {
   disabledOutsideClick: boolean;
 };

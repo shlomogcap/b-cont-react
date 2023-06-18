@@ -18,6 +18,6 @@ export const ProjectAttachmentDoc = Z.object({
   [IProjectAttahcmentFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
 });
 
-export type IProjectAttachmentDoc = WithCommonFields<
+export type TProjectAttachmentDoc = WithCommonFields<
   Z.infer<typeof ProjectAttachmentDoc>
 >;

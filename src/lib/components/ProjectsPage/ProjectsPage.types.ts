@@ -3,8 +3,8 @@ import { IFilterItemType } from '../commons/FilterPanel';
 import Z from 'zod';
 import { projectFilterSchema } from './ProjectsPage.consts';
 
-export type IProjectPageProps = {
+export type TProjectPageProps = {
   projectType: ProjectType;
 };
 
-export type IProjectFilterDoc = Z.infer<typeof projectFilterSchema>;
+export type TProjectFilterDoc = Z.infer<typeof projectFilterSchema>;

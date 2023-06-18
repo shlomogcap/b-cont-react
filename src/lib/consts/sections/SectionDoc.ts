@@ -29,4 +29,4 @@ export const SectionDoc = Z.object({
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
 });
 
-export type ISectionDoc = WithCommonFields<Z.infer<typeof SectionDoc>>;
+export type TSectionDoc = WithCommonFields<Z.infer<typeof SectionDoc>>;

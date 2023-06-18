@@ -1,1 +1,1 @@
-export type IProjectConfirmsProps = {};
+export type TProjectConfirmsProps = {};

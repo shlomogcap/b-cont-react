@@ -4,7 +4,7 @@ import { StyledInputField } from '../Input.styled';
 import { IInputProps } from '../Input.types';
 import { NumericFormat, NumericFormatProps } from 'react-number-format';
 
-type INumberInputProps = Omit<IInputProps, 'inputElement'> & {
+type TNumberInputProps = Omit<IInputProps, 'inputElement'> & {
   numericFormatProps?: NumericFormatProps;
   onlyInteger?: boolean;
   max?: number;

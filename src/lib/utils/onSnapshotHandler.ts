@@ -2,7 +2,7 @@ import { CollectionReference, onSnapshot } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 
-type IOnSnapshotHanderArgs = {
+type TOnSnapshotHanderArgs = {
   collectionRef: CollectionReference;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setData: Dispatch<SetStateAction<any[]>>;

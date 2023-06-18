@@ -8,7 +8,7 @@ export enum ECommonFields {
   UpdatedBy = 'updatedBy',
 }
 
-type IDisplayTextMapping = Record<ICommonFields, string>;
+type TDisplayTextMapping = Record<ICommonFields, string>;
 
 export const COMMON_FIELDS_DISPLAY_TEXTS: Record<Lang, IDisplayTextMapping> = {
   he: {

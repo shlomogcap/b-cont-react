@@ -16,4 +16,4 @@ export const UserDoc = Z.object({
   [IUserFields.Status]: Z.nativeEnum(IUserStatus).optional(),
 });
 
-export type IUserDoc = WithCommonFields<Z.infer<typeof UserDoc>>;
+export type TUserDoc = WithCommonFields<Z.infer<typeof UserDoc>>;

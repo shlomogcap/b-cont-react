@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { ITableProps, ITableRow } from '../commons/Table';
 
-export type ISectionLevel = 'main' | 'secondary' | 'tertiary';
+export type TSectionLevel = 'main' | 'secondary' | 'tertiary';
 
-export type IReportTableSection<T extends string> =
+export type TReportTableSection<T extends string> =
   | {
       title: ReactNode;
       totals?: Partial<ITableRow<T>>;
@@ -24,12 +24,12 @@ type ExtendedTableProps<T extends string> = Omit<
   'rows' | 'totals'
 >;
 
-export type IReportTableProps<T extends string = string> =
+export type TReportTableProps<T extends string = string> =
   ExtendedTableProps<T> & {
     sections: IReportTableSection<T>[];
   };
 
-export type IReportSectionProps<T extends string = string> = Pick<
+export type TReportSectionProps<T extends string = string> = Pick<
   IReportTableProps<T>,
   'columns' | 'loading' | 'onRowClick'
 > & {

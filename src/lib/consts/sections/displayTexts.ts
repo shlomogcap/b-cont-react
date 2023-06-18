@@ -1,7 +1,7 @@
 import { Lang } from '../displayTexts';
 import { ESectionFields } from './SectionFields';
 
-type DisplayTextMapping = {
+type TDisplayTextMapping = {
   fields: Record<ESectionFields, string>;
 };
 

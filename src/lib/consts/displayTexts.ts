@@ -1,6 +1,6 @@
 import { IRoutesNames } from './routes';
 
-export type Lang = 'he' | 'en';
+export type TLang = 'he' | 'en';
 
 export enum EButtonTexts {
   Save,
@@ -30,7 +30,7 @@ export enum EFilterPanelStates {
   Close,
 }
 
-type DisplayTextMapping = {
+type TDisplayTextMapping = {
   toasts: Record<IToastType, string>;
   routeNames: Record<IRoutesNames, string>;
   buttons: Record<IButtonTexts, string>;

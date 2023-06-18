@@ -10,7 +10,7 @@ import {
 
 const PATH_FIELD = 'path';
 
-type WithPathField<T> = T & { [PATH_FIELD]: string };
+type TWithPathField<T> = T & { [PATH_FIELD]: string };
 
 export const MOCK_CONTRACTS_DATA: WithPathField<ITableRow<IContractFields>>[] =
   [

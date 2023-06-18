@@ -7,7 +7,7 @@ export enum EErrorMessage {
   TooHigh,
 }
 
-type DisplayTextMapping = {
+type TDisplayTextMapping = {
   errosMessages: Record<IErrorMessage, string>;
 };
 

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type ICardProps = {
+export type TCardProps = {
   title?: string;
   children: ReactNode;
 };
