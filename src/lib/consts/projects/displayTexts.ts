@@ -2,18 +2,24 @@ import { ProjectFields } from './ProjectFields';
 import { EProjectViews } from './ProjectViews';
 import { Lang } from '../displayTexts';
 import { ProjectType } from './ProjectType';
+import { IProjectStatus } from './ProjectStatus';
 
 type DisplayTextMapping = {
   fields: Record<ProjectFields, string>;
   tabs: Record<EProjectViews, string>;
   projectPageTitle: string;
   projectTypes: Record<ProjectType, string>;
+  projectStatus: Record<IProjectStatus, string>;
   getAddNewText: (projectType: ProjectType) => string;
 };
 
 export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
     projectPageTitle: 'דשבורד פרוייקט',
+    projectStatus: {
+      [IProjectStatus.Active]: 'פעיל',
+      [IProjectStatus.NonActive]: 'לא פעיל',
+    },
     fields: {
       [ProjectFields.Title]: 'פרוייקט',
       [ProjectFields.Address]: 'מיקום',
@@ -52,6 +58,10 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   },
   en: {
     projectPageTitle: 'Project Dashboard',
+    projectStatus: {
+      [IProjectStatus.Active]: 'Active',
+      [IProjectStatus.NonActive]: 'Not Active',
+    },
     fields: {
       [ProjectFields.Title]: 'Project Name',
       [ProjectFields.Address]: 'Location',

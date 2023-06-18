@@ -11,6 +11,8 @@ import { ITableProps } from './Table.types';
 import { EmptyState } from '../EmptyState';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
+import { FilterPanel } from '../FilterPanel';
+import { Badge } from '../Badge';
 
 export const Table = <T extends string = string>({
   rows,
@@ -20,13 +22,16 @@ export const Table = <T extends string = string>({
   loading,
   className,
   onRowClick,
+  tableFilterProps,
 }: ITableProps<T>) => {
   return (
     <StyledTable className={className}>
+      {tableFilterProps && <FilterPanel {...tableFilterProps} />}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display, fieldPath }) => (
           <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
+            {tableFilterProps?.activeFilters[field] && <Badge columnBadge />}
             {display ?? field}
           </StyledTableHeader>
         ))}
