@@ -1,4 +1,4 @@
-export enum IFilterItemType {
+export enum EFilterItemType {
   Date = 'date',
   Buttons = 'buttons',
 }

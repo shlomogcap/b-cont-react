@@ -1,6 +1,6 @@
 import { Lang } from '@/lib/consts/displayTexts';
 
-export enum IErrorMessage {
+export enum EErrorMessage {
   Required,
   TooShort,
   TooLow,

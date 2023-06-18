@@ -1,4 +1,4 @@
-export enum IContractType {
+export enum EContractType {
   Pauschal = 'pauschal',
   Amount = 'amount',
   Rent = 'rent',

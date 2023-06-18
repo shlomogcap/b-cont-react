@@ -1,4 +1,4 @@
-export enum IContractFields {
+export enum EContractFields {
   Title = 'title',
   Description = 'description',
   VendorRef = 'vendorRef',

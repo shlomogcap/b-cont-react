@@ -1,4 +1,4 @@
-export enum Breakpoints {
+export enum EBreakpoints {
   Phone = '37.5em',
   TabPort = '56.25em',
   TabLand = '75em',

@@ -1,6 +1,6 @@
 import { Lang } from './displayTexts';
 
-export enum ICommonFields {
+export enum ECommonFields {
   Id = 'id',
   CreatedAt = 'createdAt',
   CreatedBy = 'createdBy',

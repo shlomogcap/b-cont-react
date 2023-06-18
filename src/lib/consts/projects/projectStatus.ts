@@ -1,4 +1,4 @@
-export enum IProjectStatus {
+export enum EProjectStatus {
   Active = 'active',
   NonActive = 'nonActive',
 }

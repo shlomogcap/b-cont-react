@@ -1,4 +1,4 @@
-export enum IProjectAttahcmentStatus {
+export enum EProjectAttahcmentStatus {
   Open = 'open',
   Done = 'done',
   Archive = 'archive',

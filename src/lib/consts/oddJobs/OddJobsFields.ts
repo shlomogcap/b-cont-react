@@ -1,4 +1,4 @@
-export enum IOddJobsFields {
+export enum EOddJobsFields {
   Title = 'title',
   InvoiceNumber = 'invoiceNumber',
   InvoiceDate = 'invoiceDate',

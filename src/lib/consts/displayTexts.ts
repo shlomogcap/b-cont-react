@@ -2,25 +2,25 @@ import { IRoutesNames } from './routes';
 
 export type Lang = 'he' | 'en';
 
-export enum IButtonTexts {
+export enum EButtonTexts {
   Save,
   Cancel,
 }
-export enum ITableStates {
+export enum ETableStates {
   NoRows,
   Loading,
   Error,
 }
-export enum IToastType {
+export enum EToastType {
   AddingNewDoc,
   SavingDocData,
 }
-export enum IBoolean {
+export enum EBoolean {
   False,
   True,
 }
 
-export enum IFilterPanelStates {
+export enum EFilterPanelStates {
   Active,
   InActive,
   From,
