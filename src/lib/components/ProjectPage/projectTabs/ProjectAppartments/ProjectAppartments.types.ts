@@ -1,1 +1,1 @@
-export type TProjectAppartmentsProps = {};
+export type IProjectAppartmentsProps = {};

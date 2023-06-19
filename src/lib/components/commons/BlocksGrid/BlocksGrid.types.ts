@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-type TBlockElement = {
+type IBlockElement = {
   id: string | number;
   text?: string;
   icon?: ReactElement;
@@ -8,6 +8,6 @@ type TBlockElement = {
   onClick?: () => void;
 };
 
-export type TBlocksGridProps = {
+export type IBlocksGridProps = {
   items: IBlockElement[];
 };

@@ -12,7 +12,7 @@ import {
 } from '../consts/routes';
 import { useModalContext } from '../context/ModalProvider/ModalProvider';
 
-type TUseProjectNavListProps = {
+type IUseProjectNavListProps = {
   projects: IProjectDoc[];
   projectId: string;
   projectType: ProjectType;

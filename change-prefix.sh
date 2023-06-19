@@ -7,10 +7,10 @@ SOURCE_DIR="./src/lib"
 OBJECT="type"
 
 #Define Preffix you want to get rid of
-OLD_PREFIX="I"
+OLD_PREFIX="T"
 
 #Define the new Preffix you want
-NEW_PREFIX="T"
+NEW_PREFIX="I"
 
 # Find all source code files with .tsx or .ts extension
 FILES=$(find "$SOURCE_DIR" -type f \( -name "*.tsx" -o -name "*.ts" \))

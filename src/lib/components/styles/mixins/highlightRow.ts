@@ -30,7 +30,7 @@ const otherPosition = css`
   }
 `;
 
-type THightlightRowMixinProps = {
+type IHightlightRowMixinProps = {
   side: 'left' | 'right' | 'bottom';
   trigger?: 'hover' | 'constant';
 };

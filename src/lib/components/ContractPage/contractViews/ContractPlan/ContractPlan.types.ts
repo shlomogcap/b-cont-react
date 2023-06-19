@@ -1,1 +1,1 @@
-export type TContractPlanProps = {};
+export type IContractPlanProps = {};

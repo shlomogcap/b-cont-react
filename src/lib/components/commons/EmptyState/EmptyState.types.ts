@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type TEmptyStateProps = {
+export type IEmptyStateProps = {
   rows?: number;
   content?: ReactNode;
   animation?: 'pulse' | 'none';

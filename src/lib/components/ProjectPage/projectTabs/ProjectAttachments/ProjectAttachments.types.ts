@@ -1,1 +1,1 @@
-export type TProjectAttachmentsProps = {};
+export type IProjectAttachmentsProps = {};

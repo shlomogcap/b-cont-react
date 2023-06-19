@@ -1,1 +1,1 @@
-export type TVendorsPageProps = {};
+export type IVendorsPageProps = {};

@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 import { EModalName } from './ModalName';
 import { ISwitchRouteModalData } from '@/lib/components/SwitchRouteModal';
 
-export type TModalProviderProps = {
+export type IModalProviderProps = {
   children?: ReactNode;
 };
 
-export type TModalContext = {
+export type IModalContext = {
   showModal: (data: IModalData) => void;
   closeModal: () => void;
 };
 
-export type TModalData = { name: EModalName } & ISwitchRouteModalData;
+export type IModalData = { name: EModalName } & ISwitchRouteModalData;

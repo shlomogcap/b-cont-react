@@ -10,13 +10,13 @@ import { collection } from 'firebase/firestore';
 import { IUserDoc } from '../consts/users';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
-type TUsersContext = {
+type IUsersContext = {
   data: IUserDoc[];
   isLoading: boolean;
   error: string;
 };
 
-type TUsersProviderProps = {};
+type IUsersProviderProps = {};
 
 const UsersContext = createContext<IUsersContext>({
   data: [],

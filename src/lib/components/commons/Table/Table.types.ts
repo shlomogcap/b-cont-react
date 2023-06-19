@@ -2,31 +2,31 @@ import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 import { IFilterPanelProps } from '../FilterPanel';
 
-type TRowValues<T extends string> = {
+type IRowValues<T extends string> = {
   [field in T]?: unknown;
 };
-export type TTableColumnType =
+export type ITableColumnType =
   | 'string'
   | 'number'
   | 'percentage'
   | 'date'
   | 'list';
 
-export type TTableColumnOption = {
+export type ITableColumnOption = {
   text: string;
   value: string;
 };
 
-type TGetColumnValueFunctionArgs<T extends string> = {
+type IGetColumnValueFunctionArgs<T extends string> = {
   row: ITableRow<T>;
   field: T;
 };
 
-type TGetColumnValueFunction<T extends string> = (
+type IGetColumnValueFunction<T extends string> = (
   args: IGetColumnValueFunctionArgs<T>,
 ) => string | number;
 
-export type TTableColumn<T extends string> = {
+export type ITableColumn<T extends string> = {
   field: T;
   fieldPath?: string;
   display?: string;
@@ -35,17 +35,17 @@ export type TTableColumn<T extends string> = {
   getValue?: IGetColumnValueFunction<T>;
 };
 
-export type TGetDisplayValueProps = {
+export type IGetDisplayValueProps = {
   value: any;
   type?: ITableColumnType;
   options?: ITableColumnOption[];
 };
 
-export type TTableRow<T extends string> = WithCommonFields<IRowValues<T>>;
+export type ITableRow<T extends string> = WithCommonFields<IRowValues<T>>;
 
-type TOnRowClickParams<T extends string> = ITableRow<T>;
+type IOnRowClickParams<T extends string> = ITableRow<T>;
 
-export type TTableProps<T extends string = string> = {
+export type ITableProps<T extends string = string> = {
   title?: ReactNode;
   rows: ITableRow<T>[];
   totals?: Partial<ITableRow<T>>;

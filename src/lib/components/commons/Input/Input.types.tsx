@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-export type TInputProps<T extends string = string> = {
+export type IInputProps<T extends string = string> = {
   name: string;
   label: string;
   isRequired?: boolean;

@@ -9,10 +9,10 @@ import { ISectionLevel } from './ReportTable.types';
 import { getPrevLevel } from './ReportTable.utils';
 import { ReactElement } from 'react';
 
-type TSectionPart = 'title' | 'totals';
-type TColors = string | { color: string; 'background-color': string };
+type ISectionPart = 'title' | 'totals';
+type IColors = string | { color: string; 'background-color': string };
 
-type TColorosMapping = Record<ISectionLevel, Record<ISectionPart, IColors>>;
+type IColorosMapping = Record<ISectionLevel, Record<ISectionPart, IColors>>;
 
 const SECTION_COLORS: IColorosMapping = {
   main: { title: 'var(--color-report-main)', totals: '#403151' },

@@ -1,6 +1,6 @@
 import { IProjectFormValues } from './ProjectForm.types';
 
-type TPreparedFormData = { [key: string]: unknown };
+type IPreparedFormData = { [key: string]: unknown };
 
 export const prepareFormData = (formData: IProjectFormValues) => {
   return Object.entries(formData).reduce(

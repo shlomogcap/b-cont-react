@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { getFullPathNoQuery } from '../utils/getFullPathNoQuery';
 
-type TUseQueryParam = {
+type IUseQueryParam = {
   key: string;
   initialValue?: string;
 };

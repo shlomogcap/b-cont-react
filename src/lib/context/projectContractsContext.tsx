@@ -10,13 +10,13 @@ import { collection } from 'firebase/firestore';
 import { IContractDoc } from '../consts/contracts';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
-type TProjectContractsContext = {
+type IProjectContractsContext = {
   data: IContractDoc[];
   isLoading: boolean;
   error: string;
 };
 
-type TProjectContractsProviderProps = {
+type IProjectContractsProviderProps = {
   projectId: string;
 };
 

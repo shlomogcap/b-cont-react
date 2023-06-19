@@ -25,4 +25,4 @@ export const VendorDoc = Z.object({
   [IVendorFields.Status]: Z.nativeEnum(IVendorStatus).optional(),
 });
 
-export type TVendorDoc = WithCommonFields<Z.infer<typeof VendorDoc>>;
+export type IVendorDoc = WithCommonFields<Z.infer<typeof VendorDoc>>;

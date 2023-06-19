@@ -4,7 +4,7 @@ import { PaymentsIcon } from '../components/icons/PaymentsIcon';
 import { ProfileIcon } from '../components/icons/ProfileIcon';
 import { IRoutesNames } from './routes';
 
-export type TSettingRoutes = Extract<
+export type ISettingRoutes = Extract<
   IRoutesNames,
   IRoutesNames.Me | IRoutesNames.Budget | IRoutesNames.Company
 >;

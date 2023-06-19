@@ -1,6 +1,6 @@
 import { Lang } from '@/lib/consts/displayTexts';
 
-type TDisplayTextMapping = {
+type IDisplayTextMapping = {
   getModalTitle: (segmentName: string) => string;
 };
 

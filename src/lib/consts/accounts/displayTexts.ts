@@ -2,7 +2,7 @@ import { Lang } from '../displayTexts';
 import { IAccountConfirms } from './AccountConfirms';
 import { IProjectAccountsFields } from './ProjectAccountFields';
 
-type TDisplayTextMapping = {
+type IDisplayTextMapping = {
   fields: Record<IProjectAccountsFields, string>;
   confirms: Record<IAccountConfirms, string>;
 };

@@ -1,7 +1,7 @@
 import { IProjectDoc } from '@/lib/consts/projects';
 
-export type TProjectFormProps = {
+export type IProjectFormProps = {
   id?: string;
 };
 
-export type TProjectFormValues = IProjectDoc;
+export type IProjectFormValues = IProjectDoc;

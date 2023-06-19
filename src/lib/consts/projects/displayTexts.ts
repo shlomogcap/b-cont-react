@@ -4,7 +4,7 @@ import { Lang } from '../displayTexts';
 import { ProjectType } from './ProjectType';
 import { IProjectStatus } from './ProjectStatus';
 
-type TDisplayTextMapping = {
+type IDisplayTextMapping = {
   fields: Record<ProjectFields, string>;
   tabs: Record<EProjectViews, string>;
   projectPageTitle: string;

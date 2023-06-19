@@ -5,7 +5,7 @@ import { IContractStage } from './ContractStage';
 import { IContractStatus } from './ContractStatus';
 import { IContractType } from './ContractType';
 
-type TDisplayTextMapping = {
+type IDisplayTextMapping = {
   fields: Record<IContractFields, string>;
   contractFormTitle: string;
   contractType: Record<IContractType, string>;

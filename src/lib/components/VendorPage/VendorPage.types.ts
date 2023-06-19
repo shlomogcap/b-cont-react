@@ -1,3 +1,3 @@
-export type TVendorPageProps = {
+export type IVendorPageProps = {
   vendorId: string;
 };

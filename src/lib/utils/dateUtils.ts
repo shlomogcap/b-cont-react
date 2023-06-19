@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 dayjs.extend(isSameOrAfterDayJs);
 dayjs.extend(isSameOrBeforeDayJs);
 
-export type TDateType = dayjs.ConfigType;
+export type IDateType = dayjs.ConfigType;
 
 export const isSameOrBefore = (originDate: DateType, anotherDate: DateType) =>
   dayjs(originDate).isSameOrBefore(anotherDate);

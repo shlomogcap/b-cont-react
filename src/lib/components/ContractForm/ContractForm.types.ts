@@ -1,3 +1,3 @@
-export type TContractFormProps = {
+export type IContractFormProps = {
   id?: string;
 };

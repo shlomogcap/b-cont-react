@@ -10,13 +10,13 @@ import { firestore } from '@firebase';
 import { collection } from 'firebase/firestore';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 
-type TProjectsContext = {
+type IProjectsContext = {
   data: IProjectDoc[];
   isLoading: boolean;
   error: string;
 };
 
-type TProjectsProviderProps = {};
+type IProjectsProviderProps = {};
 
 const ProjectsContext = createContext<IProjectsContext>({
   data: [],

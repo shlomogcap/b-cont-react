@@ -1,6 +1,6 @@
 import { ProjectType } from '@/lib/consts/projects/ProjectType';
 
-export type TProjectPageProps = {
+export type IProjectPageProps = {
   projectType: ProjectType;
   projectId: string;
 };

@@ -1,8 +1,8 @@
 import { PropsWithChildren, SVGAttributes } from 'react';
 
-export type TIconSize = 'S' | 'M' | 'L' | 'XL';
+export type IIconSize = 'S' | 'M' | 'L' | 'XL';
 
-export type TSvgIconProps = PropsWithChildren<
+export type ISvgIconProps = PropsWithChildren<
   SVGAttributes<any> & {
     size?: IIconSize;
   }

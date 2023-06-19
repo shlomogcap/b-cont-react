@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useState } from 'react';
-type TUseOverflowedProps = {
+type IUseOverflowedProps = {
   ref: RefObject<HTMLElement>;
 };
 export const useOverflowed = ({ ref }: IUseOverflowedProps) => {

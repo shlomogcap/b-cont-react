@@ -22,4 +22,4 @@ export const OddJobDoc = Z.object({
   [IOddJobsFields.PaymentDate]: OPTIONAL_DATE_SCHEMA,
 });
 
-export type TOddJobDoc = WithCommonFields<Z.infer<typeof OddJobDoc>>;
+export type IOddJobDoc = WithCommonFields<Z.infer<typeof OddJobDoc>>;

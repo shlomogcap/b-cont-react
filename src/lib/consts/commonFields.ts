@@ -1,4 +1,4 @@
-import { Lang } from './displayTexts';
+import { TLang } from './displayTexts';
 
 export enum ECommonFields {
   Id = 'id',
@@ -8,21 +8,21 @@ export enum ECommonFields {
   UpdatedBy = 'updatedBy',
 }
 
-type TDisplayTextMapping = Record<ICommonFields, string>;
+type IDisplayTextMapping = Record<ECommonFields, string>;
 
-export const COMMON_FIELDS_DISPLAY_TEXTS: Record<Lang, IDisplayTextMapping> = {
+export const COMMON_FIELDS_DISPLAY_TEXTS: Record<TLang, TDisplayTextMapping> = {
   he: {
-    [ICommonFields.Id]: 'מזהה',
-    [ICommonFields.CreatedAt]: 'נוצר ב',
-    [ICommonFields.CreatedBy]: 'נוצר עי',
-    [ICommonFields.UpdatedAt]: 'עודכן ב',
-    [ICommonFields.UpdatedBy]: 'עודכן עי',
+    [ECommonFields.Id]: 'מזהה',
+    [ECommonFields.CreatedAt]: 'נוצר ב',
+    [ECommonFields.CreatedBy]: 'נוצר עי',
+    [ECommonFields.UpdatedAt]: 'עודכן ב',
+    [ECommonFields.UpdatedBy]: 'עודכן עי',
   },
   en: {
-    [ICommonFields.Id]: 'ID',
-    [ICommonFields.CreatedAt]: 'Created At',
-    [ICommonFields.CreatedBy]: 'Created By',
-    [ICommonFields.UpdatedAt]: 'Updated At',
-    [ICommonFields.UpdatedBy]: 'Updated By',
+    [ECommonFields.Id]: 'ID',
+    [ECommonFields.CreatedAt]: 'Created At',
+    [ECommonFields.CreatedBy]: 'Created By',
+    [ECommonFields.UpdatedAt]: 'Updated At',
+    [ECommonFields.UpdatedBy]: 'Updated By',
   },
 };

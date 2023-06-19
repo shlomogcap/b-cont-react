@@ -23,7 +23,7 @@ export const NewProjectPage = ({ projectType }: IProjectPageProps) => {
       ProjectType.Entrepreneurship,
       ProjectType.PublicSpace,
     ]
-      .filter((type) => type T!== projectType)
+      .filter((type) => type !== projectType)
       .map((projectType) => ({
         id: projectType,
         text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],

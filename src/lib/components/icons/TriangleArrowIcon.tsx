@@ -1,8 +1,8 @@
 import { CURRENT_COLOR_CLASS_NAME, SvgIcon, ISvgIconProps } from './SvgIcon';
 
-type TTriangleArrowIconDirection = 'down' | 'left' | 'right' | 'up';
+type ITriangleArrowIconDirection = 'down' | 'left' | 'right' | 'up';
 
-type TTriangleArrowIconProps = ISvgIconProps & {
+type ITriangleArrowIconProps = ISvgIconProps & {
   direction: ITriangleArrowIconDirection;
 };
 

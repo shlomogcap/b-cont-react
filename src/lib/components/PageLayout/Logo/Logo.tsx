@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { CSSProperties } from 'react';
 
-type TLogoProps = {
+type ILogoProps = {
   style?: CSSProperties;
   className?: string;
 };

@@ -1,7 +1,7 @@
 import { Lang } from '@/lib/consts/displayTexts';
 import { IVendorFields } from './VendorFields';
 
-type TDisplayTextMapping = {
+type IDisplayTextMapping = {
   fields: Record<IVendorFields, string>;
 };
 
