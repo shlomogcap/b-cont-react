@@ -14,13 +14,30 @@ import {
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
 import { TriangleArrowIcon } from '@/lib/components/icons/TriangleArrowIcon';
 import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
+import {
+  EWorkspaceEntityType,
+  IGroupDoc,
+  IWorkspaceDoc,
+} from '@/lib/consts/workspaces';
 
 export const ContractPlan = (props: IContractPlanProps) => {
   const { showModal } = useModalContext();
   const {
-    data: { sections: contractSections },
+    data: { contract, sections: contractSections, workspaces },
   } = useContractContext();
-  const reportSections = prepareContractSectionReport(contractSections);
+  const reportSections = prepareContractSectionReport(
+    contractSections,
+    workspaces,
+  );
+  const modalProps = {
+    contract: contract!,
+    groups: workspaces.filter(
+      ({ entityType }) => entityType === EWorkspaceEntityType.Group,
+    ) as IGroupDoc[],
+    workspaces: workspaces.filter(
+      ({ entityType }) => entityType === EWorkspaceEntityType.Workspace,
+    ) as IWorkspaceDoc[],
+  };
   return (
     <>
       <ReportTable
@@ -31,6 +48,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                 showModal({
                   name: EModalName.AddSectionForm,
                   openTab: EContractSectionItem.Section,
+                  ...modalProps,
                 })
               }
             >
@@ -46,6 +64,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                   showModal({
                     name: EModalName.AddSectionForm,
                     openTab: key as any,
+                    ...modalProps,
                   }),
               }))}
             >

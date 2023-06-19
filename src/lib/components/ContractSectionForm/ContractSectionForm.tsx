@@ -1,5 +1,8 @@
 import { FirebaseError } from 'firebase/app';
-import { IContractSectionFormProps } from './ContractSectionForm.types';
+import {
+  IContractSectionFormFieldsProps,
+  IContractSectionFormProps,
+} from './ContractSectionForm.types';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import {
@@ -7,6 +10,7 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
+  useWatch,
 } from 'react-hook-form';
 import {
   ESectionFields,
@@ -31,7 +35,7 @@ import {
   IToastType,
 } from '@/lib/consts/displayTexts';
 import { firestore } from '@/lib/firebase';
-import { Form, FormFooter } from '../commons/Form';
+import { FormFooter } from '../commons/Form';
 import { Button } from '../commons/Button';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 import { DropdownInput, NumberInput, TextInput } from '../commons/Input';
@@ -40,19 +44,25 @@ import {
   StyledContractSectionFormFields,
 } from './ContractSectionForm.styled';
 import { Divider } from '../commons/Divider';
+import { EWorkspaceFields } from '@/lib/consts/workspaces';
+import { useGetGroupsOptions } from './ContractSectionForm.utils';
 
-export const ContractSectionFormFields = () => {
+export const ContractSectionFormFields = ({
+  workspacesOptions,
+  groupsOptions,
+}: IContractSectionFormFieldsProps) => {
+  const groupsFilterOptions = useGetGroupsOptions(groupsOptions);
   return (
     <StyledContractSectionFormFields>
       <DropdownInput
-        options={[]}
+        options={workspacesOptions}
         label={
           SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceAreaRef]
         }
         name={ESectionFields.WorkspaceAreaRef}
       />
       <DropdownInput
-        options={[]}
+        options={groupsFilterOptions}
         label={
           SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceGroupRef]
         }
@@ -104,16 +114,15 @@ export const ContractSectionFormFields = () => {
   );
 };
 
-export const ContractSectionForm = ({ id }: IContractSectionFormProps) => {
-  const isEditMode = Boolean(id);
+export const ContractSectionForm = ({
+  section,
+  groups,
+  workspaces,
+}: IContractSectionFormProps) => {
+  const isEditMode = Boolean(section);
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
-  const {
-    data: { sections },
-    isLoading,
-  } = useContractContext();
-  const section = sections.find((s) => s.id === id);
   const form = useForm<ISectionDoc>({
     resolver: zodResolver(SectionDoc),
     defaultValues: CONTRACT_SECTION_FORM_DEFAULT_VALUES,
@@ -122,12 +131,12 @@ export const ContractSectionForm = ({ id }: IContractSectionFormProps) => {
   const { reset } = form;
 
   useEffect(() => {
-    if (isEditMode && !isLoading) {
-      if (section && id) {
+    if (isEditMode) {
+      if (section) {
         reset(section);
       }
     }
-  }, [isLoading, isEditMode, reset, id, section]);
+  }, [isEditMode, reset, section]);
 
   const onSubmit: SubmitHandler<ISectionDoc> = async (data) => {
     const preparedData = prepareFormData(data);
@@ -135,7 +144,7 @@ export const ContractSectionForm = ({ id }: IContractSectionFormProps) => {
       try {
         const docRef = doc(
           firestore,
-          `projects/${projectId}/contracts/${contractId}/sections/${id}`,
+          `projects/${projectId}/contracts/${contractId}/sections/${section?.id}`,
         );
         await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
@@ -179,7 +188,16 @@ export const ContractSectionForm = ({ id }: IContractSectionFormProps) => {
   return (
     <FormProvider {...form}>
       <StyledContractSectionForm>
-        <ContractSectionFormFields />
+        <ContractSectionFormFields
+          workspacesOptions={workspaces.map((workspace) => ({
+            text: workspace[EWorkspaceFields.Title],
+            value: JSON.stringify(workspace),
+          }))}
+          groupsOptions={groups.map((group) => ({
+            text: group[EWorkspaceFields.Title],
+            value: JSON.stringify(group),
+          }))}
+        />
         <FormFooter>
           {form.formState.isDirty && (
             <>

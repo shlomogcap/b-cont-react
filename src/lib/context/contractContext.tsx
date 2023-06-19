@@ -10,11 +10,13 @@ import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IContractDoc } from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
+import { IWorkspaceGroupDoc } from '../consts/workspaces';
 
 type IContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
   accounts: { title: string }[];
+  workspaces: IWorkspaceGroupDoc[];
 };
 
 type IContractContext = {
@@ -32,6 +34,7 @@ const INITIAL_CONTRACT_DATA = {
   contract: {} as any,
   sections: [],
   accounts: [],
+  workspaces: [],
 };
 
 const ContractContext = createContext<IContractContext>({
@@ -52,13 +55,12 @@ export const ContractProvider = ({
   );
   const [accounts, setAccounts] = useState<IContractData['accounts']>([]);
   const [sections, setSections] = useState<IContractData['sections']>([]);
+  const [workspaces, setWorkspaces] = useState<IContractData['workspaces']>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   const contractPath = `/projects/${projectId}/contracts/${contractId}`;
   useEffect(() => {
-    console.log('CONTRACT CHANNEL OPEN:');
-
     const contractSubscription = onSnapshot(
       doc(firestore, contractPath),
       (snapshot) => {
@@ -66,6 +68,7 @@ export const ContractProvider = ({
           setContract(null);
         } else {
           setContract({
+            path: snapshot.ref.path,
             id: snapshot.id,
             ...(snapshot.data() as IContractDoc),
           });
@@ -84,18 +87,34 @@ export const ContractProvider = ({
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
+    const workspacesSubscription = onSnapshotHandler({
+      collectionRef: collection(firestore, `${contractPath}/workspaces`),
+      setData: setWorkspaces,
+      setIsLoading,
+      setError: (e) => setError((prev) => `${prev}\n${e}`),
+    });
 
     return () =>
       [
         contractSubscription,
         accountsSubscription,
         sectionsSubscription,
+        workspacesSubscription,
       ].forEach((unsubscribe) => unsubscribe());
   }, [contractPath]);
 
   return (
     <ContractContext.Provider
-      value={{ data: { accounts, sections, contract }, isLoading, error }}
+      value={{
+        data: {
+          accounts,
+          sections,
+          contract,
+          workspaces,
+        },
+        isLoading,
+        error,
+      }}
     >
       {children}
     </ContractContext.Provider>

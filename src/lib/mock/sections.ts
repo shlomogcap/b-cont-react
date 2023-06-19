@@ -20,6 +20,8 @@ export const MOCK_SECTIONS_DATA: WithPathField<ITableRow<ESectionFields>>[] = [
     [ESectionFields.TotalSum]: 8 * 10_000,
     [ESectionFields.DonePercentage]: 0,
     [ESectionFields.TotalActualsSum]: 0,
+    [ESectionFields.WorkspaceAreaRef]: 'projects/1/contracts/1/workspaces/1',
+    [ESectionFields.WorkspaceGroupRef]: '',
   },
   {
     [ICommonFields.Id]: '2',
@@ -33,5 +35,7 @@ export const MOCK_SECTIONS_DATA: WithPathField<ITableRow<ESectionFields>>[] = [
     [ESectionFields.TotalSum]: 12 * 5_000,
     [ESectionFields.DonePercentage]: 0,
     [ESectionFields.TotalActualsSum]: 0,
+    [ESectionFields.WorkspaceAreaRef]: 'projects/1/contracts/1/workspaces/2',
+    [ESectionFields.WorkspaceGroupRef]: '',
   },
 ];

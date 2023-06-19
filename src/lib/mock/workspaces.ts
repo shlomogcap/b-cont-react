@@ -10,7 +10,6 @@ export const MOCK_WORKSPACES_DATA: WithPathField<
     [ICommonFields.Id]: '1',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [EWorkspaceFields.Title]: 'בניין 1',
-    [EWorkspaceFields.Description]: '',
     [EWorkspaceFields.OrderIndex]: 1,
     [EWorkspaceFields.EntityType]: EWorkspaceEntityType.Workspace,
     [EWorkspaceFields.Description]: '',

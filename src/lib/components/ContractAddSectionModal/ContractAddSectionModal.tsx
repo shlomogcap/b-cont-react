@@ -8,16 +8,16 @@ import {
   EContractSectionItem,
 } from '@/lib/consts/contracts';
 
-const TABS: Record<EContractSectionItem, ReactElement> = {
-  section: <ContractSectionForm />,
-  workspace: <>TODO: add Workspace form</>,
-  sectionsGroup: <>TODO: add Section Group form</>,
-};
-
 export const ContractAddSectionModal = ({
   openTab = EContractSectionItem.Section,
+  ...rest
 }: IContractAddSectionModalProps) => {
   const [activeTab, setActiveTab] = useState(openTab);
+  const TABS: Record<EContractSectionItem, ReactElement> = {
+    section: <ContractSectionForm {...rest} />,
+    workspace: <>TODO: add Workspace form</>,
+    sectionsGroup: <>TODO: add Section Group form</>,
+  };
   return (
     <StyledContractAddSectionModal>
       <Tabs
