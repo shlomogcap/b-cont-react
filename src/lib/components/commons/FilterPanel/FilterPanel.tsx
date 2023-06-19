@@ -15,7 +15,7 @@ import {
 import {
   IFilterButtonsControlProps,
   IFilterDatesControlProps,
-  IFilterItemType,
+  EFilterItemType,
   IFilterPanelButtonProps,
   IFilterPanelProps,
 } from './FilterPanel.types';
@@ -24,7 +24,7 @@ import { FilterIconClose, FilterIconOpen } from '../../icons';
 import { ISvgIconProps } from '../../icons/SvgIcon';
 import { createPopper, Instance } from '@popperjs/core';
 import { Badge } from '../Badge';
-import { DISPLAY_TEXTS, IFilterPanelStates } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, EFilterPanelStates } from '@/lib/consts/displayTexts';
 import Draggable from 'react-draggable';
 
 const FilterPanelButton = ({
@@ -75,11 +75,11 @@ const FilterDatesControl = ({ label, field }: IFilterDatesControlProps) => (
   <StyledFilterControlDiv>
     <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
     <DateInput
-      label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.From]}
+      label={DISPLAY_TEXTS.he.filterPanel[EFilterPanelStates.From]}
       name={`${field}.value.from`}
     />
     <DateInput
-      label={DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.To]}
+      label={DISPLAY_TEXTS.he.filterPanel[EFilterPanelStates.To]}
       name={`${field}.value.to`}
     />
   </StyledFilterControlDiv>
@@ -180,7 +180,7 @@ export const FilterPanel = ({
             {filters.map(({ type, field, options = [] }) => {
               const label: string = displayTexts[field];
               switch (type) {
-                case IFilterItemType.Buttons:
+                case EFilterItemType.Buttons:
                   return (
                     <FilterButtonsControl
                       label={label}
@@ -188,7 +188,7 @@ export const FilterPanel = ({
                       options={options}
                     />
                   );
-                case IFilterItemType.Date:
+                case EFilterItemType.Date:
                   return <FilterDatesControl label={label} field={field} />;
                 default:
                   return null;
@@ -202,7 +202,7 @@ export const FilterPanel = ({
                   setIsFilterPanelOpen(false);
                 }}
               >
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Close]}
+                {DISPLAY_TEXTS.he.filterPanel[EFilterPanelStates.Close]}
               </StyledFilterButton>
               <StyledFilterButton
                 width='20%'
@@ -212,7 +212,7 @@ export const FilterPanel = ({
                   reset(formState.defaultValues);
                 }}
               >
-                {DISPLAY_TEXTS.he.filterPanel[IFilterPanelStates.Reset]}
+                {DISPLAY_TEXTS.he.filterPanel[EFilterPanelStates.Reset]}
               </StyledFilterButton>
             </StyledFilterControlDiv>
           </StyledFilterPanel>

@@ -1,69 +1,69 @@
 import Z from 'zod';
-import { IFilterItem, IFilterItemType } from '../commons/FilterPanel';
+import { IFilterItem, EFilterItemType } from '../commons/FilterPanel';
 import {
-  IProjectStatus,
+  EProjectStatus,
   PROJECT_DISPLAY_TEXTS,
-  ProjectFields,
-  ProjectType,
+  EProjectFields,
+  EProjectType,
 } from '@/lib/consts/projects';
 import { dateFilterSchema } from '../commons/FilterPanel/FilterPanel.consts';
 import { fieldsNamesToColumns } from '../commons/Table';
 
 export const projectFilterSchema = Z.object({
-  [ProjectFields.Status]: Z.object({
-    type: Z.literal(IFilterItemType.Buttons),
-    value: Z.array(Z.nativeEnum(IProjectStatus)),
+  [EProjectFields.Status]: Z.object({
+    type: Z.literal(EFilterItemType.Buttons),
+    value: Z.array(Z.nativeEnum(EProjectStatus)),
   }),
-  [ProjectFields.SDate]: Z.object({
-    type: Z.literal(IFilterItemType.Date),
+  [EProjectFields.SDate]: Z.object({
+    type: Z.literal(EFilterItemType.Date),
     value: dateFilterSchema,
   }),
-  [ProjectFields.EDate]: Z.object({
-    type: Z.literal(IFilterItemType.Date),
+  [EProjectFields.EDate]: Z.object({
+    type: Z.literal(EFilterItemType.Date),
     value: dateFilterSchema,
   }),
 });
 
-export const projectsTableFilters: IFilterItem<ProjectFields>[] = [
+export const projectsTableFilters: IFilterItem<EProjectFields>[] = [
   {
-    type: IFilterItemType.Buttons,
-    field: ProjectFields.Status,
-    options: Object.values(IProjectStatus).map((value) => ({
+    type: EFilterItemType.Buttons,
+    field: EProjectFields.Status,
+    options: Object.values(EProjectStatus).map((value) => ({
       value,
       text: PROJECT_DISPLAY_TEXTS.he.projectStatus[value],
     })),
-    defaultValue: [IProjectStatus.Active],
+    defaultValue: [EProjectStatus.Active],
   },
   {
-    type: IFilterItemType.Date,
-    field: ProjectFields.SDate,
+    type: EFilterItemType.Date,
+    field: EProjectFields.SDate,
   },
   {
-    type: IFilterItemType.Date,
-    field: ProjectFields.EDate,
+    type: EFilterItemType.Date,
+    field: EProjectFields.EDate,
   },
 ];
 
 export const projectsTableColumns = fieldsNamesToColumns(
   [
-    ProjectFields.Title,
+    EProjectFields.Title,
     {
-      field: ProjectFields.ProjectType,
+      field: EProjectFields.ProjectType,
       type: 'list',
       options: [
-        ProjectType.Residential,
-        ProjectType.Entrepreneurship,
-        ProjectType.PublicSpace,
+        EProjectType.Residential,
+        EProjectType.Entrepreneurship,
+        EProjectType.PublicSpace,
       ].map((projectType) => ({
         text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
         value: projectType,
       })),
     },
-    { field: ProjectFields.SDate, type: 'date' },
-    { field: ProjectFields.EDate, type: 'date' },
-    { field: ProjectFields.TotalAgreementSum, type: 'number' },
-    { field: ProjectFields.TotalActualsSum, type: 'number' },
-    ProjectFields.Address,
+    { field: EProjectFields.SDate, type: 'date' },
+    { field: EProjectFields.EDate, type: 'date' },
+    { field: EProjectFields.TotalAgreementSum, type: 'number' },
+    { field: EProjectFields.TotalActualsSum, type: 'number' },
+    EProjectFields.Address,
   ],
   PROJECT_DISPLAY_TEXTS.he.fields,
 );

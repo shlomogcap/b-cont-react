@@ -1,6 +1,6 @@
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { IProjectFormValues } from './ProjectForm.types';
-import { ProjectFields } from '@/lib/consts/projects';
+import { EProjectFields } from '@/lib/consts/projects';
 
 export const DUMMY_OPTIONS: IDropdownInputProps['options'] = [
   { text: 'Foo', value: 'foo' },
@@ -9,19 +9,19 @@ export const DUMMY_OPTIONS: IDropdownInputProps['options'] = [
 ];
 
 export const PROJECT_FORM_DEFAULT_VALUES: IProjectFormValues = {
-  [ProjectFields.Title]: '',
-  [ProjectFields.Address]: '',
+  [EProjectFields.Title]: '',
+  [EProjectFields.Address]: '',
   // [ProjectFields.SDate]: '',
-  [ProjectFields.NumberOfPeriods]: 0,
+  [EProjectFields.NumberOfPeriods]: 0,
   // [ProjectFields.EDate]:'',
-  [ProjectFields.Description]: '',
-  [ProjectFields.Manager]: '',
-  [ProjectFields.SeniorManager]: '',
-  [ProjectFields.Executor]: '',
-  [ProjectFields.Entrepreneur]: '',
+  [EProjectFields.Description]: '',
+  [EProjectFields.Manager]: '',
+  [EProjectFields.SeniorManager]: '',
+  [EProjectFields.Executor]: '',
+  [EProjectFields.Entrepreneur]: '',
   // [ProjectFields.ProjectType]: '',
-  [ProjectFields.NumberOfBuildings]: 0,
-  [ProjectFields.Basements]: 0,
-  [ProjectFields.NumberOfApatrments]: 0,
+  [EProjectFields.NumberOfBuildings]: 0,
+  [EProjectFields.Basements]: 0,
+  [EProjectFields.NumberOfApatrments]: 0,
   // [ProjectFields.Status]: '',
 };

@@ -1,48 +1,48 @@
-import { IProjectAttahcmentFields } from '@/lib/consts/projectAttachments/ProjectAttachmentFields';
+import { EProjectAttahcmentFields } from '@/lib/consts/projectAttachments/ProjectAttachmentFields';
 import { IProjectAttachmentsProps } from './ProjectAttachments.types';
 import { ITableColumn, Table } from '@/lib/components/commons/Table';
 import { PROJECT_ATTACHMENTS_DISPLAY_TEXTS } from '@/lib/consts/projectAttachments/displayTexts';
 import { PROJECT_ATTACHMENT_STATUS_OPTIONS } from './ProjectAttachments.consts';
 import {
   COMMON_FIELDS_DISPLAY_TEXTS,
-  ICommonFields,
+  ECommonFields,
 } from '@/lib/consts/commonFields';
 import { useProjectAttachmentsContext } from '@/lib/context/projectAttachmentsContext';
 
 export const ProjectAttachments = (props: IProjectAttachmentsProps) => {
   const { isLoading, data: oddJobs } = useProjectAttachmentsContext();
-  const columns: ITableColumn<IProjectAttahcmentFields | ICommonFields>[] = [
+  const columns: ITableColumn<EProjectAttahcmentFields | ECommonFields>[] = [
     {
-      field: IProjectAttahcmentFields.Title,
+      field: EProjectAttahcmentFields.Title,
       display:
         PROJECT_ATTACHMENTS_DISPLAY_TEXTS.he.fields[
-          IProjectAttahcmentFields.Title
+          EProjectAttahcmentFields.Title
         ],
     },
     {
-      field: IProjectAttahcmentFields.Description,
+      field: EProjectAttahcmentFields.Description,
       display:
         PROJECT_ATTACHMENTS_DISPLAY_TEXTS.he.fields[
-          IProjectAttahcmentFields.Description
+          EProjectAttahcmentFields.Description
         ],
     },
     {
-      field: IProjectAttahcmentFields.Status,
+      field: EProjectAttahcmentFields.Status,
       display:
         PROJECT_ATTACHMENTS_DISPLAY_TEXTS.he.fields[
-          IProjectAttahcmentFields.Status
+          EProjectAttahcmentFields.Status
         ],
       type: 'list',
       options: PROJECT_ATTACHMENT_STATUS_OPTIONS,
     },
     {
-      field: ICommonFields.CreatedAt,
-      display: COMMON_FIELDS_DISPLAY_TEXTS.he[ICommonFields.CreatedAt],
+      field: ECommonFields.CreatedAt,
+      display: COMMON_FIELDS_DISPLAY_TEXTS.he[ECommonFields.CreatedAt],
       type: 'date',
     },
     {
-      field: ICommonFields.CreatedBy,
-      display: COMMON_FIELDS_DISPLAY_TEXTS.he[ICommonFields.CreatedBy],
+      field: ECommonFields.CreatedBy,
+      display: COMMON_FIELDS_DISPLAY_TEXTS.he[ECommonFields.CreatedBy],
       getValue: ({ row, field }) => 'TODO: get user by id ' + row[field],
     },
   ];

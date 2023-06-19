@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
-import { VENDOR_DISPLAY_TEXTS, IVendorFields } from '@/lib/consts/vendors';
-import { IRoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
+import { VENDOR_DISPLAY_TEXTS, EVendorFields } from '@/lib/consts/vendors';
+import { ERoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 
 export const VendorsTable = () => {
@@ -13,30 +13,30 @@ export const VendorsTable = () => {
       loading={isLoading}
       columns={fieldsNamesToColumns(
         [
-          IVendorFields.Title,
-          IVendorFields.CompanyNumber,
-          IVendorFields.CommercialName,
-          IVendorFields.CompanExternalNumber,
-          { field: IVendorFields.TaxesEndDate, type: 'date' },
-          IVendorFields.TaxPercent,
-          IVendorFields.Phone,
-          IVendorFields.Email,
-          IVendorFields.Status,
+          EVendorFields.Title,
+          EVendorFields.CompanyNumber,
+          EVendorFields.CommercialName,
+          EVendorFields.CompanExternalNumber,
+          { field: EVendorFields.TaxesEndDate, type: 'date' },
+          EVendorFields.TaxPercent,
+          EVendorFields.Phone,
+          EVendorFields.Email,
+          EVendorFields.Status,
         ],
         VENDOR_DISPLAY_TEXTS.he.fields,
       )}
       rows={rows}
       totals={{
-        [IVendorFields.Title]:
+        [EVendorFields.Title]:
           rows.length < 2
             ? '-'
             : `${rows.length.toLocaleString()} ${
-                DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors]
+                DISPLAY_TEXTS.he.routeNames[ERoutesNames.Vendors]
               }`,
       }}
       onRowClick={({ id }) =>
         router.push({
-          pathname: IRoutesNames.Vendor,
+          pathname: ERoutesNames.Vendor,
           query: { [VENDOR_ID_QUERY]: id },
         })
       }

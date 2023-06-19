@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
-import { ProjectType } from './ProjectType';
+import { EProjectType } from './ProjectType';
 import {
   ProjectsEntrepreneurshipIcon,
   ProjectsPublicSpaceIcon,
   ProjectsResidentialIcon,
 } from '../../components/icons';
 
-export const PROJECT_TYPES_ICON_MAPPING: Record<ProjectType, ReactElement> = {
-  [ProjectType.Residential]: <ProjectsResidentialIcon />,
-  [ProjectType.PublicSpace]: <ProjectsPublicSpaceIcon />,
-  [ProjectType.Entrepreneurship]: <ProjectsEntrepreneurshipIcon />,
+export const PROJECT_TYPES_ICON_MAPPING: Record<EProjectType, ReactElement> = {
+  [EProjectType.Residential]: <ProjectsResidentialIcon />,
+  [EProjectType.PublicSpace]: <ProjectsPublicSpaceIcon />,
+  [EProjectType.Entrepreneurship]: <ProjectsEntrepreneurshipIcon />,
 };

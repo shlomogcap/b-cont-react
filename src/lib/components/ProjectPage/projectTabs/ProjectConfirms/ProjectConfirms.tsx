@@ -1,9 +1,9 @@
 import { IProjectConfirmsProps } from './ProjectConfirms.types';
 import { ITableColumn, Table } from '@/lib/components/commons/Table';
 import { PROJECT_ACCOUNTS_DISPLAY_TEXTS } from '@/lib/consts/accounts';
-import { IAccountConfirms } from '@/lib/consts/accounts/AccountConfirms';
+import { EAccountConfirms } from '@/lib/consts/accounts/AccountConfirms';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
-import { VENDOR_DISPLAY_TEXTS, IVendorFields } from '@/lib/consts/vendors';
+import { VENDOR_DISPLAY_TEXTS, EVendorFields } from '@/lib/consts/vendors';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import {
@@ -12,12 +12,12 @@ import {
 } from '../ProjectContracts';
 import {
   CONTRACTS_DISPLAY_TEXTS,
-  IContractFields,
+  EContractFields,
 } from '@/lib/consts/contracts';
 import { useRouter } from 'next/router';
 import {
   CONTRACT_ID_QUERY,
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
@@ -31,84 +31,84 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
   const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
 
   const projectConfirmsColumns: ITableColumn<
-    IContractFields | IAccountConfirms
+    EContractFields | EAccountConfirms
   >[] = [
     {
-      field: IContractFields.Title,
-      display: CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.Title],
+      field: EContractFields.Title,
+      display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Title],
     },
     {
-      field: IContractFields.Status,
-      display: CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.Status],
+      field: EContractFields.Status,
+      display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Status],
       type: 'list',
       options: CONTRACT_STATUS_OPTIONS,
     },
     {
-      field: IContractFields.VendorRef,
-      fieldPath: `${IContractFields.VendorRef}.${IVendorFields.Title}`,
-      display: CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.VendorRef],
+      field: EContractFields.VendorRef,
+      fieldPath: `${EContractFields.VendorRef}.${EVendorFields.Title}`,
+      display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.VendorRef],
       getValue: ({ row }) =>
         vendors.find((vendor) => vendor.id === row.vendorRef)?.[
-          IVendorFields.Title
+          EVendorFields.Title
         ] ?? FALLBACK_BROKEN_REF_TEXT,
     },
     {
-      field: IContractFields.VendorRef,
-      fieldPath: `${IContractFields.VendorRef}.${IVendorFields.CompanExternalNumber}`,
+      field: EContractFields.VendorRef,
+      fieldPath: `${EContractFields.VendorRef}.${EVendorFields.CompanExternalNumber}`,
       display:
-        VENDOR_DISPLAY_TEXTS.he.fields[IVendorFields.CompanExternalNumber],
+        VENDOR_DISPLAY_TEXTS.he.fields[EVendorFields.CompanExternalNumber],
       getValue: ({ row }) =>
         vendors.find((vendor) => vendor.id === row.vendorRef)?.[
-          IVendorFields.CompanExternalNumber
+          EVendorFields.CompanExternalNumber
         ] ?? FALLBACK_BROKEN_REF_TEXT,
     },
     {
-      field: IContractFields.CurrentAccountPeriod,
+      field: EContractFields.CurrentAccountPeriod,
       display:
-        CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.CurrentAccountPeriod],
+        CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.CurrentAccountPeriod],
     },
     {
-      field: IAccountConfirms.Start,
+      field: EAccountConfirms.Start,
       display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[IAccountConfirms.Start],
+        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Start],
     },
     {
-      field: IAccountConfirms.Projectmanager,
+      field: EAccountConfirms.Projectmanager,
       display:
         PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[
-          IAccountConfirms.Projectmanager
+          EAccountConfirms.Projectmanager
         ],
     },
     {
-      field: IAccountConfirms.Manager,
+      field: EAccountConfirms.Manager,
       display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[IAccountConfirms.Manager],
+        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Manager],
     },
     {
-      field: IAccountConfirms.Accounting,
+      field: EAccountConfirms.Accounting,
       display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[IAccountConfirms.Accounting],
+        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Accounting],
     },
     {
-      field: IAccountConfirms.Financing,
+      field: EAccountConfirms.Financing,
       display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[IAccountConfirms.Financing],
+        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Financing],
     },
     {
-      field: IAccountConfirms.ExternalSoftware,
+      field: EAccountConfirms.ExternalSoftware,
       display:
         PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[
-          IAccountConfirms.ExternalSoftware
+          EAccountConfirms.ExternalSoftware
         ],
     },
     {
-      field: IAccountConfirms.Billing,
+      field: EAccountConfirms.Billing,
       display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[IAccountConfirms.Billing],
+        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Billing],
     },
     {
-      field: IContractFields.ActualsStatus,
-      display: CONTRACTS_DISPLAY_TEXTS.he.fields[IContractFields.ActualsStatus],
+      field: EContractFields.ActualsStatus,
+      display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.ActualsStatus],
       type: 'list',
       options: CONTRACT_ACTUALS_STATUS_OPTIONS,
     },
@@ -121,7 +121,7 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
       rows={contracts}
       onRowClick={({ id }) =>
         router.push({
-          pathname: IRoutesNames.Contract,
+          pathname: ERoutesNames.Contract,
           query: {
             [PROJECT_TYPE_QUERY]: projectType,
             [PROJECT_ID_QUERY]: projectId,

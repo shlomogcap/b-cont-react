@@ -1,4 +1,4 @@
-import { WithCommonFields } from '@/lib/utils/WithFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 import { IFilterPanelProps } from '../FilterPanel';
 
@@ -41,7 +41,7 @@ export type IGetDisplayValueProps = {
   options?: ITableColumnOption[];
 };
 
-export type ITableRow<T extends string> = WithCommonFields<IRowValues<T>>;
+export type ITableRow<T extends string> = IWithCommonFields<IRowValues<T>>;
 
 type IOnRowClickParams<T extends string> = ITableRow<T>;
 

@@ -1,15 +1,15 @@
 import { ITableRow } from '../components/commons/Table';
-import { ICommonFields } from '../consts/commonFields';
+import { ECommonFields } from '../consts/commonFields';
 import {
   ESectionCalculationMethod,
   ESectionCalculationType,
   ESectionFields,
 } from '../consts/sections';
-import { PATH_FIELD, WithPathField } from './utils';
+import { PATH_FIELD, IWithPathField } from './utils';
 
-export const MOCK_SECTIONS_DATA: WithPathField<ITableRow<ESectionFields>>[] = [
+export const MOCK_SECTIONS_DATA: IWithPathField<ITableRow<ESectionFields>>[] = [
   {
-    [ICommonFields.Id]: '1',
+    [ECommonFields.Id]: '1',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [ESectionFields.Title]: 'חציבת קירות',
     [ESectionFields.Description]: '',
@@ -22,7 +22,7 @@ export const MOCK_SECTIONS_DATA: WithPathField<ITableRow<ESectionFields>>[] = [
     [ESectionFields.TotalActualsSum]: 0,
   },
   {
-    [ICommonFields.Id]: '2',
+    [ECommonFields.Id]: '2',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [ESectionFields.Title]: 'התקנת מחיצות',
     [ESectionFields.Description]: '',

@@ -1,4 +1,4 @@
-import { Lang } from '@/lib/consts/displayTexts';
+import { ILang } from '@/lib/consts/displayTexts';
 
 export enum EErrorMessage {
   Required,
@@ -8,24 +8,24 @@ export enum EErrorMessage {
 }
 
 type IDisplayTextMapping = {
-  errosMessages: Record<IErrorMessage, string>;
+  errosMessages: Record<EErrorMessage, string>;
 };
 
-export const VALIDATION_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const VALIDATION_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     errosMessages: {
-      [IErrorMessage.Required]: 'שדה חובה',
-      [IErrorMessage.TooShort]: 'ערך קצר מדי',
-      [IErrorMessage.TooLow]: 'ערך נמוך מדי',
-      [IErrorMessage.TooHigh]: 'ערך גבוה מדי',
+      [EErrorMessage.Required]: 'שדה חובה',
+      [EErrorMessage.TooShort]: 'ערך קצר מדי',
+      [EErrorMessage.TooLow]: 'ערך נמוך מדי',
+      [EErrorMessage.TooHigh]: 'ערך גבוה מדי',
     },
   },
   en: {
     errosMessages: {
-      [IErrorMessage.Required]: 'Field Is Required',
-      [IErrorMessage.TooShort]: 'Value Too Short',
-      [IErrorMessage.TooLow]: 'Value Too Low',
-      [IErrorMessage.TooHigh]: 'Value Too High',
+      [EErrorMessage.Required]: 'Field Is Required',
+      [EErrorMessage.TooShort]: 'Value Too Short',
+      [EErrorMessage.TooLow]: 'Value Too Low',
+      [EErrorMessage.TooHigh]: 'Value Too High',
     },
   },
 };

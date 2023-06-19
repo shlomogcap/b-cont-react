@@ -37,7 +37,7 @@ type IHightlightRowMixinProps = {
 export const highlightRowMixin = ({
   trigger,
   side,
-}: HightlightRowMixinProps) => css`
+}: IHightlightRowMixinProps) => css`
   & {
     position: relative;
   }

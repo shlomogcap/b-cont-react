@@ -1,6 +1,6 @@
-import { ProjectType } from '@/lib/consts/projects/ProjectType';
+import { EProjectType } from '@/lib/consts/projects/ProjectType';
 
 export type IProjectPageProps = {
-  projectType: ProjectType;
+  projectType: EProjectType;
   projectId: string;
 };

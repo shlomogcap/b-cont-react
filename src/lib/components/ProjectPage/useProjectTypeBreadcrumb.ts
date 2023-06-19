@@ -1,11 +1,11 @@
-import { PROJECT_DISPLAY_TEXTS, ProjectType } from '@/lib/consts/projects';
+import { PROJECT_DISPLAY_TEXTS, EProjectType } from '@/lib/consts/projects';
 import { IBreadcrumbProps } from '../PageLayout/Breadcrubms';
 import { useRouter } from 'next/router';
 import { PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 
 export const useProjectTypeBreadcrumb = (
-  projectType: ProjectType,
+  projectType: EProjectType,
   pathname?: string,
 ): IBreadcrumbProps => {
   const { closeModal } = useModalContext();
@@ -14,9 +14,9 @@ export const useProjectTypeBreadcrumb = (
     text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
     id: 'projectType',
     navList: [
-      ProjectType.Residential,
-      ProjectType.Entrepreneurship,
-      ProjectType.PublicSpace,
+      projectType.Residential,
+      projectType.Entrepreneurship,
+      projectType.PublicSpace,
     ]
       .filter((type) => type !== projectType)
       .map((projectType) => ({

@@ -1,28 +1,28 @@
 import { IBreadcrumbProps } from '../components/PageLayout/Breadcrubms';
 import { DISPLAY_TEXTS } from './displayTexts';
-import { ProjectType } from './projects/ProjectType';
-import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY, IRoutesNames } from './routes';
+import { EProjectType } from './projects/ProjectType';
+import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY, ERoutesNames } from './routes';
 
 export const APP_BREADCRUMB: IBreadcrumbProps = {
-  text: DISPLAY_TEXTS.he.routeNames[IRoutesNames.App],
-  href: IRoutesNames.App,
-  id: IRoutesNames.App,
+  text: DISPLAY_TEXTS.he.routeNames[ERoutesNames.App],
+  href: ERoutesNames.App,
+  id: ERoutesNames.App,
 };
 export const VENDORS_BREADCRUMB: IBreadcrumbProps = {
-  text: DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors],
-  href: IRoutesNames.Vendors,
-  id: IRoutesNames.Vendors,
+  text: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Vendors],
+  href: ERoutesNames.Vendors,
+  id: ERoutesNames.Vendors,
 };
 
 export const getProjectBredcrumb = (
   projectId: string,
-  projectType: ProjectType,
+  projectType: EProjectType,
   projectName?: string,
 ): IBreadcrumbProps => ({
   text: projectName ?? projectId,
-  href: IRoutesNames.Project.replace(
+  href: ERoutesNames.Project.replace(
     `[${PROJECT_ID_QUERY}]`,
     projectId,
   ).replace(`[${PROJECT_TYPE_QUERY}]`, projectType),
-  id: IRoutesNames.Project,
+  id: ERoutesNames.Project,
 });

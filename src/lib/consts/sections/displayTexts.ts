@@ -1,11 +1,11 @@
-import { Lang } from '../displayTexts';
+import { ILang } from '../displayTexts';
 import { ESectionFields } from './SectionFields';
 
 type IDisplayTextMapping = {
   fields: Record<ESectionFields, string>;
 };
 
-export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     fields: {
       [ESectionFields.Title]: 'סעיף',

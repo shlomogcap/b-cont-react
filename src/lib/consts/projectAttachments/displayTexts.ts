@@ -1,40 +1,40 @@
-import { Lang } from '../displayTexts';
-import { IProjectAttahcmentStatus } from './ProjectAttachmentStatus';
-import { IProjectAttahcmentFields } from './ProjectAttachmentFields';
+import { ILang } from '../displayTexts';
+import { EProjectAttahcmentStatus } from './ProjectAttachmentStatus';
+import { EProjectAttahcmentFields } from './ProjectAttachmentFields';
 
 type IDisplayTextMapping = {
-  fields: Record<IProjectAttahcmentFields, string>;
-  status: Record<IProjectAttahcmentStatus, string>;
+  fields: Record<EProjectAttahcmentFields, string>;
+  status: Record<EProjectAttahcmentStatus, string>;
 };
 
 export const PROJECT_ATTACHMENTS_DISPLAY_TEXTS: Record<
-  Lang,
-  DisplayTextMapping
+  ILang,
+  IDisplayTextMapping
 > = {
   he: {
     fields: {
-      [IProjectAttahcmentFields.Title]: 'עבודה',
-      [IProjectAttahcmentFields.Description]: 'תיאור',
-      [IProjectAttahcmentFields.Status]: 'סטטוס',
-      [IProjectAttahcmentFields.AttachmentUrl]: 'קובץ',
+      [EProjectAttahcmentFields.Title]: 'עבודה',
+      [EProjectAttahcmentFields.Description]: 'תיאור',
+      [EProjectAttahcmentFields.Status]: 'סטטוס',
+      [EProjectAttahcmentFields.AttachmentUrl]: 'קובץ',
     },
     status: {
-      [IProjectAttahcmentStatus.Open]: 'פתוח',
-      [IProjectAttahcmentStatus.Done]: 'טופל',
-      [IProjectAttahcmentStatus.Archive]: 'ארכיון',
+      [EProjectAttahcmentStatus.Open]: 'פתוח',
+      [EProjectAttahcmentStatus.Done]: 'טופל',
+      [EProjectAttahcmentStatus.Archive]: 'ארכיון',
     },
   },
   en: {
     fields: {
-      [IProjectAttahcmentFields.Title]: 'Job',
-      [IProjectAttahcmentFields.Description]: 'Descriptions',
-      [IProjectAttahcmentFields.Status]: 'Status',
-      [IProjectAttahcmentFields.AttachmentUrl]: 'Attachment',
+      [EProjectAttahcmentFields.Title]: 'Job',
+      [EProjectAttahcmentFields.Description]: 'Descriptions',
+      [EProjectAttahcmentFields.Status]: 'Status',
+      [EProjectAttahcmentFields.AttachmentUrl]: 'Attachment',
     },
     status: {
-      [IProjectAttahcmentStatus.Open]: 'Open',
-      [IProjectAttahcmentStatus.Done]: 'Done',
-      [IProjectAttahcmentStatus.Archive]: 'Archive',
+      [EProjectAttahcmentStatus.Open]: 'Open',
+      [EProjectAttahcmentStatus.Done]: 'Done',
+      [EProjectAttahcmentStatus.Archive]: 'Archive',
     },
   },
 };

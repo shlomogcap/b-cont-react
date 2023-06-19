@@ -39,7 +39,7 @@ type IDisplayTextMapping = {
   filterPanel: Record<EFilterPanelStates, string>;
 };
 
-export const DISPLAY_TEXTS: Record<TLang, TDisplayTextMapping> = {
+export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     boolean: {
       [EBoolean.False]: 'לא',

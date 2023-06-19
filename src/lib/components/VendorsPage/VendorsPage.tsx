@@ -5,12 +5,12 @@ import { IVendorsPageProps } from './VendorsPage.types';
 import { useRouter } from 'next/router';
 import { VENDORS_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { VendorsTable } from '../VendorPage/VendorsTable';
-import { IRoutesNames } from '@/lib/consts/routes';
+import { ERoutesNames } from '@/lib/consts/routes';
 
 export const VendorsPage = (_props: IVendorsPageProps) => {
   const router = useRouter();
 
-  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors];
+  const title = DISPLAY_TEXTS.he.routeNames[ERoutesNames.Vendors];
 
   return (
     <PageLayout title={title} breadcrubms={[VENDORS_BREADCRUMB]}>

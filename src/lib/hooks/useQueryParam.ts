@@ -10,7 +10,7 @@ type IUseQueryParam = {
 export const useQueryParam = <T extends string>({
   key,
   initialValue,
-}: UseQueryParam): [T, (newState: T) => void] => {
+}: IUseQueryParam): [T, (newState: T) => void] => {
   const { query, asPath, push, isReady } = useRouter();
   const setQueryValue = useCallback(
     (value: string) => {

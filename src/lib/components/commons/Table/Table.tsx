@@ -9,7 +9,7 @@ import {
 } from './Table.styled';
 import { ITableProps } from './Table.types';
 import { EmptyState } from '../EmptyState';
-import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
 import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
@@ -55,13 +55,13 @@ export const Table = <T extends string = string>({
         ))}
       {!loading && rows.length === 0 && (
         <EmptyState
-          content={DISPLAY_TEXTS.he.tableStates[ITableStates.NoRows]}
+          content={DISPLAY_TEXTS.he.tableStates[ETableStates.NoRows]}
         />
       )}
       {loading && (
         <EmptyState
           animation='pulse'
-          content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+          content={DISPLAY_TEXTS.he.tableStates[ETableStates.Loading]}
         />
       )}
       {!loading && totals && (

@@ -1,5 +1,5 @@
 import { ProjectPage } from '@/lib/components/ProjectPage/ProjectPage';
-import { ProjectType } from '@/lib/consts/projects';
+import { EProjectType } from '@/lib/consts/projects';
 import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { ProjectContractsProvider } from '@/lib/context/projectContractsContext';
 import { ProjectOddJobsProvider } from '@/lib/context/projectOddJobsContext';
@@ -8,7 +8,7 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 
 type IProjectRouteProps = {
-  projectType: ProjectType;
+  projectType: EProjectType;
   projectId: string;
 };
 
@@ -30,7 +30,7 @@ export default function ProjectRoute({
 export const getServerSideProps: GetServerSideProps<
   IProjectRouteProps
 > = async (ctx) => {
-  const projectType = queryParamToString<ProjectType>(
+  const projectType = queryParamToString<EProjectType>(
     ctx.query,
     PROJECT_TYPE_QUERY,
   );

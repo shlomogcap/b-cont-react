@@ -1,55 +1,55 @@
 import { ITableColumn, Table } from '@/lib/components/commons/Table';
 import { IProjectOddJobsProps } from './ProjectOddJobs.types';
 import { useProjectOddJobsContext } from '@/lib/context/projectOddJobsContext';
-import { IOddJobsFields } from '@/lib/consts/oddJobs/OddJobsFields';
+import { EOddJobsFields } from '@/lib/consts/oddJobs/OddJobsFields';
 import { ODD_JOBS_DISPLAY_TEXTS } from '@/lib/consts/oddJobs/displayTexts';
 import { ODD_JOBS_STATUS_OPTIONS } from './ProjectOddJobs.consts';
 
 export const ProjectOddJobs = (props: IProjectOddJobsProps) => {
   const { isLoading, data: oddJobs } = useProjectOddJobsContext();
-  const columns: ITableColumn<IOddJobsFields>[] = [
+  const columns: ITableColumn<EOddJobsFields>[] = [
     {
-      field: IOddJobsFields.Title,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Title],
+      field: EOddJobsFields.Title,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.Title],
     },
     {
-      field: IOddJobsFields.InvoiceNumber,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.InvoiceNumber],
+      field: EOddJobsFields.InvoiceNumber,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.InvoiceNumber],
     },
     {
-      field: IOddJobsFields.InvoiceDate,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.InvoiceDate],
+      field: EOddJobsFields.InvoiceDate,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.InvoiceDate],
       type: 'date',
     },
     {
-      field: IOddJobsFields.SumBeforeTax,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.SumBeforeTax],
+      field: EOddJobsFields.SumBeforeTax,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.SumBeforeTax],
       type: 'number',
     },
     {
-      field: IOddJobsFields.Description,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Description],
+      field: EOddJobsFields.Description,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.Description],
     },
     {
-      field: IOddJobsFields.Status,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.Status],
+      field: EOddJobsFields.Status,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.Status],
       type: 'list',
       options: ODD_JOBS_STATUS_OPTIONS,
     },
     {
-      field: IOddJobsFields.ApprovalSumBeforeTax,
+      field: EOddJobsFields.ApprovalSumBeforeTax,
       display:
-        ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.ApprovalSumBeforeTax],
+        ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.ApprovalSumBeforeTax],
       type: 'number',
     },
     {
-      field: IOddJobsFields.PaymentDue,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.PaymentDue],
+      field: EOddJobsFields.PaymentDue,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.PaymentDue],
       type: 'number',
     },
     {
-      field: IOddJobsFields.PaymentDate,
-      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[IOddJobsFields.PaymentDate],
+      field: EOddJobsFields.PaymentDate,
+      display: ODD_JOBS_DISPLAY_TEXTS.he.fields[EOddJobsFields.PaymentDate],
       type: 'date',
     },
   ];

@@ -1,29 +1,29 @@
-import { Lang } from '@/lib/consts/displayTexts';
-import { IUserFields } from './UserFields';
+import { ILang } from '@/lib/consts/displayTexts';
+import { EUserFields } from './UserFields';
 
 type IDisplayTextMapping = {
-  fields: Record<IUserFields, string>;
+  fields: Record<EUserFields, string>;
 };
 
-export const USERS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const USERS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     fields: {
-      [IUserFields.Title]: 'שם',
-      [IUserFields.Phone]: 'טלפון',
-      [IUserFields.Email]: 'אימייל',
-      [IUserFields.Address]: 'כתובת',
-      [IUserFields.Description]: 'הערות',
-      [IUserFields.Status]: 'סטטוס',
+      [EUserFields.Title]: 'שם',
+      [EUserFields.Phone]: 'טלפון',
+      [EUserFields.Email]: 'אימייל',
+      [EUserFields.Address]: 'כתובת',
+      [EUserFields.Description]: 'הערות',
+      [EUserFields.Status]: 'סטטוס',
     },
   },
   en: {
     fields: {
-      [IUserFields.Title]: 'Name',
-      [IUserFields.Phone]: 'Phone',
-      [IUserFields.Email]: 'Email',
-      [IUserFields.Address]: 'Address',
-      [IUserFields.Description]: 'Description',
-      [IUserFields.Status]: 'Status',
+      [EUserFields.Title]: 'Name',
+      [EUserFields.Phone]: 'Phone',
+      [EUserFields.Email]: 'Email',
+      [EUserFields.Address]: 'Address',
+      [EUserFields.Description]: 'Description',
+      [EUserFields.Status]: 'Status',
     },
   },
 };

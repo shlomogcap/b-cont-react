@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import {
   IProjectDoc,
   PROJECT_DISPLAY_TEXTS,
-  ProjectFields,
-  ProjectType,
+  EProjectFields,
+  EProjectType,
 } from '../consts/projects';
 import {
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '../consts/routes';
@@ -15,7 +15,7 @@ import { useModalContext } from '../context/ModalProvider/ModalProvider';
 type IUseProjectNavListProps = {
   projects: IProjectDoc[];
   projectId: string;
-  projectType: ProjectType;
+  projectType: EProjectType;
 };
 export const useProjectNavList = ({
   projects,
@@ -29,11 +29,11 @@ export const useProjectNavList = ({
     .map((project) => ({
       id: String(project.id),
       text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${
-        project[ProjectFields.Title]
+        project[projectId.Title]
       }`,
       onClick: () => {
         router.push({
-          pathname: IRoutesNames.Project,
+          pathname: ERoutesNames.Project,
           query: {
             [PROJECT_ID_QUERY]: project.id,
             [PROJECT_TYPE_QUERY]: project.projectType,

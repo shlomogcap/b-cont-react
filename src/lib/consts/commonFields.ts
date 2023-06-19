@@ -1,4 +1,4 @@
-import { TLang } from './displayTexts';
+import { ILang } from './displayTexts';
 
 export enum ECommonFields {
   Id = 'id',
@@ -10,7 +10,7 @@ export enum ECommonFields {
 
 type IDisplayTextMapping = Record<ECommonFields, string>;
 
-export const COMMON_FIELDS_DISPLAY_TEXTS: Record<TLang, TDisplayTextMapping> = {
+export const COMMON_FIELDS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     [ECommonFields.Id]: 'מזהה',
     [ECommonFields.CreatedAt]: 'נוצר ב',

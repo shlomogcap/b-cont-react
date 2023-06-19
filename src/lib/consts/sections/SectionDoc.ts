@@ -1,4 +1,4 @@
-import { WithCommonFields } from '@/lib/utils/WithFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
 import Z from 'zod';
 import { ESectionFields } from './SectionFields';
 import {
@@ -29,4 +29,4 @@ export const SectionDoc = Z.object({
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
 });
 
-export type ISectionDoc = WithCommonFields<Z.infer<typeof SectionDoc>>;
+export type ISectionDoc = IWithCommonFields<Z.infer<typeof SectionDoc>>;
