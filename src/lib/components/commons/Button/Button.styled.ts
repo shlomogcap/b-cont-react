@@ -27,8 +27,9 @@ export const StyledButton = styled.button<IButtonProps>`
   ${activateButtonMixin}
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-gray-2);
     color: var(--color-non-active);
+    opacity: 0.8;
+    ${resetActivateButtonMixin}
   }
   ${({ variant }) => {
     switch (variant) {

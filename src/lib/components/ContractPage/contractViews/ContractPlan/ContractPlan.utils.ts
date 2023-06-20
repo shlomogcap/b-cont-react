@@ -1,59 +1,72 @@
 import { IReportTableSection } from '@/lib/components/ReportTable';
-import { ICommonFields } from '@/lib/consts/commonFields';
 import { ESectionFields, ISectionDoc } from '@/lib/consts/sections';
-import { IWorkspaceGroupDoc } from '@/lib/consts/workspaces';
+import { EWorkspaceFields, IWorkspaceDoc } from '@/lib/consts/workspaces';
+import { sortBy } from 'lodash-es';
 
 const DEFAULT_WORKSPACE = '(default)';
 
 export const prepareContractSectionReport = (
   contractSections: ISectionDoc[],
-  workspaces: IWorkspaceGroupDoc[],
+  workspaces: IWorkspaceDoc[],
 ): IReportTableSection<ESectionFields>[] => {
-  //TODO: implement workspace/group logic by adding object field inside section to manage this + sort by workspace/index and then by group/index and then by section/index
-  const result: IReportTableSection<ESectionFields>[] = [];
-  const indexWorkspaceDir: Record<
-    string,
-    Record<string, { title: string; rows: ISectionDoc[] }>
-  > = {};
-  contractSections.forEach((sectionData) => {
-    const workspaceId = String(
-      sectionData.workspaceAreaRef || DEFAULT_WORKSPACE,
+  const wsMap = new Map(workspaces.map((ws) => [ws.id, ws]));
+
+  function injectRows(id: string): IReportTableSection<ESectionFields> {
+    const workspace = wsMap.get(id);
+    const result: Partial<IReportTableSection<ESectionFields>> = {
+      title: workspace!.title,
+    };
+
+    const rows = contractSections.filter(
+      (row) => row[ESectionFields.WorkspaceRef] === workspace?.path,
     );
-    const groupId = String(sectionData.workspaceGroupRef || DEFAULT_WORKSPACE);
-    if (workspaceId && !indexWorkspaceDir[workspaceId]) {
-      indexWorkspaceDir[workspaceId] = {
-        [groupId]: {
-          title:
-            workspaces.find((ws) => ws[ICommonFields.Path] === workspaceId)
-              ?.title ?? '',
-          rows: [sectionData],
-        },
-      };
-      return;
+    if (rows.length > 0) {
+      result.rows = sortBy(rows, EWorkspaceFields.OrderIndex);
     }
-    if (workspaceId && groupId && !indexWorkspaceDir[workspaceId][groupId]) {
-      indexWorkspaceDir[workspaceId] = {
-        [groupId]: {
-          title:
-            workspaces.find((grp) => grp[ICommonFields.Path] === groupId)
-              ?.title ?? '',
-          rows: [sectionData],
-        },
-      };
-      return;
+
+    const subChildren = workspaces.filter(
+      (child) => child.parent === String(id),
+    );
+    if (subChildren.length > 0) {
+      result.sections = sortBy(
+        subChildren
+          .map((child) => injectRows(String(child.id)))
+          .filter((section) => section.rows || section.sections),
+        EWorkspaceFields.OrderIndex,
+      );
     }
-    indexWorkspaceDir[workspaceId]?.[groupId]?.rows.push(sectionData);
+
+    return result as IReportTableSection<ESectionFields>;
+  }
+
+  const sortedWorkspaces = sortBy(workspaces, EWorkspaceFields.OrderIndex);
+  const sortedRows = sortBy(contractSections, ESectionFields.OrderIndex);
+
+  const defaultSection: IReportTableSection<ESectionFields> = {
+    title: DEFAULT_WORKSPACE,
+    rows: [],
+  };
+
+  sortedRows.forEach((row) => {
+    if (!row[ESectionFields.WorkspaceRef]) {
+      defaultSection.rows?.push(row);
+    }
   });
-  console.log(indexWorkspaceDir);
-  return [
-    {
-      title: '',
-      sections: [
-        {
-          title: '',
-          rows: contractSections,
-        },
-      ],
-    },
-  ];
+
+  const result: IReportTableSection<ESectionFields>[] = sortedWorkspaces
+    .reduce(
+      (acc: IReportTableSection<ESectionFields>[], curr: IWorkspaceDoc) => {
+        if (!curr.parent) {
+          const section = injectRows(String(curr.id));
+          if (section.rows || section.sections) {
+            acc.push(section);
+          }
+        }
+        return acc;
+      },
+      [defaultSection],
+    )
+    .filter((section) => section.rows?.length || section.sections?.length);
+
+  return result;
 };

@@ -61,6 +61,8 @@ const GlobalStyle = createGlobalStyle<Props>`
     --box-shadow-2: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
     --box-shadow-3: 0.1rem 0.9rem 2rem rgba(0, 0, 0, 0.4);
 
+    --toastify-z-index: 999999;
+
 
     font-size: 62.5%;
     @media only screen and (max-width: ${Breakpoints.Phone}) {

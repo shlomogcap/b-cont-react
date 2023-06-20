@@ -1,30 +1,20 @@
-import { ESectionFields } from '@/lib/consts/sections';
-import { IGroupDoc, IWorkspaceDoc } from '@/lib/consts/workspaces';
-import { safeJSONParse } from '@/lib/utils/safeJsonParse';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 import { IDropdownOption } from '../commons/Input/inputs/DropdownInput';
-import { useEffect } from 'react';
-import { IContractSectionFormFieldsProps } from './ContractSectionForm.types';
 
-export const useGetGroupsOptions = (
-  groupsOptions: IContractSectionFormFieldsProps['groupsOptions'],
-) => {
-  const { setValue } = useFormContext();
-  const selectedWorkspaceValue = useWatch({
-    name: ESectionFields.WorkspaceAreaRef,
-  });
-  const selectedWorkspace = safeJSONParse<IWorkspaceDoc>(
-    selectedWorkspaceValue,
-  );
-  useEffect(() => {
-    if (!selectedWorkspaceValue) {
-      setValue(ESectionFields.WorkspaceGroupRef, '');
+export const prepareWorkspaceOptions = (workspaces: IWorkspaceDoc[]) => {
+  const result: IDropdownOption<string>[] = [];
+  const wsMap = new Map(workspaces.map((ws) => [ws.path, ws]));
+  const contactPath = (ws: IWorkspaceDoc): string => {
+    if (ws.parent) {
+      const parent = wsMap.get(String(ws?.parent));
+      if (parent) {
+        return `${contactPath(parent)} / ${ws.title}`;
+      }
     }
-  }, [selectedWorkspaceValue, setValue]);
-  return selectedWorkspaceValue
-    ? groupsOptions.filter(
-        ({ value }) =>
-          safeJSONParse<IGroupDoc>(value)?.parent === selectedWorkspace?.path,
-      )
-    : [];
+    return ws.title;
+  };
+  workspaces.forEach((ws) => {
+    result.push({ value: ws.path!, text: contactPath(ws) });
+  });
+  return result;
 };

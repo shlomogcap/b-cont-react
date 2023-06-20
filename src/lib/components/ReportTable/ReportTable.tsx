@@ -16,6 +16,7 @@ const ReportSection = <T extends string>({
   loading,
   columns,
   onRowClick,
+  onSectionClick,
 }: IReportSectionProps<T>) => {
   if (depth > 3) {
     throw 'Inavlid Nested Sections , Nesting Sections is limit to 3 levels only';
@@ -23,14 +24,23 @@ const ReportSection = <T extends string>({
   const level = section.level ?? getLevelFromDepth(depth);
   return (
     <>
-      <StyledSectionRowTitle level={level}>
+      <StyledSectionRowTitle
+        level={level}
+        onClick={(e) => {
+          e.stopPropagation();
+          onSectionClick?.(section);
+        }}
+      >
         {section.title}
       </StyledSectionRowTitle>
       {!loading &&
         section?.rows?.map((row) => (
           <StyledReportTableDataRow
             level={level}
-            onClick={() => onRowClick?.({ ...row })}
+            onClick={(e) => {
+              e.stopPropagation();
+              onRowClick?.({ ...row });
+            }}
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
@@ -65,6 +75,7 @@ export const ReportTable = <T extends string = string>({
   sections,
   loading,
   onRowClick,
+  onSectionClick,
   title,
   className,
 }: IReportTableProps<T>) => {
@@ -88,6 +99,7 @@ export const ReportTable = <T extends string = string>({
           loading={loading}
           columns={columns}
           onRowClick={onRowClick}
+          onSectionClick={onSectionClick}
         />
       ))}
     </StyledReportTable>

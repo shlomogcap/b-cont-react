@@ -1,4 +1,4 @@
 export enum EModalName {
   SwitchRoute,
-  AddSectionForm,
+  SectionWsForm,
 }

@@ -1,12 +1,11 @@
-import { IContractAddSectionModalProps } from '../ContractAddSectionModal';
+import { IContractSectionModalProps } from '../ContractSectionModal';
 import { IDropdownOption } from '../commons/Input/inputs/DropdownInput';
 
 export type IContractSectionFormProps = Omit<
-  IContractAddSectionModalProps,
-  'openTab'
+  IContractSectionModalProps,
+  'openTab' | 'workspace'
 >;
 
 export type IContractSectionFormFieldsProps = {
   workspacesOptions: IDropdownOption<string>[];
-  groupsOptions: IDropdownOption<string>[];
 };

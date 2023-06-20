@@ -10,7 +10,6 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-  useWatch,
 } from 'react-hook-form';
 import {
   ESectionFields,
@@ -21,7 +20,6 @@ import {
 import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
-import { useContractContext } from '@/lib/context/contractContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import {
@@ -44,29 +42,17 @@ import {
   StyledContractSectionFormFields,
 } from './ContractSectionForm.styled';
 import { Divider } from '../commons/Divider';
-import { EWorkspaceFields } from '@/lib/consts/workspaces';
-import { useGetGroupsOptions } from './ContractSectionForm.utils';
+import { prepareWorkspaceOptions } from './ContractSectionForm.utils';
 
 export const ContractSectionFormFields = ({
   workspacesOptions,
-  groupsOptions,
 }: IContractSectionFormFieldsProps) => {
-  const groupsFilterOptions = useGetGroupsOptions(groupsOptions);
   return (
     <StyledContractSectionFormFields>
       <DropdownInput
         options={workspacesOptions}
-        label={
-          SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceAreaRef]
-        }
-        name={ESectionFields.WorkspaceAreaRef}
-      />
-      <DropdownInput
-        options={groupsFilterOptions}
-        label={
-          SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceGroupRef]
-        }
-        name={ESectionFields.WorkspaceGroupRef}
+        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceRef]}
+        name={ESectionFields.WorkspaceRef}
       />
       <Divider />
       <TextInput
@@ -116,8 +102,8 @@ export const ContractSectionFormFields = ({
 
 export const ContractSectionForm = ({
   section,
-  groups,
   workspaces,
+  onSaved,
 }: IContractSectionFormProps) => {
   const isEditMode = Boolean(section);
   const router = useRouter();
@@ -148,6 +134,7 @@ export const ContractSectionForm = ({
         );
         await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
+        onSaved?.();
       } catch (err) {
         toast.error(
           err instanceof FirebaseError
@@ -184,31 +171,27 @@ export const ContractSectionForm = ({
       form.reset(CONTRACT_SECTION_FORM_DEFAULT_VALUES);
     }
   };
-
   return (
     <FormProvider {...form}>
       <StyledContractSectionForm>
         <ContractSectionFormFields
-          workspacesOptions={workspaces.map((workspace) => ({
-            text: workspace[EWorkspaceFields.Title],
-            value: JSON.stringify(workspace),
-          }))}
-          groupsOptions={groups.map((group) => ({
-            text: group[EWorkspaceFields.Title],
-            value: JSON.stringify(group),
-          }))}
+          workspacesOptions={prepareWorkspaceOptions(workspaces)}
         />
+        {isEditMode && <>milestones table...</>}
         <FormFooter>
-          {form.formState.isDirty && (
-            <>
-              <Button onClick={form.handleSubmit(onSubmit, onError)}>
-                {DISPLAY_TEXTS.he.buttons[IButtonTexts.Save]}
-              </Button>
-              <Button variant='secondary' onClick={abortChanges}>
-                {DISPLAY_TEXTS.he.buttons[IButtonTexts.Cancel]}
-              </Button>
-            </>
-          )}
+          <Button
+            onClick={form.handleSubmit(onSubmit, onError)}
+            disabled={!form.formState.isDirty}
+          >
+            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Save]}
+          </Button>
+          <Button
+            variant='secondary'
+            onClick={abortChanges}
+            disabled={!form.formState.isDirty}
+          >
+            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Cancel]}
+          </Button>
         </FormFooter>
       </StyledContractSectionForm>
     </FormProvider>

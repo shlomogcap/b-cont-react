@@ -4,6 +4,7 @@ import { ESectionFields } from './SectionFields';
 import {
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
+  REQUIRED_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
 import { ESectionCalculationType } from './SectionCalculationType';
@@ -24,10 +25,9 @@ export const SectionDoc = Z.object({
   [ESectionFields.ItemsCount]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalSum]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [ESectionFields.WorkspaceAreaRef]: OPTIONAL_STRING_SCHEMA,
-  [ESectionFields.WorkspaceGroupRef]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.DonePercentage]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
+  [ESectionFields.WorkspaceRef]: REQUIRED_STRING_SCHEMA,
 });
 
 export type ISectionDoc = WithCommonFields<Z.infer<typeof SectionDoc>>;

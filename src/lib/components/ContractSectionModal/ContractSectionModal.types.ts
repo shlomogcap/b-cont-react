@@ -1,16 +1,15 @@
 import { EContractSectionItem, IContractDoc } from '@/lib/consts/contracts';
 import { ISectionDoc } from '@/lib/consts/sections';
-import { IGroupDoc, IWorkspaceDoc } from '@/lib/consts/workspaces';
+import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
-export type IContractAddSectionModalProps = {
+export type IContractSectionModalProps = {
   openTab?: EContractSectionItem;
-  contract: IContractDoc;
   section?: ISectionDoc;
+  workspace?: IWorkspaceDoc;
+  contract: IContractDoc;
   workspaces: IWorkspaceDoc[];
-  groups: IGroupDoc[];
 };
-
-export type IContractAddSectionFormModalData = IContractAddSectionModalProps & {
-  name: EModalName.AddSectionForm;
+export type IContractSectionModalData = IContractSectionModalProps & {
+  name: EModalName.SectionWsForm;
 };

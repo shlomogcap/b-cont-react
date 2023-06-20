@@ -14,11 +14,8 @@ import {
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
 import { TriangleArrowIcon } from '@/lib/components/icons/TriangleArrowIcon';
 import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
-import {
-  EWorkspaceEntityType,
-  IGroupDoc,
-  IWorkspaceDoc,
-} from '@/lib/consts/workspaces';
+import { ISectionDoc } from '@/lib/consts/sections';
+import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 
 export const ContractPlan = (props: IContractPlanProps) => {
   const { showModal } = useModalContext();
@@ -31,12 +28,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
   );
   const modalProps = {
     contract: contract!,
-    groups: workspaces.filter(
-      ({ entityType }) => entityType === EWorkspaceEntityType.Group,
-    ) as IGroupDoc[],
-    workspaces: workspaces.filter(
-      ({ entityType }) => entityType === EWorkspaceEntityType.Workspace,
-    ) as IWorkspaceDoc[],
+    workspaces,
   };
   return (
     <>
@@ -46,7 +38,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
             <Button
               onClick={() =>
                 showModal({
-                  name: EModalName.AddSectionForm,
+                  name: EModalName.SectionWsForm,
                   openTab: EContractSectionItem.Section,
                   ...modalProps,
                 })
@@ -62,7 +54,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                 value: key,
                 onOptionClick: () =>
                   showModal({
-                    name: EModalName.AddSectionForm,
+                    name: EModalName.SectionWsForm,
                     openTab: key as any,
                     ...modalProps,
                   }),
@@ -72,6 +64,21 @@ export const ContractPlan = (props: IContractPlanProps) => {
             </ButtonMenu>
           </StyledActionsRow>
         }
+        onRowClick={(section) => {
+          showModal({
+            name: EModalName.SectionWsForm,
+            section: section as ISectionDoc,
+            ...modalProps,
+          });
+        }}
+        onSectionClick={(workspace) => {
+          showModal({
+            name: EModalName.SectionWsForm,
+            openTab: EContractSectionItem.Workspace,
+            workspace: workspace as IWorkspaceDoc,
+            ...modalProps,
+          });
+        }}
         columns={CONTRACT_SECTIONS_COLUMNS}
         sections={reportSections}
       />

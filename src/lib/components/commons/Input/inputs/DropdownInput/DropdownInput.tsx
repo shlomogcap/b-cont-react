@@ -40,7 +40,10 @@ export const DropdownInput = ({ options, ...props }: IDropdownInputProps) => {
           {displayValue}
           {displayValue && (
             <StyledRemoveIcon
-              onClick={() => setValue(props.name, '')}
+              onClick={(e) => {
+                e.stopPropagation();
+                setValue(props.name, '');
+              }}
               style={{ color: 'var(--color-non-active)', cursor: 'pointer' }}
             />
           )}

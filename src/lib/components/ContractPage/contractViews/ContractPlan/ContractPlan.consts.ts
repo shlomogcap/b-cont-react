@@ -74,6 +74,21 @@ export const DUMMY_REPORT_DATA: IReportTableSection<ESectionFields>[] = [
   {
     title: 'Workspace B',
     // level: 'main',
-    sections: [{ title: 'Group B.1', level: 'secondary', rows: [] }],
+    rows: [
+      {
+        id: 'b21',
+        title: 'Section B.2.1',
+        itemPrice: 30_000,
+        itemsCount: 8,
+        totalSum: 30_000 * 8,
+      },
+      {
+        id: 'b22',
+        title: 'Section B.2.2',
+        itemPrice: 800_000,
+        itemsCount: 3,
+        totalSum: 800_000 * 3,
+      },
+    ],
   },
 ];

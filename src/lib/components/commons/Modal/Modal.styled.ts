@@ -17,8 +17,8 @@ export const StyledModal = styled.div<IStyledModalProps>`
 `;
 
 export const StyledModalBox = styled.div`
-  padding: 3rem;
-  padding-top: 4rem;
+  padding: 2.5rem;
+  padding-block: 2rem;
   position: relative;
   cursor: context-menu;
   min-width: 30rem;

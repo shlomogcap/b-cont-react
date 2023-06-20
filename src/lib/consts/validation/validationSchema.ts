@@ -11,6 +11,8 @@ export const TITLE_FIELD_SCHEMA = REQUIRED_STRING_SCHEMA.min(
   VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooShort],
 );
 
+export const INTEGER_SCHEMA = Z.coerce.number().int().positive();
+
 export const OPTIONAL_STRING_SCHEMA = Z.string().optional();
 export const OPTIONAL_BOOLEAN_SCHEMA = Z.boolean().optional();
 export const OPTIONAL_NUMBER_SCHEMA = Z.coerce.number().optional();

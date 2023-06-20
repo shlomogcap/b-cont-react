@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { EModalName } from './ModalName';
 import { ISwitchRouteModalData } from '@/lib/components/SwitchRouteModal';
-import { IContractAddSectionFormModalData } from '@/lib/components/ContractAddSectionModal';
+import { IContractSectionModalData } from '@/lib/components/ContractSectionModal';
 
 export type IModalProviderProps = {
   children?: ReactNode;
@@ -14,5 +14,5 @@ export type IModalContext = {
 
 export type IModalData = { name: EModalName } & (
   | ISwitchRouteModalData
-  | IContractAddSectionFormModalData
+  | IContractSectionModalData
 );

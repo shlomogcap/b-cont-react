@@ -7,11 +7,9 @@ export enum ESectionFields {
   ItemsStartIndex = 'itemsStartIndex',
   TotalActualsSum = 'totalActualsSum',
   DonePercentage = 'donePercentage',
-  WorkspacePath = 'workspacePath',
+  WorkspaceRef = 'workspaceRef',
   ItemPrice = 'itemPrice',
   ItemsCount = 'itemsCount',
   TotalSum = 'totalSum',
   Description = 'description',
-  WorkspaceAreaRef = 'workspaceAreaRef',
-  WorkspaceGroupRef = 'workspaceGroupRef',
 }

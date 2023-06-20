@@ -21,7 +21,6 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     contractFormTitle: 'פרטי החוזה',
     addNewItems: {
       [EContractSectionItem.Section]: 'סעיף',
-      [EContractSectionItem.SectionsGroup]: 'קבוצת סעיפים',
       [EContractSectionItem.Workspace]: 'איזור עבודה',
     },
     fields: {
@@ -80,7 +79,6 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
     contractFormTitle: 'Contract Details',
     addNewItems: {
       [EContractSectionItem.Section]: '+ Section',
-      [EContractSectionItem.SectionsGroup]: '+ Group',
       [EContractSectionItem.Workspace]: '+ Workspace',
     },
     fields: {
