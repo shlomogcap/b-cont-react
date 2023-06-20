@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
   }
   const accountStage: 'billing' | 'actual' = 'actual';
   const contractStage =
-    contract.data()?.[EContractFields.Status] === contractStage.Plan
+    contract.data()?.[EContractFields.Status] === EContractStatus.Plan
       ? 'plan'
       : accountStage;
   const destination = `${replaceQueryParams(ERoutesNames.Contract, query, [

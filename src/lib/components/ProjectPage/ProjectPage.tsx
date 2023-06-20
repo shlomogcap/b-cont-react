@@ -20,7 +20,6 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
     projectType,
     ERoutesNames.ProjectsWithType,
   );
-
   const projectsNavList = useProjectNavList({
     projects,
     projectId,
