@@ -10,6 +10,7 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
+  useFormContext,
 } from 'react-hook-form';
 import {
   ESectionFields,
@@ -44,9 +45,23 @@ import {
 import { Divider } from '../commons/Divider';
 import { prepareWorkspaceOptions } from './ContractSectionForm.utils';
 
+const useCalcTotalSum = () => {
+  const { setValue, watch } = useFormContext();
+  return () => {
+    const [price, amount] = watch([
+      ESectionFields.ItemPrice,
+      ESectionFields.ItemsCount,
+    ]);
+    if (price && amount) {
+      setValue(ESectionFields.TotalSum, Number(price) * Number(amount));
+    }
+  };
+};
+
 export const ContractSectionFormFields = ({
   workspacesOptions,
 }: IContractSectionFormFieldsProps) => {
+  const calcTotalSum = useCalcTotalSum();
   return (
     <StyledContractSectionFormFields>
       <DropdownInput
@@ -87,16 +102,19 @@ export const ContractSectionFormFields = ({
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemPrice]}
         name={ESectionFields.ItemPrice}
+        afterChange={calcTotalSum}
       />
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsCount]}
         name={ESectionFields.ItemsCount}
+        afterChange={calcTotalSum}
       />
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.TotalSum]}
         name={ESectionFields.TotalSum}
+        numericFormatProps={{ readOnly: true }}
       />
       <TextInput
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.Description]}
