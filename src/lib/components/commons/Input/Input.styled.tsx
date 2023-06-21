@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { StyledDropdownField } from './inputs/DropdownInput/DropdownInput.styled';
 
 type IStyledInputControlProps = {
   isTextOnly?: boolean;
@@ -30,11 +29,6 @@ export const InputStyles = css`
   width: 100%;
   height: 5.5rem;
 
-  &:read-only {
-    cursor: context-menu;
-    color: var(--color-gray);
-  }
-
   &[data-id] {
     cursor: pointer;
     text-decoration: underline;
@@ -42,9 +36,11 @@ export const InputStyles = css`
     transition: all 0.3s;
   }
 
-  &:disabled {
+  &:disabled,
+  &:read-only {
     cursor: context-menu;
-    background: none;
+    color: var(--color-gray-1);
+    background: var(--color-bg-3);
     border-bottom: 0.5px solid var(--color-gray-3);
   }
 `;
@@ -55,7 +51,7 @@ export const StyledInputField = styled.input`
 
 export const StyledInputControl = styled.div<IStyledInputControlProps>`
   display: grid;
-  &:focus-within ${StyledInputLabel} {
+  &:focus-within ${StyledInputLabel}:not(:read-only) {
     color: var(--color-active-1);
     font-weight: var(--font-w-3);
   }

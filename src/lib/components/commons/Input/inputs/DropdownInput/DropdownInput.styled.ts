@@ -7,6 +7,7 @@ export const StyledDropdownField = styled.div`
   display: grid;
   grid-template-columns: 1fr max-content;
   align-items: center;
+  background-color: unset !important;
 `;
 
 export const StyledDropdownTag = styled.div`
