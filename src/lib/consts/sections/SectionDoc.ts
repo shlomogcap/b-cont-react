@@ -2,6 +2,7 @@ import { WithCommonFields } from '@/lib/utils/WithFields';
 import Z from 'zod';
 import { ESectionFields } from './SectionFields';
 import {
+  NUMBER_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
   REQUIRED_STRING_SCHEMA,
@@ -21,9 +22,9 @@ export const SectionDoc = Z.object({
   [ESectionFields.OrderIndex]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.AmountType]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.ItemsStartIndex]: OPTIONAL_NUMBER_SCHEMA,
-  [ESectionFields.ItemPrice]: OPTIONAL_NUMBER_SCHEMA,
-  [ESectionFields.ItemsCount]: OPTIONAL_NUMBER_SCHEMA,
-  [ESectionFields.TotalSum]: OPTIONAL_NUMBER_SCHEMA,
+  [ESectionFields.ItemPrice]: NUMBER_SCHEMA,
+  [ESectionFields.ItemsCount]: NUMBER_SCHEMA,
+  [ESectionFields.TotalSum]: NUMBER_SCHEMA,
   [ESectionFields.Description]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.DonePercentage]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,

@@ -12,6 +12,7 @@ export const TITLE_FIELD_SCHEMA = REQUIRED_STRING_SCHEMA.min(
 );
 
 export const INTEGER_SCHEMA = Z.coerce.number().int().positive();
+export const NUMBER_SCHEMA = Z.coerce.number();
 
 export const OPTIONAL_STRING_SCHEMA = Z.string().optional();
 export const OPTIONAL_BOOLEAN_SCHEMA = Z.boolean().optional();

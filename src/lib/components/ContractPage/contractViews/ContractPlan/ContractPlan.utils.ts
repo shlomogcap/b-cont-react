@@ -58,7 +58,6 @@ export const prepareContractSectionReport = (
       (acc: IReportTableSection<ESectionFields>[], curr: IWorkspaceDoc) => {
         if (!curr.parent) {
           const section = injectRows(String(curr.id));
-          console.log(section);
           if (section.rows || section.sections) {
             acc.push(section);
           }

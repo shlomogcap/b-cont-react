@@ -61,6 +61,7 @@ export const ContractSectionFormFields = ({
         name={ESectionFields.Title}
       />
       <DropdownInput
+        isRequired
         options={SECTION_CALULATION_METHOD_OPTIONS}
         label={
           SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationMethod]
@@ -68,6 +69,7 @@ export const ContractSectionFormFields = ({
         name={ESectionFields.CalculationMethod}
       />
       <DropdownInput
+        isRequired
         options={SECTION_CALULATION_TYPE_OPTIONS}
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationType]}
         name={ESectionFields.CalculationType}
@@ -77,18 +79,22 @@ export const ContractSectionFormFields = ({
         name={ESectionFields.AmountType}
       />
       <NumberInput
+        isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsStartIndex]}
         name={ESectionFields.ItemsStartIndex}
       />
       <NumberInput
+        isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemPrice]}
         name={ESectionFields.ItemPrice}
       />
       <NumberInput
+        isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsCount]}
         name={ESectionFields.ItemsCount}
       />
       <NumberInput
+        isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.TotalSum]}
         name={ESectionFields.TotalSum}
       />
