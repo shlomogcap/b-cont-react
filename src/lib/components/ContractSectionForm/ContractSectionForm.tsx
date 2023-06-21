@@ -152,6 +152,7 @@ export const ContractSectionForm = ({
       );
       const res = await addDoc(collectionRef, preparedData);
       toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
+      onSaved?.({ id: res.id, path: res.path, ...preparedData });
       // router.push({
       //   pathname: IRoutesNames.Project,
       //   query: { [PROJECT_ID_QUERY]: res.id },

@@ -5,7 +5,7 @@ import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
 export type IContractSectionModalProps = {
   openTab?: EContractSectionItem;
-  section?: ISectionDoc;
+  section?: Partial<ISectionDoc>;
   workspace?: IWorkspaceDoc;
   contract: IContractDoc;
   workspaces: IWorkspaceDoc[];

@@ -9,6 +9,7 @@ import {
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { ContractAddWorkspaceForm } from '../ContractAddWorkspaceForm';
 import { Tabs } from '../commons/Tabs';
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
 export const ContractSectionModal = ({
   openTab,
@@ -18,13 +19,21 @@ export const ContractSectionModal = ({
   const [activeTab, setActiveTab] = useState(
     openTab ?? EContractSectionItem.Section,
   );
-  const { closeModal } = useModalContext();
+  const { closeModal, showModal } = useModalContext();
   const TABS: Record<EContractSectionItem, ReactElement> = {
     section: (
       <ContractSectionForm
         section={section}
         {...rest}
-        onSaved={() => closeModal()}
+        onSaved={(section) => {
+          !section
+            ? showModal({
+                name: EModalName.SectionWsForm,
+                ...rest,
+                section,
+              })
+            : closeModal();
+        }}
       />
     ),
     workspace: (
