@@ -10,13 +10,13 @@ import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IContractDoc } from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
-import { IWorkspaceGroupDoc } from '../consts/workspaces';
+import { IWorkspaceDoc } from '../consts/workspaces';
 
 type IContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
   accounts: { title: string }[];
-  workspaces: IWorkspaceGroupDoc[];
+  workspaces: IWorkspaceDoc[];
 };
 
 type IContractContext = {

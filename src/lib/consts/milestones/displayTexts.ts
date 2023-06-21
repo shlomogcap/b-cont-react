@@ -3,9 +3,10 @@ import { EMilestoneFields } from './MilestoneFields';
 
 type DisplayTextMapping = {
   fields: Record<EMilestoneFields, string>;
+  total: string;
 };
 
-export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const MILESTONES_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
   he: {
     fields: {
       [EMilestoneFields.Title]: 'אבן דרך של יחידה',
@@ -14,6 +15,7 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EMilestoneFields.Price]: 'סכום',
       [EMilestoneFields.TotalDone]: 'סהכ בוצע',
     },
+    total: 'סהכ',
   },
   en: {
     fields: {
@@ -23,5 +25,6 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EMilestoneFields.Price]: 'Price',
       [EMilestoneFields.TotalDone]: 'Total Done',
     },
+    total: 'Total',
   },
 };

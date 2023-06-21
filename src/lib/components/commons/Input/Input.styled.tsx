@@ -51,6 +51,7 @@ export const StyledInputField = styled.input`
 
 export const StyledInputControl = styled.div<IStyledInputControlProps>`
   display: grid;
+  overflow: visible;
   &:focus-within ${StyledInputLabel}:not(:read-only) {
     color: var(--color-active-1);
     font-weight: var(--font-w-3);

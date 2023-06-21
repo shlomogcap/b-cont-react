@@ -11,11 +11,12 @@ export const InputControlLabel = ({
   label,
   error,
   isRequired,
-}: Pick<IInputProps, 'name' | 'isRequired' | 'label'> & {
+  hideLabel,
+}: Pick<IInputProps, 'name' | 'isRequired' | 'label' | 'hideLabel'> & {
   error?: FieldError;
 }) => (
   <StyledInputLabel htmlFor={name}>
-    {`${label}${isRequired ? ' *' : ''}`}
+    {!hideLabel && `${label}${isRequired ? ' *' : ''}`}
     {error?.message && (
       <Tooltip content={error.message}>
         <AlertIcon

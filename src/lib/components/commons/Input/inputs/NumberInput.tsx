@@ -18,6 +18,7 @@ type INumberInputProps = Omit<IInputProps, 'inputElement'> & {
 
 const StyledNumericFormat = styled.div`
   & > input {
+    background-color: unset;
     ${InputStyles}
   }
 `;
@@ -47,6 +48,7 @@ export const NumberInput = ({
           >
             <StyledNumericFormat ref={inputWrapperRef}>
               <NumericFormat
+                style={{ direction: 'ltr' }}
                 thousandSeparator
                 allowNegative={false}
                 isAllowed={(values) => {

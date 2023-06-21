@@ -14,4 +14,4 @@ export const MilestoneDoc = Z.object({
   [EMilestoneFields.Weight]: NUMBER_SCHEMA,
 });
 
-export type ISectionDoc = WithCommonFields<Z.infer<typeof MilestoneDoc>>;
+export type IMilestoneDoc = WithCommonFields<Z.infer<typeof MilestoneDoc>>;

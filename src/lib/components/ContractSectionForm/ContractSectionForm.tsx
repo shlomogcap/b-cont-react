@@ -1,7 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import {
-  IContractSectionFormFieldsProps,
   IContractSectionFormProps,
+  ISectionFormValues,
 } from './ContractSectionForm.types';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
@@ -10,14 +10,8 @@ import {
   SubmitErrorHandler,
   SubmitHandler,
   useForm,
-  useFormContext,
 } from 'react-hook-form';
-import {
-  ESectionFields,
-  ISectionDoc,
-  SECTIONS_DISPALY_TEXTS,
-  SectionDoc,
-} from '@/lib/consts/sections';
+import { ISectionDoc, SectionDoc } from '@/lib/consts/sections';
 import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
@@ -25,8 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import {
   CONTRACT_SECTION_FORM_DEFAULT_VALUES,
-  SECTION_CALULATION_METHOD_OPTIONS,
-  SECTION_CALULATION_TYPE_OPTIONS,
+  SectionFormShape,
 } from './ContractSectionForm.consts';
 import {
   DISPLAY_TEXTS,
@@ -37,118 +30,50 @@ import { firestore } from '@/lib/firebase';
 import { FormFooter } from '../commons/Form';
 import { Button } from '../commons/Button';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
-import { DropdownInput, NumberInput, TextInput } from '../commons/Input';
-import {
-  StyledContractSectionForm,
-  StyledContractSectionFormFields,
-} from './ContractSectionForm.styled';
-import { Divider } from '../commons/Divider';
+import { StyledContractSectionForm } from './ContractSectionForm.styled';
 import { prepareWorkspaceOptions } from './ContractSectionForm.utils';
+import {
+  SectionProvider,
+  useSectionContext,
+} from '@/lib/context/sectionContext';
+import { MilestonesTable } from './MilestonesTable';
+import { ContractSectionFormFields } from './ContractSectionFormFields';
 
-const useCalcTotalSum = () => {
-  const { setValue, watch } = useFormContext();
-  return () => {
-    const [price, amount] = watch([
-      ESectionFields.ItemPrice,
-      ESectionFields.ItemsCount,
-    ]);
-    if (price && amount) {
-      setValue(ESectionFields.TotalSum, Number(price) * Number(amount));
-    }
-  };
-};
+export const ContractSectionForm = (props: IContractSectionFormProps) => (
+  <SectionProvider sectionPath={props.section?.path}>
+    <ContractSectionFormInner {...props} />
+  </SectionProvider>
+);
 
-export const ContractSectionFormFields = ({
-  workspacesOptions,
-}: IContractSectionFormFieldsProps) => {
-  const calcTotalSum = useCalcTotalSum();
-  return (
-    <StyledContractSectionFormFields>
-      <DropdownInput
-        options={workspacesOptions}
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceRef]}
-        name={ESectionFields.WorkspaceRef}
-      />
-      <Divider />
-      <TextInput
-        isRequired
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.Title]}
-        name={ESectionFields.Title}
-      />
-      <DropdownInput
-        isRequired
-        options={SECTION_CALULATION_METHOD_OPTIONS}
-        label={
-          SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationMethod]
-        }
-        name={ESectionFields.CalculationMethod}
-      />
-      <DropdownInput
-        isRequired
-        options={SECTION_CALULATION_TYPE_OPTIONS}
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationType]}
-        name={ESectionFields.CalculationType}
-      />
-      <TextInput
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.AmountType]}
-        name={ESectionFields.AmountType}
-      />
-      <NumberInput
-        isRequired
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsStartIndex]}
-        name={ESectionFields.ItemsStartIndex}
-      />
-      <NumberInput
-        isRequired
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemPrice]}
-        name={ESectionFields.ItemPrice}
-        afterChange={calcTotalSum}
-      />
-      <NumberInput
-        isRequired
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsCount]}
-        name={ESectionFields.ItemsCount}
-        afterChange={calcTotalSum}
-      />
-      <NumberInput
-        isRequired
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.TotalSum]}
-        name={ESectionFields.TotalSum}
-        numericFormatProps={{ readOnly: true }}
-      />
-      <TextInput
-        label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.Description]}
-        name={ESectionFields.Description}
-      />
-    </StyledContractSectionFormFields>
-  );
-};
-
-export const ContractSectionForm = ({
+const ContractSectionFormInner = ({
   section,
   workspaces,
   onSaved,
 }: IContractSectionFormProps) => {
+  const {
+    isLoading,
+    data: { milestones },
+  } = useSectionContext();
+
   const isEditMode = Boolean(section);
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
-  const form = useForm<ISectionDoc>({
-    resolver: zodResolver(SectionDoc),
+  const form = useForm<ISectionFormValues>({
+    resolver: zodResolver(SectionFormShape),
     defaultValues: CONTRACT_SECTION_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
   const { reset } = form;
-
   useEffect(() => {
     if (isEditMode) {
       if (section) {
-        reset(section);
+        reset({ ...section, milestones });
       }
     }
-  }, [isEditMode, reset, section]);
+  }, [isEditMode, reset, section, milestones]);
 
-  const onSubmit: SubmitHandler<ISectionDoc> = async (data) => {
+  const onSubmit: SubmitHandler<ISectionFormValues> = async (data) => {
     const preparedData = prepareFormData(data);
     if (isEditMode) {
       try {
@@ -186,7 +111,7 @@ export const ContractSectionForm = ({
       console.error(err);
     }
   };
-  const onError: SubmitErrorHandler<ISectionDoc> = (errors) => {
+  const onError: SubmitErrorHandler<ISectionFormValues> = (errors) => {
     //TODO: promt error...
     console.log('ERROR:', errors);
   };
@@ -202,7 +127,9 @@ export const ContractSectionForm = ({
         <ContractSectionFormFields
           workspacesOptions={prepareWorkspaceOptions(workspaces)}
         />
-        {isEditMode && <>milestones table...</>}
+        {isEditMode && milestones.length > 0 && (
+          <MilestonesTable milestones={milestones} isLoading={isLoading} />
+        )}
         <FormFooter>
           <Button
             onClick={form.handleSubmit(onSubmit, onError)}
