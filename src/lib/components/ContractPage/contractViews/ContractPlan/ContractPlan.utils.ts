@@ -25,7 +25,7 @@ export const prepareContractSectionReport = (
     }
 
     const subChildren = workspaces.filter(
-      (child) => child.parent === String(id),
+      (child) => child.parent === String(workspace?.path),
     );
     if (subChildren.length > 0) {
       result.sections = sortBy(
@@ -58,6 +58,7 @@ export const prepareContractSectionReport = (
       (acc: IReportTableSection<ESectionFields>[], curr: IWorkspaceDoc) => {
         if (!curr.parent) {
           const section = injectRows(String(curr.id));
+          console.log(section);
           if (section.rows || section.sections) {
             acc.push(section);
           }
