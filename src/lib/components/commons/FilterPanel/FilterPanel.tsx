@@ -11,6 +11,7 @@ import {
   StyledFilterControlDiv,
   StyledFilterButton,
   StyledFilterItemCaption,
+  StyledFiltersBar,
 } from './FilterPanel.styled';
 import {
   IFilterButtonsControlProps,
@@ -26,6 +27,7 @@ import { createPopper, Instance } from '@popperjs/core';
 import { Badge } from '../Badge';
 import { DISPLAY_TEXTS, EFilterPanelStates } from '@/lib/consts/displayTexts';
 import Draggable from 'react-draggable';
+import { SearchBar } from '../SearchBar';
 
 const FilterPanelButton = ({
   field,
@@ -89,6 +91,7 @@ export const FilterPanel = ({
   filters,
   displayTexts,
   activeFilters,
+  searchBy,
 }: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const referenceElement = useRef<SVGSVGElement>(null);
@@ -172,8 +175,11 @@ export const FilterPanel = ({
   );
   return (
     <div>
-      {isFiltersActive && <Badge />}
-      {filterIcon}
+      <StyledFiltersBar>
+        {isFiltersActive && <Badge />}
+        {filterIcon}
+        <SearchBar searchBy={searchBy} />
+      </StyledFiltersBar>
       {isFilterPanelOpen && (
         <Draggable>
           <StyledFilterPanel ref={popperElement}>

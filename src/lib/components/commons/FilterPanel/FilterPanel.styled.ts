@@ -2,6 +2,12 @@ import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button';
 import { IStyledFilterProps } from './FilterPanel.types';
 
+export const StyledFiltersBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
 export const StyledFilterPanel = styled.div`
   display: grid;
   grid-column: 1/-1;
@@ -36,11 +42,11 @@ export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
     isButtonGroup &&
     css`
       border-radius: 0;
-      &:last-of-type I{
+      &:last-of-type I {
         border-end-end-radius: 0.8rem;
         border-start-end-radius: 0.8rem;
       }
-      &:first-of-type I{
+      &:first-of-type I {
         border-end-start-radius: 0.8rem;
         border-start-start-radius: 0.8rem;
       }
