@@ -25,6 +25,7 @@ const ReportSection = <T extends string>({
   return (
     <>
       <StyledSectionRowTitle
+        actionable={Boolean(onSectionClick)}
         level={level}
         onClick={(e) => {
           e.stopPropagation();
@@ -36,6 +37,7 @@ const ReportSection = <T extends string>({
       {!loading &&
         section?.rows?.map((row) => (
           <StyledReportTableDataRow
+            actionable={Boolean(onRowClick)}
             level={level}
             onClick={(e) => {
               e.stopPropagation();
