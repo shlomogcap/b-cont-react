@@ -25,12 +25,12 @@ export const ContractSectionModal = ({
       <ContractSectionForm
         section={section}
         {...rest}
-        onSaved={(section) => {
+        onSaved={(sectionData) => {
           !section
             ? showModal({
                 name: EModalName.SectionWsForm,
                 ...rest,
-                section,
+                section: sectionData,
               })
             : closeModal();
         }}
