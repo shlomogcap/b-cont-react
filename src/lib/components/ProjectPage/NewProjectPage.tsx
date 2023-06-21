@@ -19,9 +19,9 @@ export const NewProjectPage = ({ projectType }: IProjectPageProps) => {
     text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
     id: 'projectType',
     navList: [
-      projectType.Residential,
-      projectType.Entrepreneurship,
-      projectType.PublicSpace,
+      EProjectType.Residential,
+      EProjectType.Entrepreneurship,
+      EProjectType.PublicSpace,
     ]
       .filter((type) => type !== projectType)
       .map((projectType) => ({
