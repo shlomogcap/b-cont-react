@@ -1,4 +1,4 @@
-import Z from 'zod';
+import { z } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { IVendorFields } from './VendorFields';
 import {
@@ -10,19 +10,19 @@ import {
 import { ICompanyType } from '../companyTypes';
 import { IVendorStatus } from './VendorStatus';
 
-export const VendorDoc = Z.object({
+export const VendorDoc = z.object({
   [IVendorFields.Title]: TITLE_FIELD_SCHEMA,
   [IVendorFields.CommercialName]: OPTIONAL_STRING_SCHEMA,
   [IVendorFields.CompanyNumber]: OPTIONAL_STRING_SCHEMA,
   [IVendorFields.CompanExternalNumber]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.CompanyType]: Z.nativeEnum(ICompanyType).optional(),
+  [IVendorFields.CompanyType]: z.nativeEnum(ICompanyType).optional(),
   [IVendorFields.Phone]: OPTIONAL_STRING_SCHEMA,
   [IVendorFields.Email]: OPTIONAL_STRING_SCHEMA,
   [IVendorFields.TaxesEndDate]: OPTIONAL_DATE_SCHEMA,
   [IVendorFields.TaxPercent]: OPTIONAL_NUMBER_SCHEMA,
   [IVendorFields.Address]: OPTIONAL_STRING_SCHEMA,
   [IVendorFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.Status]: Z.nativeEnum(IVendorStatus).optional(),
+  [IVendorFields.Status]: z.nativeEnum(IVendorStatus).optional(),
 });
 
-export type IVendorDoc = WithCommonFields<Z.infer<typeof VendorDoc>>;
+export type IVendorDoc = WithCommonFields<z.infer<typeof VendorDoc>>;

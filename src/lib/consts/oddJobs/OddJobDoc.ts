@@ -1,4 +1,4 @@
-import Z from 'zod';
+import { z } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { IOddJobsFields } from './OddJobsFields';
 import {
@@ -9,10 +9,10 @@ import {
 } from '../validation/validationSchema';
 import { IOddJobStatus } from './OddJobStatus';
 
-export const OddJobDoc = Z.object({
+export const OddJobDoc = z.object({
   [IOddJobsFields.Title]: TITLE_FIELD_SCHEMA,
   [IOddJobsFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IOddJobsFields.Status]: Z.nativeEnum(IOddJobStatus).optional(),
+  [IOddJobsFields.Status]: z.nativeEnum(IOddJobStatus).optional(),
   [IOddJobsFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
   [IOddJobsFields.InvoiceNumber]: OPTIONAL_STRING_SCHEMA,
   [IOddJobsFields.InvoiceDate]: OPTIONAL_DATE_SCHEMA,
@@ -22,4 +22,4 @@ export const OddJobDoc = Z.object({
   [IOddJobsFields.PaymentDate]: OPTIONAL_DATE_SCHEMA,
 });
 
-export type IOddJobDoc = WithCommonFields<Z.infer<typeof OddJobDoc>>;
+export type IOddJobDoc = WithCommonFields<z.infer<typeof OddJobDoc>>;

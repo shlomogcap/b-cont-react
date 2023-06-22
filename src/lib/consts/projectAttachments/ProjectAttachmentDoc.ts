@@ -1,4 +1,4 @@
-import Z from 'zod';
+import { z } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { IProjectAttahcmentFields } from './ProjectAttachmentFields';
 import {
@@ -9,15 +9,15 @@ import {
 } from '../validation/validationSchema';
 import { IProjectAttahcmentStatus } from './ProjectAttachmentStatus';
 
-export const ProjectAttachmentDoc = Z.object({
+export const ProjectAttachmentDoc = z.object({
   [IProjectAttahcmentFields.Title]: TITLE_FIELD_SCHEMA,
   [IProjectAttahcmentFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IProjectAttahcmentFields.Status]: Z.nativeEnum(
-    IProjectAttahcmentStatus,
-  ).optional(),
+  [IProjectAttahcmentFields.Status]: z
+    .nativeEnum(IProjectAttahcmentStatus)
+    .optional(),
   [IProjectAttahcmentFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
 });
 
 export type IProjectAttachmentDoc = WithCommonFields<
-  Z.infer<typeof ProjectAttachmentDoc>
+  z.infer<typeof ProjectAttachmentDoc>
 >;

@@ -1,4 +1,4 @@
-import Z, { ZodType } from 'zod';
+import { z } from 'zod';
 import { WithCommonFields } from '@/lib/utils/WithFields';
 import { ProjectFields } from './ProjectFields';
 import { ProjectType } from './ProjectType';
@@ -14,11 +14,11 @@ import {
   VALIDATION_DISPLAY_TEXTS,
 } from '../validation/displayTexts';
 
-export const ProjectDoc = Z.object({
+export const ProjectDoc = z.object({
   [ProjectFields.Title]: TITLE_FIELD_SCHEMA,
   [ProjectFields.Address]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.SDate]: OPTIONAL_DATE_SCHEMA,
-  [ProjectFields.NumberOfPeriods]: Z.coerce
+  [ProjectFields.NumberOfPeriods]: z.coerce
     .number()
     .min(12, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooLow])
     .max(100, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooHigh])
@@ -29,15 +29,15 @@ export const ProjectDoc = Z.object({
   [ProjectFields.SeniorManager]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.Executor]: OPTIONAL_STRING_SCHEMA,
   [ProjectFields.Entrepreneur]: OPTIONAL_STRING_SCHEMA,
-  [ProjectFields.ProjectType]: Z.nativeEnum(ProjectType).optional(),
-  [ProjectFields.NumberOfBuildings]: Z.coerce
+  [ProjectFields.ProjectType]: z.nativeEnum(ProjectType).optional(),
+  [ProjectFields.NumberOfBuildings]: z.coerce
     .number()
     .min(1, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooLow])
     .max(20, VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooHigh])
     .optional(),
   [ProjectFields.Basements]: OPTIONAL_NUMBER_SCHEMA,
   [ProjectFields.NumberOfApatrments]: OPTIONAL_NUMBER_SCHEMA,
-  [ProjectFields.Status]: Z.nativeEnum(IProjectStatus).optional(),
+  [ProjectFields.Status]: z.nativeEnum(IProjectStatus).optional(),
 });
 
-export type IProjectDoc = WithCommonFields<Z.infer<typeof ProjectDoc>>;
+export type IProjectDoc = WithCommonFields<z.infer<typeof ProjectDoc>>;

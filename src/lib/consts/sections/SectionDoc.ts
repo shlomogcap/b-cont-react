@@ -1,5 +1,5 @@
 import { WithCommonFields } from '@/lib/utils/WithFields';
-import Z from 'zod';
+import { z } from 'zod';
 import { ESectionFields } from './SectionFields';
 import {
   NUMBER_SCHEMA,
@@ -11,14 +11,14 @@ import {
 import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionCalculationMethod } from './SectionCalculationMethod';
 
-export const SectionDoc = Z.object({
+export const SectionDoc = z.object({
   [ESectionFields.Title]: TITLE_FIELD_SCHEMA,
-  [ESectionFields.CalculationMethod]: Z.nativeEnum(
-    ESectionCalculationMethod,
-  ).optional(),
-  [ESectionFields.CalculationType]: Z.nativeEnum(
-    ESectionCalculationType,
-  ).optional(),
+  [ESectionFields.CalculationMethod]: z
+    .nativeEnum(ESectionCalculationMethod)
+    .optional(),
+  [ESectionFields.CalculationType]: z
+    .nativeEnum(ESectionCalculationType)
+    .optional(),
   [ESectionFields.OrderIndex]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.AmountType]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.ItemsStartIndex]: OPTIONAL_NUMBER_SCHEMA,
@@ -31,4 +31,4 @@ export const SectionDoc = Z.object({
   [ESectionFields.WorkspaceRef]: REQUIRED_STRING_SCHEMA,
 });
 
-export type ISectionDoc = WithCommonFields<Z.infer<typeof SectionDoc>>;
+export type ISectionDoc = WithCommonFields<z.infer<typeof SectionDoc>>;

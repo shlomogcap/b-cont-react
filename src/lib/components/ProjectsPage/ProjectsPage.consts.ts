@@ -1,4 +1,4 @@
-import Z from 'zod';
+import { z } from 'zod';
 import { IFilterItem, IFilterItemType } from '../commons/FilterPanel';
 import {
   IProjectStatus,
@@ -9,17 +9,17 @@ import {
 import { dateFilterSchema } from '../commons/FilterPanel/FilterPanel.consts';
 import { fieldsNamesToColumns } from '../commons/Table';
 
-export const projectFilterSchema = Z.object({
-  [ProjectFields.Status]: Z.object({
-    type: Z.literal(IFilterItemType.Buttons),
-    value: Z.array(Z.nativeEnum(IProjectStatus)),
+export const projectFilterSchema = z.object({
+  [ProjectFields.Status]: z.object({
+    type: z.literal(IFilterItemType.Buttons),
+    value: z.array(z.nativeEnum(IProjectStatus)),
   }),
-  [ProjectFields.SDate]: Z.object({
-    type: Z.literal(IFilterItemType.Date),
+  [ProjectFields.SDate]: z.object({
+    type: z.literal(IFilterItemType.Date),
     value: dateFilterSchema,
   }),
-  [ProjectFields.EDate]: Z.object({
-    type: Z.literal(IFilterItemType.Date),
+  [ProjectFields.EDate]: z.object({
+    type: z.literal(IFilterItemType.Date),
     value: dateFilterSchema,
   }),
 });
