@@ -1,5 +1,8 @@
-import { useFormContext } from 'react-hook-form';
-import { IContractSectionFormFieldsProps } from './ContractSectionForm.types';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import {
+  IContractSectionFormFieldsProps,
+  ISectionFormValues,
+} from './ContractSectionForm.types';
 import { ESectionFields, SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections';
 import { StyledContractSectionFormFields } from './ContractSectionForm.styled';
 import { DropdownInput, NumberInput, TextInput } from '../commons/Input';
@@ -8,6 +11,7 @@ import {
   SECTION_CALULATION_METHOD_OPTIONS,
   SECTION_CALULATION_TYPE_OPTIONS,
 } from './ContractSectionForm.consts';
+import { EMilestoneFields } from '@/lib/consts/milestones';
 
 const useCalcTotalSum = () => {
   const { setValue, watch } = useFormContext();
@@ -21,11 +25,35 @@ const useCalcTotalSum = () => {
     }
   };
 };
+const useCalcMilestonesPrice = () => {
+  const { watch } = useFormContext();
+  const { fields: milestones, update } = useFieldArray<ISectionFormValues>({
+    name: 'milestones',
+  });
+  return () => {
+    const price = watch(ESectionFields.ItemPrice);
+    if (milestones.length === 1) {
+      update(0, {
+        ...milestones[0],
+        [EMilestoneFields.Price]: price,
+      });
+    } else {
+      milestones.forEach((ms, ind, arr) => {
+        update(ind, {
+          ...ms,
+          [EMilestoneFields.Price]:
+            Number(ms[EMilestoneFields.Price]) / arr.length,
+        });
+      });
+    }
+  };
+};
 
 export const ContractSectionFormFields = ({
   workspacesOptions,
 }: IContractSectionFormFieldsProps) => {
   const calcTotalSum = useCalcTotalSum();
+  const calcMilestonesPrice = useCalcMilestonesPrice();
   return (
     <StyledContractSectionFormFields>
       <DropdownInput
@@ -66,7 +94,10 @@ export const ContractSectionFormFields = ({
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemPrice]}
         name={ESectionFields.ItemPrice}
-        afterChange={calcTotalSum}
+        afterChange={() => {
+          calcTotalSum();
+          calcMilestonesPrice();
+        }}
       />
       <NumberInput
         isRequired

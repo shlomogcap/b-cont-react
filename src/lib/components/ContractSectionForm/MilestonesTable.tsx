@@ -39,8 +39,13 @@ export const MilestonesTable = ({
   const milestoneValueField = isPercentageSection
     ? EMilestoneFields.Weight
     : EMilestoneFields.Price;
-  const milestonesFields = useFieldArray<ISectionFormValues>({
+  const milestonesFields = useFieldArray<
+    ISectionFormValues,
+    'milestones',
+    '__intern__'
+  >({
     name: 'milestones',
+    keyName: '__intern__',
   });
   const watchMilestones: IMilestoneDoc[] = watch('milestones');
   const milestonesTotal = watchMilestones.reduce(
@@ -64,7 +69,7 @@ export const MilestonesTable = ({
         {MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.OrderIndex]}
       </StyledIndex>
       {milestonesFields.fields.map((ms, i) => (
-        <StyledHeader key={`title/${ms.id}`}>
+        <StyledHeader key={`title/${ms.__intern__}`}>
           <TextInput
             name={`milestones[${i}].${EMilestoneFields.Title}`}
             label={MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.Title]}

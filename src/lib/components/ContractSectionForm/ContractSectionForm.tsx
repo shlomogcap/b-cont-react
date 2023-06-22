@@ -3,7 +3,13 @@ import {
   IContractSectionFormProps,
   ISectionFormValues,
 } from './ContractSectionForm.types';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  writeBatch,
+} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import {
   FormProvider,
@@ -11,7 +17,6 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
-import { ISectionDoc, SectionDoc } from '@/lib/consts/sections';
 import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
@@ -73,15 +78,22 @@ const ContractSectionFormInner = ({
     }
   }, [isEditMode, reset, section, milestones]);
 
-  const onSubmit: SubmitHandler<ISectionFormValues> = async (data) => {
-    const preparedData = prepareFormData(data);
+  const onSubmit: SubmitHandler<ISectionFormValues> = async ({
+    milestones: milestonesData,
+    ...sectionData
+  }) => {
+    const preparedData = prepareFormData(sectionData);
     if (isEditMode) {
       try {
-        const docRef = doc(
-          firestore,
-          `projects/${projectId}/contracts/${contractId}/sections/${section?.id}`,
-        );
-        await setDoc(docRef, preparedData, { merge: true });
+        const batch = writeBatch(firestore);
+        const sectionPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id}`;
+        const docRef = doc(firestore, sectionPath);
+        batch.set(docRef, preparedData, { merge: true });
+        milestonesData.forEach((ms) => {
+          const msRef = doc(firestore, `${sectionPath}/milestones/${ms.id}`);
+          batch.set(msRef, prepareFormData(ms), { merge: true });
+        });
+        await batch.commit();
         toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
         onSaved?.();
       } catch (err) {
