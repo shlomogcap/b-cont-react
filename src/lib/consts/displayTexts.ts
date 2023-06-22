@@ -6,6 +6,8 @@ export enum IButtonTexts {
   Save,
   Cancel,
   Add,
+  Delete,
+  Duplicate,
 }
 export enum ITableStates {
   NoRows,
@@ -59,6 +61,8 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IButtonTexts.Save]: 'שמור',
       [IButtonTexts.Cancel]: 'בטל שינויים',
       [IButtonTexts.Add]: 'הוספה',
+      [IButtonTexts.Delete]: 'מחק',
+      [IButtonTexts.Duplicate]: 'שכפל',
     },
     routeNames: {
       [IRoutesNames.App]: 'פרוייקטים',
@@ -114,6 +118,8 @@ export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [IButtonTexts.Save]: 'Save',
       [IButtonTexts.Cancel]: 'Cancel',
       [IButtonTexts.Add]: 'Add',
+      [IButtonTexts.Delete]: 'Delete',
+      [IButtonTexts.Duplicate]: 'Duplicate',
     },
     filterPanel: {
       [IFilterPanelStates.Active]: 'Active',

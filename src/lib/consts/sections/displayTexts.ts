@@ -3,10 +3,18 @@ import { ESectionCalculationMethod } from './SectionCalculationMethod';
 import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionFields } from './SectionFields';
 
+export enum ESectionActions {
+  AddUnit,
+  AddMilestone,
+  ShowPreview,
+  HidePreview,
+}
+
 type DisplayTextMapping = {
   fields: Record<ESectionFields, string>;
   calculationMethod: Record<ESectionCalculationMethod, string>;
   calculationType: Record<ESectionCalculationType, string>;
+  actions: Record<ESectionActions, string>;
 };
 
 export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
@@ -35,6 +43,12 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [ESectionCalculationType.Numeric]: 'כמויות',
       [ESectionCalculationType.Percentage]: 'אחוזים',
     },
+    actions: {
+      [ESectionActions.AddUnit]: 'הוסף יחידה',
+      [ESectionActions.AddMilestone]: 'הוסף אבן דרך של יחידה',
+      [ESectionActions.ShowPreview]: 'תצוגה מקדימה',
+      [ESectionActions.HidePreview]: 'תצוגת עריכה',
+    },
   },
   en: {
     fields: {
@@ -60,6 +74,12 @@ export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
     calculationType: {
       [ESectionCalculationType.Numeric]: 'Numeric',
       [ESectionCalculationType.Percentage]: 'Percentage',
+    },
+    actions: {
+      [ESectionActions.AddUnit]: 'Add Unit',
+      [ESectionActions.AddMilestone]: 'Add Milestone',
+      [ESectionActions.ShowPreview]: 'Show Preview',
+      [ESectionActions.HidePreview]: ' Preview',
     },
   },
 };

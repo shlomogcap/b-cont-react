@@ -3,13 +3,7 @@ import {
   IContractSectionFormProps,
   ISectionFormValues,
 } from './ContractSectionForm.types';
-import {
-  addDoc,
-  collection,
-  doc,
-  setDoc,
-  writeBatch,
-} from 'firebase/firestore';
+import { addDoc, collection, doc, writeBatch } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import {
   FormProvider,
@@ -32,10 +26,12 @@ import {
   IToastType,
 } from '@/lib/consts/displayTexts';
 import { firestore } from '@/lib/firebase';
-import { FormFooter } from '../commons/Form';
-import { Button } from '../commons/Button';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
-import { StyledContractSectionForm } from './ContractSectionForm.styled';
+import {
+  StyledAction,
+  StyledActionsFooter,
+  StyledContractSectionForm,
+} from './ContractSectionForm.styled';
 import { prepareWorkspaceOptions } from './ContractSectionForm.utils';
 import {
   SectionProvider,
@@ -43,6 +39,12 @@ import {
 } from '@/lib/context/sectionContext';
 import { MilestonesTable } from './MilestonesTable';
 import { ContractSectionFormFields } from './ContractSectionFormFields';
+import { CopyIcon, DeleteIcon, PlusIcon, PreviewIcon } from '../icons';
+import { Button } from '../commons/Button';
+import { Divider } from '../commons/Divider';
+import { FormFooter } from '../commons/Form';
+import { CONTRACTS_DISPLAY_TEXTS } from '@/lib/consts/contracts';
+import { ESectionActions, SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -142,6 +144,34 @@ const ContractSectionFormInner = ({
         {isEditMode && milestones.length > 0 && (
           <MilestonesTable milestones={milestones} isLoading={isLoading} />
         )}
+        <StyledActionsFooter>
+          <StyledAction>
+            <span>{DISPLAY_TEXTS.he.buttons[IButtonTexts.Delete]}</span>
+            <DeleteIcon />
+          </StyledAction>
+          <StyledAction>
+            <span>{DISPLAY_TEXTS.he.buttons[IButtonTexts.Duplicate]}</span>
+            <CopyIcon />
+          </StyledAction>
+          <StyledAction>
+            <span>
+              {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.AddMilestone]}
+            </span>
+            <PlusIcon />
+          </StyledAction>
+          <StyledAction>
+            <span>
+              {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.AddUnit]}
+            </span>
+            <PlusIcon />
+          </StyledAction>
+          <StyledAction>
+            <span>
+              {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.ShowPreview]}
+            </span>
+            <PreviewIcon mode='show' />
+          </StyledAction>
+        </StyledActionsFooter>
         <FormFooter>
           <Button
             onClick={form.handleSubmit(onSubmit, onError)}
@@ -161,3 +191,12 @@ const ContractSectionFormInner = ({
     </FormProvider>
   );
 };
+// m(".section__action", { onclick: e => handleDeleteSection(e, section) }, "מחק", m(Icon, { icon: "icon-delete" })),
+// m(".section__action", { onclick: e => handleCopySection(e, section, milestones) }, "שכפל", m(Icon, { icon: "icon-copy" })),
+// (!section.isNew) && [
+//     // (sectionIndex > 0) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex - 1].docData.ref) }, "למעלה", m(Icon, { icon: "icon-arrow-up" })),
+//     // (sectionIndex < sectionsArr.length - 1) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex + 1].docData.ref) }, "למטה", m(Icon, { icon: "icon-arrow-down" })),
+//     m(".section__action", { onclick: e => addMilestone(`${section.docData.ref}/milestones`) }, "הוסף אבן דרך", m(Icon, { icon: "icon-plus" })),
+//     m(".section__action", { onclick: e => addUnit(section) }, "הוסף יחידה", m(Icon, { icon: "icon-plus" })),
+//     m(".section__action", { onclick: e => vnode.attrs.togglePreviewEdit(section.docData.docID) }, "תצוגה מקדימה", m(Icon, { icon: "icon-eye" })),
+// ]

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Form } from '../commons/Form';
+import { Form, FormFooter } from '../commons/Form';
 import { StyledTableCell } from '../commons/Table/Table.styled';
 import { StyledInputField } from '../commons/Input/Input.styled';
+import { StyledSvgIcon } from '../icons/SvgIcon/SvgIcon.styled';
 
 export const StyledContractSectionForm = styled.div`
   display: grid;
@@ -18,6 +19,7 @@ export const StyledContractSectionFormFields = styled(Form)`
 
 export const StyledMilestonesTable = styled.div`
   display: grid;
+  overflow-y: scroll;
 `;
 export const StyledCell = styled(StyledTableCell)`
   white-space: nowrap;
@@ -53,4 +55,34 @@ export const StyledGrandTotal = styled(StyledCell)`
 `;
 export const StyledIndex = styled(StyledCell)`
   background-color: white;
+`;
+
+export const StyledActionsFooter = styled(FormFooter)`
+  margin-top: 2rem;
+  grid-column: 1/-1;
+  display: grid;
+  gap: 0;
+  justify-content: stretch;
+`;
+export const StyledAction = styled.div`
+  background-color: var(--color-gray-trs);
+  font-size: 1.6rem;
+  font-weight: 500;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  padding: 1rem;
+  color: var(--color-active);
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  &:not(:last-child) {
+    border-left: 1px solid var(--color-bg-1);
+  }
+  &:hover {
+    background-color: var(--color-bg-1);
+  }
+  & ${StyledSvgIcon} {
+    fill: var(--color-active);
+  }
 `;
