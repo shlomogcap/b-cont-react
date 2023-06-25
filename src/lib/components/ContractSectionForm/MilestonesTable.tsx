@@ -11,20 +11,20 @@ import {
   StyledTotal,
   StyledValue,
 } from './ContractSectionForm.styled';
-import {
-  IMilestonesTableProps,
-  ISectionFormValues,
-} from './ContractSectionForm.types';
+import { IMilestonesTableProps } from './ContractSectionForm.types';
 import { ESectionCalculationType, ESectionFields } from '@/lib/consts/sections';
-import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
 import { EmptyState } from '../commons/EmptyState';
 import { NumberInput, TextInput } from '../commons/Input';
+import { toNumber } from '@/lib/utils/numberUtils';
 
-export const MilestonesTable = ({
-  milestones,
-  isLoading,
-}: IMilestonesTableProps) => {
+const calcTotalMilestones = (
+  ms: IMilestoneDoc[],
+  milestoneValueField: EMilestoneFields,
+): number => ms.reduce((acc, ms) => acc + toNumber(ms[milestoneValueField]), 0);
+
+export const MilestonesTable = ({ isLoading }: IMilestonesTableProps) => {
   const { watch } = useFormContext();
   const [calculationType, price, itemsCount, totalSum] = useWatch({
     name: [
@@ -39,19 +39,12 @@ export const MilestonesTable = ({
   const milestoneValueField = isPercentageSection
     ? EMilestoneFields.Weight
     : EMilestoneFields.Price;
-  const milestonesFields = useFieldArray<
-    ISectionFormValues,
-    'milestones',
-    '__intern__'
-  >({
+  const watchMilestones: IMilestoneDoc[] = useWatch({
     name: 'milestones',
-    keyName: '__intern__',
   });
-  const watchMilestones: IMilestoneDoc[] = watch('milestones');
-  const milestonesTotal = watchMilestones.reduce(
-    (acc, ms) =>
-      acc + Number(String(ms[milestoneValueField]).replace(/[^\d\.-]/g, '')),
-    0,
+  const milestonesTotal = calcTotalMilestones(
+    watchMilestones,
+    milestoneValueField,
   );
   return isLoading ? (
     <EmptyState
@@ -61,15 +54,14 @@ export const MilestonesTable = ({
   ) : (
     <StyledMilestonesTable
       style={{
-        gridTemplateColumns: `min-content repeat(${milestones.length},1fr) 1fr`,
+        gridTemplateColumns: `min-content repeat(${watchMilestones.length},1fr) 1fr`,
       }}
     >
-      {/* HEADERS */}
       <StyledIndex>
         {MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.OrderIndex]}
       </StyledIndex>
-      {milestonesFields.fields.map((ms, i) => (
-        <StyledHeader key={`title/${ms.__intern__}`}>
+      {watchMilestones.map((ms, i) => (
+        <StyledHeader key={`title/${ms.id}`}>
           <TextInput
             name={`milestones[${i}].${EMilestoneFields.Title}`}
             label={MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.Title]}
@@ -81,7 +73,7 @@ export const MilestonesTable = ({
 
       {/* ROWS */}
       <StyledIndex>{itemsCount > 1 ? `X ${itemsCount}` : '-'}</StyledIndex>
-      {milestonesFields.fields.map((ms, i) => (
+      {watchMilestones.map((ms, i) => (
         <StyledValue key={`body/${ms.id}`}>
           <NumberInput
             name={`milestones[${i}].${milestoneValueField}`}
@@ -97,10 +89,14 @@ export const MilestonesTable = ({
 
       {/* TOTALS */}
       <StyledGrandTotal>{MILESTONES_DISPALY_TEXTS.he.total}</StyledGrandTotal>
-      {milestones.map((ms) => {
+      {watchMilestones.map((ms, ind) => {
+        const [msWeight, msPrice] = watch([
+          `milestones.[${ind}]${EMilestoneFields.Weight}`,
+          `milestones.[${ind}]${EMilestoneFields.Price}`,
+        ]);
         const totalValue = isPercentageSection
-          ? (Number(ms[EMilestoneFields.Weight]) / 100) * price
-          : Number(ms[EMilestoneFields.Price]);
+          ? (toNumber(msWeight) / 100) * price
+          : toNumber(msPrice);
         const grandTotalValue = totalValue * itemsCount;
         return (
           <StyledGrandTotal

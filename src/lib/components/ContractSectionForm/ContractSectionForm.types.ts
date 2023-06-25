@@ -20,7 +20,6 @@ export type IContractSectionFormFieldsProps = {
   workspacesOptions: IDropdownOption<string>[];
 };
 export type IMilestonesTableProps = {
-  milestones: IMilestoneDoc[];
   isLoading: boolean;
 };
 

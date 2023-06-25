@@ -9,6 +9,7 @@ import {
   FormProvider,
   SubmitErrorHandler,
   SubmitHandler,
+  useFieldArray,
   useForm,
 } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -41,10 +42,11 @@ import { MilestonesTable } from './MilestonesTable';
 import { ContractSectionFormFields } from './ContractSectionFormFields';
 import { CopyIcon, DeleteIcon, PlusIcon, PreviewIcon } from '../icons';
 import { Button } from '../commons/Button';
-import { Divider } from '../commons/Divider';
 import { FormFooter } from '../commons/Form';
-import { CONTRACTS_DISPLAY_TEXTS } from '@/lib/consts/contracts';
 import { ESectionActions, SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections';
+import { uuid } from '@/lib/utils/uuid';
+import { EMilestoneFields } from '@/lib/consts/milestones';
+import { getNextIndex } from '@/lib/utils/arrayUtils';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -135,6 +137,10 @@ const ContractSectionFormInner = ({
       form.reset(CONTRACT_SECTION_FORM_DEFAULT_VALUES);
     }
   };
+  const { append, fields } = useFieldArray({
+    name: 'milestones',
+    control: form.control,
+  });
   return (
     <FormProvider {...form}>
       <StyledContractSectionForm>
@@ -142,7 +148,7 @@ const ContractSectionFormInner = ({
           workspacesOptions={prepareWorkspaceOptions(workspaces)}
         />
         {isEditMode && milestones.length > 0 && (
-          <MilestonesTable milestones={milestones} isLoading={isLoading} />
+          <MilestonesTable isLoading={isLoading} />
         )}
         <StyledActionsFooter>
           <StyledAction>
@@ -153,7 +159,18 @@ const ContractSectionFormInner = ({
             <span>{DISPLAY_TEXTS.he.buttons[IButtonTexts.Duplicate]}</span>
             <CopyIcon />
           </StyledAction>
-          <StyledAction>
+          <StyledAction
+            onClick={() => {
+              append({
+                id: uuid(),
+                title: '---',
+                orderIndex: getNextIndex(fields, EMilestoneFields.OrderIndex),
+                price: 0,
+                totalDone: 0,
+                weight: 0,
+              });
+            }}
+          >
             <span>
               {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.AddMilestone]}
             </span>
