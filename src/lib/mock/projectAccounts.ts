@@ -1,37 +1,37 @@
 import { ITableRow } from '../components/commons/Table';
-import { ICommonFields } from '../consts/commonFields';
-import { IProjectAccountsFields } from '../consts/accounts';
+import { ECommonFields } from '../consts/commonFields';
+import { EProjectAccountsFields } from '../consts/accounts';
 
-export const MOCK_PROJECTS_ACCOUNTS_DATA: ITableRow<IProjectAccountsFields>[] =
+export const MOCK_PROJECTS_ACCOUNTS_DATA: ITableRow<EProjectAccountsFields>[] =
   [
     {
-      [ICommonFields.Id]: '1',
-      [IProjectAccountsFields.Contract]: '1',
-      [IProjectAccountsFields.Vendor]: '1',
-      [IProjectAccountsFields.AccumulatedTotal]: 63_000,
-      [IProjectAccountsFields.AccumulatedHisotry]: 0,
-      [IProjectAccountsFields.AccountAdditions]: 0,
-      [IProjectAccountsFields.AccountSubtractions]: 0,
-      [IProjectAccountsFields.AccountPeriod]: '04 2023',
-      [IProjectAccountsFields.AccountToPay]: 63_000,
-      [IProjectAccountsFields.ContractSum]: 119_000,
-      [IProjectAccountsFields.TotalAdditionsSubtractions]: 0,
-      [IProjectAccountsFields.TotalToPay]: 56_000,
-      [IProjectAccountsFields.PaidPercentage]: 0.53,
+      [ECommonFields.Id]: '1',
+      [EProjectAccountsFields.Contract]: '1',
+      [EProjectAccountsFields.Vendor]: '1',
+      [EProjectAccountsFields.AccumulatedTotal]: 63_000,
+      [EProjectAccountsFields.AccumulatedHisotry]: 0,
+      [EProjectAccountsFields.AccountAdditions]: 0,
+      [EProjectAccountsFields.AccountSubtractions]: 0,
+      [EProjectAccountsFields.AccountPeriod]: '04 2023',
+      [EProjectAccountsFields.AccountToPay]: 63_000,
+      [EProjectAccountsFields.ContractSum]: 119_000,
+      [EProjectAccountsFields.TotalAdditionsSubtractions]: 0,
+      [EProjectAccountsFields.TotalToPay]: 56_000,
+      [EProjectAccountsFields.PaidPercentage]: 0.53,
     },
     {
-      [ICommonFields.Id]: '2',
-      [IProjectAccountsFields.Contract]: '2',
-      [IProjectAccountsFields.Vendor]: '2',
-      [IProjectAccountsFields.AccumulatedTotal]: 120_425,
-      [IProjectAccountsFields.AccumulatedHisotry]: 34_220,
-      [IProjectAccountsFields.AccountAdditions]: 0,
-      [IProjectAccountsFields.AccountSubtractions]: 0,
-      [IProjectAccountsFields.AccountPeriod]: '01 2023',
-      [IProjectAccountsFields.AccountToPay]: 86_205,
-      [IProjectAccountsFields.ContractSum]: 82_000,
-      [IProjectAccountsFields.TotalAdditionsSubtractions]: 48_707,
-      [IProjectAccountsFields.TotalToPay]: -38_425,
-      [IProjectAccountsFields.PaidPercentage]: 1.47,
+      [ECommonFields.Id]: '2',
+      [EProjectAccountsFields.Contract]: '2',
+      [EProjectAccountsFields.Vendor]: '2',
+      [EProjectAccountsFields.AccumulatedTotal]: 120_425,
+      [EProjectAccountsFields.AccumulatedHisotry]: 34_220,
+      [EProjectAccountsFields.AccountAdditions]: 0,
+      [EProjectAccountsFields.AccountSubtractions]: 0,
+      [EProjectAccountsFields.AccountPeriod]: '01 2023',
+      [EProjectAccountsFields.AccountToPay]: 86_205,
+      [EProjectAccountsFields.ContractSum]: 82_000,
+      [EProjectAccountsFields.TotalAdditionsSubtractions]: 48_707,
+      [EProjectAccountsFields.TotalToPay]: -38_425,
+      [EProjectAccountsFields.PaidPercentage]: 1.47,
     },
   ];

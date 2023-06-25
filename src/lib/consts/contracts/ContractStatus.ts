@@ -1,4 +1,4 @@
-export enum IContractStatus {
+export enum EContractStatus {
   Plan = 'plan',
   Active = 'active',
   Done = 'done',

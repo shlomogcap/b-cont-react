@@ -1,19 +1,19 @@
 import { z } from 'zod';
-import { WithCommonFields } from '@/lib/utils/WithFields';
-import { IUserFields } from './UserFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
+import { EUserFields } from './UserFields';
 import {
   OPTIONAL_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
-import { IUserStatus } from './UserStatus';
+import { EUserStatus } from './UserStatus';
 
 export const UserDoc = z.object({
-  [IUserFields.Title]: TITLE_FIELD_SCHEMA,
-  [IUserFields.Phone]: OPTIONAL_STRING_SCHEMA,
-  [IUserFields.Email]: OPTIONAL_STRING_SCHEMA,
-  [IUserFields.Address]: OPTIONAL_STRING_SCHEMA,
-  [IUserFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IUserFields.Status]: z.nativeEnum(IUserStatus).optional(),
+  [EUserFields.Title]: TITLE_FIELD_SCHEMA,
+  [EUserFields.Phone]: OPTIONAL_STRING_SCHEMA,
+  [EUserFields.Email]: OPTIONAL_STRING_SCHEMA,
+  [EUserFields.Address]: OPTIONAL_STRING_SCHEMA,
+  [EUserFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [EUserFields.Status]: z.nativeEnum(EUserStatus).optional(),
 });
 
-export type IUserDoc = WithCommonFields<z.infer<typeof UserDoc>>;
+export type IUserDoc = IWithCommonFields<z.infer<typeof UserDoc>>;

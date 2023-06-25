@@ -1,28 +1,28 @@
 import { z } from 'zod';
-import { WithCommonFields } from '@/lib/utils/WithFields';
-import { IVendorFields } from './VendorFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
+import { EVendorFields } from './VendorFields';
 import {
   OPTIONAL_DATE_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
-import { ICompanyType } from '../companyTypes';
-import { IVendorStatus } from './VendorStatus';
+import { ECompanyType } from '../companyTypes';
+import { EVendorStatus } from './VendorStatus';
 
 export const VendorDoc = z.object({
-  [IVendorFields.Title]: TITLE_FIELD_SCHEMA,
-  [IVendorFields.CommercialName]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.CompanyNumber]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.CompanExternalNumber]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.CompanyType]: z.nativeEnum(ICompanyType).optional(),
-  [IVendorFields.Phone]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.Email]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.TaxesEndDate]: OPTIONAL_DATE_SCHEMA,
-  [IVendorFields.TaxPercent]: OPTIONAL_NUMBER_SCHEMA,
-  [IVendorFields.Address]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IVendorFields.Status]: z.nativeEnum(IVendorStatus).optional(),
+  [EVendorFields.Title]: TITLE_FIELD_SCHEMA,
+  [EVendorFields.CommercialName]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.CompanyNumber]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.CompanExternalNumber]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.CompanyType]: z.nativeEnum(ECompanyType).optional(),
+  [EVendorFields.Phone]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.Email]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.TaxesEndDate]: OPTIONAL_DATE_SCHEMA,
+  [EVendorFields.TaxPercent]: OPTIONAL_NUMBER_SCHEMA,
+  [EVendorFields.Address]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [EVendorFields.Status]: z.nativeEnum(EVendorStatus).optional(),
 });
 
-export type IVendorDoc = WithCommonFields<z.infer<typeof VendorDoc>>;
+export type IVendorDoc = IWithCommonFields<z.infer<typeof VendorDoc>>;

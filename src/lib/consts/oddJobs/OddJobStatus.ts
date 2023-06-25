@@ -1,4 +1,4 @@
-export enum IOddJobStatus {
+export enum EOddJobStatus {
   Open = 'open',
   ProjectMangerConfirm = 'projectMangerConfirm',
   SeniorManagerConfirm = 'seniorManagerConfirm',

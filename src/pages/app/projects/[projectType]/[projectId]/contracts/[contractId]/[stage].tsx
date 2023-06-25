@@ -4,18 +4,18 @@ import { IContractRouteProps } from './_types';
 import { getContractRouteServerSideProps } from './_utils';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect } from 'react';
-import { IContractStage } from '@/lib/consts/contracts/ContractStage';
+import { EContractStage } from '@/lib/consts/contracts/ContractStage';
 import {
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
 import { ContractPlan } from '@/lib/components/ContractPage/contractViews/ContractPlan';
 
-const CONTRACT_STAGE_PAGE: Record<IContractStage, ReactElement> = {
-  [IContractStage.Plan]: <ContractPlan />,
-  [IContractStage.Actual]: <ContractPlan />,
-  [IContractStage.Billing]: <ContractPlan />,
+const CONTRACT_STAGE_PAGE: Record<EContractStage, ReactElement> = {
+  [EContractStage.Plan]: <ContractPlan />,
+  [EContractStage.Actual]: <ContractPlan />,
+  [EContractStage.Billing]: <ContractPlan />,
 };
 
 export const getServerSideProps = getContractRouteServerSideProps;
@@ -29,9 +29,9 @@ export default function ContractPlanRoute({
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
-      if (!Object.values(IContractStage).includes(stage)) {
+      if (!Object.values(EContractStage).includes(stage)) {
         router.push({
-          pathname: IRoutesNames.Project,
+          pathname: ERoutesNames.Project,
           query: {
             [PROJECT_ID_QUERY]: projectId,
             [PROJECT_TYPE_QUERY]: projectType,

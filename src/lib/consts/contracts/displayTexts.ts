@@ -1,22 +1,22 @@
-import { Lang } from '../displayTexts';
-import { IContractActualStatus } from './ContractActualStatus';
-import { IContractFields } from './ContractFields';
+import { ILang } from '../displayTexts';
+import { EContractActualStatus } from './ContractActualStatus';
+import { EContractFields } from './ContractFields';
 import { EContractSectionItem } from './ContractSectionItem';
-import { IContractStage } from './ContractStage';
-import { IContractStatus } from './ContractStatus';
-import { IContractType } from './ContractType';
+import { EContractStage } from './ContractStage';
+import { EContractStatus } from './ContractStatus';
+import { EContractType } from './ContractType';
 
-type DisplayTextMapping = {
-  fields: Record<IContractFields, string>;
+type IDisplayTextMapping = {
+  fields: Record<EContractFields, string>;
   contractFormTitle: string;
-  contractType: Record<IContractType, string>;
-  contractStage: Record<IContractStage, string>;
-  contractStatus: Record<IContractStatus, string>;
-  contractActualsStatus: Record<IContractActualStatus, string>;
+  contractType: Record<EContractType, string>;
+  contractStage: Record<EContractStage, string>;
+  contractStatus: Record<EContractStatus, string>;
+  contractActualsStatus: Record<EContractActualStatus, string>;
   addNewItems: Record<EContractSectionItem, string>;
 };
 
-export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     contractFormTitle: 'פרטי החוזה',
     addNewItems: {
@@ -24,55 +24,55 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EContractSectionItem.Workspace]: 'איזור עבודה',
     },
     fields: {
-      [IContractFields.Title]: 'חוזה',
-      [IContractFields.Description]: 'תיאור',
-      [IContractFields.BudgetbudgetaryItem]: 'סעיף תקציבי',
-      [IContractFields.ActualsStatus]: 'תגית תהליך ביצוע',
-      [IContractFields.VendorRef]: 'קבלן מבצע',
-      [IContractFields.TotalAgreementSum]: 'סכום חוזה',
-      [IContractFields.PaymentDelay]: 'תנאי תשלום (ש+)',
-      [IContractFields.ContractType]: 'סוג חוזה',
-      [IContractFields.DelayPercentage]: 'אחוז עיכבון',
-      [IContractFields.Status]: 'סטטוס',
-      [IContractFields.IsIndexed]: 'האם מוצמד?',
-      [IContractFields.IndexedFactor]: 'הצמדה למדד',
-      [IContractFields.CalculationMethod]: 'שיטת חישוב',
-      [IContractFields.SWorkDate]: 'תחילת עבודה',
-      [IContractFields.NumberOfPeriods]: 'מספר תקופות',
-      [IContractFields.EWorkDate]: 'סיום עבודה',
-      [IContractFields.DonePercentage]: 'אחוז ביצוע',
-      [IContractFields.TotalActualsSum]: 'סכום ביצוע',
-      [IContractFields.CurrentAccountPeriod]: 'חשבון נוכחי',
+      [EContractFields.Title]: 'חוזה',
+      [EContractFields.Description]: 'תיאור',
+      [EContractFields.BudgetbudgetaryItem]: 'סעיף תקציבי',
+      [EContractFields.ActualsStatus]: 'תגית תהליך ביצוע',
+      [EContractFields.VendorRef]: 'קבלן מבצע',
+      [EContractFields.TotalAgreementSum]: 'סכום חוזה',
+      [EContractFields.PaymentDelay]: 'תנאי תשלום (ש+)',
+      [EContractFields.ContractType]: 'סוג חוזה',
+      [EContractFields.DelayPercentage]: 'אחוז עיכבון',
+      [EContractFields.Status]: 'סטטוס',
+      [EContractFields.IsIndexed]: 'האם מוצמד?',
+      [EContractFields.IndexedFactor]: 'הצמדה למדד',
+      [EContractFields.CalculationMethod]: 'שיטת חישוב',
+      [EContractFields.SWorkDate]: 'תחילת עבודה',
+      [EContractFields.NumberOfPeriods]: 'מספר תקופות',
+      [EContractFields.EWorkDate]: 'סיום עבודה',
+      [EContractFields.DonePercentage]: 'אחוז ביצוע',
+      [EContractFields.TotalActualsSum]: 'סכום ביצוע',
+      [EContractFields.CurrentAccountPeriod]: 'חשבון נוכחי',
     },
     contractStage: {
-      [IContractStage.Plan]: 'תכנון',
-      [IContractStage.Actual]: 'ביצוע',
-      [IContractStage.Billing]: 'כספים',
+      [EContractStage.Plan]: 'תכנון',
+      [EContractStage.Actual]: 'ביצוע',
+      [EContractStage.Billing]: 'כספים',
     },
     contractType: {
-      [IContractType.Pauschal]: 'פאושלי',
-      [IContractType.Amount]: 'כמויות',
-      [IContractType.Rent]: 'שכירות',
-      [IContractType.Invoice]: 'חשבוניות',
-      [IContractType.Kitchen]: 'מטבחים ושיש',
+      [EContractType.Pauschal]: 'פאושלי',
+      [EContractType.Amount]: 'כמויות',
+      [EContractType.Rent]: 'שכירות',
+      [EContractType.Invoice]: 'חשבוניות',
+      [EContractType.Kitchen]: 'מטבחים ושיש',
     },
     contractStatus: {
-      [IContractStatus.Plan]: 'בהקמה',
-      [IContractStatus.Active]: 'פעיל',
-      [IContractStatus.Done]: 'הסתיים',
-      [IContractStatus.NonActive]: 'לא פעיל',
+      [EContractStatus.Plan]: 'בהקמה',
+      [EContractStatus.Active]: 'פעיל',
+      [EContractStatus.Done]: 'הסתיים',
+      [EContractStatus.NonActive]: 'לא פעיל',
     },
     contractActualsStatus: {
-      [IContractActualStatus.None]: '---',
-      [IContractActualStatus.MissingProjectManagerConfirm]:
+      [EContractActualStatus.None]: '---',
+      [EContractActualStatus.MissingProjectManagerConfirm]:
         'חסר אישור מ.פרוייקט',
-      [IContractActualStatus.MissingSeniorManagerConfirm]: 'חסר אישור מנכ״ל',
-      [IContractActualStatus.InCareOfAccounting]: 'בטיפול הנה״ח',
-      [IContractActualStatus.InCareOfFinancing]: 'בטיפול כספים',
-      [IContractActualStatus.MovedToDelayRelease]: 'עבר לשחרור עכבון',
-      [IContractActualStatus.DelayNotReleased]: 'לא שוחרר עכבון',
-      [IContractActualStatus.DelayReleased]: 'שוחרר עכבון',
-      [IContractActualStatus.LackOfClaimsReceived]: 'התקבל העדר תביעות',
+      [EContractActualStatus.MissingSeniorManagerConfirm]: 'חסר אישור מנכ״ל',
+      [EContractActualStatus.InCareOfAccounting]: 'בטיפול הנה״ח',
+      [EContractActualStatus.InCareOfFinancing]: 'בטיפול כספים',
+      [EContractActualStatus.MovedToDelayRelease]: 'עבר לשחרור עכבון',
+      [EContractActualStatus.DelayNotReleased]: 'לא שוחרר עכבון',
+      [EContractActualStatus.DelayReleased]: 'שוחרר עכבון',
+      [EContractActualStatus.LackOfClaimsReceived]: 'התקבל העדר תביעות',
     },
   },
   en: {
@@ -82,56 +82,56 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EContractSectionItem.Workspace]: '+ Workspace',
     },
     fields: {
-      [IContractFields.Title]: 'Contract',
-      [IContractFields.Description]: 'Description',
-      [IContractFields.BudgetbudgetaryItem]: 'Budget #',
-      [IContractFields.ActualsStatus]: 'Actuals Status',
-      [IContractFields.VendorRef]: 'Vendor',
-      [IContractFields.TotalAgreementSum]: 'Total Agreement Sum',
-      [IContractFields.PaymentDelay]: 'Payment Delay Condition',
-      [IContractFields.ContractType]: 'Contract Type',
-      [IContractFields.DelayPercentage]: 'Delay Percentage',
-      [IContractFields.Status]: 'Status',
-      [IContractFields.IsIndexed]: 'Is Indexed?',
-      [IContractFields.IndexedFactor]: 'Indexed Factor',
-      [IContractFields.CalculationMethod]: 'Calculation Method',
-      [IContractFields.SWorkDate]: 'Start Date',
-      [IContractFields.NumberOfPeriods]: '# Periods',
-      [IContractFields.EWorkDate]: 'End Date',
-      [IContractFields.DonePercentage]: 'Done Percentage',
-      [IContractFields.TotalActualsSum]: 'Total Actuals Sum',
-      [IContractFields.CurrentAccountPeriod]: 'Current Account',
+      [EContractFields.Title]: 'Contract',
+      [EContractFields.Description]: 'Description',
+      [EContractFields.BudgetbudgetaryItem]: 'Budget #',
+      [EContractFields.ActualsStatus]: 'Actuals Status',
+      [EContractFields.VendorRef]: 'Vendor',
+      [EContractFields.TotalAgreementSum]: 'Total Agreement Sum',
+      [EContractFields.PaymentDelay]: 'Payment Delay Condition',
+      [EContractFields.ContractType]: 'Contract Type',
+      [EContractFields.DelayPercentage]: 'Delay Percentage',
+      [EContractFields.Status]: 'Status',
+      [EContractFields.IsIndexed]: 'Is Indexed?',
+      [EContractFields.IndexedFactor]: 'Indexed Factor',
+      [EContractFields.CalculationMethod]: 'Calculation Method',
+      [EContractFields.SWorkDate]: 'Start Date',
+      [EContractFields.NumberOfPeriods]: '# Periods',
+      [EContractFields.EWorkDate]: 'End Date',
+      [EContractFields.DonePercentage]: 'Done Percentage',
+      [EContractFields.TotalActualsSum]: 'Total Actuals Sum',
+      [EContractFields.CurrentAccountPeriod]: 'Current Account',
     },
     contractType: {
-      [IContractType.Pauschal]: 'Pauschal',
-      [IContractType.Amount]: 'Amount',
-      [IContractType.Rent]: 'Rent',
-      [IContractType.Invoice]: 'Invoice',
-      [IContractType.Kitchen]: 'Kitchen',
+      [EContractType.Pauschal]: 'Pauschal',
+      [EContractType.Amount]: 'Amount',
+      [EContractType.Rent]: 'Rent',
+      [EContractType.Invoice]: 'Invoice',
+      [EContractType.Kitchen]: 'Kitchen',
     },
     contractStage: {
-      [IContractStage.Plan]: 'Plan',
-      [IContractStage.Actual]: 'Actual',
-      [IContractStage.Billing]: 'Billing',
+      [EContractStage.Plan]: 'Plan',
+      [EContractStage.Actual]: 'Actual',
+      [EContractStage.Billing]: 'Billing',
     },
     contractStatus: {
-      [IContractStatus.Plan]: 'Plan',
-      [IContractStatus.Active]: 'Active',
-      [IContractStatus.Done]: 'Done',
-      [IContractStatus.NonActive]: 'Not Active',
+      [EContractStatus.Plan]: 'Plan',
+      [EContractStatus.Active]: 'Active',
+      [EContractStatus.Done]: 'Done',
+      [EContractStatus.NonActive]: 'Not Active',
     },
     contractActualsStatus: {
-      [IContractActualStatus.None]: 'None',
-      [IContractActualStatus.MissingProjectManagerConfirm]:
+      [EContractActualStatus.None]: 'None',
+      [EContractActualStatus.MissingProjectManagerConfirm]:
         'Missing Project Manager Approval',
-      [IContractActualStatus.MissingSeniorManagerConfirm]:
+      [EContractActualStatus.MissingSeniorManagerConfirm]:
         'Missing Senior Manager Approval',
-      [IContractActualStatus.InCareOfAccounting]: 'In Care Of Accounting',
-      [IContractActualStatus.InCareOfFinancing]: 'In Care Of Financing',
-      [IContractActualStatus.MovedToDelayRelease]: 'Moved To Delay Release',
-      [IContractActualStatus.DelayNotReleased]: 'Delay Pending Release',
-      [IContractActualStatus.DelayReleased]: 'Delay Release',
-      [IContractActualStatus.LackOfClaimsReceived]:
+      [EContractActualStatus.InCareOfAccounting]: 'In Care Of Accounting',
+      [EContractActualStatus.InCareOfFinancing]: 'In Care Of Financing',
+      [EContractActualStatus.MovedToDelayRelease]: 'Moved To Delay Release',
+      [EContractActualStatus.DelayNotReleased]: 'Delay Pending Release',
+      [EContractActualStatus.DelayReleased]: 'Delay Release',
+      [EContractActualStatus.LackOfClaimsReceived]:
         'A Lack Of Claims Was Received',
     },
   },

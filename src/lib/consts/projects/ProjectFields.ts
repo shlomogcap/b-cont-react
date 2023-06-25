@@ -1,4 +1,4 @@
-export enum ProjectFields {
+export enum EProjectFields {
   Title = 'title',
   Address = 'address',
   ProjectType = 'projectType',

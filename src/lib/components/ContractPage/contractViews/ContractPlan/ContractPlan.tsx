@@ -13,7 +13,7 @@ import {
 } from '@/lib/consts/contracts';
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
 import { TriangleArrowIcon } from '@/lib/components/icons/TriangleArrowIcon';
-import { DISPLAY_TEXTS, IButtonTexts } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, EButtonTexts } from '@/lib/consts/displayTexts';
 import { ISectionDoc } from '@/lib/consts/sections';
 import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 
@@ -44,7 +44,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                 })
               }
             >
-              {DISPLAY_TEXTS.he.buttons[IButtonTexts.Add]}
+              {DISPLAY_TEXTS.he.buttons[EButtonTexts.Add]}
             </Button>
             <ButtonMenu
               options={Object.entries(

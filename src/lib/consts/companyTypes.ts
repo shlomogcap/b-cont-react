@@ -1,4 +1,4 @@
-export enum ICompanyType {
+export enum ECompanyType {
   PrivateCompany = 'privateCompany',
   LicensedDealer = 'licensedDealer',
 }

@@ -1,4 +1,4 @@
-export enum IProjectAccountsFields {
+export enum EProjectAccountsFields {
   Contract = 'contract',
   Vendor = 'vendor',
   AccumulatedTotal = 'accumulatedTotal',

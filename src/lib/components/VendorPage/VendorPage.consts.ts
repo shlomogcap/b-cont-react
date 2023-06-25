@@ -1,8 +1,8 @@
-import { IVendorFields, VENDOR_DISPLAY_TEXTS } from '@/lib/consts/vendors';
+import { EVendorFields, VENDOR_DISPLAY_TEXTS } from '@/lib/consts/vendors';
 
 export const VENDOR_VIEW_TABS = [
   {
     id: '',
-    text: VENDOR_DISPLAY_TEXTS.he.fields[IVendorFields.CompanyType],
+    text: VENDOR_DISPLAY_TEXTS.he.fields[EVendorFields.CompanyType],
   },
 ];

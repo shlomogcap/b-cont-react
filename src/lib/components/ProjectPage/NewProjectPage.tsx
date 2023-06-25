@@ -1,9 +1,9 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { IRoutesNames, PROJECT_TYPE_QUERY } from '../../consts/routes';
+import { ERoutesNames, PROJECT_TYPE_QUERY } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectPage.types';
 import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
-import { PROJECT_DISPLAY_TEXTS, ProjectType } from '@/lib/consts/projects';
+import { PROJECT_DISPLAY_TEXTS, EProjectType } from '@/lib/consts/projects';
 import { Card } from '../commons/Card';
 import { ProjectForm } from '../ProjectForm';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { IBreadcrumbProps } from '../PageLayout/Breadcrubms';
 
 export const NewProjectPage = ({ projectType }: IProjectPageProps) => {
-  const title = DISPLAY_TEXTS.he.routeNames[IRoutesNames.Project];
+  const title = DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project];
   const router = useRouter();
   const { closeModal } = useModalContext();
   const addProjectText = PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType);
@@ -19,9 +19,9 @@ export const NewProjectPage = ({ projectType }: IProjectPageProps) => {
     text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
     id: 'projectType',
     navList: [
-      ProjectType.Residential,
-      ProjectType.Entrepreneurship,
-      ProjectType.PublicSpace,
+      EProjectType.Residential,
+      EProjectType.Entrepreneurship,
+      EProjectType.PublicSpace,
     ]
       .filter((type) => type !== projectType)
       .map((projectType) => ({
@@ -44,7 +44,7 @@ export const NewProjectPage = ({ projectType }: IProjectPageProps) => {
         projectsTypeBreadCrumb,
         {
           text: addProjectText,
-          id: IRoutesNames.Project,
+          id: ERoutesNames.Project,
         },
       ]}
     >

@@ -23,8 +23,8 @@ import {
 } from './ContractSectionForm.consts';
 import {
   DISPLAY_TEXTS,
-  IButtonTexts,
-  IToastType,
+  EButtonTexts,
+  EToastType,
 } from '@/lib/consts/displayTexts';
 import { firestore } from '@/lib/firebase';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
@@ -98,7 +98,7 @@ const ContractSectionFormInner = ({
           batch.set(msRef, prepareFormData(ms), { merge: true });
         });
         await batch.commit();
-        toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
+        toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
         onSaved?.();
       } catch (err) {
         toast.error(
@@ -116,7 +116,7 @@ const ContractSectionFormInner = ({
         `projects/${projectId}/contracts/${contractId}/sections`,
       );
       const res = await addDoc(collectionRef, preparedData);
-      toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
       onSaved?.({ id: res.id, path: res.path, ...preparedData });
       // router.push({
       //   pathname: IRoutesNames.Project,
@@ -152,11 +152,11 @@ const ContractSectionFormInner = ({
         )}
         <StyledActionsFooter>
           <StyledAction>
-            <span>{DISPLAY_TEXTS.he.buttons[IButtonTexts.Delete]}</span>
+            <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Delete]}</span>
             <DeleteIcon />
           </StyledAction>
           <StyledAction>
-            <span>{DISPLAY_TEXTS.he.buttons[IButtonTexts.Duplicate]}</span>
+            <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Duplicate]}</span>
             <CopyIcon />
           </StyledAction>
           <StyledAction
@@ -194,14 +194,14 @@ const ContractSectionFormInner = ({
             onClick={form.handleSubmit(onSubmit, onError)}
             disabled={!form.formState.isDirty}
           >
-            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Save]}
+            {DISPLAY_TEXTS.he.buttons[EButtonTexts.Save]}
           </Button>
           <Button
             variant='secondary'
             onClick={abortChanges}
             disabled={!form.formState.isDirty}
           >
-            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Cancel]}
+            {DISPLAY_TEXTS.he.buttons[EButtonTexts.Cancel]}
           </Button>
         </FormFooter>
       </StyledContractSectionForm>

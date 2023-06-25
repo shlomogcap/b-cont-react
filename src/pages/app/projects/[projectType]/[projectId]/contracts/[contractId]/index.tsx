@@ -1,7 +1,7 @@
-import { IContractFields, IContractStatus } from '@/lib/consts/contracts';
+import { EContractFields, EContractStatus } from '@/lib/consts/contracts';
 import {
   CONTRACT_ID_QUERY,
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
@@ -23,10 +23,10 @@ export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
   }
   const accountStage: 'billing' | 'actual' = 'actual';
   const contractStage =
-    contract.data()?.[IContractFields.Status] === IContractStatus.Plan
+    contract.data()?.[EContractFields.Status] === EContractStatus.Plan
       ? 'plan'
       : accountStage;
-  const destination = `${replaceQueryParams(IRoutesNames.Contract, query, [
+  const destination = `${replaceQueryParams(ERoutesNames.Contract, query, [
     PROJECT_ID_QUERY,
     PROJECT_TYPE_QUERY,
     CONTRACT_ID_QUERY,

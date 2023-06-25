@@ -1,15 +1,14 @@
-import { WithCommonFields } from '@/lib/utils/WithFields';
 import { z } from 'zod';
 import { ESectionFields } from './SectionFields';
 import {
   NUMBER_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
-  REQUIRED_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
 import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionCalculationMethod } from './SectionCalculationMethod';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
 
 export const SectionDoc = z.object({
   [ESectionFields.Title]: TITLE_FIELD_SCHEMA,
@@ -28,7 +27,7 @@ export const SectionDoc = z.object({
   [ESectionFields.Description]: OPTIONAL_STRING_SCHEMA,
   [ESectionFields.DonePercentage]: OPTIONAL_NUMBER_SCHEMA,
   [ESectionFields.TotalActualsSum]: OPTIONAL_NUMBER_SCHEMA,
-  [ESectionFields.WorkspaceRef]: REQUIRED_STRING_SCHEMA,
+  [ESectionFields.WorkspaceRef]: z.string(),
 });
 
-export type ISectionDoc = WithCommonFields<z.infer<typeof SectionDoc>>;
+export type ISectionDoc = IWithCommonFields<z.infer<typeof SectionDoc>>;

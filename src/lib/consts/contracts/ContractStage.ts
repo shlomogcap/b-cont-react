@@ -1,4 +1,4 @@
-export enum IContractStage {
+export enum EContractStage {
   Plan = 'plan',
   Actual = 'actual',
   Billing = 'billing',

@@ -1,4 +1,4 @@
-export enum IProjectAttahcmentFields {
+export enum EProjectAttahcmentFields {
   Title = 'title',
   Status = 'status',
   Description = 'description',

@@ -1,63 +1,65 @@
-import { Lang } from '../displayTexts';
-import { IAccountConfirms } from './AccountConfirms';
-import { IProjectAccountsFields } from './ProjectAccountFields';
+import { ILang } from '../displayTexts';
+import { EAccountConfirms } from './AccountConfirms';
+import { EProjectAccountsFields } from './ProjectAccountFields';
 
-type DisplayTextMapping = {
-  fields: Record<IProjectAccountsFields, string>;
-  confirms: Record<IAccountConfirms, string>;
+type IDisplayTextMapping = {
+  fields: Record<EProjectAccountsFields, string>;
+  confirms: Record<EAccountConfirms, string>;
 };
 
-export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> =
-  {
-    he: {
-      fields: {
-        [IProjectAccountsFields.Contract]: 'חוזה',
-        [IProjectAccountsFields.Vendor]: 'קבלן',
-        [IProjectAccountsFields.AccumulatedTotal]: 'חשבון מצטבר',
-        [IProjectAccountsFields.AccumulatedHisotry]: 'מצטבר תק׳ קודמות',
-        [IProjectAccountsFields.AccountAdditions]: 'תק׳ נוכחית תוספות',
-        [IProjectAccountsFields.AccountSubtractions]: 'תק׳ נוכחית קיזוזים',
-        [IProjectAccountsFields.AccountPeriod]: 'חשבון נוכחי',
-        [IProjectAccountsFields.AccountToPay]: 'תשלום תק׳ נוכחית',
-        [IProjectAccountsFields.ContractSum]: 'סכום הסכם',
-        [IProjectAccountsFields.TotalAdditionsSubtractions]: 'תוספות וקיזוזים',
-        [IProjectAccountsFields.TotalToPay]: 'יתרה לתשלום',
-        [IProjectAccountsFields.PaidPercentage]: '% ששולם',
-      },
-      confirms: {
-        [IAccountConfirms.Start]: 'אתחול ועדכון',
-        [IAccountConfirms.Projectmanager]: 'אישור מ.פרוייקט',
-        [IAccountConfirms.Manager]: 'אישור מהנדס חברה/מנכ״ל',
-        [IAccountConfirms.Accounting]: 'אישור הנה״ח',
-        [IAccountConfirms.Financing]: 'אישור כספים',
-        [IAccountConfirms.ExternalSoftware]: 'הזנה לסאפ',
-        [IAccountConfirms.Billing]: 'צ׳ק מאושר',
-      },
+export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
+  ILang,
+  IDisplayTextMapping
+> = {
+  he: {
+    fields: {
+      [EProjectAccountsFields.Contract]: 'חוזה',
+      [EProjectAccountsFields.Vendor]: 'קבלן',
+      [EProjectAccountsFields.AccumulatedTotal]: 'חשבון מצטבר',
+      [EProjectAccountsFields.AccumulatedHisotry]: 'מצטבר תק׳ קודמות',
+      [EProjectAccountsFields.AccountAdditions]: 'תק׳ נוכחית תוספות',
+      [EProjectAccountsFields.AccountSubtractions]: 'תק׳ נוכחית קיזוזים',
+      [EProjectAccountsFields.AccountPeriod]: 'חשבון נוכחי',
+      [EProjectAccountsFields.AccountToPay]: 'תשלום תק׳ נוכחית',
+      [EProjectAccountsFields.ContractSum]: 'סכום הסכם',
+      [EProjectAccountsFields.TotalAdditionsSubtractions]: 'תוספות וקיזוזים',
+      [EProjectAccountsFields.TotalToPay]: 'יתרה לתשלום',
+      [EProjectAccountsFields.PaidPercentage]: '% ששולם',
     },
-    en: {
-      fields: {
-        [IProjectAccountsFields.Contract]: 'Contract',
-        [IProjectAccountsFields.Vendor]: 'Vendor',
-        [IProjectAccountsFields.AccumulatedTotal]: 'Accumulated Total',
-        [IProjectAccountsFields.AccumulatedHisotry]: 'Accumulated Hisotry',
-        [IProjectAccountsFields.AccountAdditions]: 'Additions',
-        [IProjectAccountsFields.AccountSubtractions]: 'Subtractions',
-        [IProjectAccountsFields.AccountPeriod]: 'Period',
-        [IProjectAccountsFields.AccountToPay]: 'Account To Pay',
-        [IProjectAccountsFields.ContractSum]: 'Contract Sum',
-        [IProjectAccountsFields.TotalAdditionsSubtractions]:
-          'Total Additions Subtractions',
-        [IProjectAccountsFields.TotalToPay]: 'Total To Pay',
-        [IProjectAccountsFields.PaidPercentage]: 'Paid %',
-      },
-      confirms: {
-        [IAccountConfirms.Start]: 'Account Init',
-        [IAccountConfirms.Projectmanager]: 'Project Manager Approve',
-        [IAccountConfirms.Manager]: 'Senior Manager Approve',
-        [IAccountConfirms.Accounting]: 'Accounting Approve',
-        [IAccountConfirms.Financing]: 'Financing Approve',
-        [IAccountConfirms.ExternalSoftware]: 'Entered To SAP',
-        [IAccountConfirms.Billing]: 'Billing Ready',
-      },
+    confirms: {
+      [EAccountConfirms.Start]: 'אתחול ועדכון',
+      [EAccountConfirms.Projectmanager]: 'אישור מ.פרוייקט',
+      [EAccountConfirms.Manager]: 'אישור מהנדס חברה/מנכ״ל',
+      [EAccountConfirms.Accounting]: 'אישור הנה״ח',
+      [EAccountConfirms.Financing]: 'אישור כספים',
+      [EAccountConfirms.ExternalSoftware]: 'הזנה לסאפ',
+      [EAccountConfirms.Billing]: 'צ׳ק מאושר',
     },
-  };
+  },
+  en: {
+    fields: {
+      [EProjectAccountsFields.Contract]: 'Contract',
+      [EProjectAccountsFields.Vendor]: 'Vendor',
+      [EProjectAccountsFields.AccumulatedTotal]: 'Accumulated Total',
+      [EProjectAccountsFields.AccumulatedHisotry]: 'Accumulated Hisotry',
+      [EProjectAccountsFields.AccountAdditions]: 'Additions',
+      [EProjectAccountsFields.AccountSubtractions]: 'Subtractions',
+      [EProjectAccountsFields.AccountPeriod]: 'Period',
+      [EProjectAccountsFields.AccountToPay]: 'Account To Pay',
+      [EProjectAccountsFields.ContractSum]: 'Contract Sum',
+      [EProjectAccountsFields.TotalAdditionsSubtractions]:
+        'Total Additions Subtractions',
+      [EProjectAccountsFields.TotalToPay]: 'Total To Pay',
+      [EProjectAccountsFields.PaidPercentage]: 'Paid %',
+    },
+    confirms: {
+      [EAccountConfirms.Start]: 'Account Init',
+      [EAccountConfirms.Projectmanager]: 'Project Manager Approve',
+      [EAccountConfirms.Manager]: 'Senior Manager Approve',
+      [EAccountConfirms.Accounting]: 'Accounting Approve',
+      [EAccountConfirms.Financing]: 'Financing Approve',
+      [EAccountConfirms.ExternalSoftware]: 'Entered To SAP',
+      [EAccountConfirms.Billing]: 'Billing Ready',
+    },
+  },
+};

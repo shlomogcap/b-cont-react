@@ -1,17 +1,13 @@
 import { z } from 'zod';
-import { IErrorMessage, VALIDATION_DISPLAY_TEXTS } from './displayTexts';
+import { EErrorMessage, VALIDATION_DISPLAY_TEXTS } from './displayTexts';
 
-export const REQUIRED_STRING_SCHEMA = z
+export const TITLE_FIELD_SCHEMA = z
   .string({
     required_error:
-      VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.Required],
+      VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.Required],
   })
-  .nonempty(VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.Required]);
-
-export const TITLE_FIELD_SCHEMA = REQUIRED_STRING_SCHEMA.min(
-  4,
-  VALIDATION_DISPLAY_TEXTS.he.errosMessages[IErrorMessage.TooShort],
-);
+  .nonempty(VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.Required])
+  .min(4, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooShort]);
 
 export const INTEGER_SCHEMA = z.coerce.number().int().positive();
 export const NUMBER_SCHEMA = z.preprocess(

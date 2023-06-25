@@ -1,44 +1,44 @@
-import { ProjectFields } from './ProjectFields';
+import { EProjectFields } from './ProjectFields';
 import { EProjectViews } from './ProjectViews';
-import { Lang } from '../displayTexts';
-import { ProjectType } from './ProjectType';
-import { IProjectStatus } from './ProjectStatus';
+import { ILang } from '../displayTexts';
+import { EProjectType } from './ProjectType';
+import { EProjectStatus } from './ProjectStatus';
 
-type DisplayTextMapping = {
-  fields: Record<ProjectFields, string>;
+type IDisplayTextMapping = {
+  fields: Record<EProjectFields, string>;
   tabs: Record<EProjectViews, string>;
   projectPageTitle: string;
-  projectTypes: Record<ProjectType, string>;
-  projectStatus: Record<IProjectStatus, string>;
-  getAddNewText: (projectType: ProjectType) => string;
+  projectTypes: Record<EProjectType, string>;
+  projectStatus: Record<EProjectStatus, string>;
+  getAddNewText: (projectType: EProjectType) => string;
 };
 
-export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const PROJECT_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     projectPageTitle: 'דשבורד פרוייקט',
     projectStatus: {
-      [IProjectStatus.Active]: 'פעיל',
-      [IProjectStatus.NonActive]: 'לא פעיל',
+      [EProjectStatus.Active]: 'פעיל',
+      [EProjectStatus.NonActive]: 'לא פעיל',
     },
     fields: {
-      [ProjectFields.Title]: 'פרוייקט',
-      [ProjectFields.Address]: 'מיקום',
-      [ProjectFields.ProjectType]: 'סוג פרוייקט',
-      [ProjectFields.SDate]: 'תחילת פרוייקט',
-      [ProjectFields.EDate]: 'סיום מתוכנן',
-      [ProjectFields.NumberOfPeriods]: 'מס תקופות מתוכנן',
-      [ProjectFields.Description]: 'תאור הפרוייקט',
-      [ProjectFields.Manager]: 'מנהל ביצוע',
-      [ProjectFields.SeniorManager]: 'מנהל פרוייקט בכיר',
-      [ProjectFields.Entrepreneur]: 'חברה יזמית',
-      [ProjectFields.Executor]: 'חברה מבצעת',
-      [ProjectFields.NumberOfBuildings]: 'מספר בניינים',
-      [ProjectFields.Basements]: 'מרתפים',
-      [ProjectFields.NumberOfApatrments]: 'מספר דירות',
-      [ProjectFields.Status]: 'סטטוס',
-      [ProjectFields.TotalAgreementSum]: 'סכום הסכם',
-      [ProjectFields.TotalActualsSum]: 'סכום מצטבר מאושר',
-      [ProjectFields.DonePercentage]: 'הושלם',
+      [EProjectFields.Title]: 'פרוייקט',
+      [EProjectFields.Address]: 'מיקום',
+      [EProjectFields.ProjectType]: 'סוג פרוייקט',
+      [EProjectFields.SDate]: 'תחילת פרוייקט',
+      [EProjectFields.EDate]: 'סיום מתוכנן',
+      [EProjectFields.NumberOfPeriods]: 'מס תקופות מתוכנן',
+      [EProjectFields.Description]: 'תאור הפרוייקט',
+      [EProjectFields.Manager]: 'מנהל ביצוע',
+      [EProjectFields.SeniorManager]: 'מנהל פרוייקט בכיר',
+      [EProjectFields.Entrepreneur]: 'חברה יזמית',
+      [EProjectFields.Executor]: 'חברה מבצעת',
+      [EProjectFields.NumberOfBuildings]: 'מספר בניינים',
+      [EProjectFields.Basements]: 'מרתפים',
+      [EProjectFields.NumberOfApatrments]: 'מספר דירות',
+      [EProjectFields.Status]: 'סטטוס',
+      [EProjectFields.TotalAgreementSum]: 'סכום הסכם',
+      [EProjectFields.TotalActualsSum]: 'סכום מצטבר מאושר',
+      [EProjectFields.DonePercentage]: 'הושלם',
     },
     tabs: {
       [EProjectViews.Confirms]: 'סטטוס אישורים',
@@ -49,9 +49,9 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EProjectViews.Appartments]: 'דירות',
     },
     projectTypes: {
-      [ProjectType.Residential]: 'מגורים',
-      [ProjectType.PublicSpace]: 'ציבורי',
-      [ProjectType.Entrepreneurship]: 'יזמות',
+      [EProjectType.Residential]: 'מגורים',
+      [EProjectType.PublicSpace]: 'ציבורי',
+      [EProjectType.Entrepreneurship]: 'יזמות',
     },
     getAddNewText: (projectType) =>
       `+ פרוייקט [${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]}]`,
@@ -59,28 +59,28 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
   en: {
     projectPageTitle: 'Project Dashboard',
     projectStatus: {
-      [IProjectStatus.Active]: 'Active',
-      [IProjectStatus.NonActive]: 'Not Active',
+      [EProjectStatus.Active]: 'Active',
+      [EProjectStatus.NonActive]: 'Not Active',
     },
     fields: {
-      [ProjectFields.Title]: 'Project Name',
-      [ProjectFields.Address]: 'Location',
-      [ProjectFields.ProjectType]: 'projectType',
-      [ProjectFields.SDate]: 'sDate',
-      [ProjectFields.EDate]: 'eDate',
-      [ProjectFields.NumberOfPeriods]: 'numberOfPeriods',
-      [ProjectFields.Description]: 'description',
-      [ProjectFields.Manager]: 'manager',
-      [ProjectFields.SeniorManager]: 'seniorManager',
-      [ProjectFields.Entrepreneur]: 'entrepreneur',
-      [ProjectFields.Executor]: 'executor',
-      [ProjectFields.NumberOfBuildings]: 'numberOfBuildings',
-      [ProjectFields.Basements]: 'basements',
-      [ProjectFields.NumberOfApatrments]: 'numberOfApatrments',
-      [ProjectFields.Status]: 'status',
-      [ProjectFields.TotalAgreementSum]: 'totalAgreementSum',
-      [ProjectFields.TotalActualsSum]: 'totalActualsSum',
-      [ProjectFields.DonePercentage]: 'donePercentage',
+      [EProjectFields.Title]: 'Project Name',
+      [EProjectFields.Address]: 'Location',
+      [EProjectFields.ProjectType]: 'projectType',
+      [EProjectFields.SDate]: 'sDate',
+      [EProjectFields.EDate]: 'eDate',
+      [EProjectFields.NumberOfPeriods]: 'numberOfPeriods',
+      [EProjectFields.Description]: 'description',
+      [EProjectFields.Manager]: 'manager',
+      [EProjectFields.SeniorManager]: 'seniorManager',
+      [EProjectFields.Entrepreneur]: 'entrepreneur',
+      [EProjectFields.Executor]: 'executor',
+      [EProjectFields.NumberOfBuildings]: 'numberOfBuildings',
+      [EProjectFields.Basements]: 'basements',
+      [EProjectFields.NumberOfApatrments]: 'numberOfApatrments',
+      [EProjectFields.Status]: 'status',
+      [EProjectFields.TotalAgreementSum]: 'totalAgreementSum',
+      [EProjectFields.TotalActualsSum]: 'totalActualsSum',
+      [EProjectFields.DonePercentage]: 'donePercentage',
     },
     tabs: {
       [EProjectViews.Confirms]: 'Confirms',
@@ -91,9 +91,9 @@ export const PROJECT_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
       [EProjectViews.Appartments]: 'Appartments',
     },
     projectTypes: {
-      [ProjectType.Residential]: 'Residential',
-      [ProjectType.PublicSpace]: 'Public Space',
-      [ProjectType.Entrepreneurship]: 'Entrepreneurship',
+      [EProjectType.Residential]: 'Residential',
+      [EProjectType.PublicSpace]: 'Public Space',
+      [EProjectType.Entrepreneurship]: 'Entrepreneurship',
     },
     getAddNewText: (projectType) =>
       `+ project [${PROJECT_DISPLAY_TEXTS.en.projectTypes[projectType]}]`,

@@ -1,4 +1,4 @@
-import { Lang } from '../displayTexts';
+import { ILang } from '../displayTexts';
 import { ESectionCalculationMethod } from './SectionCalculationMethod';
 import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionFields } from './SectionFields';
@@ -10,14 +10,14 @@ export enum ESectionActions {
   HidePreview,
 }
 
-type DisplayTextMapping = {
+type IDisplayTextMapping = {
   fields: Record<ESectionFields, string>;
   calculationMethod: Record<ESectionCalculationMethod, string>;
   calculationType: Record<ESectionCalculationType, string>;
   actions: Record<ESectionActions, string>;
 };
 
-export const SECTIONS_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     fields: {
       [ESectionFields.Title]: 'סעיף',

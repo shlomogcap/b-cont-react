@@ -1,4 +1,4 @@
-export enum IAccountConfirms {
+export enum EAccountConfirms {
   Start = 'start',
   Projectmanager = 'projectManager',
   Manager = 'manager',

@@ -2,7 +2,7 @@ import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { IProjectContractsProps } from './ProjectContracts.types';
 import {
   CONTRACTS_DISPLAY_TEXTS,
-  IContractFields,
+  EContractFields,
 } from '@/lib/consts/contracts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'next/router';
 import {
   CONTRACT_ID_QUERY,
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
@@ -31,22 +31,22 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
       loading={isLoading}
       columns={fieldsNamesToColumns(
         [
-          IContractFields.Title,
+          EContractFields.Title,
           {
-            field: IContractFields.Status,
+            field: EContractFields.Status,
             type: 'list',
             options: CONTRACT_STATUS_OPTIONS,
           },
           {
-            field: IContractFields.VendorRef,
+            field: EContractFields.VendorRef,
             getValue: ({ row, field }) =>
               vendors.find(({ id }) => row[field] === id)?.title ??
               FALLBACK_BROKEN_REF_TEXT,
           },
-          IContractFields.BudgetbudgetaryItem,
-          { field: IContractFields.TotalAgreementSum, type: 'number' },
+          EContractFields.BudgetbudgetaryItem,
+          { field: EContractFields.TotalAgreementSum, type: 'number' },
           {
-            field: IContractFields.ContractType,
+            field: EContractFields.ContractType,
             type: 'list',
             options: CONTRACT_TYPE_OPTIONS,
           },
@@ -56,7 +56,7 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
       rows={rows}
       onRowClick={({ id }) =>
         router.push({
-          pathname: IRoutesNames.Contract,
+          pathname: ERoutesNames.Contract,
           query: {
             [PROJECT_TYPE_QUERY]: projectType,
             [PROJECT_ID_QUERY]: projectId,

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Breakpoints, FOOTER_HEIGHT } from '../../consts/stylesConsts';
+import { EBreakpoints, FOOTER_HEIGHT } from '../../consts/stylesConsts';
 
 export const StyledPageLayout = styled.div`
   min-width: fit-content;
@@ -8,7 +8,7 @@ export const StyledPageLayout = styled.div`
     display: grid;
     position: relative;
     grid-template-columns: [sidebar] 7rem [center-start] 1fr [center-end];
-    @media only screen and (min-width: ${Breakpoints.BigDesktop}) {
+    @media only screen and (min-width: ${EBreakpoints.BigDesktop}) {
       grid-template-columns: [sidebar] 30rem [center-start] 1fr [center-end];
     }
   }

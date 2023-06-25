@@ -1,15 +1,15 @@
 import { ProjectsPage } from '@/lib/components/ProjectsPage/ProjectsPage';
-import { ProjectType } from '@/lib/consts/projects/ProjectType';
-import { IRoutesNames, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
+import { EProjectType } from '@/lib/consts/projects/ProjectType';
+import { ERoutesNames, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 export const getServerSideProps: GetServerSideProps<{
-  projectType: ProjectType;
+  projectType: EProjectType;
 }> = async (ctx) => {
-  const projectType = queryParamToString<ProjectType>(
+  const projectType = queryParamToString<EProjectType>(
     ctx.query,
     PROJECT_TYPE_QUERY,
   );
@@ -25,10 +25,10 @@ export default function ProjectsWithTypeRoute({
   useEffect(() => {
     if (
       !projectType ||
-      Object.values(ProjectType).every((t) => t !== projectType)
+      Object.values(EProjectType).every((t) => t !== projectType)
     ) {
       replace({
-        pathname: IRoutesNames.App,
+        pathname: ERoutesNames.App,
       });
     }
   }, [replace, projectType]);

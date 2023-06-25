@@ -1,10 +1,9 @@
-import { ProjectFields, ProjectType } from '../../consts/projects';
-import { IFilterItemType } from '../commons/FilterPanel';
 import { z } from 'zod';
+import { EProjectType } from '../../consts/projects';
 import { projectFilterSchema } from './ProjectsPage.consts';
 
 export type IProjectPageProps = {
-  projectType: ProjectType;
+  projectType: EProjectType;
 };
 
 export type IProjectFilterDoc = z.infer<typeof projectFilterSchema>;

@@ -1,4 +1,4 @@
-import { Breakpoints } from '@/lib/consts/stylesConsts';
+import { EBreakpoints } from '@/lib/consts/stylesConsts';
 import { createGlobalStyle } from 'styled-components';
 
 type Props = {
@@ -65,16 +65,16 @@ const GlobalStyle = createGlobalStyle<Props>`
 
 
     font-size: 62.5%;
-    @media only screen and (max-width: ${Breakpoints.Phone}) {
+    @media only screen and (max-width: ${EBreakpoints.Phone}) {
         font-size: 50%;
     }
-    @media only screen and (max-width: ${Breakpoints.TabPort}) {
+    @media only screen and (max-width: ${EBreakpoints.TabPort}) {
         font-size: 55%;
     }
-    @media only screen and (max-width: ${Breakpoints.TabLand}) {
+    @media only screen and (max-width: ${EBreakpoints.TabLand}) {
         font-size: 60%;
     }
-    @media only screen and (min-width: ${Breakpoints.BigDesktop}) {
+    @media only screen and (min-width: ${EBreakpoints.BigDesktop}) {
         font-size: 65%;
     }
 }

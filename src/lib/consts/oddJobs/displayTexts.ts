@@ -1,57 +1,57 @@
-import { Lang } from '../displayTexts';
-import { IOddJobStatus } from './OddJobStatus';
-import { IOddJobsFields } from './OddJobsFields';
+import { ILang } from '../displayTexts';
+import { EOddJobStatus } from './OddJobStatus';
+import { EOddJobsFields } from './OddJobsFields';
 
-type DisplayTextMapping = {
-  fields: Record<IOddJobsFields, string>;
-  status: Record<IOddJobStatus, string>;
+type IDisplayTextMapping = {
+  fields: Record<EOddJobsFields, string>;
+  status: Record<EOddJobStatus, string>;
 };
 
-export const ODD_JOBS_DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const ODD_JOBS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     fields: {
-      [IOddJobsFields.Title]: 'עבודה',
-      [IOddJobsFields.Description]: 'תיאור',
-      [IOddJobsFields.Status]: 'סטטוס',
-      [IOddJobsFields.AttachmentUrl]: 'קובץ',
-      [IOddJobsFields.InvoiceNumber]: 'מספר חשבונית',
-      [IOddJobsFields.InvoiceDate]: 'תאריך חשבונית',
-      [IOddJobsFields.SumBeforeTax]: 'סכום לפני מעמ',
-      [IOddJobsFields.ApprovalSumBeforeTax]: 'סכום מאושר לפני מעמ',
-      [IOddJobsFields.PaymentDue]: 'יתרה לתשלום',
-      [IOddJobsFields.PaymentDate]: 'שולם',
+      [EOddJobsFields.Title]: 'עבודה',
+      [EOddJobsFields.Description]: 'תיאור',
+      [EOddJobsFields.Status]: 'סטטוס',
+      [EOddJobsFields.AttachmentUrl]: 'קובץ',
+      [EOddJobsFields.InvoiceNumber]: 'מספר חשבונית',
+      [EOddJobsFields.InvoiceDate]: 'תאריך חשבונית',
+      [EOddJobsFields.SumBeforeTax]: 'סכום לפני מעמ',
+      [EOddJobsFields.ApprovalSumBeforeTax]: 'סכום מאושר לפני מעמ',
+      [EOddJobsFields.PaymentDue]: 'יתרה לתשלום',
+      [EOddJobsFields.PaymentDate]: 'שולם',
     },
     status: {
-      [IOddJobStatus.Open]: 'פתוח',
-      [IOddJobStatus.ProjectMangerConfirm]: 'מאושר מנהל פרוייקט',
-      [IOddJobStatus.SeniorManagerConfirm]: 'מאושר הנהלה בכירה',
-      [IOddJobStatus.PartiallyDone]: 'נסגר ושולם חלקי',
-      [IOddJobStatus.Done]: 'נסגר ושולם מלא',
-      [IOddJobStatus.NotConfirm]: 'לא אושר לתשלום',
-      [IOddJobStatus.Archive]: 'ארכיון',
+      [EOddJobStatus.Open]: 'פתוח',
+      [EOddJobStatus.ProjectMangerConfirm]: 'מאושר מנהל פרוייקט',
+      [EOddJobStatus.SeniorManagerConfirm]: 'מאושר הנהלה בכירה',
+      [EOddJobStatus.PartiallyDone]: 'נסגר ושולם חלקי',
+      [EOddJobStatus.Done]: 'נסגר ושולם מלא',
+      [EOddJobStatus.NotConfirm]: 'לא אושר לתשלום',
+      [EOddJobStatus.Archive]: 'ארכיון',
     },
   },
   en: {
     fields: {
-      [IOddJobsFields.Title]: 'Job',
-      [IOddJobsFields.Description]: 'Descriptions',
-      [IOddJobsFields.Status]: 'Status',
-      [IOddJobsFields.AttachmentUrl]: 'Attachment',
-      [IOddJobsFields.InvoiceNumber]: 'Invoice Number',
-      [IOddJobsFields.InvoiceDate]: 'Invoice Date',
-      [IOddJobsFields.SumBeforeTax]: 'Sum Before Tax',
-      [IOddJobsFields.ApprovalSumBeforeTax]: 'Approval Sum Before Tax',
-      [IOddJobsFields.PaymentDue]: 'Payment Due',
-      [IOddJobsFields.PaymentDate]: 'Payment Date',
+      [EOddJobsFields.Title]: 'Job',
+      [EOddJobsFields.Description]: 'Descriptions',
+      [EOddJobsFields.Status]: 'Status',
+      [EOddJobsFields.AttachmentUrl]: 'Attachment',
+      [EOddJobsFields.InvoiceNumber]: 'Invoice Number',
+      [EOddJobsFields.InvoiceDate]: 'Invoice Date',
+      [EOddJobsFields.SumBeforeTax]: 'Sum Before Tax',
+      [EOddJobsFields.ApprovalSumBeforeTax]: 'Approval Sum Before Tax',
+      [EOddJobsFields.PaymentDue]: 'Payment Due',
+      [EOddJobsFields.PaymentDate]: 'Payment Date',
     },
     status: {
-      [IOddJobStatus.Open]: 'Open',
-      [IOddJobStatus.ProjectMangerConfirm]: 'Project Manager Confirm',
-      [IOddJobStatus.SeniorManagerConfirm]: 'Senior Manager Confirm',
-      [IOddJobStatus.PartiallyDone]: 'Partially Done',
-      [IOddJobStatus.Done]: 'Done',
-      [IOddJobStatus.NotConfirm]: 'Not Conrim',
-      [IOddJobStatus.Archive]: 'Archive',
+      [EOddJobStatus.Open]: 'Open',
+      [EOddJobStatus.ProjectMangerConfirm]: 'Project Manager Confirm',
+      [EOddJobStatus.SeniorManagerConfirm]: 'Senior Manager Confirm',
+      [EOddJobStatus.PartiallyDone]: 'Partially Done',
+      [EOddJobStatus.Done]: 'Done',
+      [EOddJobStatus.NotConfirm]: 'Not Conrim',
+      [EOddJobStatus.Archive]: 'Archive',
     },
   },
 };

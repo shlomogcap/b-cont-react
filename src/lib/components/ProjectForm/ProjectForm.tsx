@@ -1,7 +1,7 @@
 import {
   PROJECT_DISPLAY_TEXTS,
   ProjectDoc,
-  ProjectFields,
+  EProjectFields,
 } from '@/lib/consts/projects';
 import React, { useEffect } from 'react';
 import {
@@ -21,8 +21,8 @@ import {
 import { Button } from '../commons/Button';
 import {
   DISPLAY_TEXTS,
-  IButtonTexts,
-  IToastType,
+  EButtonTexts,
+  EToastType,
 } from '@/lib/consts/displayTexts';
 import {
   DUMMY_OPTIONS,
@@ -35,7 +35,7 @@ import { useProjectsContext } from '@/lib/context/projectsContext';
 import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { PROJECT_ID_QUERY, IRoutesNames } from '@/lib/consts/routes';
+import { PROJECT_ID_QUERY, ERoutesNames } from '@/lib/consts/routes';
 import { toast } from 'react-toastify';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 
@@ -46,71 +46,73 @@ const ProjectFormFields = () => {
     <>
       <TextInput
         isRequired
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Title]}
-        name={ProjectFields.Title}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Title]}
+        name={EProjectFields.Title}
       />
       <TextInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Address]}
-        name={ProjectFields.Address}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Address]}
+        name={EProjectFields.Address}
       />
       <DateInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.SDate]}
-        name={ProjectFields.SDate}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.SDate]}
+        name={EProjectFields.SDate}
         afterChange={() => calcPeriods()}
       />
       <NumberInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.NumberOfPeriods]}
-        name={ProjectFields.NumberOfPeriods}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.NumberOfPeriods]}
+        name={EProjectFields.NumberOfPeriods}
         afterChange={() => calcEDateByPeriodsAndSDate()}
       />
       <DateInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.EDate]}
-        name={ProjectFields.EDate}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.EDate]}
+        name={EProjectFields.EDate}
         afterChange={() => calcPeriods()}
       />
       <TextInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Description]}
-        name={ProjectFields.Description}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Description]}
+        name={EProjectFields.Description}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Manager]}
-        name={ProjectFields.Manager}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Manager]}
+        name={EProjectFields.Manager}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.SeniorManager]}
-        name={ProjectFields.SeniorManager}
-      />
-      <NumberInput
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.NumberOfBuildings]}
-        name={ProjectFields.NumberOfBuildings}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.SeniorManager]}
+        name={EProjectFields.SeniorManager}
       />
       <NumberInput
         label={
-          PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.NumberOfApatrments]
+          PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.NumberOfBuildings]
         }
-        name={ProjectFields.NumberOfApatrments}
+        name={EProjectFields.NumberOfBuildings}
+      />
+      <NumberInput
+        label={
+          PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.NumberOfApatrments]
+        }
+        name={EProjectFields.NumberOfApatrments}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Executor]}
-        name={ProjectFields.Executor}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Executor]}
+        name={EProjectFields.Executor}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Entrepreneur]}
-        name={ProjectFields.Entrepreneur}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Entrepreneur]}
+        name={EProjectFields.Entrepreneur}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.ProjectType]}
-        name={ProjectFields.ProjectType}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.ProjectType]}
+        name={EProjectFields.ProjectType}
       />
       <DropdownInput
         options={DUMMY_OPTIONS}
-        label={PROJECT_DISPLAY_TEXTS.he.fields[ProjectFields.Status]}
-        name={ProjectFields.Status}
+        label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Status]}
+        name={EProjectFields.Status}
       />
     </>
   );
@@ -142,7 +144,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       try {
         const docRef = doc(firestore, `projects/${id}`);
         await setDoc(docRef, preparedData, { merge: true });
-        toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
+        toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
       } catch (err) {
         //TODO: promt error...
         console.error(err);
@@ -152,9 +154,9 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     try {
       const collectionRef = collection(firestore, 'projects');
       const res = await addDoc(collectionRef, preparedData);
-      toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
       router.push({
-        pathname: IRoutesNames.Project,
+        pathname: ERoutesNames.Project,
         query: { [PROJECT_ID_QUERY]: res.id },
       });
     } catch (err) {
@@ -177,10 +179,10 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
         {form.formState.isDirty && (
           <FormFooter>
             <Button onClick={form.handleSubmit(onSubmit, onError)}>
-              {DISPLAY_TEXTS.he.buttons[IButtonTexts.Save]}
+              {DISPLAY_TEXTS.he.buttons[EButtonTexts.Save]}
             </Button>
             <Button variant='secondary' onClick={abortChanges}>
-              {DISPLAY_TEXTS.he.buttons[IButtonTexts.Cancel]}
+              {DISPLAY_TEXTS.he.buttons[EButtonTexts.Cancel]}
             </Button>
           </FormFooter>
         )}

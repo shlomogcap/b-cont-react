@@ -1,7 +1,7 @@
 import { Link } from '../../commons/Link';
 import styled from 'styled-components';
 import { highlightRowMixin } from '../../styles/mixins/highlightRow';
-import { Breakpoints, TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
+import { EBreakpoints, TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
 
 export const StyledSidebar = styled.aside`
   grid-column: sidebar / center-start;
@@ -45,7 +45,7 @@ export const StyledSidebarLink = styled(Link)`
   & .text {
     display: none;
   }
-  @media only screen and (min-width: ${Breakpoints.BigDesktop}) {
+  @media only screen and (min-width: ${EBreakpoints.BigDesktop}) {
     grid-template-columns: 3rem 1fr;
     & .text {
       display: block;
