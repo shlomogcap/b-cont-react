@@ -25,7 +25,7 @@ export default function ProjectsRoute({
   useEffect(() => {
     if (
       !projectType ||
-      Object.values(projectType).every((t) => t !== projectType)
+      Object.values(EProjectType).every((t) => t !== projectType)
     ) {
       replace({
         pathname: '/app',
