@@ -67,3 +67,9 @@ export const projectsTableColumns = fieldsNamesToColumns(
   ],
   PROJECT_DISPLAY_TEXTS.he.fields,
 );
+
+export const searchBy = [
+  EProjectFields.Title,
+  EProjectFields.ProjectType,
+  EProjectFields.Address,
+];

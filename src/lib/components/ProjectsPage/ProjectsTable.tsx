@@ -17,6 +17,7 @@ import {
   projectFilterSchema,
   projectsTableColumns,
   projectsTableFilters,
+  searchBy,
 } from './ProjectsPage.consts';
 import {
   filterByFilterPanel,
@@ -27,6 +28,7 @@ import { useEffect, useState } from 'react';
 export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
+  const [searchValue, setSearchValue] = useState('');
   const [activeFilters, setActiveFilters] = useState(
     Object.values(projectsTableColumns).reduce(
       (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
@@ -56,9 +58,22 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     setActiveFilters({ ...activeFilterFields });
   }, [watchedFields]);
 
+  const filterBySearch = (row: any) => {
+    if (searchValue.length) {
+      return searchBy
+        .map((field) => {
+          return row[field].toString().includes(searchValue);
+        })
+        .some((row) => row === true);
+    } else {
+      return true;
+    }
+  };
+
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
-    .filter((r) => filterByFilterPanel(r, watchedFields as any)); //TODO: fix that type assertion
+    .filter((r) => filterByFilterPanel(r, watchedFields as any)) //TODO: fix that type assertion
+    .filter(filterBySearch);
   return (
     <FormProvider {...form}>
       <Table
@@ -67,6 +82,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
           status: EProjectStatus,
           activeFilters,
+          setSearchValue,
         }}
         loading={isLoading}
         rows={rows}

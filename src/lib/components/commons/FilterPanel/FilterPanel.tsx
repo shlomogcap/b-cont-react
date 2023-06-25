@@ -91,7 +91,7 @@ export const FilterPanel = ({
   filters,
   displayTexts,
   activeFilters,
-  searchBy,
+  setSearchValue,
 }: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const referenceElement = useRef<SVGSVGElement>(null);
@@ -178,7 +178,7 @@ export const FilterPanel = ({
       <StyledFiltersBar>
         {isFiltersActive && <Badge />}
         {filterIcon}
-        <SearchBar searchBy={searchBy} />
+        <SearchBar setSearchValue={setSearchValue} />
       </StyledFiltersBar>
       {isFilterPanelOpen && (
         <Draggable>

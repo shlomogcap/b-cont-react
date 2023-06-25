@@ -10,10 +10,17 @@ import {
 import { ISearchBarProps } from './SearchBar.types';
 
 export const SearchBar = (props: ISearchBarProps) => {
+  const { setSearchValue } = props;
   return (
     <>
       <StyledSearchBar>
-        <StyledSearchInput name='search' />
+        <StyledSearchInput
+          name='search'
+          placeholder='חפש...'
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+        />
         <StyledSearchIcon
           {...props}
           viewBox='0 0 32 32'
