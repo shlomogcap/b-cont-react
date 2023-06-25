@@ -1,10 +1,10 @@
 import { Table } from '../commons/Table';
-import { IRoutesNames } from '../../consts/routes';
+import { ERoutesNames } from '../../consts/routes';
 import {
   IProjectDoc,
-  IProjectStatus,
+  EProjectStatus,
   PROJECT_DISPLAY_TEXTS,
-  ProjectFields,
+  EProjectFields,
 } from '../../consts/projects';
 import { IProjectFilterDoc, IProjectPageProps } from './ProjectsPage.types';
 import { useRouter } from 'next/router';
@@ -44,13 +44,13 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
   const watchedFields = useWatch({ control });
 
   useEffect(() => {
-    const activeFilterFields: Partial<Record<ProjectFields, boolean>> = {};
+    const activeFilterFields: Partial<Record<EProjectFields, boolean>> = {};
     Object.entries(watchedFields).forEach(([field, { value }]) => {
       if (
         (Array.isArray(value) && value.length > 0) ||
         (typeof value === 'object' && Object.values(value).some(Boolean))
       ) {
-        activeFilterFields[field as ProjectFields] = true;
+        activeFilterFields[field as EProjectFields] = true;
       }
     });
     setActiveFilters({ ...activeFilterFields });
@@ -65,31 +65,31 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
         tableFilterProps={{
           filters: projectsTableFilters,
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
-          status: IProjectStatus,
+          status: EProjectStatus,
           activeFilters,
         }}
         loading={isLoading}
         rows={rows}
         columns={projectsTableColumns as any} //TODO: fix this type assertion
         totals={{
-          [ProjectFields.Title]:
+          [EProjectFields.Title]:
             rows.length < 2
               ? '-'
               : `${rows.length.toLocaleString()} ${
-                  DISPLAY_TEXTS.he.routeNames[IRoutesNames.ProjectsWithType]
+                  DISPLAY_TEXTS.he.routeNames[ERoutesNames.ProjectsWithType]
                 }`,
-          [ProjectFields.TotalAgreementSum]: sumBy(
+          [EProjectFields.TotalAgreementSum]: sumBy(
             rows,
-            ProjectFields.TotalAgreementSum,
+            EProjectFields.TotalAgreementSum,
           ),
-          [ProjectFields.TotalActualsSum]: sumBy(
+          [EProjectFields.TotalActualsSum]: sumBy(
             rows,
-            ProjectFields.TotalActualsSum,
+            EProjectFields.TotalActualsSum,
           ),
         }}
         onRowClick={({ id }) =>
           router.push({
-            pathname: IRoutesNames.Project,
+            pathname: ERoutesNames.Project,
             query: { projectId: id, projectType },
           })
         }

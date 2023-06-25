@@ -1,7 +1,7 @@
 import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { IProjectAccountsProps } from './ProjectAccounts.types';
 import {
-  IProjectAccountsFields,
+  EProjectAccountsFields,
   PROJECT_ACCOUNTS_DISPLAY_TEXTS,
 } from '@/lib/consts/accounts';
 import { MOCK_PROJECTS_ACCOUNTS_DATA } from '@/lib/mock/projectAccounts';
@@ -17,30 +17,30 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
       columns={fieldsNamesToColumns(
         [
           {
-            field: IProjectAccountsFields.Contract,
+            field: EProjectAccountsFields.Contract,
             getValue: ({ row, field }) =>
               contracts.find(({ id }) => row[field] === id)?.title ??
               FALLBACK_BROKEN_REF_TEXT,
           },
           {
-            field: IProjectAccountsFields.Vendor,
+            field: EProjectAccountsFields.Vendor,
             getValue: ({ row, field }) =>
               vendors.find(({ id }) => row[field] === id)?.title ??
               FALLBACK_BROKEN_REF_TEXT,
           },
-          { field: IProjectAccountsFields.AccumulatedTotal, type: 'number' },
-          { field: IProjectAccountsFields.AccumulatedHisotry, type: 'number' },
-          { field: IProjectAccountsFields.AccountAdditions, type: 'number' },
-          { field: IProjectAccountsFields.AccountSubtractions, type: 'number' },
-          IProjectAccountsFields.AccountPeriod,
-          { field: IProjectAccountsFields.AccountToPay, type: 'number' },
-          { field: IProjectAccountsFields.ContractSum, type: 'number' },
+          { field: EProjectAccountsFields.AccumulatedTotal, type: 'number' },
+          { field: EProjectAccountsFields.AccumulatedHisotry, type: 'number' },
+          { field: EProjectAccountsFields.AccountAdditions, type: 'number' },
+          { field: EProjectAccountsFields.AccountSubtractions, type: 'number' },
+          EProjectAccountsFields.AccountPeriod,
+          { field: EProjectAccountsFields.AccountToPay, type: 'number' },
+          { field: EProjectAccountsFields.ContractSum, type: 'number' },
           {
-            field: IProjectAccountsFields.TotalAdditionsSubtractions,
+            field: EProjectAccountsFields.TotalAdditionsSubtractions,
             type: 'number',
           },
-          { field: IProjectAccountsFields.TotalToPay, type: 'number' },
-          { field: IProjectAccountsFields.PaidPercentage, type: 'percentage' },
+          { field: EProjectAccountsFields.TotalToPay, type: 'number' },
+          { field: EProjectAccountsFields.PaidPercentage, type: 'percentage' },
         ],
         PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.fields,
       )}

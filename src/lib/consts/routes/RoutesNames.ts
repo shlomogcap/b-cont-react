@@ -5,7 +5,7 @@ import {
   VENDOR_ID_QUERY,
 } from './queryParams';
 
-export enum IRoutesNames {
+export enum ERoutesNames {
   App = '/app',
   Projects = `/app/projects`,
   ProjectsWithType = `/app/projects/[${PROJECT_TYPE_QUERY}]`,

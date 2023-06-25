@@ -1,4 +1,4 @@
-export enum IFilterItemType {
+export enum EFilterItemType {
   Date = 'date',
   Buttons = 'buttons',
 }
@@ -15,13 +15,13 @@ export type IDateFilterValue = {
 
 export type IFilterItem<T extends string = string, V extends string = string> =
   | {
-      type: IFilterItemType.Date;
+      type: EFilterItemType.Date;
       field: T;
       defaultValue?: IDateFilterValue;
       options?: undefined;
     }
   | {
-      type: IFilterItemType.Buttons;
+      type: EFilterItemType.Buttons;
       field: T;
       options: IFilterItemOption<V>[];
       defaultValue?: V[];
@@ -29,11 +29,11 @@ export type IFilterItem<T extends string = string, V extends string = string> =
 
 export type IFilterValues =
   | {
-      type: IFilterItemType.Date;
+      type: EFilterItemType.Date;
       value: IDateFilterValue;
     }
   | {
-      type: IFilterItemType.Buttons;
+      type: EFilterItemType.Buttons;
       value: string[];
     };
 

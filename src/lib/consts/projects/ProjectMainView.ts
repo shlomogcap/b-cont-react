@@ -1,4 +1,4 @@
-export enum ProjectMainViews {
+export enum EProjectMainViews {
   Overview = 'overview',
   Appartments = 'appartments',
 }

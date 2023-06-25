@@ -1,23 +1,23 @@
 import Z from 'zod';
-import { WithCommonFields } from '@/lib/utils/WithFields';
-import { IProjectAttahcmentFields } from './ProjectAttachmentFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
+import { EProjectAttahcmentFields } from './ProjectAttachmentFields';
 import {
   OPTIONAL_DATE_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
-import { IProjectAttahcmentStatus } from './ProjectAttachmentStatus';
+import { EProjectAttahcmentStatus } from './ProjectAttachmentStatus';
 
 export const ProjectAttachmentDoc = Z.object({
-  [IProjectAttahcmentFields.Title]: TITLE_FIELD_SCHEMA,
-  [IProjectAttahcmentFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IProjectAttahcmentFields.Status]: Z.nativeEnum(
-    IProjectAttahcmentStatus,
+  [EProjectAttahcmentFields.Title]: TITLE_FIELD_SCHEMA,
+  [EProjectAttahcmentFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [EProjectAttahcmentFields.Status]: Z.nativeEnum(
+    EProjectAttahcmentStatus,
   ).optional(),
-  [IProjectAttahcmentFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
+  [EProjectAttahcmentFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
 });
 
-export type IProjectAttachmentDoc = WithCommonFields<
+export type IProjectAttachmentDoc = IWithCommonFields<
   Z.infer<typeof ProjectAttachmentDoc>
 >;

@@ -1,4 +1,4 @@
-export enum IVendorStatus {
+export enum EVendorStatus {
   Active = 'active',
   NonActive = 'nonActive',
 }

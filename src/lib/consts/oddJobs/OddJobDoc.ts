@@ -1,25 +1,25 @@
 import Z from 'zod';
-import { WithCommonFields } from '@/lib/utils/WithFields';
-import { IOddJobsFields } from './OddJobsFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
+import { EOddJobsFields } from './OddJobsFields';
 import {
   OPTIONAL_DATE_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
-import { IOddJobStatus } from './OddJobStatus';
+import { EOddJobStatus } from './OddJobStatus';
 
 export const OddJobDoc = Z.object({
-  [IOddJobsFields.Title]: TITLE_FIELD_SCHEMA,
-  [IOddJobsFields.Description]: OPTIONAL_STRING_SCHEMA,
-  [IOddJobsFields.Status]: Z.nativeEnum(IOddJobStatus).optional(),
-  [IOddJobsFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
-  [IOddJobsFields.InvoiceNumber]: OPTIONAL_STRING_SCHEMA,
-  [IOddJobsFields.InvoiceDate]: OPTIONAL_DATE_SCHEMA,
-  [IOddJobsFields.SumBeforeTax]: OPTIONAL_NUMBER_SCHEMA,
-  [IOddJobsFields.ApprovalSumBeforeTax]: OPTIONAL_NUMBER_SCHEMA,
-  [IOddJobsFields.PaymentDue]: OPTIONAL_NUMBER_SCHEMA,
-  [IOddJobsFields.PaymentDate]: OPTIONAL_DATE_SCHEMA,
+  [EOddJobsFields.Title]: TITLE_FIELD_SCHEMA,
+  [EOddJobsFields.Description]: OPTIONAL_STRING_SCHEMA,
+  [EOddJobsFields.Status]: Z.nativeEnum(EOddJobStatus).optional(),
+  [EOddJobsFields.AttachmentUrl]: OPTIONAL_STRING_SCHEMA,
+  [EOddJobsFields.InvoiceNumber]: OPTIONAL_STRING_SCHEMA,
+  [EOddJobsFields.InvoiceDate]: OPTIONAL_DATE_SCHEMA,
+  [EOddJobsFields.SumBeforeTax]: OPTIONAL_NUMBER_SCHEMA,
+  [EOddJobsFields.ApprovalSumBeforeTax]: OPTIONAL_NUMBER_SCHEMA,
+  [EOddJobsFields.PaymentDue]: OPTIONAL_NUMBER_SCHEMA,
+  [EOddJobsFields.PaymentDate]: OPTIONAL_DATE_SCHEMA,
 });
 
-export type IOddJobDoc = WithCommonFields<Z.infer<typeof OddJobDoc>>;
+export type IOddJobDoc = IWithCommonFields<Z.infer<typeof OddJobDoc>>;

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { CONTRACT_STAGE_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { CONTRACTS_DISPLAY_TEXTS } from '@/lib/consts/contracts';
-import { IContractStage } from '@/lib/consts/contracts/ContractStage';
+import { EContractStage } from '@/lib/consts/contracts/ContractStage';
 
 export const useContractStageBreadcrumb = (
-  currentStage: IContractStage,
+  currentStage: EContractStage,
 ): IBreadcrumbProps => {
   const { closeModal } = useModalContext();
   const router = useRouter();
@@ -14,9 +14,9 @@ export const useContractStageBreadcrumb = (
     text: CONTRACTS_DISPLAY_TEXTS.he.contractStage[currentStage],
     id: 'contract-stage',
     navList: [
-      IContractStage.Plan,
-      IContractStage.Actual,
-      IContractStage.Billing,
+      EContractStage.Plan,
+      EContractStage.Actual,
+      EContractStage.Billing,
     ]
       .filter((stage) => stage !== currentStage)
       .map((stage) => ({

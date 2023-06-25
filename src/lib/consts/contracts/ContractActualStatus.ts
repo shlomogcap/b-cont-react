@@ -1,4 +1,4 @@
-export enum IContractActualStatus {
+export enum EContractActualStatus {
   None = 'none',
   MissingProjectManagerConfirm = 'missingProjectManagerConfirm',
   MissingSeniorManagerConfirm = 'missingSeniorManagerConfirm',

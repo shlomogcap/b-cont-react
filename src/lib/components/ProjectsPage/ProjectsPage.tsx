@@ -1,6 +1,6 @@
 import { PageLayout } from '../PageLayout';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
-import { IRoutesNames } from '../../consts/routes';
+import { ERoutesNames } from '../../consts/routes';
 import { IProjectPageProps } from './ProjectsPage.types';
 import { ProjectsTable } from './ProjectsTable';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
@@ -10,7 +10,7 @@ import { useProjectTypeBreadcrumb } from '../ProjectPage/useProjectTypeBreadcrum
 export const ProjectsPage = ({ projectType }: IProjectPageProps) => {
   const title = projectType
     ? PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]
-    : DISPLAY_TEXTS.he.routeNames[IRoutesNames.ProjectsWithType];
+    : DISPLAY_TEXTS.he.routeNames[ERoutesNames.ProjectsWithType];
   const projectsTypeBreadcrumbd = useProjectTypeBreadcrumb(projectType);
 
   return (

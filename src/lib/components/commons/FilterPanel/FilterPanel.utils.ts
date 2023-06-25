@@ -5,15 +5,15 @@ import {
 } from '@/lib/utils/dateUtils';
 import {
   IFilterItem,
-  IFilterItemType,
+  EFilterItemType,
   IFilterValues,
 } from './FilterPanel.types';
 
 const getFilterItemDefaultData = (item: IFilterItem) => {
   switch (item.type) {
-    case IFilterItemType.Buttons:
+    case EFilterItemType.Buttons:
       return item.defaultValue ?? [];
-    case IFilterItemType.Date:
+    case EFilterItemType.Date:
       return {
         from: item.defaultValue?.from ?? '',
         to: item.defaultValue?.to ?? '',
@@ -41,7 +41,7 @@ export const filterByFilterPanel = <Doc extends {}>(
   return Object.entries<IFilterValues>(filterFields).every(
     ([field, { type, value }]) => {
       switch (type) {
-        case IFilterItemType.Date:
+        case EFilterItemType.Date:
           const fromValue = Array.isArray(value) ? '' : value?.from;
           const toValue = Array.isArray(value) ? '' : value?.to;
           const fieldValue = String(row[field as keyof Doc] ?? '');
@@ -58,7 +58,7 @@ export const filterByFilterPanel = <Doc extends {}>(
           if (toValue) {
             return isSameOrBefore(fieldValue, toValue);
           }
-        case IFilterItemType.Buttons:
+        case EFilterItemType.Buttons:
           const array = value as string[];
           return array.includes(String(row[field as keyof Doc]));
         default:

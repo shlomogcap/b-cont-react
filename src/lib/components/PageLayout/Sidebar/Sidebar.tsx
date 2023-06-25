@@ -1,6 +1,6 @@
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
-import { ProjectType } from '../../../consts/projects/ProjectType';
-import { IRoutesNames, PROJECT_TYPE_QUERY } from '../../../consts/routes';
+import { EProjectType } from '../../../consts/projects/ProjectType';
+import { ERoutesNames, PROJECT_TYPE_QUERY } from '../../../consts/routes';
 import {
   ProjectsPublicSpaceIcon,
   SettingsIcon,
@@ -19,39 +19,39 @@ export const Sidebar = ({ title }: ISidebarProps) => {
     <StyledSidebar>
       <nav className='nav'>
         <SidebarLink
-          text={projectTypeTexts[ProjectType.Residential]}
-          href={IRoutesNames.ProjectsWithType.replace(
+          text={projectTypeTexts[EProjectType.Residential]}
+          href={ERoutesNames.ProjectsWithType.replace(
             `[${PROJECT_TYPE_QUERY}]`,
-            ProjectType.Residential,
+            EProjectType.Residential,
           )}
           icon={<ProjectsResidentialIcon />}
         />
         <SidebarLink
-          text={projectTypeTexts[ProjectType.PublicSpace]}
-          href={IRoutesNames.ProjectsWithType.replace(
+          text={projectTypeTexts[EProjectType.PublicSpace]}
+          href={ERoutesNames.ProjectsWithType.replace(
             `[${PROJECT_TYPE_QUERY}]`,
-            ProjectType.PublicSpace,
+            EProjectType.PublicSpace,
           )}
           icon={<ProjectsPublicSpaceIcon />}
         />
         <SidebarLink
-          text={projectTypeTexts[ProjectType.Entrepreneurship]}
-          href={IRoutesNames.ProjectsWithType.replace(
+          text={projectTypeTexts[EProjectType.Entrepreneurship]}
+          href={ERoutesNames.ProjectsWithType.replace(
             `[${PROJECT_TYPE_QUERY}]`,
-            ProjectType.Entrepreneurship,
+            EProjectType.Entrepreneurship,
           )}
           icon={<ProjectsEntrepreneurshipIcon />}
         />
         <div className='hr' />
         <SidebarLink
-          text={DISPLAY_TEXTS.he.routeNames[IRoutesNames.Vendors]}
-          href={IRoutesNames.Vendors}
+          text={DISPLAY_TEXTS.he.routeNames[ERoutesNames.Vendors]}
+          href={ERoutesNames.Vendors}
           icon={<VendorsIcon />}
         />
         <div className='hr' />
         <SidebarLink
-          text={DISPLAY_TEXTS.he.routeNames[IRoutesNames.Settings]}
-          href={IRoutesNames.Settings}
+          text={DISPLAY_TEXTS.he.routeNames[ERoutesNames.Settings]}
+          href={ERoutesNames.Settings}
           icon={<SettingsIcon />}
         />
       </nav>

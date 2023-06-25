@@ -1,4 +1,4 @@
-export enum IUserFields {
+export enum EUserFields {
   Title = 'title',
   Phone = 'phone',
   Email = 'email',

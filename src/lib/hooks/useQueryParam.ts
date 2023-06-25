@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { getFullPathNoQuery } from '../utils/getFullPathNoQuery';
 
-type UseQueryParam = {
+type IUseQueryParam = {
   key: string;
   initialValue?: string;
 };
@@ -10,7 +10,7 @@ type UseQueryParam = {
 export const useQueryParam = <T extends string>({
   key,
   initialValue,
-}: UseQueryParam): [T, (newState: T) => void] => {
+}: IUseQueryParam): [T, (newState: T) => void] => {
   const { query, asPath, push, isReady } = useRouter();
   const setQueryValue = useCallback(
     (value: string) => {

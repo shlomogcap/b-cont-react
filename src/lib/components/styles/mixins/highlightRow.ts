@@ -30,14 +30,14 @@ const otherPosition = css`
   }
 `;
 
-type HightlightRowMixinProps = {
+type IHightlightRowMixinProps = {
   side: 'left' | 'right' | 'bottom';
   trigger?: 'hover' | 'constant';
 };
 export const highlightRowMixin = ({
   trigger,
   side,
-}: HightlightRowMixinProps) => css`
+}: IHightlightRowMixinProps) => css`
   & {
     position: relative;
   }

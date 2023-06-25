@@ -1,3 +1,3 @@
 export const PATH_FIELD = 'path';
 
-export type WithPathField<T> = T & { [PATH_FIELD]: string };
+export type IWithPathField<T> = T & { [PATH_FIELD]: string };

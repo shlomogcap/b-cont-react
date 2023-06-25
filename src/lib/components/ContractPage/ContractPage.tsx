@@ -3,15 +3,15 @@ import { IContractPageProps } from './ContractPage.types';
 import { PageLayout } from '../PageLayout';
 import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { useProjectTypeBreadcrumb } from '../ProjectPage/useProjectTypeBreadcrumb';
-import { IRoutesNames } from '@/lib/consts/routes';
+import { ERoutesNames } from '@/lib/consts/routes';
 import { useProjectNavList } from '@/lib/hooks/useProjectNavList';
 import { EmptyState } from '../commons/EmptyState';
-import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import { PropsWithChildren } from 'react';
 import { useContractContext } from '@/lib/context/contractContext';
 import {
   CONTRACTS_DISPLAY_TEXTS,
-  IContractFields,
+  EContractFields,
 } from '@/lib/consts/contracts';
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 import { Card } from '../commons/Card';
@@ -34,7 +34,7 @@ export const ContractPage = ({
 
   const projectsTypeBreadCrumb = useProjectTypeBreadcrumb(
     projectType,
-    IRoutesNames.ProjectsWithType,
+    ERoutesNames.ProjectsWithType,
   );
   const contractStageBreadcrumb = useContractStageBreadcrumb(stage);
 
@@ -51,12 +51,12 @@ export const ContractPage = ({
         projectsTypeBreadCrumb,
         {
           text: isLoading ? '---' : projectBreadCrumbText,
-          id: IRoutesNames.Project,
+          id: ERoutesNames.Project,
           navList: projectsNavList,
         },
         {
-          text: contract?.[IContractFields.Title] ?? '---',
-          id: IRoutesNames.Contract,
+          text: contract?.[EContractFields.Title] ?? '---',
+          id: ERoutesNames.Contract,
         },
         contractStageBreadcrumb,
       ]}
@@ -64,7 +64,7 @@ export const ContractPage = ({
       {isLoading ? (
         <EmptyState
           animation='pulse'
-          content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+          content={DISPLAY_TEXTS.he.tableStates[ETableStates.Loading]}
         />
       ) : (
         <>

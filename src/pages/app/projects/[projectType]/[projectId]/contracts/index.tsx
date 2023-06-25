@@ -1,5 +1,5 @@
 import {
-  IRoutesNames,
+  ERoutesNames,
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
@@ -14,11 +14,11 @@ export default function ContractsPage() {
   useEffect(() => {
     if (projectId && projectType) {
       replace({
-        pathname: IRoutesNames.Project,
+        pathname: ERoutesNames.Project,
         query: { projectId, projectType },
       });
     } else {
-      replace(IRoutesNames.App);
+      replace(ERoutesNames.App);
     }
   }, [replace, projectId, projectType]);
   return null;

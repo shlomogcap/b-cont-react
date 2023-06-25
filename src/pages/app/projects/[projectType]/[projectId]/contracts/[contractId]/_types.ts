@@ -1,9 +1,9 @@
-import { IContractStage } from '@/lib/consts/contracts/ContractStage';
-import { ProjectType } from '@/lib/consts/projects';
+import { EContractStage } from '@/lib/consts/contracts/ContractStage';
+import { EProjectType } from '@/lib/consts/projects';
 
 export type IContractRouteProps = {
-  projectType: ProjectType;
+  projectType: EProjectType;
   projectId: string;
   contractId: string;
-  stage: IContractStage;
+  stage: EContractStage;
 };

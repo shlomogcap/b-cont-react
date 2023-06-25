@@ -1,26 +1,26 @@
-import { IRoutesNames } from './routes';
+import { ERoutesNames } from './routes';
 
-export type Lang = 'he' | 'en';
+export type ILang = 'he' | 'en';
 
-export enum IButtonTexts {
+export enum EButtonTexts {
   Save,
   Cancel,
 }
-export enum ITableStates {
+export enum ETableStates {
   NoRows,
   Loading,
   Error,
 }
-export enum IToastType {
+export enum EToastType {
   AddingNewDoc,
   SavingDocData,
 }
-export enum IBoolean {
+export enum EBoolean {
   False,
   True,
 }
 
-export enum IFilterPanelStates {
+export enum EFilterPanelStates {
   Active,
   InActive,
   From,
@@ -30,96 +30,96 @@ export enum IFilterPanelStates {
   Close,
 }
 
-type DisplayTextMapping = {
-  toasts: Record<IToastType, string>;
-  routeNames: Record<IRoutesNames, string>;
-  buttons: Record<IButtonTexts, string>;
-  boolean: Record<IBoolean, string>;
-  tableStates: Record<ITableStates, string>;
-  filterPanel: Record<IFilterPanelStates, string>;
+type IDisplayTextMapping = {
+  toasts: Record<EToastType, string>;
+  routeNames: Record<ERoutesNames, string>;
+  buttons: Record<EButtonTexts, string>;
+  boolean: Record<EBoolean, string>;
+  tableStates: Record<ETableStates, string>;
+  filterPanel: Record<EFilterPanelStates, string>;
 };
 
-export const DISPLAY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     boolean: {
-      [IBoolean.False]: 'לא',
-      [IBoolean.True]: 'כן',
+      [EBoolean.False]: 'לא',
+      [EBoolean.True]: 'כן',
     },
     toasts: {
-      [IToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
-      [IToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
+      [EToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
+      [EToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
     },
     tableStates: {
-      [ITableStates.NoRows]: 'לא נמצאו נתונים',
-      [ITableStates.Loading]: 'טוען...',
-      [ITableStates.Error]: 'אירעה שגיאה',
+      [ETableStates.NoRows]: 'לא נמצאו נתונים',
+      [ETableStates.Loading]: 'טוען...',
+      [ETableStates.Error]: 'אירעה שגיאה',
     },
     buttons: {
-      [IButtonTexts.Save]: 'שמור',
-      [IButtonTexts.Cancel]: 'בטל שינויים',
+      [EButtonTexts.Save]: 'שמור',
+      [EButtonTexts.Cancel]: 'בטל שינויים',
     },
     routeNames: {
-      [IRoutesNames.App]: 'פרוייקטים',
-      [IRoutesNames.ProjectsWithType]: 'פרוייקטים',
-      [IRoutesNames.Projects]: 'פרוייקטים',
-      [IRoutesNames.Vendors]: 'קבלנים',
-      [IRoutesNames.Settings]: 'הגדרות',
-      [IRoutesNames.Project]: 'פרוייקט',
-      [IRoutesNames.Contract]: 'חוזה',
-      [IRoutesNames.Vendor]: 'קבלן',
-      [IRoutesNames.Me]: 'המשתמש שלי',
-      [IRoutesNames.Company]: 'פרטי חברה/חברות',
-      [IRoutesNames.Budget]: 'פרקים תקציב',
+      [ERoutesNames.App]: 'פרוייקטים',
+      [ERoutesNames.ProjectsWithType]: 'פרוייקטים',
+      [ERoutesNames.Projects]: 'פרוייקטים',
+      [ERoutesNames.Vendors]: 'קבלנים',
+      [ERoutesNames.Settings]: 'הגדרות',
+      [ERoutesNames.Project]: 'פרוייקט',
+      [ERoutesNames.Contract]: 'חוזה',
+      [ERoutesNames.Vendor]: 'קבלן',
+      [ERoutesNames.Me]: 'המשתמש שלי',
+      [ERoutesNames.Company]: 'פרטי חברה/חברות',
+      [ERoutesNames.Budget]: 'פרקים תקציב',
     },
     filterPanel: {
-      [IFilterPanelStates.Active]: 'פעיל',
-      [IFilterPanelStates.InActive]: 'לא פעיל',
-      [IFilterPanelStates.From]: 'מ',
-      [IFilterPanelStates.To]: 'עד',
-      [IFilterPanelStates.Filter]: 'סנן',
-      [IFilterPanelStates.Reset]: 'אפס',
-      [IFilterPanelStates.Close]: 'סגור',
+      [EFilterPanelStates.Active]: 'פעיל',
+      [EFilterPanelStates.InActive]: 'לא פעיל',
+      [EFilterPanelStates.From]: 'מ',
+      [EFilterPanelStates.To]: 'עד',
+      [EFilterPanelStates.Filter]: 'סנן',
+      [EFilterPanelStates.Reset]: 'אפס',
+      [EFilterPanelStates.Close]: 'סגור',
     },
   },
   en: {
     boolean: {
-      [IBoolean.False]: 'No',
-      [IBoolean.True]: 'Yes',
+      [EBoolean.False]: 'No',
+      [EBoolean.True]: 'Yes',
     },
     toasts: {
-      [IToastType.AddingNewDoc]: 'Data Added Succefully',
-      [IToastType.SavingDocData]: 'Data Saved Succefully',
+      [EToastType.AddingNewDoc]: 'Data Added Succefully',
+      [EToastType.SavingDocData]: 'Data Saved Succefully',
     },
     tableStates: {
-      [ITableStates.NoRows]: 'No Rows',
-      [ITableStates.Loading]: 'Loading...',
-      [ITableStates.Error]: 'An Error Has Occured',
+      [ETableStates.NoRows]: 'No Rows',
+      [ETableStates.Loading]: 'Loading...',
+      [ETableStates.Error]: 'An Error Has Occured',
     },
     routeNames: {
-      [IRoutesNames.App]: 'Projects',
-      [IRoutesNames.Projects]: 'Projects',
-      [IRoutesNames.ProjectsWithType]: 'Projects',
-      [IRoutesNames.Vendors]: 'Vendors',
-      [IRoutesNames.Settings]: 'Settings',
-      [IRoutesNames.Project]: 'Project',
-      [IRoutesNames.Contract]: 'Contract',
-      [IRoutesNames.Vendor]: 'Vendor',
-      [IRoutesNames.Me]: 'Me',
-      [IRoutesNames.Company]: 'Company',
-      [IRoutesNames.Budget]: 'Budget',
+      [ERoutesNames.App]: 'Projects',
+      [ERoutesNames.Projects]: 'Projects',
+      [ERoutesNames.ProjectsWithType]: 'Projects',
+      [ERoutesNames.Vendors]: 'Vendors',
+      [ERoutesNames.Settings]: 'Settings',
+      [ERoutesNames.Project]: 'Project',
+      [ERoutesNames.Contract]: 'Contract',
+      [ERoutesNames.Vendor]: 'Vendor',
+      [ERoutesNames.Me]: 'Me',
+      [ERoutesNames.Company]: 'Company',
+      [ERoutesNames.Budget]: 'Budget',
     },
     buttons: {
-      [IButtonTexts.Save]: 'Save',
-      [IButtonTexts.Cancel]: 'Cancel',
+      [EButtonTexts.Save]: 'Save',
+      [EButtonTexts.Cancel]: 'Cancel',
     },
     filterPanel: {
-      [IFilterPanelStates.Active]: 'Active',
-      [IFilterPanelStates.InActive]: 'Not Active',
-      [IFilterPanelStates.From]: 'From',
-      [IFilterPanelStates.To]: 'To',
-      [IFilterPanelStates.Filter]: 'Filter',
-      [IFilterPanelStates.Reset]: 'Reset',
-      [IFilterPanelStates.Close]: 'Close',
+      [EFilterPanelStates.Active]: 'Active',
+      [EFilterPanelStates.InActive]: 'Not Active',
+      [EFilterPanelStates.From]: 'From',
+      [EFilterPanelStates.To]: 'To',
+      [EFilterPanelStates.Filter]: 'Filter',
+      [EFilterPanelStates.Reset]: 'Reset',
+      [EFilterPanelStates.Close]: 'Close',
     },
   },
 };
