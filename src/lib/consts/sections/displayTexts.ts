@@ -10,11 +10,16 @@ export enum ESectionActions {
   HidePreview,
 }
 
+export enum EConfirmSectionActions {
+  DeleteSection,
+}
+
 type IDisplayTextMapping = {
   fields: Record<ESectionFields, string>;
   calculationMethod: Record<ESectionCalculationMethod, string>;
   calculationType: Record<ESectionCalculationType, string>;
   actions: Record<ESectionActions, string>;
+  confirmActions: Record<EConfirmSectionActions, string>;
 };
 
 export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -49,6 +54,9 @@ export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ESectionActions.ShowPreview]: 'תצוגה מקדימה',
       [ESectionActions.HidePreview]: 'תצוגת עריכה',
     },
+    confirmActions: {
+      [EConfirmSectionActions.DeleteSection]: 'האם למחוק סעיף?',
+    },
   },
   en: {
     fields: {
@@ -80,6 +88,9 @@ export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ESectionActions.AddMilestone]: 'Add Milestone',
       [ESectionActions.ShowPreview]: 'Show Preview',
       [ESectionActions.HidePreview]: ' Preview',
+    },
+    confirmActions: {
+      [EConfirmSectionActions.DeleteSection]: 'Delete Section?',
     },
   },
 };

@@ -12,5 +12,4 @@ export enum ESectionFields {
   ItemsCount = 'itemsCount',
   TotalSum = 'totalSum',
   Description = 'description',
-  SubTotal = 'subTotal',
 }

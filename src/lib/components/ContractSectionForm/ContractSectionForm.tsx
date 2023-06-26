@@ -3,7 +3,13 @@ import {
   IContractSectionFormProps,
   ISectionFormValues,
 } from './ContractSectionForm.types';
-import { addDoc, collection, doc, writeBatch } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  writeBatch,
+  deleteDoc,
+} from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import {
   FormProvider,
@@ -43,10 +49,15 @@ import { ContractSectionFormFields } from './ContractSectionFormFields';
 import { CopyIcon, DeleteIcon, PlusIcon, PreviewIcon } from '../icons';
 import { Button } from '../commons/Button';
 import { FormFooter } from '../commons/Form';
-import { ESectionActions, SECTIONS_DISPALY_TEXTS } from '@/lib/consts/sections';
+import {
+  EConfirmSectionActions,
+  ESectionActions,
+  SECTIONS_DISPALY_TEXTS,
+} from '@/lib/consts/sections';
 import { uuid } from '@/lib/utils/uuid';
 import { EMilestoneFields } from '@/lib/consts/milestones';
 import { getNextIndex } from '@/lib/utils/arrayUtils';
+import { WithConfirmAction } from '../commons/WithConfirmAction';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -137,6 +148,12 @@ const ContractSectionFormInner = ({
       form.reset(CONTRACT_SECTION_FORM_DEFAULT_VALUES);
     }
   };
+  const handleDeleteSection = async () => {
+    const sectionPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id}`;
+    const docRef = doc(firestore, sectionPath);
+    await deleteDoc(docRef);
+    onSaved?.();
+  };
   const { append, fields } = useFieldArray({
     name: 'milestones',
     control: form.control,
@@ -151,10 +168,19 @@ const ContractSectionFormInner = ({
           <MilestonesTable isLoading={isLoading} />
         )}
         <StyledActionsFooter>
-          <StyledAction>
-            <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Delete]}</span>
-            <DeleteIcon />
-          </StyledAction>
+          <WithConfirmAction
+            onConfirm={handleDeleteSection}
+            confirmText={
+              SECTIONS_DISPALY_TEXTS.he.confirmActions[
+                EConfirmSectionActions.DeleteSection
+              ]
+            }
+          >
+            <StyledAction>
+              <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Delete]}</span>
+              <DeleteIcon />
+            </StyledAction>
+          </WithConfirmAction>
           <StyledAction>
             <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Duplicate]}</span>
             <CopyIcon />

@@ -8,6 +8,9 @@ export enum EButtonTexts {
   Add,
   Delete,
   Duplicate,
+  AreYouSure,
+  Approve,
+  Abort,
 }
 export enum ETableStates {
   NoRows,
@@ -63,6 +66,9 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EButtonTexts.Add]: 'הוספה',
       [EButtonTexts.Delete]: 'מחק',
       [EButtonTexts.Duplicate]: 'שכפל',
+      [EButtonTexts.AreYouSure]: 'האם אתה בטוח?',
+      [EButtonTexts.Approve]: 'אישור',
+      [EButtonTexts.Abort]: 'ביטול',
     },
     routeNames: {
       [ERoutesNames.App]: 'פרוייקטים',
@@ -120,6 +126,9 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EButtonTexts.Add]: 'Add',
       [EButtonTexts.Delete]: 'Delete',
       [EButtonTexts.Duplicate]: 'Duplicate',
+      [EButtonTexts.AreYouSure]: 'Are You Sure?',
+      [EButtonTexts.Approve]: 'Approve',
+      [EButtonTexts.Abort]: 'Abort',
     },
     filterPanel: {
       [EFilterPanelStates.Active]: 'Active',
