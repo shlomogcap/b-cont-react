@@ -8,6 +8,7 @@ import {
   EFilterItemType,
   IFilterValues,
 } from './FilterPanel.types';
+import { projectTableSearchFields } from '../../ProjectsPage/ProjectsPage.consts';
 
 const getFilterItemDefaultData = (item: IFilterItem) => {
   switch (item.type) {
@@ -67,4 +68,16 @@ export const filterByFilterPanel = <Doc extends {}>(
       return true;
     },
   );
+};
+
+export const filterBySearch = <T extends {}, F extends keyof T>(
+  r: T,
+  projectTableSearchFields: F[],
+  searchValue: string,
+) => {
+  return searchValue.trim().length > 0
+    ? projectTableSearchFields.some((field) => {
+        return String(r[field]).includes(searchValue);
+      })
+    : true;
 };

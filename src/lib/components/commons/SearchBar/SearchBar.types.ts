@@ -1,3 +1,3 @@
 export type ISearchBarProps = {
-  setSearchValue: (string: string) => void;
+  searchProps: any;
 };

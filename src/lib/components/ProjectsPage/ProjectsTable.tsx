@@ -17,10 +17,11 @@ import {
   projectFilterSchema,
   projectsTableColumns,
   projectsTableFilters,
-  searchBy,
+  projectTableSearchFields,
 } from './ProjectsPage.consts';
 import {
   filterByFilterPanel,
+  filterBySearch,
   getDefaultFilterValues,
 } from '../commons/FilterPanel';
 import { useEffect, useState } from 'react';
@@ -58,22 +59,12 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     setActiveFilters({ ...activeFilterFields });
   }, [watchedFields]);
 
-  const filterBySearch = (row: any) => {
-    if (searchValue.length) {
-      return searchBy
-        .map((field) => {
-          return row[field].toString().includes(searchValue);
-        })
-        .some((row) => row === true);
-    } else {
-      return true;
-    }
-  };
-
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
     .filter((r) => filterByFilterPanel(r, watchedFields as any)) //TODO: fix that type assertion
-    .filter(filterBySearch);
+    .filter((r) =>
+      filterBySearch(r, projectTableSearchFields as any, searchValue),
+    );
   return (
     <FormProvider {...form}>
       <Table
@@ -82,7 +73,10 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
           displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
           status: EProjectStatus,
           activeFilters,
-          setSearchValue,
+          searchProps: {
+            setSearchValue,
+            searchValue,
+          },
         }}
         loading={isLoading}
         rows={rows}

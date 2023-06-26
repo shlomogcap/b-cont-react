@@ -1,13 +1,9 @@
 import styled from 'styled-components';
-import { SearchIcon } from '../../icons/SearchIcon';
-import { SvgIcon } from '../../icons/SvgIcon';
-
-export const StyledSearchIcon = styled(SvgIcon)`
-  position: absolute;
-  left: 0;
-`;
 
 export const StyledSearchInput = styled.input`
+  position: absolute;
+  inset: 0 -13rem;
+  background: none;
   font: inherit;
   font-size: 1.8rem;
   padding: 1.2rem 0;

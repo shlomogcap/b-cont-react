@@ -53,7 +53,9 @@ export type IFilterPanelProps<T extends string = string> = {
   displayTexts: Record<T, string>;
   status: any;
   activeFilters: any;
-  setSearchValue: (string: string) => void;
+  // setSearchValue: (text: string) => void | undefined;
+  // searchValue: string;
+  searchProps?: any;
 };
 export type IFilterPanelButtonProps<
   T extends string = string,
