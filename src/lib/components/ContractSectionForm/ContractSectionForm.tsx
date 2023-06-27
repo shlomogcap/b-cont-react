@@ -52,12 +52,15 @@ import { FormFooter } from '../commons/Form';
 import {
   EConfirmSectionActions,
   ESectionActions,
+  ESectionFields,
   SECTIONS_DISPALY_TEXTS,
 } from '@/lib/consts/sections';
 import { uuid } from '@/lib/utils/uuid';
 import { EMilestoneFields } from '@/lib/consts/milestones';
 import { getNextIndex } from '@/lib/utils/arrayUtils';
 import { WithConfirmAction } from '../commons/WithConfirmAction';
+import { toNumber } from '@/lib/utils/numberUtils';
+import { useToggle } from '@/lib/hooks/useToggle';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -76,6 +79,7 @@ const ContractSectionFormInner = ({
   } = useSectionContext();
 
   const isEditMode = Boolean(section);
+  const [isPreviewMode, togglePreviewMode] = useToggle(false);
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
@@ -84,7 +88,7 @@ const ContractSectionFormInner = ({
     defaultValues: CONTRACT_SECTION_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
-  const { reset } = form;
+  const { reset, watch, setValue } = form;
   useEffect(() => {
     if (isEditMode) {
       if (section) {
@@ -154,7 +158,48 @@ const ContractSectionFormInner = ({
     await deleteDoc(docRef);
     onSaved?.();
   };
-  const { append, fields } = useFieldArray({
+  const handleAddUnit = () => {
+    const oldUnit = toNumber(watch(ESectionFields.ItemsCount) ?? 0);
+    setValue(ESectionFields.ItemsCount, oldUnit + 1);
+  };
+  const handleDuplicateSection = async () => {
+    const contractSectionsPath = `projects/${projectId}/contracts/${contractId}/sections`;
+    const newSectionId = uuid();
+    const sectionsRef = doc(
+      firestore,
+      `${contractSectionsPath}/${newSectionId}`,
+    );
+    const batch = writeBatch(firestore);
+    batch.set(
+      sectionsRef,
+      prepareFormData(
+        {
+          ...section,
+          title: `${section?.title} [copy of ${section?.title}]`,
+          donePercentage: 0,
+          totalActualsSum: 0,
+        } ?? {},
+      ),
+    );
+    milestones.forEach((ms) => {
+      const msRef = doc(
+        firestore,
+        `${contractSectionsPath}/${newSectionId}/milestones/${ms.id}`,
+      );
+      batch.set(msRef, prepareFormData({ ...ms, totalDone: 0 }));
+    });
+    try {
+      await batch.commit();
+      onSaved?.({ ...section, id: newSectionId });
+    } catch (err) {
+      toast.error(
+        `An Error Occured , Copy Section Task Was Failed : ${JSON.stringify(
+          err,
+        )}`,
+      );
+    }
+  };
+  const { append, fields: milestonesFields } = useFieldArray({
     name: 'milestones',
     control: form.control,
   });
@@ -165,7 +210,10 @@ const ContractSectionFormInner = ({
           workspacesOptions={prepareWorkspaceOptions(workspaces)}
         />
         {isEditMode && milestones.length > 0 && (
-          <MilestonesTable isLoading={isLoading} />
+          <MilestonesTable
+            isLoading={isLoading}
+            isPreviewMode={isPreviewMode}
+          />
         )}
         <StyledActionsFooter>
           <WithConfirmAction
@@ -181,39 +229,62 @@ const ContractSectionFormInner = ({
               <DeleteIcon />
             </StyledAction>
           </WithConfirmAction>
-          <StyledAction>
+          <StyledAction onClick={handleDuplicateSection}>
             <span>{DISPLAY_TEXTS.he.buttons[EButtonTexts.Duplicate]}</span>
             <CopyIcon />
           </StyledAction>
-          <StyledAction
-            onClick={() => {
-              append({
-                id: uuid(),
-                title: '---',
-                orderIndex: getNextIndex(fields, EMilestoneFields.OrderIndex),
-                price: 0,
-                totalDone: 0,
-                weight: 0,
-              });
-            }}
-          >
-            <span>
-              {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.AddMilestone]}
-            </span>
-            <PlusIcon />
-          </StyledAction>
-          <StyledAction>
+          {milestones.length > 0 && (
+            <StyledAction
+              onClick={() => {
+                append({
+                  id: uuid(),
+                  title: '---',
+                  orderIndex: getNextIndex(
+                    milestonesFields,
+                    EMilestoneFields.OrderIndex,
+                  ),
+                  price: 0,
+                  totalDone: 0,
+                  weight: 0,
+                });
+              }}
+            >
+              <span>
+                {
+                  SECTIONS_DISPALY_TEXTS.he.actions[
+                    ESectionActions.AddMilestone
+                  ]
+                }
+              </span>
+              <PlusIcon />
+            </StyledAction>
+          )}
+          <StyledAction onClick={handleAddUnit}>
             <span>
               {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.AddUnit]}
             </span>
             <PlusIcon />
           </StyledAction>
-          <StyledAction>
-            <span>
-              {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.ShowPreview]}
-            </span>
-            <PreviewIcon mode='show' />
-          </StyledAction>
+          {milestones.length > 0 && (
+            <StyledAction onClick={togglePreviewMode}>
+              <span>
+                {SECTIONS_DISPALY_TEXTS.he.actions[ESectionActions.ShowPreview]}
+              </span>
+              <PreviewIcon mode={isPreviewMode ? 'hide' : 'show'} />
+            </StyledAction>
+          )}
+          {milestones.length === 0 && isEditMode && (
+            <StyledAction onClick={() => alert('TODO: create milestone')}>
+              <span>
+                {
+                  SECTIONS_DISPALY_TEXTS.he.actions[
+                    ESectionActions.CreateMilestones
+                  ]
+                }
+              </span>
+              <PlusIcon />
+            </StyledAction>
+          )}
         </StyledActionsFooter>
         <FormFooter>
           <Button

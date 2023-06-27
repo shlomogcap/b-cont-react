@@ -21,14 +21,16 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form';
-import { safeJSONParse } from '@/lib/utils/safeJsonParse';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
-import { DISPLAY_TEXTS, IButtonTexts } from '../../consts/displayTexts';
+import {
+  DISPLAY_TEXTS,
+  EButtonTexts,
+  EToastType,
+} from '../../consts/displayTexts';
 import { toast } from 'react-toastify';
 import { FirebaseError } from 'firebase/app';
-import { IToastType } from '@/lib/consts/displayTexts';
 import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
@@ -103,7 +105,7 @@ export const ContractAddWorkspaceForm = ({
           `projects/${projectId}/contracts/${contractId}/workspaces/${workspace?.id}`,
         );
         await setDoc(docRef, preparedData, { merge: true });
-        toast.success(DISPLAY_TEXTS.he.toasts[IToastType.SavingDocData]);
+        toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
         onSaved?.(workspace);
       } catch (err) {
         toast.error(
@@ -122,7 +124,7 @@ export const ContractAddWorkspaceForm = ({
       );
       const res = await addDoc(collectionRef, preparedData);
       onSaved?.({ ...(workspace ?? {}), id: res.id, path: res.path });
-      toast.success(DISPLAY_TEXTS.he.toasts[IToastType.AddingNewDoc]);
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
       // router.push({
       //   pathname: IRoutesNames.Project,
       //   query: { [PROJECT_ID_QUERY]: res.id },
@@ -155,14 +157,14 @@ export const ContractAddWorkspaceForm = ({
             onClick={form.handleSubmit(onSubmit, onError)}
             disabled={!form.formState.isDirty}
           >
-            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Save]}
+            {DISPLAY_TEXTS.he.buttons[EButtonTexts.Save]}
           </Button>
           <Button
             variant='secondary'
             onClick={abortChanges}
             disabled={!form.formState.isDirty}
           >
-            {DISPLAY_TEXTS.he.buttons[IButtonTexts.Cancel]}
+            {DISPLAY_TEXTS.he.buttons[EButtonTexts.Cancel]}
           </Button>
         </FormFooter>
       </StyledContractAddWorkspaceForm>

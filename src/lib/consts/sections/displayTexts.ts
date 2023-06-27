@@ -4,6 +4,7 @@ import { ESectionCalculationType } from './SectionCalculationType';
 import { ESectionFields } from './SectionFields';
 
 export enum ESectionActions {
+  CreateMilestones,
   AddUnit,
   AddMilestone,
   ShowPreview,
@@ -49,8 +50,9 @@ export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ESectionCalculationType.Percentage]: 'אחוזים',
     },
     actions: {
+      [ESectionActions.CreateMilestones]: 'צור אבן דרך',
       [ESectionActions.AddUnit]: 'הוסף יחידה',
-      [ESectionActions.AddMilestone]: 'הוסף אבן דרך של יחידה',
+      [ESectionActions.AddMilestone]: 'הוסף אבן דרך ליחידה',
       [ESectionActions.ShowPreview]: 'תצוגה מקדימה',
       [ESectionActions.HidePreview]: 'תצוגת עריכה',
     },
@@ -84,6 +86,7 @@ export const SECTIONS_DISPALY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ESectionCalculationType.Percentage]: 'Percentage',
     },
     actions: {
+      [ESectionActions.CreateMilestones]: 'Create Milestones',
       [ESectionActions.AddUnit]: 'Add Unit',
       [ESectionActions.AddMilestone]: 'Add Milestone',
       [ESectionActions.ShowPreview]: 'Show Preview',

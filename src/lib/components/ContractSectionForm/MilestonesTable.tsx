@@ -14,7 +14,7 @@ import {
 import { IMilestonesTableProps } from './ContractSectionForm.types';
 import { ESectionCalculationType, ESectionFields } from '@/lib/consts/sections';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { DISPLAY_TEXTS, ITableStates } from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import { EmptyState } from '../commons/EmptyState';
 import { NumberInput, TextInput } from '../commons/Input';
 import { toNumber } from '@/lib/utils/numberUtils';
@@ -24,7 +24,10 @@ const calcTotalMilestones = (
   milestoneValueField: EMilestoneFields,
 ): number => ms.reduce((acc, ms) => acc + toNumber(ms[milestoneValueField]), 0);
 
-export const MilestonesTable = ({ isLoading }: IMilestonesTableProps) => {
+export const MilestonesTable = ({
+  isLoading,
+  isPreviewMode,
+}: IMilestonesTableProps) => {
   const { watch } = useFormContext();
   const [calculationType, price, itemsCount, totalSum] = useWatch({
     name: [
@@ -49,7 +52,7 @@ export const MilestonesTable = ({ isLoading }: IMilestonesTableProps) => {
   return isLoading ? (
     <EmptyState
       animation='pulse'
-      content={DISPLAY_TEXTS.he.tableStates[ITableStates.Loading]}
+      content={DISPLAY_TEXTS.he.tableStates[ETableStates.Loading]}
     />
   ) : (
     <StyledMilestonesTable
