@@ -91,8 +91,6 @@ export const FilterPanel = ({
   filters,
   displayTexts,
   activeFilters,
-  // setSearchValue,
-  // searchValue,
   searchProps,
 }: IFilterPanelProps) => {
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
