@@ -18,4 +18,6 @@ export const NUMBER_SCHEMA = z.preprocess(
 export const OPTIONAL_STRING_SCHEMA = z.string().optional();
 export const OPTIONAL_BOOLEAN_SCHEMA = z.boolean().optional();
 export const OPTIONAL_NUMBER_SCHEMA = NUMBER_SCHEMA.optional();
-export const OPTIONAL_DATE_SCHEMA = z.coerce.date().optional();
+export const OPTIONAL_DATE_SCHEMA = z
+  .union([z.coerce.date(), z.string()])
+  .optional();
