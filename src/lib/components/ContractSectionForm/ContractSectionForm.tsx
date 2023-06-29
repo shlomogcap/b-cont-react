@@ -168,6 +168,17 @@ const ContractSectionFormInner = ({
     await deleteDoc(docRef);
     onSaved?.();
   };
+  const handleDeleteMilestone = async (id: string) => {
+    const milestonePath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id}/milestones/${id}`;
+    const docRef = doc(firestore, milestonePath);
+    try {
+      await deleteDoc(docRef);
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc]);
+    } catch (err) {
+      console.error(err);
+      toast.error(JSON.stringify(err));
+    }
+  };
   const handleAddUnit = () => {
     const oldUnit = toNumber(watch(ESectionFields.ItemsCount) ?? 0);
     setValue(ESectionFields.ItemsCount, oldUnit + 1);
@@ -266,6 +277,7 @@ const ContractSectionFormInner = ({
         />
         {isEditMode && milestones.length > 0 && (
           <MilestonesTable
+            handleDeleteMilestone={handleDeleteMilestone}
             isLoading={isLoading}
             isPreviewMode={isPreviewMode}
           />

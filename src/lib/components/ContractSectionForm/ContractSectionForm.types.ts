@@ -21,6 +21,7 @@ export type IContractSectionFormFieldsProps = {
 export type IMilestonesTableProps = {
   isLoading: boolean;
   isPreviewMode: boolean;
+  handleDeleteMilestone: (id: string) => void;
 };
 
 export type ISectionFormValues = z.infer<typeof SectionFormShape>;

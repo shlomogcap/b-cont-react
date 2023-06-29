@@ -4,6 +4,7 @@ import {
   MILESTONES_DISPALY_TEXTS,
 } from '@/lib/consts/milestones';
 import {
+  StyledCellCircelButton,
   StyledGrandTotal,
   StyledHeader,
   StyledIndex,
@@ -24,6 +25,7 @@ import { NumberInput, TextInput } from '../commons/Input';
 import { toNumber } from '@/lib/utils/numberUtils';
 import { generateNumberArray } from '@/lib/utils/arrayUtils';
 import { useCallback } from 'react';
+import { DeleteIcon } from '../icons';
 
 const calcTotalMilestones = (
   ms: IMilestoneDoc[],
@@ -129,6 +131,7 @@ const MilestoneUnitRow = ({
 export const MilestonesTable = ({
   isLoading,
   isPreviewMode,
+  handleDeleteMilestone,
 }: IMilestonesTableProps) => {
   const { watch } = useFormContext();
   const [
@@ -189,6 +192,11 @@ export const MilestonesTable = ({
             label={MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.Title]}
             hideLabel
           />
+          <StyledCellCircelButton
+            onClick={() => handleDeleteMilestone(String(ms.id))}
+          >
+            <DeleteIcon />
+          </StyledCellCircelButton>
         </StyledHeader>
       ))}
       <StyledTotal>{MILESTONES_DISPALY_TEXTS.he.total}</StyledTotal>

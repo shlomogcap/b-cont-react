@@ -20,6 +20,7 @@ export enum ETableStates {
 export enum EToastType {
   AddingNewDoc,
   SavingDocData,
+  DeletedDoc,
 }
 export enum EBoolean {
   False,
@@ -54,6 +55,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     toasts: {
       [EToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
       [EToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
+      [EToastType.DeletedDoc]: 'פעולת מחיקה בוצעה בהצלחה',
     },
     tableStates: {
       [ETableStates.NoRows]: 'לא נמצאו נתונים',
@@ -99,8 +101,9 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EBoolean.True]: 'Yes',
     },
     toasts: {
-      [EToastType.AddingNewDoc]: 'Data Added Succefully',
-      [EToastType.SavingDocData]: 'Data Saved Succefully',
+      [EToastType.AddingNewDoc]: 'Data Added Succesfully',
+      [EToastType.SavingDocData]: 'Data Saved Succesfully',
+      [EToastType.DeletedDoc]: 'Item Has Been Deleted Succesfully',
     },
     tableStates: {
       [ETableStates.NoRows]: 'No Rows',

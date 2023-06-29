@@ -12,6 +12,31 @@ export const StyledContractSectionForm = styled.div`
   grid-row-gap: 4rem;
 `;
 
+export const StyledCellCircelButton = styled.div`
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5px;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: var(--color-gray-trs);
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  &:hover {
+    background-color: var(--color-white);
+    & ${StyledSvgIcon} {
+      transform: scale(1.1);
+    }
+  }
+`;
+
 export const StyledContractSectionFormFields = styled(Form)`
   width: 100%;
   align-content: flex-start;
@@ -32,6 +57,10 @@ export const StyledCell = styled(StyledTableCell)`
   overflow: visible;
   & ${StyledInputField} {
     background-color: unset;
+  }
+  &:hover ${StyledCellCircelButton} {
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
