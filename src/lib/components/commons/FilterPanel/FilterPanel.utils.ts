@@ -8,7 +8,6 @@ import {
   EFilterItemType,
   IFilterValues,
 } from './FilterPanel.types';
-import { projectTableSearchFields } from '../../ProjectsPage/ProjectsPage.consts';
 
 const getFilterItemDefaultData = (item: IFilterItem) => {
   switch (item.type) {
