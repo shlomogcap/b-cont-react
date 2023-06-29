@@ -1,6 +1,7 @@
 import { FirebaseError } from 'firebase/app';
 import {
   IContractSectionFormProps,
+  IHandleSwapOrderIndexFunc,
   ISectionFormValues,
 } from './ContractSectionForm.types';
 import {
@@ -179,6 +180,34 @@ const ContractSectionFormInner = ({
       toast.error(JSON.stringify(err));
     }
   };
+  const handleSwapMilestonesOrderIndex: IHandleSwapOrderIndexFunc = async ({
+    originalDoc,
+    otherDoc,
+  }) => {
+    const milestonesPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id}/milestones`;
+    const batch = writeBatch(firestore);
+    const originalDocRef = doc(
+      firestore,
+      `${milestonesPath}/${originalDoc.id}`,
+    );
+    const otherDocRef = doc(firestore, `${milestonesPath}/${otherDoc.id}`);
+    batch.set(
+      originalDocRef,
+      { [EMilestoneFields.OrderIndex]: otherDoc.orderIndex },
+      { merge: true },
+    );
+    batch.set(
+      otherDocRef,
+      { [EMilestoneFields.OrderIndex]: originalDoc.orderIndex },
+      { merge: true },
+    );
+    try {
+      await batch.commit();
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
+    } catch (err) {
+      toast.error(JSON.stringify(err));
+    }
+  };
   const handleAddUnit = () => {
     const oldUnit = toNumber(watch(ESectionFields.ItemsCount) ?? 0);
     setValue(ESectionFields.ItemsCount, oldUnit + 1);
@@ -277,6 +306,7 @@ const ContractSectionFormInner = ({
         />
         {isEditMode && milestones.length > 0 && (
           <MilestonesTable
+            handleSwapMilestonesOrderIndex={handleSwapMilestonesOrderIndex}
             handleDeleteMilestone={handleDeleteMilestone}
             isLoading={isLoading}
             isPreviewMode={isPreviewMode}

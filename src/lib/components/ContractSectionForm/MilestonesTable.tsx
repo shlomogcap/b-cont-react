@@ -26,6 +26,8 @@ import { toNumber } from '@/lib/utils/numberUtils';
 import { generateNumberArray } from '@/lib/utils/arrayUtils';
 import { useCallback } from 'react';
 import { DeleteIcon } from '../icons';
+import { safeJSONParse } from '@/lib/utils/safeJsonParse';
+import { sortBy } from 'lodash-es';
 
 const calcTotalMilestones = (
   ms: IMilestoneDoc[],
@@ -132,6 +134,7 @@ export const MilestonesTable = ({
   isLoading,
   isPreviewMode,
   handleDeleteMilestone,
+  handleSwapMilestonesOrderIndex,
 }: IMilestonesTableProps) => {
   const { watch } = useFormContext();
   const [
@@ -185,8 +188,66 @@ export const MilestonesTable = ({
       <StyledIndex>
         {MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.OrderIndex]}
       </StyledIndex>
-      {watchMilestones.map((ms, i) => (
-        <StyledHeader key={`title/${ms.id}`}>
+      {sortBy(watchMilestones, EMilestoneFields.OrderIndex).map((ms, i) => (
+        <StyledHeader
+          data-order-index={ms.orderIndex}
+          data-title={ms.title}
+          data-id={ms.id}
+          key={`title/${ms.id}`}
+          draggable
+          onDragStart={(e) =>
+            e.dataTransfer.setData('text', JSON.stringify(ms))
+          }
+          onDragOver={(e) => {
+            if (JSON.stringify(ms) !== e.dataTransfer.getData('text')) {
+              e.preventDefault();
+              e.currentTarget.style.border = '1px dashed gray';
+            } else {
+              e.currentTarget.style.border = 'none';
+            }
+          }}
+          onDragLeave={(e) => {
+            if (JSON.stringify(ms) !== e.dataTransfer.getData('text')) {
+              e.currentTarget.style.border = 'none';
+            }
+          }}
+          onDragExit={(e) => {
+            if (JSON.stringify(ms) !== e.dataTransfer.getData('text')) {
+              e.currentTarget.style.border = 'none';
+            }
+          }}
+          onDrop={(e) => {
+            const originalDocString = e.dataTransfer.getData('text');
+            e.currentTarget.style.border = 'none';
+            if (JSON.stringify(ms) !== originalDocString) {
+              e.preventDefault();
+              // ms.setIndex(msId)
+              const originalDoc =
+                safeJSONParse<IMilestoneDoc>(originalDocString);
+              // alert(
+              //   'TODO: set item index of ' +
+              //     originalDoc.title +
+              //     ' to -> ' +
+              //     e.currentTarget.dataset.orderIndex +
+              //     ' and ' +
+              //     e.currentTarget.dataset.title +
+              //     ' to ' +
+              //     originalDoc.orderIndex,
+              // );
+              handleSwapMilestonesOrderIndex({
+                originalDoc: {
+                  id: String(originalDoc.id),
+                  orderIndex: originalDoc.orderIndex,
+                },
+                otherDoc: {
+                  id: String(e.currentTarget.dataset.id),
+                  orderIndex: Number(e.currentTarget.dataset.orderIndex),
+                },
+              });
+            }
+            e.dataTransfer.clearData();
+          }}
+        >
           <TextInput
             name={`milestones[${i}].${EMilestoneFields.Title}`}
             label={MILESTONES_DISPALY_TEXTS.he.fields[EMilestoneFields.Title]}

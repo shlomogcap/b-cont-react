@@ -18,10 +18,27 @@ export type IContractSectionFormProps = Omit<
 export type IContractSectionFormFieldsProps = {
   workspacesOptions: IDropdownOption<string>[];
 };
+
+//TODO: move to global context - as well as creat this function globally
+export type IHandleSwapOrderIndexFuncArgs = {
+  originalDoc: {
+    id: string;
+    orderIndex: number;
+  };
+  otherDoc: {
+    id: string;
+    orderIndex: number;
+  };
+};
+export type IHandleSwapOrderIndexFunc = (
+  args: IHandleSwapOrderIndexFuncArgs,
+) => void;
+
 export type IMilestonesTableProps = {
   isLoading: boolean;
   isPreviewMode: boolean;
   handleDeleteMilestone: (id: string) => void;
+  handleSwapMilestonesOrderIndex: IHandleSwapOrderIndexFunc;
 };
 
 export type ISectionFormValues = z.infer<typeof SectionFormShape>;
