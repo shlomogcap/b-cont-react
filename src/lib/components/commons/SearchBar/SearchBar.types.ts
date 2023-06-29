@@ -1,3 +1,3 @@
 export type ISearchBarProps = {
-  searchProps: any;
+  className?: string;
 };
