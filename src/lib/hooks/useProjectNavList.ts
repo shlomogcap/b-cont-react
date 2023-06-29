@@ -28,7 +28,9 @@ export const useProjectNavList = ({
     .filter(({ id }) => id !== projectId)
     .map((project) => ({
       id: String(project.id),
-      text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${project.title}`,
+      text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${
+        project[EProjectFields.Title]
+      }`,
       onClick: () => {
         router.push({
           pathname: ERoutesNames.Project,
