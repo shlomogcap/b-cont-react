@@ -5,6 +5,12 @@ export type ILang = 'he' | 'en';
 export enum EButtonTexts {
   Save,
   Cancel,
+  Add,
+  Delete,
+  Duplicate,
+  AreYouSure,
+  Approve,
+  Abort,
 }
 export enum ETableStates {
   NoRows,
@@ -14,6 +20,7 @@ export enum ETableStates {
 export enum EToastType {
   AddingNewDoc,
   SavingDocData,
+  DeletedDoc,
 }
 export enum EBoolean {
   False,
@@ -48,6 +55,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     toasts: {
       [EToastType.AddingNewDoc]: 'הנתונים נשמרו בהצלחה',
       [EToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
+      [EToastType.DeletedDoc]: 'פעולת מחיקה בוצעה בהצלחה',
     },
     tableStates: {
       [ETableStates.NoRows]: 'לא נמצאו נתונים',
@@ -57,6 +65,12 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     buttons: {
       [EButtonTexts.Save]: 'שמור',
       [EButtonTexts.Cancel]: 'בטל שינויים',
+      [EButtonTexts.Add]: 'הוספה',
+      [EButtonTexts.Delete]: 'מחק',
+      [EButtonTexts.Duplicate]: 'שכפל',
+      [EButtonTexts.AreYouSure]: 'האם אתה בטוח?',
+      [EButtonTexts.Approve]: 'אישור',
+      [EButtonTexts.Abort]: 'ביטול',
     },
     routeNames: {
       [ERoutesNames.App]: 'פרוייקטים',
@@ -87,8 +101,9 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EBoolean.True]: 'Yes',
     },
     toasts: {
-      [EToastType.AddingNewDoc]: 'Data Added Succefully',
-      [EToastType.SavingDocData]: 'Data Saved Succefully',
+      [EToastType.AddingNewDoc]: 'Data Added Succesfully',
+      [EToastType.SavingDocData]: 'Data Saved Succesfully',
+      [EToastType.DeletedDoc]: 'Item Has Been Deleted Succesfully',
     },
     tableStates: {
       [ETableStates.NoRows]: 'No Rows',
@@ -111,6 +126,12 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     buttons: {
       [EButtonTexts.Save]: 'Save',
       [EButtonTexts.Cancel]: 'Cancel',
+      [EButtonTexts.Add]: 'Add',
+      [EButtonTexts.Delete]: 'Delete',
+      [EButtonTexts.Duplicate]: 'Duplicate',
+      [EButtonTexts.AreYouSure]: 'Are You Sure?',
+      [EButtonTexts.Approve]: 'Approve',
+      [EButtonTexts.Abort]: 'Abort',
     },
     filterPanel: {
       [EFilterPanelStates.Active]: 'Active',

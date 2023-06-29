@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   StyledTable,
   StyledTableDataRow,
@@ -7,7 +7,6 @@ import {
 } from '../commons/Table/Table.styled';
 import { ISectionLevel } from './ReportTable.types';
 import { getPrevLevel } from './ReportTable.utils';
-import { ReactElement } from 'react';
 
 type ISectionPart = 'title' | 'totals';
 type IColors = string | { color: string; 'background-color': string };
@@ -35,7 +34,7 @@ export const StyledReportTableHeaders = styled(StyledTableHeaders)`
 
 export const StyledReportTableHeader = styled(StyledTableHeader)``;
 
-type StyledRowLevelProps = { level: ISectionLevel };
+type StyledRowLevelProps = { level: ISectionLevel; actionable: boolean };
 
 export const StyledSectionRowTitle = styled.div<StyledRowLevelProps>`
   background-color: ${({ level }) => SECTION_COLORS[level].title};
@@ -43,6 +42,18 @@ export const StyledSectionRowTitle = styled.div<StyledRowLevelProps>`
   grid-column: 1/-1;
   border-inline-start: 4px solid
     ${({ level }) => SECTION_COLORS[getPrevLevel(level)].title};
+
+  ${({ actionable }) =>
+    actionable &&
+    css`
+      cursor: pointer;
+      transition: all 0.2s ease;
+      &:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+        font-weight: 500;
+      }
+    `}
 `;
 
 export const StyledReportTableDataRow = styled(

@@ -1,7 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { createPopper, Instance } from '@popperjs/core';
 import { ITooltipProps } from './Tooltip.types';
-import { StyledTooltip } from './Tooltip.styled';
+import {
+  StyledTooltip,
+  StyledTooltipArrow,
+  StyledTooltipContent,
+} from './Tooltip.styled';
 
 export const Tooltip = ({
   content,
@@ -96,8 +100,8 @@ export const Tooltip = ({
         role='tooltip'
         style={{ display: tooltipIsOpen && !disableTooltip ? 'block' : 'none' }}
       >
-        <p className='content'>{content}</p>
-        <div className='arrow' ref={arrowElement} />
+        <StyledTooltipContent>{content}</StyledTooltipContent>
+        <StyledTooltipArrow ref={arrowElement} />
       </StyledTooltip>
       {children}
     </div>

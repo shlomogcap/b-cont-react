@@ -5,3 +5,7 @@ export * from './SettingsIcon';
 export * from './VendorsIcon';
 export * from './FilterIconClose';
 export * from './FilterIconOpen';
+export * from './CopyIcon';
+export * from './DeleteIcon';
+export * from './PlusIcon';
+export * from './PreviewIcon';

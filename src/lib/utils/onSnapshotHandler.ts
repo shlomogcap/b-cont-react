@@ -29,6 +29,7 @@ export const onSnapshotHandler = ({
         snapshot.docChanges().forEach((change) => {
           const docData = {
             ...change.doc.data(),
+            path: change.doc.ref.path,
             id: change.doc.id,
           };
           switch (change.type) {
