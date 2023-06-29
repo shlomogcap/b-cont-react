@@ -194,7 +194,7 @@ const ContractSectionFormInner = ({
       );
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
     } catch (err) {
-      let errorMessage = '';
+      const errorMessages: string[] = [];
       if (err instanceof z.ZodError) {
         Object.entries(err.formErrors.fieldErrors).forEach(
           ([field, errors]) => {
@@ -202,11 +202,23 @@ const ContractSectionFormInner = ({
               field,
               MILESTONES_DISPALY_TEXTS.he.fields,
             );
-            errorMessage += `${fieldDisplayText} : ${errors?.join(' , ')}\n`;
+            errorMessages?.push(
+              `${fieldDisplayText} : ${errors?.join(' , ')}\n`,
+            );
           },
         );
       }
-      toast.error(errorMessage || 'An Error Occured');
+      toast.error(
+        errorMessages.length > 0 ? (
+          <ul>
+            {errorMessages.map((text) => (
+              <li key={text}>{text}</li>
+            ))}
+          </ul>
+        ) : (
+          'An Error Occured'
+        ),
+      );
     }
   };
   const handleDuplicateSection = async () => {
