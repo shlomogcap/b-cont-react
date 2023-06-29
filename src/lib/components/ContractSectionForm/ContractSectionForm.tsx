@@ -15,7 +15,6 @@ import {
   FormProvider,
   SubmitErrorHandler,
   SubmitHandler,
-  useFieldArray,
   useForm,
 } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -25,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import {
   CONTRACT_SECTION_FORM_DEFAULT_VALUES,
+  EMPTY_MILESONE_DEFAULT_VALUES,
   SectionFormShape,
 } from './ContractSectionForm.consts';
 import {
@@ -56,11 +56,21 @@ import {
   SECTIONS_DISPALY_TEXTS,
 } from '@/lib/consts/sections';
 import { uuid } from '@/lib/utils/uuid';
-import { EMilestoneFields } from '@/lib/consts/milestones';
+import {
+  EMilestoneFields,
+  IMilestoneDoc,
+  MILESTONES_DISPALY_TEXTS,
+  MilestoneDoc,
+} from '@/lib/consts/milestones';
 import { getNextIndex } from '@/lib/utils/arrayUtils';
 import { WithConfirmAction } from '../commons/WithConfirmAction';
 import { toNumber } from '@/lib/utils/numberUtils';
 import { useToggle } from '@/lib/hooks/useToggle';
+import { IWithCreationFields } from '@/lib/utils/WithFields';
+import dayjs from 'dayjs';
+import { ECommonFields } from '@/lib/consts/commonFields';
+import { z } from 'zod';
+import { getEnumMemberOrSelf } from '@/lib/utils/enumUtils';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -162,6 +172,43 @@ const ContractSectionFormInner = ({
     const oldUnit = toNumber(watch(ESectionFields.ItemsCount) ?? 0);
     setValue(ESectionFields.ItemsCount, oldUnit + 1);
   };
+  const handleCreateMilestone = async () => {
+    const contractSectionsPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id!}`;
+    const milestonesRef = collection(
+      firestore,
+      `${contractSectionsPath}/milestones`,
+    );
+    const milestoneData = {
+      ...EMPTY_MILESONE_DEFAULT_VALUES,
+      [ECommonFields.CreatedAt]: dayjs().toISOString(),
+      [EMilestoneFields.OrderIndex]: getNextIndex(
+        milestones,
+        EMilestoneFields.OrderIndex,
+      ),
+    };
+    try {
+      MilestoneDoc.omit({ id: true }).parse(milestoneData);
+      await addDoc<IWithCreationFields<IMilestoneDoc>>(
+        milestonesRef as any,
+        milestoneData,
+      );
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
+    } catch (err) {
+      let errorMessage = '';
+      if (err instanceof z.ZodError) {
+        Object.entries(err.formErrors.fieldErrors).forEach(
+          ([field, errors]) => {
+            const fieldDisplayText = getEnumMemberOrSelf(
+              field,
+              MILESTONES_DISPALY_TEXTS.he.fields,
+            );
+            errorMessage += `${fieldDisplayText} : ${errors?.join(' , ')}\n`;
+          },
+        );
+      }
+      toast.error(errorMessage || 'An Error Occured');
+    }
+  };
   const handleDuplicateSection = async () => {
     const contractSectionsPath = `projects/${projectId}/contracts/${contractId}/sections`;
     const newSectionId = uuid();
@@ -199,10 +246,6 @@ const ContractSectionFormInner = ({
       );
     }
   };
-  const { append, fields: milestonesFields } = useFieldArray({
-    name: 'milestones',
-    control: form.control,
-  });
   return (
     <FormProvider {...form}>
       <StyledContractSectionForm>
@@ -234,21 +277,7 @@ const ContractSectionFormInner = ({
             <CopyIcon />
           </StyledAction>
           {milestones.length > 0 && (
-            <StyledAction
-              onClick={() => {
-                append({
-                  id: uuid(),
-                  title: '---',
-                  orderIndex: getNextIndex(
-                    milestonesFields,
-                    EMilestoneFields.OrderIndex,
-                  ),
-                  price: 0,
-                  totalDone: 0,
-                  weight: 0,
-                });
-              }}
-            >
+            <StyledAction onClick={handleCreateMilestone}>
               <span>
                 {
                   SECTIONS_DISPALY_TEXTS.he.actions[
@@ -274,7 +303,7 @@ const ContractSectionFormInner = ({
             </StyledAction>
           )}
           {milestones.length === 0 && isEditMode && (
-            <StyledAction onClick={() => alert('TODO: create milestone')}>
+            <StyledAction onClick={handleCreateMilestone}>
               <span>
                 {
                   SECTIONS_DISPALY_TEXTS.he.actions[
@@ -306,11 +335,5 @@ const ContractSectionFormInner = ({
   );
 };
 // m(".section__action", { onclick: e => handleDeleteSection(e, section) }, "מחק", m(Icon, { icon: "icon-delete" })),
-// m(".section__action", { onclick: e => handleCopySection(e, section, milestones) }, "שכפל", m(Icon, { icon: "icon-copy" })),
-// (!section.isNew) && [
-//     // (sectionIndex > 0) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex - 1].docData.ref) }, "למעלה", m(Icon, { icon: "icon-arrow-up" })),
-//     // (sectionIndex < sectionsArr.length - 1) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex + 1].docData.ref) }, "למטה", m(Icon, { icon: "icon-arrow-down" })),
-//     m(".section__action", { onclick: e => addMilestone(`${section.docData.ref}/milestones`) }, "הוסף אבן דרך", m(Icon, { icon: "icon-plus" })),
-//     m(".section__action", { onclick: e => addUnit(section) }, "הוסף יחידה", m(Icon, { icon: "icon-plus" })),
-//     m(".section__action", { onclick: e => vnode.attrs.togglePreviewEdit(section.docData.docID) }, "תצוגה מקדימה", m(Icon, { icon: "icon-eye" })),
-// ]
+// (sectionIndex > 0) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex - 1].docData.ref) }, "למעלה", m(Icon, { icon: "icon-arrow-up" })),
+// (sectionIndex < sectionsArr.length - 1) && m(".section__action", { onclick: e => moveSectionIndex(section, sectionsArr[sectionIndex + 1].docData.ref) }, "למטה", m(Icon, { icon: "icon-arrow-down" })),

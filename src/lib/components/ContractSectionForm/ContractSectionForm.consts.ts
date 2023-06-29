@@ -6,7 +6,7 @@ import {
 } from '@/lib/consts/sections';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { z } from 'zod';
-import { MilestoneDoc } from '@/lib/consts/milestones';
+import { IMilestoneDoc, MilestoneDoc } from '@/lib/consts/milestones';
 import { DefaultValues } from 'react-hook-form';
 import { ISectionFormValues } from './ContractSectionForm.types';
 
@@ -19,6 +19,13 @@ export const CONTRACT_SECTION_FORM_DEFAULT_VALUES: DefaultValues<ISectionFormVal
     title: '',
     milestones: [],
   };
+export const EMPTY_MILESONE_DEFAULT_VALUES: Omit<IMilestoneDoc, 'id'> = {
+  title: '----',
+  orderIndex: 0,
+  price: 0,
+  totalDone: 0,
+  weight: 0,
+};
 
 export const SECTION_CALULATION_METHOD_OPTIONS: IDropdownInputProps['options'] =
   Object.values(ESectionCalculationMethod).map((value) => ({
