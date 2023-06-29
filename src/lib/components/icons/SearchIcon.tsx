@@ -6,7 +6,6 @@ import {
 } from './SvgIcon';
 
 export const SearchIcon = (props: ISvgIconProps) => {
-  console.log(props);
   return (
     <SvgIcon
       {...props}
