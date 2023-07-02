@@ -1,6 +1,7 @@
 import { ILang } from '../displayTexts';
 import { EContractActualStatus } from './ContractActualStatus';
 import { EContractFields } from './ContractFields';
+import { EContractSectionItem } from './ContractSectionItem';
 import { EContractStage } from './ContractStage';
 import { EContractStatus } from './ContractStatus';
 import { EContractType } from './ContractType';
@@ -12,11 +13,16 @@ type IDisplayTextMapping = {
   contractStage: Record<EContractStage, string>;
   contractStatus: Record<EContractStatus, string>;
   contractActualsStatus: Record<EContractActualStatus, string>;
+  addNewItems: Record<EContractSectionItem, string>;
 };
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     contractFormTitle: 'פרטי החוזה',
+    addNewItems: {
+      [EContractSectionItem.Section]: 'סעיף',
+      [EContractSectionItem.Workspace]: 'איזור עבודה',
+    },
     fields: {
       [EContractFields.Title]: 'חוזה',
       [EContractFields.Description]: 'תיאור',
@@ -71,6 +77,10 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   },
   en: {
     contractFormTitle: 'Contract Details',
+    addNewItems: {
+      [EContractSectionItem.Section]: '+ Section',
+      [EContractSectionItem.Workspace]: '+ Workspace',
+    },
     fields: {
       [EContractFields.Title]: 'Contract',
       [EContractFields.Description]: 'Description',

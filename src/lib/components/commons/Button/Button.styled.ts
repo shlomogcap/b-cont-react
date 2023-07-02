@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 import { IButtonProps } from './Button.types';
-import { activateButtonMixin } from '../../styles/mixins/activateButton';
+import {
+  activateButtonMixin,
+  resetActivateButtonMixin,
+} from '../../styles/mixins/activateButton';
 
 export const StyledButton = styled.button<IButtonProps>`
   font: inherit;
@@ -24,8 +27,9 @@ export const StyledButton = styled.button<IButtonProps>`
   ${activateButtonMixin}
   &:disabled {
     cursor: not-allowed;
-    background-color: var(--color-gray-2);
     color: var(--color-non-active);
+    opacity: 0.8;
+    ${resetActivateButtonMixin}
   }
   ${({ variant }) => {
     switch (variant) {
@@ -40,4 +44,8 @@ export const StyledButton = styled.button<IButtonProps>`
         `;
     }
   }}
+`;
+
+export const StyledButtonMenuButton = styled(StyledButton)`
+  ${resetActivateButtonMixin}
 `;

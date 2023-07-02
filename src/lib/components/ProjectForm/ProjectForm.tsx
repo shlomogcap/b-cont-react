@@ -36,8 +36,8 @@ import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { PROJECT_ID_QUERY, ERoutesNames } from '@/lib/consts/routes';
-import { prepareFormData } from './ProjectForm.utils';
 import { toast } from 'react-toastify';
+import { prepareFormData } from '@/lib/utils/prepareFormData';
 
 const ProjectFormFields = () => {
   const calcPeriods = useCalcPeriods();

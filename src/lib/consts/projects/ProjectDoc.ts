@@ -1,7 +1,4 @@
-import Z, { ZodType } from 'zod';
-import { IWithCommonFields } from '@/lib/utils/WithFields';
-import { EProjectFields } from './ProjectFields';
-import { EProjectType } from './ProjectType';
+import { z } from 'zod';
 import { EProjectStatus } from './ProjectStatus';
 import {
   OPTIONAL_DATE_SCHEMA,
@@ -13,12 +10,15 @@ import {
   EErrorMessage,
   VALIDATION_DISPLAY_TEXTS,
 } from '../validation/displayTexts';
+import { EProjectFields } from './ProjectFields';
+import { IWithCommonFields } from '@/lib/utils/WithFields';
+import { EProjectType } from './ProjectType';
 
-export const ProjectDoc = Z.object({
+export const ProjectDoc = z.object({
   [EProjectFields.Title]: TITLE_FIELD_SCHEMA,
   [EProjectFields.Address]: OPTIONAL_STRING_SCHEMA,
   [EProjectFields.SDate]: OPTIONAL_DATE_SCHEMA,
-  [EProjectFields.NumberOfPeriods]: Z.coerce
+  [EProjectFields.NumberOfPeriods]: z.coerce
     .number()
     .min(12, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooLow])
     .max(100, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooHigh])
@@ -29,15 +29,15 @@ export const ProjectDoc = Z.object({
   [EProjectFields.SeniorManager]: OPTIONAL_STRING_SCHEMA,
   [EProjectFields.Executor]: OPTIONAL_STRING_SCHEMA,
   [EProjectFields.Entrepreneur]: OPTIONAL_STRING_SCHEMA,
-  [EProjectFields.ProjectType]: Z.nativeEnum(EProjectType).optional(),
-  [EProjectFields.NumberOfBuildings]: Z.coerce
+  [EProjectFields.ProjectType]: z.nativeEnum(EProjectType).optional(),
+  [EProjectFields.NumberOfBuildings]: z.coerce
     .number()
     .min(1, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooLow])
     .max(20, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooHigh])
     .optional(),
   [EProjectFields.Basements]: OPTIONAL_NUMBER_SCHEMA,
   [EProjectFields.NumberOfApatrments]: OPTIONAL_NUMBER_SCHEMA,
-  [EProjectFields.Status]: Z.nativeEnum(EProjectStatus).optional(),
+  [EProjectFields.Status]: z.nativeEnum(EProjectStatus).optional(),
 });
 
-export type IProjectDoc = IWithCommonFields<Z.infer<typeof ProjectDoc>>;
+export type IProjectDoc = IWithCommonFields<z.infer<typeof ProjectDoc>>;

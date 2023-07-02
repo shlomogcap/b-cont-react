@@ -30,7 +30,6 @@ import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { PROJECT_ID_QUERY, ERoutesNames } from '@/lib/consts/routes';
-import { prepareFormData } from './ContractForm.utils';
 import { toast } from 'react-toastify';
 import { useContractContext } from '@/lib/context/contractContext';
 import {
@@ -44,6 +43,7 @@ import { useVendorsContext } from '@/lib/context/vendorsContext';
 import { EVendorFields } from '@/lib/consts/vendors';
 import { ECommonFields } from '@/lib/consts/commonFields';
 import { FirebaseError } from 'firebase/app';
+import { prepareFormData } from '@/lib/utils/prepareFormData';
 
 const ContractFormFields = () => {
   const { data: vendors } = useVendorsContext();
