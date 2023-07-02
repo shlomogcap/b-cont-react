@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <UsersProvider>
           <ProjectsProvider>
             <VendorsProvider>
-              <ToastContainer position='top-center' />
+              <ToastContainer position='top-center' closeOnClick={false} />
               <Component {...pageProps} />
             </VendorsProvider>
           </ProjectsProvider>

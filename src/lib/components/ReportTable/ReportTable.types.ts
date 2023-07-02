@@ -27,11 +27,12 @@ type ExtendedTableProps<T extends string> = Omit<
 export type IReportTableProps<T extends string = string> =
   ExtendedTableProps<T> & {
     sections: IReportTableSection<T>[];
+    onSectionClick?: (section: Partial<IReportTableSection<T>>) => void;
   };
 
 export type IReportSectionProps<T extends string = string> = Pick<
   IReportTableProps<T>,
-  'columns' | 'loading' | 'onRowClick'
+  'columns' | 'loading' | 'onRowClick' | 'onSectionClick'
 > & {
   section: IReportTableSection<T>;
   depth: number;
