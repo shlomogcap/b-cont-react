@@ -28,7 +28,7 @@ import { useEffect, useState } from 'react';
 import {
   SearchableContextProvider,
   useSearchableContext,
-} from '../commons/SearchBar/SearchableContext';
+} from '../commons/SearchBar/searchableContext';
 
 export const ProjectsTable = (props: IProjectPageProps) => {
   const form = useForm<IProjectFilterDoc>({
