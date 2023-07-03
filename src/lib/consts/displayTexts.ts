@@ -35,6 +35,7 @@ export enum EFilterPanelStates {
   Filter,
   Reset,
   Close,
+  Search,
 }
 
 type IDisplayTextMapping = {
@@ -93,6 +94,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Filter]: 'סנן',
       [EFilterPanelStates.Reset]: 'אפס',
       [EFilterPanelStates.Close]: 'סגור',
+      [EFilterPanelStates.Search]: 'חפש...',
     },
   },
   en: {
@@ -141,6 +143,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Filter]: 'Filter',
       [EFilterPanelStates.Reset]: 'Reset',
       [EFilterPanelStates.Close]: 'Close',
+      [EFilterPanelStates.Search]: 'Find...',
     },
   },
 };

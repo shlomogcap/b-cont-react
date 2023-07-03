@@ -68,3 +68,15 @@ export const filterByFilterPanel = <Doc extends {}>(
     },
   );
 };
+
+export const filterBySearch = <T extends {}, F extends keyof T>(
+  r: T,
+  projectTableSearchFields: F[],
+  searchValue: string,
+) => {
+  return searchValue.trim().length > 0
+    ? projectTableSearchFields.some((field) => {
+        return String(r[field]).includes(searchValue);
+      })
+    : true;
+};

@@ -29,7 +29,7 @@ export const useProjectNavList = ({
     .map((project) => ({
       id: String(project.id),
       text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${
-        project[projectId.Title]
+        project[EProjectFields.Title]
       }`,
       onClick: () => {
         router.push({

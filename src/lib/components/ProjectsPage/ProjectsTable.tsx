@@ -17,16 +17,38 @@ import {
   projectFilterSchema,
   projectsTableColumns,
   projectsTableFilters,
+  projectTableSearchFields,
 } from './ProjectsPage.consts';
 import {
   filterByFilterPanel,
+  filterBySearch,
   getDefaultFilterValues,
 } from '../commons/FilterPanel';
 import { useEffect, useState } from 'react';
+import {
+  SearchableContextProvider,
+  useSearchableContext,
+} from '../commons/SearchBar/searchableContext';
 
-export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
+export const ProjectsTable = (props: IProjectPageProps) => {
+  const form = useForm<IProjectFilterDoc>({
+    resolver: zodResolver(projectFilterSchema),
+    defaultValues: getDefaultFilterValues(projectsTableFilters),
+    mode: 'onSubmit',
+  });
+  return (
+    <FormProvider {...form}>
+      <SearchableContextProvider>
+        <ProjectsTableInner {...props} />
+      </SearchableContextProvider>
+    </FormProvider>
+  );
+};
+
+const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
   const router = useRouter();
   const { data, isLoading } = useProjectsContext();
+  const { searchValue } = useSearchableContext();
   const [activeFilters, setActiveFilters] = useState(
     Object.values(projectsTableColumns).reduce(
       (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
@@ -34,14 +56,7 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
     ),
   );
 
-  const form = useForm<IProjectFilterDoc>({
-    resolver: zodResolver(projectFilterSchema),
-    defaultValues: getDefaultFilterValues(projectsTableFilters),
-    mode: 'onSubmit',
-  });
-
-  const { control } = form;
-  const watchedFields = useWatch({ control });
+  const watchedFields = useWatch();
 
   useEffect(() => {
     const activeFilterFields: Partial<Record<EProjectFields, boolean>> = {};
@@ -58,42 +73,43 @@ export const ProjectsTable = ({ projectType }: IProjectPageProps) => {
 
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
-    .filter((r) => filterByFilterPanel(r, watchedFields as any)); //TODO: fix that type assertion
+    .filter((r) => filterByFilterPanel(r, watchedFields as any)) //TODO: fix that type assertion
+    .filter((r) =>
+      filterBySearch(r, projectTableSearchFields as any, searchValue),
+    );
   return (
-    <FormProvider {...form}>
-      <Table
-        tableFilterProps={{
-          filters: projectsTableFilters,
-          displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
-          status: EProjectStatus,
-          activeFilters,
-        }}
-        loading={isLoading}
-        rows={rows}
-        columns={projectsTableColumns as any} //TODO: fix this type assertion
-        totals={{
-          [EProjectFields.Title]:
-            rows.length < 2
-              ? '-'
-              : `${rows.length.toLocaleString()} ${
-                  DISPLAY_TEXTS.he.routeNames[ERoutesNames.ProjectsWithType]
-                }`,
-          [EProjectFields.TotalAgreementSum]: sumBy(
-            rows,
-            EProjectFields.TotalAgreementSum,
-          ),
-          [EProjectFields.TotalActualsSum]: sumBy(
-            rows,
-            EProjectFields.TotalActualsSum,
-          ),
-        }}
-        onRowClick={({ id }) =>
-          router.push({
-            pathname: ERoutesNames.Project,
-            query: { projectId: id, projectType },
-          })
-        }
-      />
-    </FormProvider>
+    <Table
+      tableFilterProps={{
+        filters: projectsTableFilters,
+        displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
+        status: EProjectStatus,
+        activeFilters,
+      }}
+      loading={isLoading}
+      rows={rows}
+      columns={projectsTableColumns as any} //TODO: fix this type assertion
+      totals={{
+        [EProjectFields.Title]:
+          rows.length < 2
+            ? '-'
+            : `${rows.length.toLocaleString()} ${
+                DISPLAY_TEXTS.he.routeNames[ERoutesNames.ProjectsWithType]
+              }`,
+        [EProjectFields.TotalAgreementSum]: sumBy(
+          rows,
+          EProjectFields.TotalAgreementSum,
+        ),
+        [EProjectFields.TotalActualsSum]: sumBy(
+          rows,
+          EProjectFields.TotalActualsSum,
+        ),
+      }}
+      onRowClick={({ id }) =>
+        router.push({
+          pathname: ERoutesNames.Project,
+          query: { projectId: id, projectType },
+        })
+      }
+    />
   );
 };
