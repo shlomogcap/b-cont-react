@@ -1,9 +1,11 @@
 import { ILang } from '../displayTexts';
 import { EAccountConfirms } from './AccountConfirms';
+import { EAccountFields } from './AccountFields';
 import { EProjectAccountsFields } from './ProjectAccountFields';
 
 type IDisplayTextMapping = {
-  fields: Record<EProjectAccountsFields, string>;
+  accountFields: Record<EAccountFields, string>;
+  projectAccountReportFields: Record<EProjectAccountsFields, string>;
   confirms: Record<EAccountConfirms, string>;
 };
 
@@ -12,7 +14,42 @@ export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
   IDisplayTextMapping
 > = {
   he: {
-    fields: {
+    accountFields: {
+      [EAccountFields.Title]: 'חשבון',
+      [EAccountFields.Description]: 'תיאור',
+      [EAccountFields.PeriodUnit]: 'סוג תדירות חשבון',
+      [EAccountFields.PeriodFrequancey]: 'תדירות חשבון',
+      [EAccountFields.Period]: 'תקופה',
+
+      [EAccountFields.PeriodNumber]: '# תקופה',
+      [EAccountFields.ConfirmFlow]: 'סבב אישורים',
+      [EAccountFields.AccountStage]: 'סטטוס נוכחי',
+      [EAccountFields.BillingDate]: 'תאריך עריכת תשלום',
+
+      [EAccountFields.TotalSections]: 'סהכ סעיפים',
+      [EAccountFields.TotalAdditions]: 'סהכ תוספות',
+      [EAccountFields.TotalSubtractions]: 'סהכ קיזוזים',
+      [EAccountFields.AccumulatedTotal]: 'סכום מצטבר לתשלום',
+
+      [EAccountFields.DelayPercentage]: 'אחוז עיכבון',
+      [EAccountFields.TotalDelay]: 'סכום עכבון',
+
+      [EAccountFields.DelayRelease]: 'סכום שחרור עכבון',
+      [EAccountFields.TotalAccountToPay]: 'לתשלום',
+
+      [EAccountFields.IndexedPercent]: '% הצמדה',
+      [EAccountFields.TotalIndexed]: 'סכום הצמדה',
+      [EAccountFields.TotalAfterIndexed]: 'סכום לאחר הצמדה',
+
+      [EAccountFields.VatPercent]: '% מעמ',
+      [EAccountFields.TotalVAT]: 'סכום מעמ',
+
+      [EAccountFields.TaxPercent]: '% ניכוי מס',
+      [EAccountFields.TotalTax]: 'סכום ניכוי מס',
+
+      [EAccountFields.TotalToPay]: 'סכום סופי לתשלום',
+    },
+    projectAccountReportFields: {
       [EProjectAccountsFields.Contract]: 'חוזה',
       [EProjectAccountsFields.Vendor]: 'קבלן',
       [EProjectAccountsFields.AccumulatedTotal]: 'חשבון מצטבר',
@@ -37,7 +74,43 @@ export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
     },
   },
   en: {
-    fields: {
+    accountFields: {
+      [EAccountFields.Title]: 'Account',
+      [EAccountFields.Description]: 'Description',
+      [EAccountFields.PeriodUnit]: 'Period Unit Type',
+      [EAccountFields.PeriodFrequancey]: 'Period Frequancey',
+      [EAccountFields.Period]: 'Period',
+
+      [EAccountFields.PeriodNumber]: '# Period',
+      [EAccountFields.ConfirmFlow]: 'Confirm Flow',
+      [EAccountFields.AccountStage]: 'Account Stage',
+      [EAccountFields.BillingDate]: 'Billing Date',
+
+      [EAccountFields.TotalSections]: 'Total Sections',
+      [EAccountFields.TotalAdditions]: 'Total Additions',
+      [EAccountFields.TotalSubtractions]: 'Total Subtractions',
+      [EAccountFields.AccumulatedTotal]: 'Accumulated Total',
+
+      [EAccountFields.DelayPercentage]: 'Delay Percentage',
+      [EAccountFields.TotalDelay]: 'Total Delay',
+
+      [EAccountFields.DelayRelease]: 'Delay Release',
+      [EAccountFields.TotalAccountToPay]: 'Total Account To Pay',
+
+      [EAccountFields.IndexedPercent]: 'Indexed Percent',
+      [EAccountFields.TotalIndexed]: 'Total Indexed',
+      [EAccountFields.TotalAfterIndexed]: 'Total After Indexed',
+
+      [EAccountFields.VatPercent]: 'Vat Percent',
+      [EAccountFields.TotalVAT]: 'Total VAT',
+
+      [EAccountFields.TaxPercent]: 'Tax Percent',
+      [EAccountFields.TotalTax]: 'Total Tax',
+
+      [EAccountFields.TotalToPay]: 'Total To Pay',
+    },
+
+    projectAccountReportFields: {
       [EProjectAccountsFields.Contract]: 'Contract',
       [EProjectAccountsFields.Vendor]: 'Vendor',
       [EProjectAccountsFields.AccumulatedTotal]: 'Accumulated Total',
