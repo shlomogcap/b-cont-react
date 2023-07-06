@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export type ICardProps = {
-  title?: string;
+  title?: ReactNode;
   children: ReactNode;
+  className?: string;
 };
