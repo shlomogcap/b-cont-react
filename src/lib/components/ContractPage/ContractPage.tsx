@@ -16,6 +16,7 @@ import {
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 import { Card } from '../commons/Card';
 import { ContractForm } from '../ContractForm';
+import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 
 export const ContractPage = ({
   projectId,
@@ -24,7 +25,6 @@ export const ContractPage = ({
   children,
 }: PropsWithChildren<IContractPageProps>) => {
   const { isLoading } = useProjectsContext();
-  const title = 'CONTRACT PAGE';
   const { data: projects } = useProjectsContext();
   const {
     data: { contract },
@@ -37,6 +37,9 @@ export const ContractPage = ({
     ERoutesNames.ProjectsWithType,
   );
   const contractStageBreadcrumb = useContractStageBreadcrumb(stage);
+  const title = `${
+    PROJECT_DISPLAY_TEXTS.he.projectTypes[project?.projectType!]
+  } / ${CONTRACTS_DISPLAY_TEXTS.he.contractPagesTitle[stage]}`;
 
   const projectsNavList = useProjectNavList({
     projects,

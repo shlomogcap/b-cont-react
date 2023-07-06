@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { EProjectStatus } from './ProjectStatus';
 import {
   OPTIONAL_DATE_SCHEMA,
   OPTIONAL_NUMBER_SCHEMA,
@@ -13,6 +12,7 @@ import {
 import { EProjectFields } from './ProjectFields';
 import { IWithCommonFields } from '@/lib/utils/WithFields';
 import { EProjectType } from './ProjectType';
+import { EProjectStatus } from './ProjectStatus';
 
 export const ProjectDoc = z.object({
   [EProjectFields.Title]: TITLE_FIELD_SCHEMA,
@@ -29,7 +29,7 @@ export const ProjectDoc = z.object({
   [EProjectFields.SeniorManager]: OPTIONAL_STRING_SCHEMA,
   [EProjectFields.Executor]: OPTIONAL_STRING_SCHEMA,
   [EProjectFields.Entrepreneur]: OPTIONAL_STRING_SCHEMA,
-  [EProjectFields.ProjectType]: z.nativeEnum(EProjectType).optional(),
+  [EProjectFields.ProjectType]: z.nativeEnum(EProjectType),
   [EProjectFields.NumberOfBuildings]: z.coerce
     .number()
     .min(1, VALIDATION_DISPLAY_TEXTS.he.errosMessages[EErrorMessage.TooLow])
