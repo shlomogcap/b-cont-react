@@ -1,4 +1,3 @@
-import { dateTimeDiffFormat } from '@/lib/utils/dateUtils';
 import {
   StyledChatBubble,
   StyledChatBubbleContent,
@@ -8,6 +7,7 @@ import {
   StyledPinIcon,
 } from './ChatCard.styled';
 import { IChatBubblProps } from './ChatCard.types';
+import { datetimeDueFormat } from '@/lib/utils/datatimeDueFormat';
 
 export const ChatBubble = ({
   title,
@@ -28,7 +28,7 @@ export const ChatBubble = ({
       <StyledChatBubbleContent>{description}</StyledChatBubbleContent>
       <StyledChatBubbleStage>2020-01</StyledChatBubbleStage>
       <StyledChatBubbleInfo>
-        {dateTimeDiffFormat(createdAt, { useHours: true })}
+        {datetimeDueFormat(createdAt, { useHours: true })}
       </StyledChatBubbleInfo>
     </StyledChatBubble>
   );
