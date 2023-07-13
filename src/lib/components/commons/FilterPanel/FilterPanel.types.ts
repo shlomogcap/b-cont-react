@@ -69,11 +69,9 @@ export type IStyledFilterProps = {
   isButtonGroup?: boolean;
 };
 
-type IFieldValue = string[] | Record<string, string>;
+type IField = { value: IFilterValues };
 
-type IField = { value: IFieldValue };
-
-export type IWatchFields<F extends string = string> = {
+export type IWatchedFields<F extends string = string> = {
   [key in F]: IField;
 };
 
