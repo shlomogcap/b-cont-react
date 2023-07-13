@@ -1,1 +1,6 @@
-export type IProjectContractsProps = {};
+import { z } from 'zod';
+import { projectContractsFilterSchema } from './ProjectContracts.consts';
+
+export type IProjectContractsFilterDoc = z.infer<
+  typeof projectContractsFilterSchema
+>;
