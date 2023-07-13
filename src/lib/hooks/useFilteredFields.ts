@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
 import {
   IActiveFilters,
-  IWatchFields,
+  IWatchedFields,
 } from '../components/commons/FilterPanel';
-
-const getEntries = <T extends {}>(obj: T) =>
-  Object.entries(obj) as Array<[keyof T, T[keyof T]]>;
+import { getEntries } from '../utils/arrayUtils';
 
 export const useFilteredFields = <F extends string = string>(
-  watchedFields: IWatchFields<F>,
+  watchedFields: IWatchedFields<F>,
   setActiveFilters: (filters: IActiveFilters<F>) => void,
 ) => {
   useEffect(() => {
