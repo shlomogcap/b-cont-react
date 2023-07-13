@@ -164,7 +164,6 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
   const rows = contracts
     .filter((r) => filterByFilterPanel(r, watchedFields as any))
     .filter((r) => filterBySearch(r, searchFields, searchValue, getVendorName));
-
   return (
     <Table
       loading={isLoading}

@@ -10,7 +10,11 @@ import { ERoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
 import { useForm, FormProvider, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { vendorFilterSchema, vendorsTableFilters } from './VendorPage.consts';
+import {
+  VENDOR_STATUS_OPTIONS,
+  vendorFilterSchema,
+  vendorsTableFilters,
+} from './VendorPage.consts';
 import {
   filterByFilterPanel,
   filterBySearch,
@@ -53,7 +57,12 @@ const VendorsTableInner = () => {
       EVendorFields.TaxPercent,
       EVendorFields.Phone,
       EVendorFields.Email,
-      EVendorFields.Status,
+      {
+        field: EVendorFields.Status,
+        display: VENDOR_DISPLAY_TEXTS.he.fields[EVendorFields.Status],
+        type: 'list',
+        options: VENDOR_STATUS_OPTIONS,
+      },
     ],
     VENDOR_DISPLAY_TEXTS.he.fields,
   );

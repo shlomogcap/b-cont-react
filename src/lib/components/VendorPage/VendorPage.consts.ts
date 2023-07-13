@@ -3,6 +3,15 @@ import { z } from 'zod';
 import { EFilterItemType, IFilterItem } from '../commons/FilterPanel';
 import { dateFilterSchema } from '../commons/FilterPanel/FilterPanel.consts';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
+import { ITableColumnOption } from '../commons/Table';
+
+export const VENDOR_STATUS_OPTIONS: ITableColumnOption[] = [
+  EVendorStatus.Active,
+  EVendorStatus.NonActive,
+].map((vendorStatus) => ({
+  text: VENDOR_DISPLAY_TEXTS.he.vendorStatus[vendorStatus],
+  value: vendorStatus,
+}));
 
 export const VENDOR_VIEW_TABS = [
   {
