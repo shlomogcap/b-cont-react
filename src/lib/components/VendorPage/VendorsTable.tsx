@@ -1,31 +1,85 @@
 import { useRouter } from 'next/router';
 import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
-import { VENDOR_DISPLAY_TEXTS, EVendorFields } from '@/lib/consts/vendors';
+import {
+  VENDOR_DISPLAY_TEXTS,
+  EVendorFields,
+  IVendorDoc,
+} from '@/lib/consts/vendors';
 import { ERoutesNames, VENDOR_ID_QUERY } from '@/lib/consts/routes';
 import { DISPLAY_TEXTS } from '@/lib/consts/displayTexts';
+import { useForm, FormProvider, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { vendorFilterSchema, vendorsTableFilters } from './VendorPage.consts';
+import {
+  filterByFilterPanel,
+  filterBySearch,
+  getDefaultFilterValues,
+} from '../commons/FilterPanel';
+import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
+import { useState } from 'react';
+import {
+  SearchableContextProvider,
+  useSearchableContext,
+} from '../commons/SearchBar/searchableContext';
+import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
 
 export const VendorsTable = () => {
+  const form = useForm<IVendorDoc>({
+    resolver: zodResolver(vendorFilterSchema),
+    defaultValues: getDefaultFilterValues(vendorsTableFilters),
+    mode: 'onSubmit',
+  });
+
+  return (
+    <FormProvider {...form}>
+      <SearchableContextProvider>
+        <VendorsTableInner />
+      </SearchableContextProvider>
+    </FormProvider>
+  );
+};
+
+const VendorsTableInner = () => {
   const router = useRouter();
   const { data: rows, isLoading } = useVendorsContext();
+  const vendorsTableColumns = fieldsNamesToColumns(
+    [
+      EVendorFields.Title,
+      EVendorFields.CompanyNumber,
+      EVendorFields.CommercialName,
+      EVendorFields.CompanExternalNumber,
+      { field: EVendorFields.TaxesEndDate, type: 'date' },
+      EVendorFields.TaxPercent,
+      EVendorFields.Phone,
+      EVendorFields.Email,
+      EVendorFields.Status,
+    ],
+    VENDOR_DISPLAY_TEXTS.he.fields,
+  );
+
+  const [activeFilters, setActiveFilters] = useState(
+    Object.values(vendorsTableColumns).reduce(
+      (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
+      {},
+    ),
+  );
+  const watchedFields = useWatch();
+  useFilteredFields(watchedFields, setActiveFilters);
+  const { searchValue } = useSearchableContext();
+  const searchFields = [
+    EVendorFields.Title,
+    EVendorFields.CompanyNumber,
+    EVendorFields.CommercialName,
+    EVendorFields.CompanExternalNumber,
+  ];
   return (
     <Table
       loading={isLoading}
-      columns={fieldsNamesToColumns(
-        [
-          EVendorFields.Title,
-          EVendorFields.CompanyNumber,
-          EVendorFields.CommercialName,
-          EVendorFields.CompanExternalNumber,
-          { field: EVendorFields.TaxesEndDate, type: 'date' },
-          EVendorFields.TaxPercent,
-          EVendorFields.Phone,
-          EVendorFields.Email,
-          EVendorFields.Status,
-        ],
-        VENDOR_DISPLAY_TEXTS.he.fields,
-      )}
-      rows={rows}
+      columns={vendorsTableColumns}
+      rows={rows
+        .filter((r) => filterByFilterPanel(r, watchedFields as any))
+        .filter((r) => filterBySearch(r, searchFields, searchValue))}
       totals={{
         [EVendorFields.Title]:
           rows.length < 2
@@ -40,6 +94,12 @@ export const VendorsTable = () => {
           query: { [VENDOR_ID_QUERY]: id },
         })
       }
+      tableFilterProps={{
+        filters: vendorsTableFilters,
+        displayTexts: VENDOR_DISPLAY_TEXTS.he.fields,
+        status: EVendorStatus,
+        activeFilters,
+      }}
     />
   );
 };

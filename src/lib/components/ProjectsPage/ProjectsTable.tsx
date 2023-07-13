@@ -24,7 +24,7 @@ import {
   filterBySearch,
   getDefaultFilterValues,
 } from '../commons/FilterPanel';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   SearchableContextProvider,
   useSearchableContext,
@@ -67,6 +67,7 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
     .filter((r) =>
       filterBySearch(r, projectTableSearchFields as any, searchValue),
     );
+  console.log(rows);
   return (
     <Table
       tableFilterProps={{
