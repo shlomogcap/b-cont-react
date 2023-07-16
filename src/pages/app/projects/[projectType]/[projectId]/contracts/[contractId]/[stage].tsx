@@ -11,10 +11,11 @@ import {
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
 import { ContractPlan } from '@/lib/components/ContractPage/contractViews/ContractPlan';
+import { ContractActuals } from '@/lib/components/ContractPage/contractViews/ContractActuals';
 
 const CONTRACT_STAGE_PAGE: Record<EContractStage, ReactElement> = {
   [EContractStage.Plan]: <ContractPlan />,
-  [EContractStage.Actual]: <ContractPlan />,
+  [EContractStage.Actual]: <ContractActuals />,
   [EContractStage.Billing]: <ContractPlan />,
 };
 

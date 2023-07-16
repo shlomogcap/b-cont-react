@@ -13,19 +13,19 @@ import { GetServerSideProps } from 'next';
 export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
   const contractRef = doc(
     firestore,
-    `project/${query.projectId}/contracts/${query.contractId}`,
+    `projects/${query.projectId}/contracts/${query.contractId}`,
   );
   const contract = await getDoc(contractRef);
-  if (!contract.exists) {
+  if (!contract.exists()) {
     return {
       notFound: true,
     };
   }
-  const accountStage: 'billing' | 'actual' = 'actual';
+  const defaultStage = 'actual';
   const contractStage =
     contract.data()?.[EContractFields.Status] === EContractStatus.Plan
       ? 'plan'
-      : accountStage;
+      : defaultStage;
   const destination = `${replaceQueryParams(ERoutesNames.Contract, query, [
     PROJECT_ID_QUERY,
     PROJECT_TYPE_QUERY,

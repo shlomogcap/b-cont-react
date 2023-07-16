@@ -9,6 +9,7 @@ import { EContractType } from './ContractType';
 type IDisplayTextMapping = {
   fields: Record<EContractFields, string>;
   contractFormTitle: string;
+  contractPagesTitle: Record<EContractStage, string>;
   contractType: Record<EContractType, string>;
   contractStage: Record<EContractStage, string>;
   contractStatus: Record<EContractStatus, string>;
@@ -19,6 +20,11 @@ type IDisplayTextMapping = {
 export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   he: {
     contractFormTitle: 'פרטי החוזה',
+    contractPagesTitle: {
+      [EContractStage.Plan]: 'עריכת מבנה חוזה',
+      [EContractStage.Actual]: 'דשבורד ביצוע חוזה',
+      [EContractStage.Billing]: 'דשבורד כספים חוזה',
+    },
     addNewItems: {
       [EContractSectionItem.Section]: 'סעיף',
       [EContractSectionItem.Workspace]: 'איזור עבודה',
@@ -77,6 +83,11 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
   },
   en: {
     contractFormTitle: 'Contract Details',
+    contractPagesTitle: {
+      [EContractStage.Plan]: 'Contract Plan View',
+      [EContractStage.Actual]: 'Contract Dashboard',
+      [EContractStage.Billing]: 'Contract Billing',
+    },
     addNewItems: {
       [EContractSectionItem.Section]: '+ Section',
       [EContractSectionItem.Workspace]: '+ Workspace',
