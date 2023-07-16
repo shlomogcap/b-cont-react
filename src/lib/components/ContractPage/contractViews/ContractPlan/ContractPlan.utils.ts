@@ -11,7 +11,7 @@ export const prepareContractSectionReport = (
 ): IReportTableSection<ESectionFields>[] => {
   const wsMap = new Map(workspaces.map((ws) => [ws.id, ws]));
 
-  function injectRows(id: string): IReportTableSection<ESectionFields> {
+  const injectRows = (id: string): IReportTableSection<ESectionFields> => {
     const workspace = wsMap.get(id);
     const result: Partial<IReportTableSection<ESectionFields>> = {
       title: workspace!.title,
@@ -37,7 +37,7 @@ export const prepareContractSectionReport = (
     }
 
     return result as IReportTableSection<ESectionFields>;
-  }
+  };
 
   const sortedWorkspaces = sortBy(workspaces, EWorkspaceFields.OrderIndex);
   const sortedRows = sortBy(contractSections, ESectionFields.OrderIndex);

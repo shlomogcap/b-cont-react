@@ -1,5 +1,4 @@
 import { PageLayout } from '../PageLayout';
-import { Table, fieldsNamesToColumns } from '../commons/Table';
 import { DISPLAY_TEXTS } from '../../consts/displayTexts';
 import { IVendorsPageProps } from './VendorsPage.types';
 import { useRouter } from 'next/router';

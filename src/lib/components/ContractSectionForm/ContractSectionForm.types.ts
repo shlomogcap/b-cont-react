@@ -1,7 +1,6 @@
 import { ISectionDoc } from '@/lib/consts/sections';
 import { IContractSectionModalProps } from '../ContractSectionModal';
 import { IDropdownOption } from '../commons/Input/inputs/DropdownInput';
-import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 import { z } from 'zod';
 import { SectionFormShape } from './ContractSectionForm.consts';
 
