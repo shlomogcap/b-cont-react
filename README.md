@@ -102,6 +102,8 @@ if the model is change run `tree db` so and update this block (tree represtation
 │       │   └── [buildingDoc]
 │       │       └── floors
 │       │           └── [floorDoc]
+│       ├── confirmsSettings
+│       │   └── [confirmDoc]
 │       ├── contracts
 │       │   └── [contractDoc]
 │       │       ├── accounts

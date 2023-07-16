@@ -1,7 +1,5 @@
 import { IProjectConfirmsProps } from './ProjectConfirms.types';
 import { ITableColumn, Table } from '@/lib/components/commons/Table';
-import { PROJECT_ACCOUNTS_DISPLAY_TEXTS } from '@/lib/consts/accounts';
-import { EAccountConfirms } from '@/lib/consts/accounts/AccountConfirms';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
 import { VENDOR_DISPLAY_TEXTS, EVendorFields } from '@/lib/consts/vendors';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
@@ -22,17 +20,18 @@ import {
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
+import { sortBy } from 'lodash-es';
+import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
 
 export const ProjectConfirms = (_: IProjectConfirmsProps) => {
   const { data: contracts, isLoading } = useProjectContractsContext();
+  const { data: confirms } = useProjectConfirmsSettingsContext();
   const { data: vendors } = useVendorsContext();
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
-
-  const projectConfirmsColumns: ITableColumn<
-    EContractFields | EAccountConfirms
-  >[] = [
+  const projectConfirmsColumns: ITableColumn<EContractFields>[] = [
     {
       field: EContractFields.Title,
       display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Title],
@@ -67,45 +66,10 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
       display:
         CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.CurrentAccountPeriod],
     },
-    {
-      field: EAccountConfirms.Start,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Start],
-    },
-    {
-      field: EAccountConfirms.Projectmanager,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[
-          EAccountConfirms.Projectmanager
-        ],
-    },
-    {
-      field: EAccountConfirms.Manager,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Manager],
-    },
-    {
-      field: EAccountConfirms.Accounting,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Accounting],
-    },
-    {
-      field: EAccountConfirms.Financing,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Financing],
-    },
-    {
-      field: EAccountConfirms.ExternalSoftware,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[
-          EAccountConfirms.ExternalSoftware
-        ],
-    },
-    {
-      field: EAccountConfirms.Billing,
-      display:
-        PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.confirms[EAccountConfirms.Billing],
-    },
+    ...sortBy(confirms, EConfirmFields.OrderIndex).map((c) => ({
+      field: c.id as any,
+      display: c.title,
+    })),
     {
       field: EContractFields.ActualsStatus,
       display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.ActualsStatus],

@@ -1,12 +1,10 @@
 import { ILang } from '../displayTexts';
-import { EAccountConfirms } from './AccountConfirms';
 import { EAccountFields } from './AccountFields';
 import { EProjectAccountsFields } from './ProjectAccountFields';
 
 type IDisplayTextMapping = {
   accountFields: Record<EAccountFields, string>;
   projectAccountReportFields: Record<EProjectAccountsFields, string>;
-  confirms: Record<EAccountConfirms, string>;
 };
 
 export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
@@ -63,15 +61,6 @@ export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
       [EProjectAccountsFields.TotalToPay]: 'יתרה לתשלום',
       [EProjectAccountsFields.PaidPercentage]: '% ששולם',
     },
-    confirms: {
-      [EAccountConfirms.Start]: 'אתחול ועדכון',
-      [EAccountConfirms.Projectmanager]: 'אישור מ.פרוייקט',
-      [EAccountConfirms.Manager]: 'אישור מהנדס חברה/מנכ״ל',
-      [EAccountConfirms.Accounting]: 'אישור הנה״ח',
-      [EAccountConfirms.Financing]: 'אישור כספים',
-      [EAccountConfirms.ExternalSoftware]: 'הזנה לסאפ',
-      [EAccountConfirms.Billing]: 'צ׳ק מאושר',
-    },
   },
   en: {
     accountFields: {
@@ -124,15 +113,6 @@ export const PROJECT_ACCOUNTS_DISPLAY_TEXTS: Record<
         'Total Additions Subtractions',
       [EProjectAccountsFields.TotalToPay]: 'Total To Pay',
       [EProjectAccountsFields.PaidPercentage]: 'Paid %',
-    },
-    confirms: {
-      [EAccountConfirms.Start]: 'Account Init',
-      [EAccountConfirms.Projectmanager]: 'Project Manager Approve',
-      [EAccountConfirms.Manager]: 'Senior Manager Approve',
-      [EAccountConfirms.Accounting]: 'Accounting Approve',
-      [EAccountConfirms.Financing]: 'Financing Approve',
-      [EAccountConfirms.ExternalSoftware]: 'Entered To SAP',
-      [EAccountConfirms.Billing]: 'Billing Ready',
     },
   },
 };

@@ -15,7 +15,9 @@ export const NUMBER_SCHEMA = z.preprocess(
   z.coerce.number(),
 );
 
-export const OPTIONAL_STRING_SCHEMA = z.string().optional();
+export const STRING_SCHEMA = z.string().optional();
+
+export const OPTIONAL_STRING_SCHEMA = STRING_SCHEMA.optional();
 export const OPTIONAL_BOOLEAN_SCHEMA = z.boolean().optional();
 export const OPTIONAL_NUMBER_SCHEMA = NUMBER_SCHEMA.optional();
 export const OPTIONAL_DATE_SCHEMA = z

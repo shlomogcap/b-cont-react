@@ -1,6 +1,7 @@
 import { ProjectPage } from '@/lib/components/ProjectPage/ProjectPage';
 import { EProjectType } from '@/lib/consts/projects';
 import { PROJECT_ID_QUERY, PROJECT_TYPE_QUERY } from '@/lib/consts/routes';
+import { ProjectConfirmsSettingsProvider } from '@/lib/context/projectConfirmsSettingsContext';
 import { ProjectContractsProvider } from '@/lib/context/projectContractsContext';
 import { ProjectOddJobsProvider } from '@/lib/context/projectOddJobsContext';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
@@ -20,7 +21,9 @@ export default function ProjectRoute({
     <ProjectContractsProvider projectId={projectId}>
       <ProjectOddJobsProvider projectId={projectId}>
         <ProjectContractsProvider projectId={projectId}>
-          <ProjectPage projectId={projectId} projectType={projectType} />
+          <ProjectConfirmsSettingsProvider projectId={projectId}>
+            <ProjectPage projectId={projectId} projectType={projectType} />
+          </ProjectConfirmsSettingsProvider>
         </ProjectContractsProvider>
       </ProjectOddJobsProvider>
     </ProjectContractsProvider>
