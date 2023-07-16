@@ -1,46 +1,52 @@
 import { z } from 'zod';
 import {
+  INTEGER_SCHEMA,
+  NUMBER_SCHEMA,
+  OPTIONAL_DATE_SCHEMA,
   OPTIONAL_STRING_SCHEMA,
+  STRING_SCHEMA,
   TITLE_FIELD_SCHEMA,
 } from '../validation/validationSchema';
 import { EAccountFields } from './AccountFields';
 import { COMMON_FIELDS_SCHEMA } from '../validation/commonFieldSchema';
+import { EPeriodUnit } from './PeriodUnit';
+import { ConfirmDoc } from '../confirms/ConfirmDoc';
 
 export const AccountDoc = z
   .object({
     [EAccountFields.Title]: TITLE_FIELD_SCHEMA,
     [EAccountFields.Description]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.PeriodUnit]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.PeriodFrequancey]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.Period]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.PeriodUnit]: z.nativeEnum(EPeriodUnit),
+    [EAccountFields.PeriodFrequancey]: INTEGER_SCHEMA,
+    [EAccountFields.Period]: STRING_SCHEMA,
 
-    [EAccountFields.PeriodNumber]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.ConfirmFlow]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.PeriodNumber]: INTEGER_SCHEMA,
+    [EAccountFields.ConfirmFlow]: z.array(ConfirmDoc).optional(),
     [EAccountFields.AccountStage]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.BillingDate]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.BillingDate]: OPTIONAL_DATE_SCHEMA,
 
-    [EAccountFields.TotalSections]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalAdditions]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalSubtractions]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.AccumulatedTotal]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.TotalSections]: NUMBER_SCHEMA,
+    [EAccountFields.TotalAdditions]: NUMBER_SCHEMA,
+    [EAccountFields.TotalSubtractions]: NUMBER_SCHEMA,
+    [EAccountFields.AccumulatedTotal]: NUMBER_SCHEMA,
 
-    [EAccountFields.DelayPercentage]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalDelay]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.DelayPercentage]: NUMBER_SCHEMA,
+    [EAccountFields.TotalDelay]: NUMBER_SCHEMA,
 
-    [EAccountFields.DelayRelease]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalAccountToPay]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.DelayRelease]: NUMBER_SCHEMA,
+    [EAccountFields.TotalAccountToPay]: NUMBER_SCHEMA,
 
-    [EAccountFields.IndexedPercent]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalIndexed]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalAfterIndexed]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.IndexedPercent]: NUMBER_SCHEMA,
+    [EAccountFields.TotalIndexed]: NUMBER_SCHEMA,
+    [EAccountFields.TotalAfterIndexed]: NUMBER_SCHEMA,
 
-    [EAccountFields.VatPercent]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalVAT]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.VatPercent]: NUMBER_SCHEMA,
+    [EAccountFields.TotalVAT]: NUMBER_SCHEMA,
 
-    [EAccountFields.TaxPercent]: OPTIONAL_STRING_SCHEMA,
-    [EAccountFields.TotalTax]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.TaxPercent]: NUMBER_SCHEMA,
+    [EAccountFields.TotalTax]: NUMBER_SCHEMA,
 
-    [EAccountFields.TotalToPay]: OPTIONAL_STRING_SCHEMA,
+    [EAccountFields.TotalToPay]: NUMBER_SCHEMA,
   })
   .merge(COMMON_FIELDS_SCHEMA);
 
