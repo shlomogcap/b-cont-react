@@ -38,6 +38,7 @@ export const vendorsTableFilters: IFilterItem<EVendorFields>[] = [
     options: Object.values(EVendorStatus).map((value) => ({
       value,
       text: VENDOR_DISPLAY_TEXTS.he.vendorStatus[value],
+      isMultiOptional: true,
     })),
     defaultValue: [EVendorStatus.Active],
   },

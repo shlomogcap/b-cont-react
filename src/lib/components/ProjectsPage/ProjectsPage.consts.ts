@@ -31,6 +31,7 @@ export const projectsTableFilters: IFilterItem<EProjectFields>[] = [
     options: Object.values(EProjectStatus).map((value) => ({
       value,
       text: PROJECT_DISPLAY_TEXTS.he.projectStatus[value],
+      isMultiOptional: true,
     })),
     defaultValue: [EProjectStatus.Active],
   },

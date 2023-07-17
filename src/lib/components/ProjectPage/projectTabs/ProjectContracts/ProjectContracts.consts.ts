@@ -51,6 +51,7 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
     options: Object.values(EContractStatus).map((value) => ({
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractStatus[value],
+      isMultiOptional: true,
     })),
     defaultValue: [EContractStatus.Plan],
   },
@@ -58,6 +59,7 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
     type: EFilterItemType.Buttons,
     field: EContractFields.ContractType,
     options: Object.values(EContractType).map((value) => ({
+      isMultiOptional: true,
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractType[value],
     })),

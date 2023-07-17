@@ -6,6 +6,7 @@ export enum EFilterItemType {
 export type IFilterItemOption<V extends string = string> = {
   text: string;
   value: V;
+  isMultiOptional: boolean;
 };
 
 export type IDateFilterValue = {
@@ -60,6 +61,7 @@ export type IFilterPanelButtonProps<
 > = {
   field: T;
   currentValue: V;
+  isMultiOptional: boolean;
 };
 
 export type IStyledFilterProps = {
@@ -67,6 +69,7 @@ export type IStyledFilterProps = {
   justify?: string;
   width?: string;
   isButtonGroup?: boolean;
+  isOptionButton?: boolean;
 };
 
 type IField = { value: IFilterValues };

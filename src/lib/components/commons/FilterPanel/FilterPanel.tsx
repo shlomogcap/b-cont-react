@@ -33,6 +33,7 @@ const FilterPanelButton = ({
   field,
   children,
   currentValue,
+  isMultiOptional,
 }: PropsWithChildren<IFilterPanelButtonProps>) => {
   const { setValue, watch } = useFormContext();
   const fieldValuePath = `${field}.value`;
@@ -40,7 +41,8 @@ const FilterPanelButton = ({
   const isActive = fieldValues?.includes(currentValue);
   return (
     <StyledFilterButton
-      isButtonGroup
+      isButtonGroup={!isMultiOptional}
+      isOptionButton
       onClick={() => {
         setValue(
           fieldValuePath,
@@ -64,8 +66,13 @@ const FilterButtonsControl = ({
   return (
     <StyledFilterControlDiv>
       <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
-      {options.map(({ value, text }) => (
-        <FilterPanelButton key={value} field={field} currentValue={value}>
+      {options.map(({ value, text, isMultiOptional }) => (
+        <FilterPanelButton
+          key={value}
+          field={field}
+          currentValue={value}
+          isMultiOptional={isMultiOptional}
+        >
           {text}
         </FilterPanelButton>
       ))}
