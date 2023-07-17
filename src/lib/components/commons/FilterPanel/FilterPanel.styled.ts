@@ -51,8 +51,8 @@ export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
         border-start-start-radius: 0.8rem;
       }
     `}
-  border: ${({ isButtonGroup }) =>
-    isButtonGroup ? '1px solid var(--color-active-light)' : 'none'};
+  border: ${({ isOptionButton }) =>
+    isOptionButton ? '1px solid var(--color-active-light)' : 'none'};
   &:hover {
     box-shadow: none;
     transform: none;
