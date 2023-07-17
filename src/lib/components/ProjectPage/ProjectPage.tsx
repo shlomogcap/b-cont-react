@@ -8,7 +8,6 @@ import { useProjectsContext } from '@/lib/context/projectsContext';
 import { EmptyState } from '../commons/EmptyState';
 import { useProjectTypeBreadcrumb } from './useProjectTypeBreadcrumb';
 import { useProjectNavList } from '@/lib/hooks/useProjectNavList';
-import { SearchableContextProvider } from '../commons/SearchBar/searchableContext';
 
 export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   const { isLoading } = useProjectsContext();
@@ -28,28 +27,26 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
   });
 
   return (
-    <SearchableContextProvider>
-      <PageLayout
-        title={title}
-        breadcrubms={[
-          APP_BREADCRUMB,
-          projectsTypeBreadCrumb,
-          {
-            text: isLoading ? '---' : projectBreadCrumbText,
-            id: ERoutesNames.Project,
-            navList: projectsNavList,
-          },
-        ]}
-      >
-        {isLoading ? (
-          <EmptyState
-            animation='pulse'
-            content={DISPLAY_TEXTS.he.tableStates[ETableStates.Loading]}
-          />
-        ) : (
-          <ProjectOverview />
-        )}
-      </PageLayout>
-    </SearchableContextProvider>
+    <PageLayout
+      title={title}
+      breadcrubms={[
+        APP_BREADCRUMB,
+        projectsTypeBreadCrumb,
+        {
+          text: isLoading ? '---' : projectBreadCrumbText,
+          id: ERoutesNames.Project,
+          navList: projectsNavList,
+        },
+      ]}
+    >
+      {isLoading ? (
+        <EmptyState
+          animation='pulse'
+          content={DISPLAY_TEXTS.he.tableStates[ETableStates.Loading]}
+        />
+      ) : (
+        <ProjectOverview />
+      )}
+    </PageLayout>
   );
 };

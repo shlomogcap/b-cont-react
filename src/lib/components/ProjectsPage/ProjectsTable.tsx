@@ -67,7 +67,6 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
     .filter((r) =>
       filterBySearch(r, projectTableSearchFields as any, searchValue),
     );
-  console.log(rows);
   return (
     <Table
       tableFilterProps={{

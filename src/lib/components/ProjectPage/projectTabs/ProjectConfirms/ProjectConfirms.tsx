@@ -62,7 +62,7 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
 
-  const projectConfirmsColumns: ITableColumn<
+  const confirmsTableColumns: ITableColumn<
     EContractFields | EAccountConfirms
   >[] = [
     {
@@ -147,7 +147,7 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
   ];
 
   const [activeFilters, setActiveFilters] = useState(
-    Object.values(projectConfirmsColumns).reduce(
+    Object.values(confirmsTableColumns).reduce(
       (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
       {},
     ),
@@ -167,7 +167,7 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
   return (
     <Table
       loading={isLoading}
-      columns={projectConfirmsColumns}
+      columns={confirmsTableColumns as ITableColumn<EContractFields>[]}
       rows={rows}
       onRowClick={({ id }) =>
         router.push({
@@ -181,7 +181,7 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
       }
       tableFilterProps={{
         filters: projectConfirmsTableFilters,
-        displayTexts: PROJECT_DISPLAY_TEXTS.he.fields,
+        displayTexts: CONTRACTS_DISPLAY_TEXTS.he.fields,
         status: EContractStatus,
         activeFilters,
       }}

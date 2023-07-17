@@ -42,14 +42,6 @@ export const projectContractsFilterSchema = z.object({
     type: z.literal(EFilterItemType.Buttons),
     value: z.array(z.nativeEnum(EContractStatus)),
   }),
-  // [EContractFields.SWorkDate]: z.object({
-  //   type: z.literal(EFilterItemType.Date),
-  //   value: dateFilterSchema,
-  // }),
-  // [EContractFields.EWorkDate]: z.object({
-  //   type: z.literal(EFilterItemType.Date),
-  //   value: dateFilterSchema,
-  // }),
 });
 
 export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
@@ -71,12 +63,4 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
     })),
     defaultValue: [...Object.values(EContractType)],
   },
-  // {
-  //   type: EFilterItemType.Date,
-  //   field: EContractFields.SWorkDate,
-  // },
-  // {
-  //   type: EFilterItemType.Date,
-  //   field: EContractFields.EWorkDate,
-  // },
 ];

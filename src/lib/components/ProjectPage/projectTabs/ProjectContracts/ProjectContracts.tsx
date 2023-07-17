@@ -1,4 +1,8 @@
-import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
+import {
+  ITableColumn,
+  Table,
+  fieldsNamesToColumns,
+} from '@/lib/components/commons/Table';
 import {
   IProjectContractsFilterDoc,
   IProjectContractsProps,
@@ -57,7 +61,7 @@ const ProjectContractsInner = (props_: IProjectContractsProps) => {
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
 
-  const columns = fieldsNamesToColumns(
+  const contractTableColumns = fieldsNamesToColumns<EContractFields>(
     [
       EContractFields.Title,
       {
@@ -81,9 +85,9 @@ const ProjectContractsInner = (props_: IProjectContractsProps) => {
     ],
     CONTRACTS_DISPLAY_TEXTS.he.fields,
   );
-  console.log(columns);
+
   const [activeFilters, setActiveFilters] = useState(
-    Object.values(columns).reduce(
+    Object.values(contractTableColumns).reduce(
       (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
       {},
     ),
@@ -104,7 +108,7 @@ const ProjectContractsInner = (props_: IProjectContractsProps) => {
   return (
     <Table
       loading={isLoading}
-      columns={columns}
+      columns={contractTableColumns}
       rows={rows
         .filter((r) => filterByFilterPanel(r, watchedFields as any))
         .filter((r) =>

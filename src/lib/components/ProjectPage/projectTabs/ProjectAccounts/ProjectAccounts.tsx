@@ -73,7 +73,7 @@ const ProjectAccountsInner = (props: IProjectAccountsProps) => {
       { field: EProjectAccountsFields.TotalToPay, type: 'number' },
       { field: EProjectAccountsFields.PaidPercentage, type: 'percentage' },
     ],
-    PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.fields,
+    PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.projectAccountReportFields,
   );
   const [activeFilters, setActiveFilters] = useState(
     Object.values(projectAccountsColumns).reduce(
@@ -103,7 +103,8 @@ const ProjectAccountsInner = (props: IProjectAccountsProps) => {
       rows={rows}
       tableFilterProps={{
         filters: projectAccountsTableFilters,
-        displayTexts: PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.fields,
+        displayTexts:
+          PROJECT_ACCOUNTS_DISPLAY_TEXTS.he.projectAccountReportFields,
         status: EContractStatus,
         activeFilters,
       }}
