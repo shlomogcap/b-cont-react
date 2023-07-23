@@ -71,12 +71,13 @@ export const filterByFilterPanel = <Doc extends {}>(
 
 export const filterBySearch = <T extends {}, F extends keyof T>(
   r: T,
-  projectTableSearchFields: F[],
+  tableSearchFields: F[],
   searchValue: string,
+  getValue?: (ref: string) => (string | undefined)[] | undefined,
 ) => {
-  return searchValue.trim().length > 0
-    ? projectTableSearchFields.some((field) => {
-        return String(r[field]).includes(searchValue);
-      })
+  return searchValue.trim().length >= 2
+    ? tableSearchFields.some((field) =>
+        String(getValue?.(r[field]) ?? r[field])?.includes(searchValue),
+      )
     : true;
 };

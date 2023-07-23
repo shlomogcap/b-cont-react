@@ -1,8 +1,10 @@
 import { ILang } from '@/lib/consts/displayTexts';
 import { EVendorFields } from './VendorFields';
+import { EVendorStatus } from './VendorStatus';
 
 type IDisplayTextMapping = {
   fields: Record<EVendorFields, string>;
+  vendorStatus: Record<EVendorStatus, string>;
 };
 
 export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -21,6 +23,10 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorFields.Description]: 'הערות',
       [EVendorFields.Status]: 'סטטוס',
     },
+    vendorStatus: {
+      [EVendorStatus.Active]: 'פעיל',
+      [EVendorStatus.NonActive]: 'לא פעיל',
+    },
   },
   en: {
     fields: {
@@ -36,6 +42,10 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorFields.Address]: 'Address',
       [EVendorFields.Description]: 'Description',
       [EVendorFields.Status]: 'Status',
+    },
+    vendorStatus: {
+      [EVendorStatus.Active]: 'Active',
+      [EVendorStatus.NonActive]: 'Not Active',
     },
   },
 };

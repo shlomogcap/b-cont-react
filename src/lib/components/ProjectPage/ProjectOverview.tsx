@@ -15,6 +15,7 @@ import { ProjectForm } from '@/lib/components/ProjectForm';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useRouter } from 'next/router';
 import { PROJECT_ID_QUERY } from '@/lib/consts/routes';
+import { SearchableContextProvider } from '../commons/SearchBar/searchableContext';
 
 const PROJECT_OVERVIEW_TABS_MAP: Record<EProjectViews, ReactElement> = {
   [EProjectViews.Confirms]: <ProjectConfirms />,
@@ -30,6 +31,7 @@ export const ProjectOverview = () => {
   const [projectViewsActiveTab, setProjectViewsActiveTab] = useState(
     EProjectViews.Confirms,
   );
+
   return (
     <>
       <Card title={PROJECT_DISPLAY_TEXTS.he.projectPageTitle}>
@@ -41,7 +43,9 @@ export const ProjectOverview = () => {
         setActiveTab={setProjectViewsActiveTab}
         tabs={PROJECT_VIEW_TABS}
       />
-      {PROJECT_OVERVIEW_TABS_MAP[projectViewsActiveTab]}
+      <SearchableContextProvider>
+        {PROJECT_OVERVIEW_TABS_MAP[projectViewsActiveTab]}
+      </SearchableContextProvider>
     </>
   );
 };

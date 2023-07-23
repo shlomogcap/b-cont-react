@@ -25,6 +25,7 @@ export const ProjectPage = ({ projectId, projectType }: IProjectPageProps) => {
     projectId,
     projectType,
   });
+
   return (
     <PageLayout
       title={title}

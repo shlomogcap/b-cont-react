@@ -24,11 +24,12 @@ import {
   filterBySearch,
   getDefaultFilterValues,
 } from '../commons/FilterPanel';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   SearchableContextProvider,
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
+import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
 
 export const ProjectsTable = (props: IProjectPageProps) => {
   const form = useForm<IProjectFilterDoc>({
@@ -58,18 +59,7 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
 
   const watchedFields = useWatch();
 
-  useEffect(() => {
-    const activeFilterFields: Partial<Record<EProjectFields, boolean>> = {};
-    Object.entries(watchedFields).forEach(([field, { value }]) => {
-      if (
-        (Array.isArray(value) && value.length > 0) ||
-        (typeof value === 'object' && Object.values(value).some(Boolean))
-      ) {
-        activeFilterFields[field as EProjectFields] = true;
-      }
-    });
-    setActiveFilters({ ...activeFilterFields });
-  }, [watchedFields]);
+  useFilteredFields(watchedFields, setActiveFilters);
 
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
