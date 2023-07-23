@@ -24,7 +24,7 @@ import {
   filterBySearch,
   getDefaultFilterValues,
 } from '../commons/FilterPanel';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   SearchableContextProvider,
   useSearchableContext,

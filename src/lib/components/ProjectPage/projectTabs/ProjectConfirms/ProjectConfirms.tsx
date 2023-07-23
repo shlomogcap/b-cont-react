@@ -1,4 +1,7 @@
-import { IProjectConfirmsProps } from './ProjectConfirms.types';
+import {
+  IProjectConfirmsFilterDoc,
+  IProjectConfirmsProps,
+} from './ProjectConfirms.types';
 import { ITableColumn, Table } from '@/lib/components/commons/Table';
 import { PROJECT_ACCOUNTS_DISPLAY_TEXTS } from '@/lib/consts/accounts';
 import { EAccountConfirms } from '@/lib/consts/accounts/AccountConfirms';
@@ -13,6 +16,7 @@ import {
 import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
+  EContractStatus,
 } from '@/lib/consts/contracts';
 import { useRouter } from 'next/router';
 import {
@@ -22,15 +26,43 @@ import {
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { useState } from 'react';
+import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
+import {
+  filterByFilterPanel,
+  filterBySearch,
+  getDefaultFilterValues,
+} from '@/lib/components/commons/FilterPanel';
+import { useSearchableContext } from '@/lib/components/commons/SearchBar/searchableContext';
+import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
+import {
+  projectConfirmsFilterSchema,
+  projectConfirmsTableFilters,
+} from './ProjectConfirms.consts';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
 export const ProjectConfirms = (_: IProjectConfirmsProps) => {
+  const form = useForm<IProjectConfirmsFilterDoc>({
+    resolver: zodResolver(projectConfirmsFilterSchema),
+    defaultValues: getDefaultFilterValues(projectConfirmsTableFilters),
+    mode: 'onSubmit',
+  });
+  return (
+    <FormProvider {...form}>
+      <ProjectConfirmsInner />
+    </FormProvider>
+  );
+};
+
+const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
   const { data: contracts, isLoading } = useProjectContractsContext();
   const { data: vendors } = useVendorsContext();
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const projectType = queryParamToString(router.query, PROJECT_TYPE_QUERY);
 
-  const projectConfirmsColumns: ITableColumn<
+  const confirmsTableColumns: ITableColumn<
     EContractFields | EAccountConfirms
   >[] = [
     {
@@ -114,11 +146,29 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
     },
   ];
 
+  const [activeFilters, setActiveFilters] = useState(
+    Object.values(confirmsTableColumns).reduce(
+      (acc, curr) => ({ ...acc, [curr.fieldPath ?? curr.field]: false }),
+      {},
+    ),
+  );
+
+  const watchedFields = useWatch();
+  useFilteredFields(watchedFields, setActiveFilters);
+  const { searchValue } = useSearchableContext();
+  const searchFields = [EContractFields.Title, EContractFields.VendorRef];
+  const getVendorName = (ref: string) => {
+    const vendor = vendors.find((vendor) => vendor.id === ref);
+    return vendor ? [vendor.title, vendor.companExternalNumber] : undefined;
+  };
+  const rows = contracts
+    .filter((r) => filterByFilterPanel(r, watchedFields as any))
+    .filter((r) => filterBySearch(r, searchFields, searchValue, getVendorName));
   return (
     <Table
       loading={isLoading}
-      columns={projectConfirmsColumns}
-      rows={contracts}
+      columns={confirmsTableColumns as ITableColumn<EContractFields>[]}
+      rows={rows}
       onRowClick={({ id }) =>
         router.push({
           pathname: ERoutesNames.Contract,
@@ -129,6 +179,12 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
           },
         })
       }
+      tableFilterProps={{
+        filters: projectConfirmsTableFilters,
+        displayTexts: CONTRACTS_DISPLAY_TEXTS.he.fields,
+        status: EContractStatus,
+        activeFilters,
+      }}
     />
   );
 };

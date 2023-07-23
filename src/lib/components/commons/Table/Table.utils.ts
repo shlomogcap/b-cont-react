@@ -7,11 +7,11 @@ export const fieldsNamesToColumns = <T extends string>(
 ): ITableColumn<T>[] =>
   fieldsNames.map((fieldName) =>
     typeof fieldName === 'string'
-      ? { field: fieldName, display: displayTexts[fieldName] }
+      ? { field: fieldName as T, display: String(displayTexts[fieldName]) }
       : {
           ...fieldName,
-          field: fieldName.field,
-          display: displayTexts[fieldName.field],
+          field: fieldName.field as T,
+          display: String(displayTexts[fieldName.field]),
         },
   );
 export const getDisplayValue = ({
