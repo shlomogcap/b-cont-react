@@ -7,6 +7,7 @@ import {
 } from './ModalProvider.types';
 import { SwitchRouteModal } from '@/lib/components/SwitchRouteModal';
 import { ContractSectionModal } from '@/lib/components/ContractSectionModal';
+import { PeriodSelectionModal } from '@/lib/components/PeriodSelectionModal';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -21,6 +22,8 @@ const renderModal = (modalData: IModalData) => {
       return <SwitchRouteModal {...modalData} />;
     case EModalName.SectionWsForm:
       return <ContractSectionModal {...modalData} />;
+    case EModalName.PeriodSelectionForm:
+      return <PeriodSelectionModal {...modalData} />;
     default:
       return null;
   }
