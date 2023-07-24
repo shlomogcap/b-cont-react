@@ -12,6 +12,7 @@ import {
 } from '@/lib/consts/routes';
 import { ContractPlan } from '@/lib/components/ContractPage/contractViews/ContractPlan';
 import { ContractActuals } from '@/lib/components/ContractPage/contractViews/ContractActuals';
+import { ProjectConfirmsSettingsProvider } from '@/lib/context/projectConfirmsSettingsContext';
 
 const CONTRACT_STAGE_PAGE: Record<EContractStage, ReactElement> = {
   [EContractStage.Plan]: <ContractPlan />,
@@ -21,7 +22,7 @@ const CONTRACT_STAGE_PAGE: Record<EContractStage, ReactElement> = {
 
 export const getServerSideProps = getContractRouteServerSideProps;
 
-export default function ContractPlanRoute({
+export default function ContractPageRoute({
   projectId,
   projectType,
   contractId,
@@ -42,14 +43,16 @@ export default function ContractPlanRoute({
     }
   });
   return (
-    <ContractProvider projectId={projectId} contractId={contractId}>
-      <ContractPage
-        projectId={projectId}
-        projectType={projectType}
-        stage={stage}
-      >
-        {CONTRACT_STAGE_PAGE[stage]}
-      </ContractPage>
-    </ContractProvider>
+    <ProjectConfirmsSettingsProvider projectId={projectId}>
+      <ContractProvider projectId={projectId} contractId={contractId}>
+        <ContractPage
+          projectId={projectId}
+          projectType={projectType}
+          stage={stage}
+        >
+          {CONTRACT_STAGE_PAGE[stage]}
+        </ContractPage>
+      </ContractProvider>
+    </ProjectConfirmsSettingsProvider>
   );
 }

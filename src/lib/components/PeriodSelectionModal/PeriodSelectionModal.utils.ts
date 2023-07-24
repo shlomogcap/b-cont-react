@@ -1,15 +1,15 @@
 import dayjs from 'dayjs';
 
 type GetAvailableMonthsPeriodsListArgs = {
-  lastPeriod: string;
+  lastPeriod?: string;
 };
 const DAYS_OVER_TO_ADD_ACCOOUNT = 20;
 export const getAvailableMonthsPeriodsList = ({
   lastPeriod,
-}: GetAvailableMonthsPeriodsListArgs) => {
+}: GetAvailableMonthsPeriodsListArgs = {}) => {
   const now = dayjs();
-  const lastAccountDate = dayjs(lastPeriod);
-  const nextAccountDate = lastAccountDate.add(1, 'month').set('date', 1);
+  const lastAccountDate = dayjs(lastPeriod || undefined);
+  const nextAccountDate = lastAccountDate.add(1, 'months').set('date', 1);
   const list: string[] = [];
   let diff = now.diff(nextAccountDate, 'months');
   list.push(nextAccountDate.format('MM YYYY'));

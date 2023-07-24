@@ -12,6 +12,10 @@ import {
 } from './ContractConfirms.styled';
 import { CONFIRMS_DATA } from './ContractConfirms.consts';
 import { StyledActionsRow } from '../ContractPlan/ContractPlan.styled';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
+import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
+import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 
 //TODO: move to DISPALY_TEXTS
 const TITLE = 'סטטוס אישורי ביצוע';
@@ -20,13 +24,28 @@ const FINISH = 'יצירת תקופה חדשה';
 const PERIOD_LABEL = 'חשבון תקופה';
 
 export const ContractConfirms = ({ acccount }: IContractConfirmsProps) => {
+  const { showModal } = useModalContext();
   const stage = acccount[EAccountFields.AccountStage];
+  const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   return (
     <Card title={TITLE}>
       {['start', 'finish'].includes(stage!) && (
         <StyledActionsRow>
           {stage === 'start' && <Button>{START}</Button>}
-          {stage === 'finish' && <Button>{FINISH}</Button>}
+          {stage === 'finish' && (
+            <Button
+              onClick={() =>
+                showModal({
+                  name: EModalName.PeriodSelectionForm,
+                  lastPeriod: '2022-01-01',
+                  periodUnit: EPeriodUnit.M,
+                  confirmFlow,
+                })
+              }
+            >
+              {FINISH}
+            </Button>
+          )}
         </StyledActionsRow>
       )}
       <StyledPeriod>

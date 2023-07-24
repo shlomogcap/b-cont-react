@@ -1,6 +1,7 @@
 import { ITableRow } from '../components/commons/Table';
 import { ECommonFields } from '../consts/commonFields';
 import { EConfirmFields } from '../consts/confirms/ConfirmFields';
+import { EConfirmType } from '../consts/confirms/ConfirmType';
 import { IWithPathField } from './utils';
 
 const PATH_FIELD = 'path';
@@ -38,7 +39,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.PROJECT_MANAGER,
       UserRoles.AREA_MANAGER,
     ],
-    [EConfirmFields.ConfirmType]: 'operation',
+    [EConfirmFields.ConfirmType]: EConfirmType.Actual,
     [EConfirmFields.Title]: 'אתחול ועדכון',
     [EConfirmFields.NextConfirm]: 'projectManager',
     [EConfirmFields.Due]: 10,
@@ -51,7 +52,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.PROJECT_MANAGER,
       UserRoles.AREA_MANAGER,
     ],
-    [EConfirmFields.ConfirmType]: 'operation',
+    [EConfirmFields.ConfirmType]: EConfirmType.Actual,
     [EConfirmFields.Title]: 'אתחול ועדכון',
     [EConfirmFields.NextConfirm]: 'projectManager',
     [EConfirmFields.Due]: 10,
@@ -64,7 +65,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.PROJECT_MANAGER,
       UserRoles.AREA_MANAGER,
     ],
-    [EConfirmFields.ConfirmType]: 'operation',
+    [EConfirmFields.ConfirmType]: EConfirmType.Actual,
     [EConfirmFields.Title]: 'אישור מ.פרוייקט',
     [EConfirmFields.NextConfirm]: 'manager',
     [EConfirmFields.Due]: 10,
@@ -77,7 +78,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.COMPANY_ENGINEER,
       UserRoles.CEO_OPERATIONS,
     ],
-    [EConfirmFields.ConfirmType]: 'operation',
+    [EConfirmFields.ConfirmType]: EConfirmType.Actual,
     [EConfirmFields.Title]: 'אישור מהנדס חברה / מנכל',
     [EConfirmFields.NextConfirm]: 'accounts',
     [EConfirmFields.Due]: 15,
@@ -90,7 +91,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.ACCOUNTS_OPERATIONS,
       UserRoles.ACCOUNTS_ENTREPRENEURSHIP,
     ],
-    [EConfirmFields.ConfirmType]: 'accounting',
+    [EConfirmFields.ConfirmType]: EConfirmType.Billing,
     [EConfirmFields.Title]: 'אישור הנה"ח',
     [EConfirmFields.NextConfirm]: 'finance',
     [EConfirmFields.Due]: 18,
@@ -100,7 +101,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
     [PATH_FIELD]: 'projects/1',
     [EConfirmFields.OrderIndex]: 6,
     [EConfirmFields.UserRole]: [UserRoles.BUDGETER, UserRoles.CEO_FINANCE],
-    [EConfirmFields.ConfirmType]: 'accounting',
+    [EConfirmFields.ConfirmType]: EConfirmType.Billing,
     [EConfirmFields.Title]: 'אישור כספים',
     [EConfirmFields.NextConfirm]: 'SAP',
     [EConfirmFields.Due]: 20,
@@ -113,7 +114,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.ACCOUNTS_OPERATIONS,
       UserRoles.ACCOUNTS_ENTREPRENEURSHIP,
     ],
-    [EConfirmFields.ConfirmType]: 'accounting',
+    [EConfirmFields.ConfirmType]: EConfirmType.Billing,
     [EConfirmFields.Title]: 'הזנה לסאפ',
     [EConfirmFields.NextConfirm]: 'billing',
     [EConfirmFields.Due]: 22,
@@ -126,9 +127,9 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
       UserRoles.ACCOUNTS_OPERATIONS,
       UserRoles.ACCOUNTS_ENTREPRENEURSHIP,
     ],
-    [EConfirmFields.ConfirmType]: 'accounting',
+    [EConfirmFields.ConfirmType]: EConfirmType.Billing,
     [EConfirmFields.Title]: "צ'ק מאושר",
-    [EConfirmFields.NextConfirm]: false,
+    [EConfirmFields.NextConfirm]: 'end',
     [EConfirmFields.Due]: 23,
   },
 ];
