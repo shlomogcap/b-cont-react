@@ -109,6 +109,14 @@ const VendorsTableInner = () => {
         status: EVendorStatus,
         activeFilters,
       }}
+      addItem={{
+        text: VENDOR_DISPLAY_TEXTS.he.addNewVendor,
+        func: () => {
+          router.push({
+            pathname: ERoutesNames.NewVendor,
+          });
+        },
+      }}
     />
   );
 };

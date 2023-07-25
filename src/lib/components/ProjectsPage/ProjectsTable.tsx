@@ -100,6 +100,15 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
           query: { projectId: id, projectType },
         })
       }
+      addItem={{
+        text: PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType),
+        func: () => {
+          router.push({
+            pathname: ERoutesNames.NewProject,
+            query: { projectType },
+          });
+        },
+      }}
     />
   );
 };
