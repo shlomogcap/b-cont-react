@@ -35,7 +35,7 @@ export const StyledFilterControlDiv = styled.div<IStyledFilterProps>`
 `;
 
 export const StyledFilterButton = styled(StyledButton)<IStyledFilterProps>`
-  width: ${({ width }) => width ?? '50%'};
+  width: ${({ width }) => width ?? '100%'};
 
   height: 35px;
   ${({ isButtonGroup }) =>
