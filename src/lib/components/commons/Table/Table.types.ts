@@ -54,4 +54,5 @@ export type ITableProps<T extends string = string> = {
   loading?: boolean;
   tableFilterProps?: IFilterPanelProps<T>;
   className?: string;
+  addItem?: { text: string; func: () => void } | undefined;
 };

@@ -24,11 +24,11 @@ export const Table = <T extends string = string>({
   className,
   onRowClick,
   tableFilterProps,
+  addItem,
 }: ITableProps<T>) => {
-  console.log(rows);
   return (
     <StyledTable className={className}>
-      <AddItem />
+      {addItem && <AddItem addItem={addItem} />}
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
