@@ -3,9 +3,10 @@ import { StyledButton } from '../Button';
 import { IStyledFilterProps } from './FilterPanel.types';
 
 export const StyledFiltersBar = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 `;
 
 export const StyledFilterPanel = styled.div`
