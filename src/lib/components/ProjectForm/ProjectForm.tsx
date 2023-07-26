@@ -37,7 +37,11 @@ import { useProjectsContext } from '@/lib/context/projectsContext';
 import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { PROJECT_ID_QUERY, ERoutesNames } from '@/lib/consts/routes';
+import {
+  PROJECT_ID_QUERY,
+  ERoutesNames,
+  PROJECT_TYPE_QUERY,
+} from '@/lib/consts/routes';
 import { toast } from 'react-toastify';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 
@@ -129,8 +133,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
-  const { reset } = form;
-
+  const { reset, watch } = form;
   useEffect(() => {
     if (isEditMode && !isLoading) {
       const project = projects.find((project) => project.id === id);
@@ -157,9 +160,13 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       const collectionRef = collection(firestore, 'projects');
       const res = await addDoc(collectionRef, preparedData);
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
+      console.log(res);
       router.push({
         pathname: ERoutesNames.Project,
-        query: { [PROJECT_ID_QUERY]: res.id },
+        query: {
+          [PROJECT_ID_QUERY]: res.id,
+          [PROJECT_TYPE_QUERY]: watch(PROJECT_TYPE_QUERY),
+        },
       });
     } catch (err) {
       //TODO: promt error...
