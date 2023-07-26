@@ -1,3 +1,3 @@
 export type IAddItemProps = {
-  addItem: { text: string; func: () => void } | undefined;
+  addItem: { text: string; func: () => void };
 };

@@ -1,3 +1,7 @@
 import styled from 'styled-components';
+import { Button } from '../commons/Button';
 
-export const StyledAddItem = styled.div``;
+export const StyledAddItemButton = styled(Button)`
+  height: 1rem;
+  width: 0;
+`;

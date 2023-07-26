@@ -28,7 +28,7 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorStatus.Active]: 'פעיל',
       [EVendorStatus.NonActive]: 'לא פעיל',
     },
-    addNewVendor: 'הוסף קבלן',
+    addNewVendor: '+ הוסף קבלן',
   },
   en: {
     fields: {
@@ -49,6 +49,6 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorStatus.Active]: 'Active',
       [EVendorStatus.NonActive]: 'Not Active',
     },
-    addNewVendor: 'Add new vendor',
+    addNewVendor: '+ Add new vendor',
   },
 };
