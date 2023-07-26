@@ -27,6 +27,8 @@ import {
 import {
   DUMMY_OPTIONS,
   PROJECT_FORM_DEFAULT_VALUES,
+  PROJECT_STATUS_OPTIONS,
+  PROJECT_TYPE_OPTIONS,
 } from './ProjectForm.consts';
 import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
@@ -105,12 +107,12 @@ const ProjectFormFields = () => {
         name={EProjectFields.Entrepreneur}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={PROJECT_TYPE_OPTIONS}
         label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.ProjectType]}
         name={EProjectFields.ProjectType}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={PROJECT_STATUS_OPTIONS}
         label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Status]}
         name={EProjectFields.Status}
       />
