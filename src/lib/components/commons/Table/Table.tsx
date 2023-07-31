@@ -14,6 +14,7 @@ import { getDisplayValue } from './Table.utils';
 import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
 import { AddItem } from '../../AddItem';
+import { ToolBar } from '../ToolBar';
 
 export const Table = <T extends string = string>({
   rows,
@@ -25,6 +26,7 @@ export const Table = <T extends string = string>({
   onRowClick,
   tableFilterProps,
   addItem,
+  toolbar,
 }: ITableProps<T>) => {
   return (
     <StyledTable className={className}>
@@ -54,6 +56,7 @@ export const Table = <T extends string = string>({
                 }) ?? ''}
               </StyledTableCell>
             ))}
+            {toolbar && row.path && <ToolBar path={row.path} />}
           </StyledTableDataRow>
         ))}
       {!loading && rows.length === 0 && (
