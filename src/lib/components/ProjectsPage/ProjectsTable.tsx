@@ -109,6 +109,7 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
           });
         },
       }}
+      toolbar={true}
     />
   );
 };
