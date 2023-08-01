@@ -3,14 +3,14 @@ import { ERoutesNames } from './routes';
 export type ILang = 'he' | 'en';
 
 export enum EButtonTexts {
-  Save,
-  Cancel,
-  Add,
-  Delete,
-  Duplicate,
-  AreYouSure,
-  Approve,
-  Abort,
+  Save = 'save',
+  Cancel = 'cancel',
+  Add = 'add',
+  Delete = 'delete',
+  Duplicate = 'duplicate',
+  AreYouSure = 'areYouSure',
+  Approve = 'approve',
+  Abort = 'abort',
 }
 export enum ETableStates {
   NoRows,

@@ -17,70 +17,61 @@ import {
 } from '@/lib/consts/displayTexts';
 import { toast } from 'react-toastify';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
-const ToolbarModal = ({ path, setIsModalOpen }: IToolbarModalProps) => {
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
+
+export const ToolBar = ({ path }: IToolBarProps) => {
+  const { showModal } = useModalContext();
+
+  const handleDuplicate = async () => {
+    // TODO: duplicate functionality
+    toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
+  };
+
   const handleDelete = async () => {
+    const DELETE_TEXT = DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc];
     try {
       const docRef = doc(firestore, path);
       await deleteDoc(docRef);
-      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc]);
+      toast.success(DELETE_TEXT);
     } catch {
-      toast.error(DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc]);
+      toast.error(DELETE_TEXT);
     }
   };
   return (
-    <StyledModal
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-      disabledOutsideClick={false}
-    >
-      <StyledToolbarModal>
-        <StyledModalTitle>
-          {DISPLAY_TEXTS.he.buttons[EButtonTexts.AreYouSure]}
-        </StyledModalTitle>
-        <Button
-          variant='danger'
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDelete();
-          }}
-        >
-          {DISPLAY_TEXTS.he.buttons[EButtonTexts.Delete]}
-        </Button>
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsModalOpen(false);
-          }}
-        >
-          {DISPLAY_TEXTS.he.buttons[EButtonTexts.Abort]}
-        </Button>
-      </StyledToolbarModal>
-    </StyledModal>
-  );
-};
-
-export const ToolBar = ({ path }: IToolBarProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  return (
-    <>
-      <StyledToolbar>
-        {isModalOpen && (
-          <ToolbarModal path={path} setIsModalOpen={setIsModalOpen} />
-        )}
-        <StyledToolbarButton
-          variant='danger'
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsModalOpen(true);
-          }}
-        >
-          <DeleteIcon />
-        </StyledToolbarButton>
-        <StyledToolbarButton>
-          <CopyIcon />
-        </StyledToolbarButton>
-      </StyledToolbar>
-    </>
+    <StyledToolbar>
+      <StyledToolbarButton
+        variant='danger'
+        onClick={(e) => {
+          e.stopPropagation();
+          showModal({
+            texts: {
+              display: DISPLAY_TEXTS.he.buttons,
+              title: EButtonTexts.AreYouSure,
+              buttons: [EButtonTexts.Delete, EButtonTexts.Abort],
+            },
+            name: EModalName.TableToolbar,
+            action: handleDelete,
+          });
+        }}
+      >
+        <DeleteIcon />
+      </StyledToolbarButton>
+      <StyledToolbarButton
+        onClick={(e) => {
+          e.stopPropagation();
+          showModal({
+            texts: {
+              display: DISPLAY_TEXTS.he.buttons,
+              title: EButtonTexts.AreYouSure,
+              buttons: [EButtonTexts.Duplicate, EButtonTexts.Abort],
+            },
+            name: EModalName.TableToolbar,
+            action: handleDuplicate,
+          });
+        }}
+      >
+        <CopyIcon />
+      </StyledToolbarButton>
+    </StyledToolbar>
   );
 };
