@@ -10,18 +10,27 @@ import { firestore } from '@/lib/firebase';
 import { useState } from 'react';
 import { Button } from '../Button';
 import { StyledModal, StyledModalTitle } from '../Modal/Modal.styled';
-import { DISPLAY_TEXTS, EButtonTexts } from '@/lib/consts/displayTexts';
+import {
+  DISPLAY_TEXTS,
+  EButtonTexts,
+  EToastType,
+} from '@/lib/consts/displayTexts';
+import { toast } from 'react-toastify';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 const ToolbarModal = ({ path, setIsModalOpen }: IToolbarModalProps) => {
   const handleDelete = async () => {
-    const docRef = doc(firestore, path);
-    await deleteDoc(docRef);
-    setIsModalOpen(false);
+    try {
+      const docRef = doc(firestore, path);
+      await deleteDoc(docRef);
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc]);
+    } catch {
+      toast.error(DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc]);
+    }
   };
   return (
     <StyledModal
       onClick={(e) => {
         e.stopPropagation();
-        setIsModalOpen(false);
       }}
       disabledOutsideClick={false}
     >
