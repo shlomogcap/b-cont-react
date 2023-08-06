@@ -7,6 +7,7 @@ export enum ECommonFields {
   UpdatedAt = 'updatedAt',
   UpdatedBy = 'updatedBy',
   Path = 'path',
+  Title = 'title',
 }
 
 type IDisplayTextMapping = Record<ECommonFields, string>;
@@ -19,6 +20,7 @@ export const COMMON_FIELDS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     [ECommonFields.UpdatedAt]: 'עודכן ב',
     [ECommonFields.UpdatedBy]: 'עודכן עי',
     [ECommonFields.Path]: 'נתיב',
+    [ECommonFields.Title]: 'כותרת',
   },
   en: {
     [ECommonFields.Id]: 'ID',
@@ -27,5 +29,6 @@ export const COMMON_FIELDS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
     [ECommonFields.UpdatedAt]: 'Updated At',
     [ECommonFields.UpdatedBy]: 'Updated By',
     [ECommonFields.Path]: 'Path',
+    [ECommonFields.Title]: 'Title',
   },
 };

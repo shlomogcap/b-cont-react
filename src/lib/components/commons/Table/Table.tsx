@@ -56,7 +56,9 @@ export const Table = <T extends string = string>({
                 }) ?? ''}
               </StyledTableCell>
             ))}
-            {toolbar && row.path && <ToolBar path={row.path} />}
+            {toolbar && row.path && (
+              <ToolBar path={row.path} toolbar={toolbar} title={row?.title} />
+            )}
           </StyledTableDataRow>
         ))}
       {!loading && rows.length === 0 && (

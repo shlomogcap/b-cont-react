@@ -1,6 +1,7 @@
 import { IWithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 import { IFilterPanelProps } from '../FilterPanel';
+import { EToolbarButtons, EToolbarText } from '../ToolBar/ToolBar.consts';
 
 type IRowValues<T extends string> = {
   [field in T]?: unknown;
@@ -55,5 +56,11 @@ export type ITableProps<T extends string = string> = {
   tableFilterProps?: IFilterPanelProps<T>;
   className?: string;
   addItem?: { text: string; func: () => void } | undefined;
-  toolbar?: boolean | undefined;
+  toolbar?:
+    | {
+        buttons: EToolbarButtons[];
+        display: Record<EToolbarText, string | ((arg0: string) => string)>;
+        type: EToolbarText;
+      }
+    | undefined;
 };

@@ -30,6 +30,10 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
+import {
+  EToolbarButtons,
+  EToolbarText,
+} from '../commons/ToolBar/ToolBar.consts';
 
 export const ProjectsTable = (props: IProjectPageProps) => {
   const form = useForm<IProjectFilterDoc>({
@@ -109,7 +113,11 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
           });
         },
       }}
-      toolbar={true}
+      toolbar={{
+        buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
+        display: DISPLAY_TEXTS.he.toolBar,
+        type: EToolbarText.Project,
+      }}
     />
   );
 };

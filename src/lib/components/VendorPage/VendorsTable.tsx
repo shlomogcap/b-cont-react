@@ -27,6 +27,10 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
+import {
+  EToolbarButtons,
+  EToolbarText,
+} from '../commons/ToolBar/ToolBar.consts';
 
 export const VendorsTable = () => {
   const form = useForm<IVendorDoc>({
@@ -116,6 +120,11 @@ const VendorsTableInner = () => {
             pathname: ERoutesNames.NewVendor,
           });
         },
+      }}
+      toolbar={{
+        buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
+        display: DISPLAY_TEXTS.he.toolBar,
+        type: EToolbarText.Vendor,
       }}
     />
   );

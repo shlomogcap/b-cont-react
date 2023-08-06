@@ -1,3 +1,4 @@
+import { EToolbarText } from '../components/commons/ToolBar/ToolBar.consts';
 import { ERoutesNames } from './routes';
 
 export type ILang = 'he' | 'en';
@@ -45,6 +46,7 @@ type IDisplayTextMapping = {
   boolean: Record<EBoolean, string>;
   tableStates: Record<ETableStates, string>;
   filterPanel: Record<EFilterPanelStates, string>;
+  toolBar: Record<EToolbarText, ((arg0: string) => string) | string>;
 };
 
 export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -85,6 +87,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Me]: 'המשתמש שלי',
       [ERoutesNames.Company]: 'פרטי חברה/חברות',
       [ERoutesNames.Budget]: 'פרקים תקציב',
+      [ERoutesNames.NewVendor]: 'קבלן חדש',
+      [ERoutesNames.NewProject]: 'פרויקט חדש',
     },
     filterPanel: {
       [EFilterPanelStates.Active]: 'פעיל',
@@ -95,6 +99,14 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Reset]: 'אפס',
       [EFilterPanelStates.Close]: 'סגור',
       [EFilterPanelStates.Search]: 'חפש...',
+    },
+    toolBar: {
+      [EToolbarText.Duplicate]: (type) => `הוספת ${type} - עותק`,
+      [EToolbarText.DuplicateEnsure]: (name) => `האם ליצור עותק של '${name}'?`,
+      [EToolbarText.Delete]: (type) => `מחיקת ${type}`,
+      [EToolbarText.DeleteEnsure]: (name) => `האם למחוק את '${name}'?`,
+      [EToolbarText.Project]: 'פרויקט',
+      [EToolbarText.Vendor]: 'קבלן',
     },
   },
   en: {
@@ -124,6 +136,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Me]: 'Me',
       [ERoutesNames.Company]: 'Company',
       [ERoutesNames.Budget]: 'Budget',
+      [ERoutesNames.NewVendor]: 'New Vendor',
+      [ERoutesNames.NewProject]: 'New Project',
     },
     buttons: {
       [EButtonTexts.Save]: 'Save',
@@ -144,6 +158,14 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Reset]: 'Reset',
       [EFilterPanelStates.Close]: 'Close',
       [EFilterPanelStates.Search]: 'Find...',
+    },
+    toolBar: {
+      [EToolbarText.Duplicate]: (type) => `Add ${type} - Copy`,
+      [EToolbarText.DuplicateEnsure]: (name) => `Create a copy of '${name}'?`,
+      [EToolbarText.Delete]: (type) => `Delete ${type}`,
+      [EToolbarText.DeleteEnsure]: (name) => `Delete '${name}'?`,
+      [EToolbarText.Project]: 'Project',
+      [EToolbarText.Vendor]: 'Vendor',
     },
   },
 };

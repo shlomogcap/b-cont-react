@@ -1,77 +1,62 @@
 import { deleteDoc, doc } from 'firebase/firestore';
 import { CopyIcon, DeleteIcon } from '../../icons';
-import {
-  StyledToolbar,
-  StyledToolbarButton,
-  StyledToolbarModal,
-} from './ToolBar.styled';
-import { IToolBarProps, IToolbarModalProps } from './ToolBar.types';
+import { StyledToolbar, StyledToolbarButton } from './ToolBar.styled';
+import { IToolBarProps } from './ToolBar.types';
 import { firestore } from '@/lib/firebase';
-import { useState } from 'react';
-import { Button } from '../Button';
-import { StyledModal, StyledModalTitle } from '../Modal/Modal.styled';
-import {
-  DISPLAY_TEXTS,
-  EButtonTexts,
-  EToastType,
-} from '@/lib/consts/displayTexts';
+import { DISPLAY_TEXTS, EToastType } from '@/lib/consts/displayTexts';
 import { toast } from 'react-toastify';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
+import { ReactElement } from 'react';
+import { EToolbarButtons, EToolbarText } from './ToolBar.consts';
 
-export const ToolBar = ({ path }: IToolBarProps) => {
+export const ToolBar = ({ path, toolbar, title }: IToolBarProps) => {
   const { showModal } = useModalContext();
-
-  const handleDuplicate = async () => {
-    // TODO: duplicate functionality
-    toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
+  const { buttons, display, type } = toolbar;
+  const actions = {
+    duplicate: async () => {
+      // TODO: duplicate functionality
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
+    },
+    delete: async () => {
+      const DELETE_TEXT = DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc];
+      try {
+        const docRef = doc(firestore, path);
+        await deleteDoc(docRef);
+        toast.success(DELETE_TEXT);
+      } catch {
+        toast.error(DELETE_TEXT);
+      }
+    },
   };
 
-  const handleDelete = async () => {
-    const DELETE_TEXT = DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc];
-    try {
-      const docRef = doc(firestore, path);
-      await deleteDoc(docRef);
-      toast.success(DELETE_TEXT);
-    } catch {
-      toast.error(DELETE_TEXT);
-    }
+  const TOOLBAR_ICONS: Record<EToolbarButtons, ReactElement> = {
+    [EToolbarText.Duplicate]: <CopyIcon />,
+    [EToolbarText.Delete]: <DeleteIcon />,
   };
   return (
     <StyledToolbar>
-      <StyledToolbarButton
-        variant='danger'
-        onClick={(e) => {
-          e.stopPropagation();
-          showModal({
-            texts: {
-              display: DISPLAY_TEXTS.he.buttons,
-              title: EButtonTexts.AreYouSure,
-              buttons: [EButtonTexts.Delete, EButtonTexts.Abort],
-            },
-            name: EModalName.TableToolbar,
-            action: handleDelete,
-          });
-        }}
-      >
-        <DeleteIcon />
-      </StyledToolbarButton>
-      <StyledToolbarButton
-        onClick={(e) => {
-          e.stopPropagation();
-          showModal({
-            texts: {
-              display: DISPLAY_TEXTS.he.buttons,
-              title: EButtonTexts.AreYouSure,
-              buttons: [EButtonTexts.Duplicate, EButtonTexts.Abort],
-            },
-            name: EModalName.TableToolbar,
-            action: handleDuplicate,
-          });
-        }}
-      >
-        <CopyIcon />
-      </StyledToolbarButton>
+      {buttons.map((button: EToolbarButtons, index: number) => (
+        <StyledToolbarButton
+          key={index}
+          variant={String(button) === 'delete' ? 'danger' : 'primary'}
+          onClick={(e) => {
+            e.stopPropagation();
+            showModal({
+              texts: {
+                display,
+                button,
+                title: title ?? '---',
+                type,
+              },
+              name: EModalName.TableToolbar,
+              action: actions[button],
+            });
+          }}
+        >
+          {TOOLBAR_ICONS[button]}
+        </StyledToolbarButton>
+      ))}
     </StyledToolbar>
   );
 };
