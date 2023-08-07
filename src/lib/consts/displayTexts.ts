@@ -110,6 +110,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToolbarText.DeleteEnsure]: (name) => `האם למחוק את '${name}'?`,
       [EToolbarText.Project]: 'פרויקט',
       [EToolbarText.Vendor]: 'קבלן',
+      [EToolbarText.CopyOF]: 'עותק של',
     },
   },
   en: {
@@ -170,6 +171,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToolbarText.DeleteEnsure]: (name) => `Delete '${name}'?`,
       [EToolbarText.Project]: 'Project',
       [EToolbarText.Vendor]: 'Vendor',
+      [EToolbarText.CopyOF]: 'Copy of',
     },
   },
 };

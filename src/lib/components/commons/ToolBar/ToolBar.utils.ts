@@ -2,38 +2,45 @@ import { DISPLAY_TEXTS, EToastType } from '@/lib/consts/displayTexts';
 import { firestore } from '@/lib/firebase';
 import { addDoc, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { EToolbarText } from './ToolBar.consts';
+
+const TOAST_TEXTS = DISPLAY_TEXTS.he.toasts;
+const TOOLBAR_TEXTS = DISPLAY_TEXTS.he.toolBar;
 
 export const actions = {
-  duplicate: async (path: string, type: string) => {
-    const SUCCESS_DUPLICATE_TEXT =
-      DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc];
-    const TYPE = DISPLAY_TEXTS.he.toolBar[type];
-    const FAIL_DUPLICATe_TEXT = DISPLAY_TEXTS.he.toolBar.duplicate(TYPE);
+  duplicate: async (path: string, type: EToolbarText) => {
     try {
       const docRef = doc(firestore, path);
       const data = (await getDoc(docRef)).data();
       if (data && Object.entries(data).length) {
-        const copyTitle = `copy of ${data.title}`;
+        const copyTitle = `${TOOLBAR_TEXTS[EToolbarText.CopyOF]} ${data.title}`;
         data.title = copyTitle;
         const collectionRef = collection(firestore, `/${type}`);
         await addDoc(collectionRef, data);
       }
 
-      toast.success(SUCCESS_DUPLICATE_TEXT);
+      toast.success(TOAST_TEXTS[EToastType.AddingNewDoc]);
     } catch {
-      toast.error(DISPLAY_TEXTS.he.getToastError(FAIL_DUPLICATe_TEXT));
+      const duplicateType = TOOLBAR_TEXTS[EToolbarText.Duplicate] as (
+        arg0: string,
+      ) => string;
+      toast.error(
+        DISPLAY_TEXTS.he.getToastError(duplicateType(TOOLBAR_TEXTS[type])),
+      );
     }
   },
-  delete: async (path: string, type: string) => {
-    const SUCCESS_DELETE_TEXT = DISPLAY_TEXTS.he.toasts[EToastType.DeletedDoc];
-    const TYPE = DISPLAY_TEXTS.he.toolBar[type];
-    const FAIL_DELETE_TEXT = DISPLAY_TEXTS.he.toolBar.delete(TYPE);
+  delete: async (path: string, type: EToolbarText) => {
     try {
       const docRef = doc(firestore, path);
       await deleteDoc(docRef);
-      toast.success(SUCCESS_DELETE_TEXT);
+      toast.success(TOAST_TEXTS[EToastType.DeletedDoc]);
     } catch {
-      toast.error(DISPLAY_TEXTS.he.getToastError(FAIL_DELETE_TEXT));
+      const deleteType = TOOLBAR_TEXTS[EToolbarText.Delete] as (
+        arg0: string,
+      ) => string;
+      toast.error(
+        DISPLAY_TEXTS.he.getToastError(deleteType(TOOLBAR_TEXTS[type])),
+      );
     }
   },
 };

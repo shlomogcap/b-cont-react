@@ -5,6 +5,7 @@ export enum EToolbarText {
   DeleteEnsure = 'deleteEnsure',
   Project = 'projects',
   Vendor = 'vendors',
+  CopyOF = 'copyOf,',
 }
 
 export enum EToolbarButtons {
