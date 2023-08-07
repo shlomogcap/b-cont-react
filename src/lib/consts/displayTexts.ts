@@ -41,6 +41,7 @@ export enum EFilterPanelStates {
 
 type IDisplayTextMapping = {
   toasts: Record<EToastType, string>;
+  getToastError: (arg0: (arg0: string) => string) => string;
   routeNames: Record<ERoutesNames, string>;
   buttons: Record<EButtonTexts, string>;
   boolean: Record<EBoolean, string>;
@@ -60,6 +61,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
       [EToastType.DeletedDoc]: 'פעולת מחיקה בוצעה בהצלחה',
     },
+    getToastError: (type) => `אירעה שגיאה ב${type}`,
+
     tableStates: {
       [ETableStates.NoRows]: 'לא נמצאו נתונים',
       [ETableStates.Loading]: 'טוען...',
@@ -101,7 +104,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Search]: 'חפש...',
     },
     toolBar: {
-      [EToolbarText.Duplicate]: (type) => `הוספת ${type} - עותק`,
+      [EToolbarText.Duplicate]: (type) => `הוספת עותק של ${type}`,
       [EToolbarText.DuplicateEnsure]: (name) => `האם ליצור עותק של '${name}'?`,
       [EToolbarText.Delete]: (type) => `מחיקת ${type}`,
       [EToolbarText.DeleteEnsure]: (name) => `האם למחוק את '${name}'?`,
@@ -119,6 +122,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToastType.SavingDocData]: 'Data Saved Succesfully',
       [EToastType.DeletedDoc]: 'Item Has Been Deleted Succesfully',
     },
+    getToastError: (type) => `אירעה שגיאה ב${type}`,
     tableStates: {
       [ETableStates.NoRows]: 'No Rows',
       [ETableStates.Loading]: 'Loading...',
