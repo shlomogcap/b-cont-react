@@ -17,12 +17,14 @@ export type IFilterItem<T extends string = string, V extends string = string> =
   | {
       type: EFilterItemType.Date;
       field: T;
+      isSingleOption?: undefined;
       defaultValue?: IDateFilterValue;
       options?: undefined;
     }
   | {
       type: EFilterItemType.Buttons;
       field: T;
+      isSingleOption?: boolean;
       options: IFilterItemOption<V>[];
       defaultValue?: V[];
     };
@@ -40,6 +42,7 @@ export type IFilterValues =
 export type IFilterButtonsControlProps = {
   label: string;
   field: string;
+  isSingleOption: boolean | undefined;
   options: IFilterItemOption[];
 };
 
@@ -60,6 +63,8 @@ export type IFilterPanelButtonProps<
 > = {
   field: T;
   currentValue: V;
+  isSingleOption: boolean | undefined;
+  buttonsAlignedOnRow: boolean;
 };
 
 export type IStyledFilterProps = {
@@ -67,6 +72,7 @@ export type IStyledFilterProps = {
   justify?: string;
   width?: string;
   isButtonGroup?: boolean;
+  isOptionButton?: boolean;
 };
 
 type IField = { value: IFilterValues };
