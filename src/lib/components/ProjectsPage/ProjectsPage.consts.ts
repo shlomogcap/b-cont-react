@@ -28,6 +28,7 @@ export const projectsTableFilters: IFilterItem<EProjectFields>[] = [
   {
     type: EFilterItemType.Buttons,
     field: EProjectFields.Status,
+    isSingleOption: false,
     options: Object.values(EProjectStatus).map((value) => ({
       value,
       text: PROJECT_DISPLAY_TEXTS.he.projectStatus[value],

@@ -48,6 +48,7 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
   {
     type: EFilterItemType.Buttons,
     field: EContractFields.Status,
+    isSingleOption: false,
     options: Object.values(EContractStatus).map((value) => ({
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractStatus[value],
@@ -57,6 +58,7 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
   {
     type: EFilterItemType.Buttons,
     field: EContractFields.ContractType,
+    isSingleOption: false,
     options: Object.values(EContractType).map((value) => ({
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractType[value],

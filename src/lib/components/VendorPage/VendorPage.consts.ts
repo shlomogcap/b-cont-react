@@ -35,6 +35,7 @@ export const vendorsTableFilters: IFilterItem<EVendorFields>[] = [
   {
     type: EFilterItemType.Buttons,
     field: EVendorFields.Status,
+    isSingleOption: false,
     options: Object.values(EVendorStatus).map((value) => ({
       value,
       text: VENDOR_DISPLAY_TEXTS.he.vendorStatus[value],
