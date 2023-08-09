@@ -105,6 +105,6 @@ export const prepareContractActualsReport = (
       title: '100_000',
     },
   });
-  console.log(result);
+  // console.log(result);
   return result;
 };

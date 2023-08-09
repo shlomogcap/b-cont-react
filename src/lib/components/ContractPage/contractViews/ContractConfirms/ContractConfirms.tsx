@@ -16,6 +16,13 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
+import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
+import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
+import { formatDate } from '@/lib/utils/dateUtils';
+import { CONFIRMS_DISPLAY_TEXTS } from '@/lib/consts/confirms/displayTexts';
+import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
+import { datetimeDueFormat } from '@/lib/utils/datatimeDueFormat';
+import dayjs from 'dayjs';
 
 //TODO: move to DISPALY_TEXTS
 const TITLE = 'סטטוס אישורי ביצוע';
@@ -23,9 +30,11 @@ const START = 'אתחול';
 const FINISH = 'יצירת תקופה חדשה';
 const PERIOD_LABEL = 'חשבון תקופה';
 
-export const ContractConfirms = ({ acccount }: IContractConfirmsProps) => {
+export const ContractConfirms = ({ account }: IContractConfirmsProps) => {
   const { showModal } = useModalContext();
-  const stage = acccount[EAccountFields.AccountStage];
+  const stage = account[EAccountFields.AccountStage];
+  const confirmsData = account[EAccountFields.ConfirmFlow];
+  const [month, year] = account.period?.split(' ') ?? [];
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   return (
     <Card title={TITLE}>
@@ -37,7 +46,7 @@ export const ContractConfirms = ({ acccount }: IContractConfirmsProps) => {
               onClick={() =>
                 showModal({
                   name: EModalName.PeriodSelectionForm,
-                  lastPeriod: '2022-01-01',
+                  lastPeriod: `${year}-${Number(month) - 1}-1`,
                   periodUnit: EPeriodUnit.M,
                   confirmFlow,
                 })
@@ -50,25 +59,41 @@ export const ContractConfirms = ({ acccount }: IContractConfirmsProps) => {
       )}
       <StyledPeriod>
         <StyledPeriodLabel>{PERIOD_LABEL}</StyledPeriodLabel>
-        <StyledPeriodLabel>{acccount[EAccountFields.Period]}</StyledPeriodLabel>
+        <StyledPeriodLabel>{account[EAccountFields.Period]}</StyledPeriodLabel>
       </StyledPeriod>
       <StyledContractConfirms>
-        {CONFIRMS_DATA.map((confirmItem, ind) => (
-          <>
-            <StyledConfirmHeader style={{ gridArea: `1/${ind + 1}` }}>
-              {confirmItem.title}
-            </StyledConfirmHeader>
-            <StyledConfirmLabel style={{ gridArea: `2/${ind + 1}` }}>
-              בוצע
-            </StyledConfirmLabel>
-            <StyledConfirmValue style={{ gridArea: `3/${ind + 1}` }}>
-              {confirmItem.confirmAt}
-            </StyledConfirmValue>
-            <StyledConfirmValue style={{ gridArea: `4/${ind + 1}` }}>
-              {confirmItem.confirmBy}
-            </StyledConfirmValue>
-          </>
-        ))}
+        {confirmsData
+          ?.filter(
+            (confirmItem) => confirmItem.confirmType === EConfirmType.Actual,
+          )
+          .sort((a, b) => a.orderIndex - b.orderIndex)
+          .map((confirmItem, ind) => {
+            const dueDate = dayjs()
+              .set('year', Number(year))
+              .set('month', Number(month) - 1)
+              .set('date', confirmItem.due);
+
+            return (
+              <>
+                <StyledConfirmHeader style={{ gridArea: `1/${ind + 1}` }}>
+                  {confirmItem.title}
+                </StyledConfirmHeader>
+                <StyledConfirmLabel style={{ gridArea: `2/${ind + 1}` }}>
+                  {confirmItem.approvedAt
+                    ? CONFIRMS_DISPLAY_TEXTS.he.confirmStatus[
+                        EConfirmStatus.Approve
+                      ]
+                    : dueDate.format('DD/MM/YYYY')}
+                </StyledConfirmLabel>
+                <StyledConfirmValue style={{ gridArea: `3/${ind + 1}` }}>
+                  {formatDate(confirmItem[EConfirmFields.ApprovedAt])}
+                </StyledConfirmValue>
+                <StyledConfirmValue style={{ gridArea: `4/${ind + 1}` }}>
+                  {confirmItem.approvedBy || '---'}
+                </StyledConfirmValue>
+              </>
+            );
+          })}
       </StyledContractConfirms>
     </Card>
   );

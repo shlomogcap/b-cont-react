@@ -5,6 +5,7 @@ dayjs.extend(isSameOrAfterDayJs);
 dayjs.extend(isSameOrBeforeDayJs);
 
 export type IDateType = dayjs.ConfigType;
+export type IFormatDateArgs = { fallback?: string };
 
 export const isSameOrBefore = (originDate: IDateType, anotherDate: IDateType) =>
   dayjs(originDate).isSameOrBefore(anotherDate);
@@ -17,4 +18,7 @@ export const isBetween = (
 ) =>
   isSameOrAfter(originDate, startDate) && isSameOrBefore(originDate, endDate);
 
-export const formatDate = (d: IDateType) => dayjs(d).format('DD/MM/YYYY');
+export const formatDate = (
+  d: IDateType,
+  { fallback = '---' }: IFormatDateArgs = {},
+) => (d ? dayjs(d).format('DD/MM/YYYY') : fallback);

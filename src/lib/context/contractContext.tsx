@@ -11,11 +11,12 @@ import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IContractDoc } from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
 import { IWorkspaceDoc } from '../consts/workspaces';
+import { IAccountDoc } from '../consts/accounts/AccountDoc';
 
 type IContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
-  accounts: { title: string }[];
+  accounts: IAccountDoc[];
   workspaces: IWorkspaceDoc[];
 };
 

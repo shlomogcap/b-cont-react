@@ -1,4 +1,9 @@
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  FormProvider,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { DropdownInput } from '../commons/Input';
 import { StyledPeriodSelectionModal } from './PeriodSelectionModal.styled';
 import { IPeriodSelectionModalData } from './PeriodSelectionModal.types';
@@ -14,7 +19,6 @@ import {
 } from '../../consts/displayTexts';
 import { AccountDoc, IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
 import { useRouter } from 'next/router';
 import { queryParamsValues } from '@/lib/utils/queryParamToString';
@@ -27,7 +31,7 @@ import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
 
 export const PeriodSelectionModal = ({
   lastPeriod,
-  lastPeriodNumber,
+  lastPeriodNumber = 0,
   confirmFlow,
 }: IPeriodSelectionModalData) => {
   const { closeModal } = useModalContext();
@@ -38,7 +42,7 @@ export const PeriodSelectionModal = ({
         .add(1, 'months')
         .set('date', 1)
         .format('MM YYYY'),
-      periodUnit: EPeriodUnit.M,
+      periodUnit: EPeriodUnit.M, // currently we only support Monthly period... need to think about other approaches and we might need to refactor model in order to accomplish that
       periodFrequancey: 1,
       periodNumber: Number(lastPeriodNumber) + 1,
       confirmFlow: confirmFlow?.map((confirm) => ({
@@ -71,7 +75,19 @@ export const PeriodSelectionModal = ({
       await addDoc(collectionRef, data);
       closeModal();
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
-    } catch (err) {}
+    } catch (err) {
+      //TODO: promt error message in general way...
+      toast.error(JSON.stringify(err));
+    }
+  };
+  const onError: SubmitErrorHandler<IAccountDoc> = (errors) => {
+    //TODO: promt error...
+    console.table(
+      Object.entries(errors).reduce(
+        (acc, [field, err]) => ({ ...acc, [field]: err.message }),
+        {},
+      ),
+    );
   };
   return (
     <FormProvider {...form}>
@@ -88,7 +104,7 @@ export const PeriodSelectionModal = ({
             )}
           />
           <FormFooter>
-            <Button onClick={form.handleSubmit(onSubmit)}>
+            <Button onClick={form.handleSubmit(onSubmit, onError)}>
               {DISPLAY_TEXTS.he.buttons[EButtonTexts.Add]}
             </Button>
           </FormFooter>
