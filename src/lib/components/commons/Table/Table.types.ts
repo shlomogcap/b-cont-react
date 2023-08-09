@@ -55,12 +55,10 @@ export type ITableProps<T extends string = string> = {
   loading?: boolean;
   tableFilterProps?: IFilterPanelProps<T>;
   className?: string;
-  addItem?: { text: string; func: () => void } | undefined;
-  toolbar?:
-    | {
-        buttons: EToolbarButtons[];
-        display: Record<EToolbarText, string | ((arg0: string) => string)>;
-        type: EToolbarText;
-      }
-    | undefined;
+  addItem?: { text: string; handleAddItem: () => void };
+  toolbar?: {
+    buttons: EToolbarButtons[];
+    display: Record<EToolbarText, string | ((arg0: string) => string)>;
+    type: EToolbarText;
+  };
 };
