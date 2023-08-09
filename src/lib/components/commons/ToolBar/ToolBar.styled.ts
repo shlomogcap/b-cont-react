@@ -15,9 +15,9 @@ export const StyledToolbar = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  opacity: 0;
   transition-duration: 0.5s;
   transition-timing-function: ease;
-  opacity: 0;
   & button {
     scale: 75%;
     border-radius: 50%;

@@ -40,8 +40,6 @@ export const StyledTableDataRow = styled(StyledTableRow)`
     transition: background-color 0.5s;
     background-color: var(--color-gray-trs);
     & ${StyledToolbar} {
-      transition-duration: 0.5s;
-      transition-timing-function: ease;
       opacity: 100;
     }
   }
