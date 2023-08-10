@@ -1,9 +1,11 @@
 import { EToolbarButtons, EToolbarText } from './ToolBar.consts';
 
+export type IGetDisplayTextFunc = (...args: string[]) => string;
+
 export type IToolBarProps = {
   toolbar: {
     buttons: EToolbarButtons[];
-    display: Record<EToolbarText, string | ((arg0: string) => string)>;
+    getDisplay: Record<EToolbarText, IGetDisplayTextFunc>;
     type: EToolbarText;
   };
   path: string;

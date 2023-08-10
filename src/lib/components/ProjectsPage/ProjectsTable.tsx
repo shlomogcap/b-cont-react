@@ -115,8 +115,8 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
       }}
       toolbar={{
         buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
-        display: DISPLAY_TEXTS.he.toolBar,
-        type: EToolbarText.Project,
+        getDisplay: DISPLAY_TEXTS.he.toolbar,
+        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project],
       }}
     />
   );

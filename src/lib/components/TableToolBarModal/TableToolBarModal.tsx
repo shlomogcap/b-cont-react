@@ -9,13 +9,14 @@ export const TableToolBarModal = ({
   action,
 }: ITableToolBarModalProps) => {
   const buttonsText = DISPLAY_TEXTS.he.buttons;
-  const { display, button, title, type } = texts;
-  const modalTitle = display[button](display[type]);
+  const { getDisplay, button, title, type } = texts;
+  console.log(getDisplay, button, title, type);
+  const modalTitle = getDisplay[button](type);
   const { closeModal } = useModalContext();
   return (
     <StyledTableToolbarModal>
       <StyledModalTitle>{modalTitle}</StyledModalTitle>
-      <p className='modalText'>{display[`${button}Ensure`](title)}</p>
+      <p className='modalText'>{getDisplay[`${button}Ensure`](title)}</p>
       <div className='buttonsWrapper'>
         <Button
           variant={String(button) === 'delete' ? 'danger' : 'primary'}

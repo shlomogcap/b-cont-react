@@ -58,7 +58,7 @@ export type ITableProps<T extends string = string> = {
   addItem?: { text: string; handleAddItem: () => void };
   toolbar?: {
     buttons: EToolbarButtons[];
-    display: Record<EToolbarText, string | ((arg0: string) => string)>;
-    type: EToolbarText;
+    getDisplay: Record<EToolbarText, (arg0: string) => string>;
+    type: string;
   };
 };

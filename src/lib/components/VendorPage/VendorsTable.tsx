@@ -115,7 +115,7 @@ const VendorsTableInner = () => {
       }}
       addItem={{
         text: VENDOR_DISPLAY_TEXTS.he.addNewVendor,
-        func: () => {
+        handleAddItem: () => {
           router.push({
             pathname: ERoutesNames.NewVendor,
           });
@@ -123,8 +123,8 @@ const VendorsTableInner = () => {
       }}
       toolbar={{
         buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
-        display: DISPLAY_TEXTS.he.toolBar,
-        type: EToolbarText.Vendor,
+        getDisplay: DISPLAY_TEXTS.he.toolbar,
+        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project],
       }}
     />
   );

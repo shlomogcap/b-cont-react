@@ -1,3 +1,4 @@
+import { IGetDisplayTextFunc } from '../components/commons/ToolBar';
 import { EToolbarText } from '../components/commons/ToolBar/ToolBar.consts';
 import { ERoutesNames } from './routes';
 
@@ -41,13 +42,13 @@ export enum EFilterPanelStates {
 
 type IDisplayTextMapping = {
   toasts: Record<EToastType, string>;
-  getToastError: (arg0: (arg0: string) => string) => string;
+  getToastError: (arg0: string) => string;
   routeNames: Record<ERoutesNames, string>;
   buttons: Record<EButtonTexts, string>;
   boolean: Record<EBoolean, string>;
   tableStates: Record<ETableStates, string>;
   filterPanel: Record<EFilterPanelStates, string>;
-  toolBar: Record<EToolbarText, ((arg0: string) => string) | string>;
+  toolbar: Record<EToolbarText, IGetDisplayTextFunc>;
 };
 
 export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -103,14 +104,12 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Close]: 'סגור',
       [EFilterPanelStates.Search]: 'חפש...',
     },
-    toolBar: {
+    toolbar: {
       [EToolbarText.Duplicate]: (type) => `הוספת עותק של ${type}`,
       [EToolbarText.DuplicateEnsure]: (name) => `האם ליצור עותק של '${name}'?`,
       [EToolbarText.Delete]: (type) => `מחיקת ${type}`,
       [EToolbarText.DeleteEnsure]: (name) => `האם למחוק את '${name}'?`,
-      [EToolbarText.Project]: 'פרויקט',
-      [EToolbarText.Vendor]: 'קבלן',
-      [EToolbarText.CopyOF]: 'עותק של',
+      [EToolbarText.CopyOF]: () => 'עותק של',
     },
   },
   en: {
@@ -164,14 +163,12 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Close]: 'Close',
       [EFilterPanelStates.Search]: 'Find...',
     },
-    toolBar: {
+    toolbar: {
       [EToolbarText.Duplicate]: (type) => `Add ${type} - Copy`,
       [EToolbarText.DuplicateEnsure]: (name) => `Create a copy of '${name}'?`,
       [EToolbarText.Delete]: (type) => `Delete ${type}`,
       [EToolbarText.DeleteEnsure]: (name) => `Delete '${name}'?`,
-      [EToolbarText.Project]: 'Project',
-      [EToolbarText.Vendor]: 'Vendor',
-      [EToolbarText.CopyOF]: 'Copy of',
+      [EToolbarText.CopyOF]: () => 'Copy of',
     },
   },
 };

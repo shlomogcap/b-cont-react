@@ -3,8 +3,6 @@ export enum EToolbarText {
   Delete = 'delete',
   DuplicateEnsure = 'duplicateEnsure',
   DeleteEnsure = 'deleteEnsure',
-  Project = 'projects',
-  Vendor = 'vendors',
   CopyOF = 'copyOf,',
 }
 

@@ -3,11 +3,12 @@ import {
   EToolbarButtons,
   EToolbarText,
 } from '../commons/ToolBar/ToolBar.consts';
+import { IGetDisplayTextFunc } from '../commons/ToolBar';
 
 export type ITableToolBarModalProps = {
   texts: {
-    display: any;
-    type: EToolbarText;
+    getDisplay: Record<EToolbarText, IGetDisplayTextFunc>;
+    type: string;
     button: EToolbarButtons;
     title: string;
   };

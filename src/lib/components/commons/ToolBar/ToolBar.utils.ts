@@ -3,9 +3,10 @@ import { firestore } from '@/lib/firebase';
 import { addDoc, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { EToolbarText } from './ToolBar.consts';
+import { IGetDisplayTextFunc } from './ToolBar.types';
 
 const TOAST_TEXTS = DISPLAY_TEXTS.he.toasts;
-const TOOLBAR_TEXTS = DISPLAY_TEXTS.he.toolBar;
+const TOOLBAR_TEXTS = DISPLAY_TEXTS.he.toolbar;
 
 export const actions = {
   duplicate: async (path: string, type: EToolbarText) => {
@@ -21,12 +22,8 @@ export const actions = {
 
       toast.success(TOAST_TEXTS[EToastType.AddingNewDoc]);
     } catch {
-      const duplicateType = TOOLBAR_TEXTS[EToolbarText.Duplicate] as (
-        arg0: string,
-      ) => string;
-      toast.error(
-        DISPLAY_TEXTS.he.getToastError(duplicateType(TOOLBAR_TEXTS[type])),
-      );
+      const duplicateType: string = TOOLBAR_TEXTS[EToolbarText.Duplicate](type);
+      toast.error(DISPLAY_TEXTS.he.getToastError(duplicateType));
     }
   },
   delete: async (path: string, type: EToolbarText) => {
@@ -35,12 +32,8 @@ export const actions = {
       await deleteDoc(docRef);
       toast.success(TOAST_TEXTS[EToastType.DeletedDoc]);
     } catch {
-      const deleteType = TOOLBAR_TEXTS[EToolbarText.Delete] as (
-        arg0: string,
-      ) => string;
-      toast.error(
-        DISPLAY_TEXTS.he.getToastError(deleteType(TOOLBAR_TEXTS[type])),
-      );
+      const deleteType: string = TOOLBAR_TEXTS[EToolbarText.Delete](type);
+      toast.error(DISPLAY_TEXTS.he.getToastError(deleteType));
     }
   },
 };

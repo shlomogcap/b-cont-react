@@ -9,7 +9,7 @@ import { actions } from './ToolBar.utils';
 
 export const ToolBar = ({ path, toolbar, title }: IToolBarProps) => {
   const { showModal } = useModalContext();
-  const { buttons, display, type } = toolbar;
+  const { buttons, getDisplay, type } = toolbar;
   const TOOLBAR_ICONS: Record<EToolbarButtons, ReactElement> = {
     [EToolbarButtons.Duplicate]: <CopyIcon />,
     [EToolbarButtons.Delete]: <DeleteIcon />,
@@ -24,7 +24,7 @@ export const ToolBar = ({ path, toolbar, title }: IToolBarProps) => {
             e.stopPropagation();
             showModal({
               texts: {
-                display,
+                getDisplay,
                 button,
                 title: title ?? '---',
                 type,
