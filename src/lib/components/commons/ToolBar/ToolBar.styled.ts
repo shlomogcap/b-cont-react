@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { StyledButton } from '../Button';
-import { StyledModal, StyledModalBox } from '../Modal/Modal.styled';
+import { StyledModalBox } from '../Modal/Modal.styled';
+import { StyledSvgIcon } from '../../icons/SvgIcon/SvgIcon.styled';
 
 export const StyledToolbarButton = styled(StyledButton)`
-  & :first-child {
+  & ${StyledSvgIcon} {
     color: white;
   }
 `;
@@ -18,7 +19,7 @@ export const StyledToolbar = styled.div`
   opacity: 0;
   transition-duration: 0.5s;
   transition-timing-function: ease;
-  & button {
+  & ${StyledButton} {
     scale: 75%;
     border-radius: 50%;
   }

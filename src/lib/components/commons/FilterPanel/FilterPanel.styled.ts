@@ -6,7 +6,8 @@ export const StyledFiltersBar = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin: 1rem 0;
+  margin-block: 1rem;
+  margin-inline: 0;
 `;
 
 export const StyledFilterPanel = styled.div`

@@ -9,7 +9,7 @@ export type IToolBarProps = {
     type: EToolbarText;
   };
   path: string;
-  title: string | undefined;
+  title?: string;
 };
 
 export type IToolbarModalProps = {

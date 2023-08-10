@@ -27,10 +27,7 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
-import {
-  EToolbarButtons,
-  EToolbarText,
-} from '../commons/ToolBar/ToolBar.consts';
+import { EToolbarButtons } from '../commons/ToolBar/ToolBar.consts';
 
 export const VendorsTable = () => {
   const form = useForm<IVendorDoc>({
