@@ -8,13 +8,15 @@ export const StyledTableToolbarModal = styled(Modal)`
     display: grid;
     place-items: center;
     min-height: 20rem;
-    & .modalText {
-      margin-block-start: 2rem;
-    }
-    & .buttonsWrapper {
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
-    }
   }
+`;
+
+export const StyledTableToolbarModalBody = styled.p`
+  margin-block-start: 2rem;
+`;
+
+export const StyledTableToolbarModalButtonsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 `;
