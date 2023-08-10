@@ -4,6 +4,7 @@ import {
   activateButtonMixin,
   resetActivateButtonMixin,
 } from '../../styles/mixins/activateButton';
+import { SIZE_MAP } from './Button.consts';
 
 export const StyledButton = styled.button<IButtonProps>`
   font: inherit;
@@ -44,6 +45,9 @@ export const StyledButton = styled.button<IButtonProps>`
         `;
     }
   }}
+  ${({ size }) => css`
+    height: ${size && SIZE_MAP[size]};
+  `}
 `;
 
 export const StyledButtonMenuButton = styled(StyledButton)`

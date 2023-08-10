@@ -4,6 +4,8 @@ import { IAddItemProps } from './AddItem.types';
 export const AddItem = ({ addItem }: IAddItemProps) => {
   const { text, handleAddItem } = addItem;
   return (
-    <StyledAddItemButton onClick={handleAddItem}>{text}</StyledAddItemButton>
+    <StyledAddItemButton onClick={handleAddItem} size='L'>
+      {text}
+    </StyledAddItemButton>
   );
 };
