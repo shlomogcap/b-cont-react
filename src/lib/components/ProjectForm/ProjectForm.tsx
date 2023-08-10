@@ -160,12 +160,11 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       const collectionRef = collection(firestore, 'projects');
       const res = await addDoc(collectionRef, preparedData);
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
-      console.log(res);
       router.push({
         pathname: ERoutesNames.Project,
         query: {
           [PROJECT_ID_QUERY]: res.id,
-          [PROJECT_TYPE_QUERY]: watch(PROJECT_TYPE_QUERY),
+          [PROJECT_TYPE_QUERY]: watch(EProjectFields.ProjectType),
         },
       });
     } catch (err) {
