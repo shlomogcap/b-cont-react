@@ -30,10 +30,7 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
-import {
-  EToolbarButtons,
-  EToolbarText,
-} from '../commons/ToolBar/ToolBar.consts';
+import { EToolbarButtons } from '../commons/ToolBar/ToolBar.consts';
 
 export const ProjectsTable = (props: IProjectPageProps) => {
   const form = useForm<IProjectFilterDoc>({
@@ -63,7 +60,7 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
 
   const watchedFields = useWatch();
 
-  useFilteredFields(watchedFields, setActiveFilters);
+  useFilteredFields(watchedFields, activeFilters, setActiveFilters);
 
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
