@@ -60,7 +60,7 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
 
   const watchedFields = useWatch();
 
-  useFilteredFields(watchedFields, activeFilters, setActiveFilters);
+  useFilteredFields(watchedFields, setActiveFilters);
 
   const rows: IProjectDoc[] = data
     .filter((p) => p.projectType === projectType)
