@@ -17,4 +17,7 @@ export const isBetween = (
 ) =>
   isSameOrAfter(originDate, startDate) && isSameOrBefore(originDate, endDate);
 
+export const isExpired = (originDate: IDateType) =>
+  dayjs().isAfter(dayjs(originDate));
+
 export const formatDate = (d: IDateType) => dayjs(d).format('DD/MM/YYYY');

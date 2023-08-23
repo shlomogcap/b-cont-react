@@ -28,6 +28,8 @@ import {
 } from '../commons/SearchBar/searchableContext';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
 import { EToolbarButtons } from '../commons/ToolBar/ToolBar.consts';
+import { StyledExpiredLabel } from '../commons/Table/Table.styled';
+import { isExpired } from '@/lib/utils/dateUtils';
 
 export const VendorsTable = () => {
   const form = useForm<IVendorDoc>({
@@ -83,11 +85,21 @@ const VendorsTableInner = () => {
     EVendorFields.CommercialName,
     EVendorFields.CompanExternalNumber,
   ];
+  const checkTaxesEndDate = (r: any) => {
+    isExpired(r.taxesEndDate)
+      ? (r.taxesEndDate = (
+          <StyledExpiredLabel>{r.taxesEndDate}</StyledExpiredLabel>
+        ))
+      : r.taxesEndDate;
+    return r;
+  };
+  console.log(rows);
   return (
     <Table
       loading={isLoading}
       columns={vendorsTableColumns}
       rows={rows
+        .map((r) => checkTaxesEndDate(r))
         .filter((r) => filterByFilterPanel(r, watchedFields as any))
         .filter((r) => filterBySearch(r, searchFields, searchValue))}
       totals={{
