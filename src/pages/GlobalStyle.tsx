@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle<Props>`
     --color-active-dark: #333666;
 
     --color-red: #eb2f64;
-    --color-red-trs: #ea2e6399;
+    --color-red-trs: #ea2e6363;
 
     --color-pending: #c7380d;
 

@@ -34,6 +34,12 @@ export const StyledTableCell = styled.div`
   color: inherit;
 `;
 
+export const StyledExpiredLabel = styled.div`
+  background-color: var(--color-red-trs);
+  color: var(--color-red);
+  border-radius: 0.5rem;
+`;
+
 export const StyledTableDataRow = styled(StyledTableRow)`
   border-bottom: 1px solid var(--color-gray-3);
   &:hover {

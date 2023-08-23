@@ -15,7 +15,6 @@ import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
 import { AddItem } from '../../AddItem';
 import { ToolBar } from '../ToolBar';
-
 export const Table = <T extends string = string>({
   rows,
   totals,
