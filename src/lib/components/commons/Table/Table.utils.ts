@@ -27,7 +27,11 @@ export const getDisplayValue = ({
         style: 'percent',
       });
     case 'date':
-      return value ? dayjs(value).format('DD/MM/YYYY') : '';
+      return dayjs(value).isValid()
+        ? dayjs(value).format('DD/MM/YYYY')
+        : value
+        ? value
+        : '';
     case 'list':
       return options?.find(({ value }) => value === value)?.text ?? '';
     default:
