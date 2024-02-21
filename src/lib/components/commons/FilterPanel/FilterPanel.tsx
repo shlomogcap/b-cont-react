@@ -33,7 +33,8 @@ const FilterPanelButton = ({
   field,
   children,
   currentValue,
-  isMultiOptional,
+  isSingleOption,
+  buttonsAlignedOnRow,
 }: PropsWithChildren<IFilterPanelButtonProps>) => {
   const { setValue, watch } = useFormContext();
   const fieldValuePath = `${field}.value`;
@@ -41,7 +42,7 @@ const FilterPanelButton = ({
   const isActive = fieldValues?.includes(currentValue);
   return (
     <StyledFilterButton
-      isButtonGroup={!isMultiOptional}
+      isButtonGroup={isSingleOption && buttonsAlignedOnRow}
       isOptionButton
       onClick={() => {
         setValue(
@@ -62,16 +63,19 @@ const FilterButtonsControl = ({
   label,
   field,
   options,
+  isSingleOption,
 }: IFilterButtonsControlProps) => {
+  const buttonsAlignedOnRow = options.length === 2;
   return (
     <StyledFilterControlDiv>
       <StyledFilterItemCaption>{label}</StyledFilterItemCaption>
-      {options.map(({ value, text, isMultiOptional }) => (
+      {options.map(({ value, text }) => (
         <FilterPanelButton
           key={value}
           field={field}
           currentValue={value}
-          isMultiOptional={isMultiOptional}
+          isSingleOption={isSingleOption}
+          buttonsAlignedOnRow={buttonsAlignedOnRow}
         >
           {text}
         </FilterPanelButton>
@@ -205,7 +209,7 @@ export const FilterPanel = ({
       {isFilterPanelOpen && (
         <Draggable>
           <StyledFilterPanel ref={popperElement}>
-            {filters.map(({ type, field, options = [] }) => {
+            {filters.map(({ type, field, isSingleOption, options = [] }) => {
               const label: string = displayTexts[field];
               switch (type) {
                 case EFilterItemType.Buttons:
@@ -213,6 +217,7 @@ export const FilterPanel = ({
                     <FilterButtonsControl
                       label={label}
                       field={field}
+                      isSingleOption={isSingleOption}
                       options={options}
                     />
                   );
