@@ -66,6 +66,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
         columns={columns}
         sections={prepareContractActualsReport(sections, workspaces)}
         title={REPORT_TITLE}
+        onRowClick={() => alert('TODO: show actuals modal')}
       />
     </>
   );

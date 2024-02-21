@@ -37,7 +37,7 @@ export const MOCK_SECTIONS_DATA: IWithPathField<ITableRow<ESectionFields>>[] = [
     [ESectionFields.WorkspaceRef]: 'projects/1/contracts/1/workspaces/1',
   },
   {
-    [ICommonFields.Id]: '3',
+    [ECommonFields.Id]: '3',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [ESectionFields.Title]: 'חציבת קירות',
     [ESectionFields.Description]: '',
@@ -51,7 +51,7 @@ export const MOCK_SECTIONS_DATA: IWithPathField<ITableRow<ESectionFields>>[] = [
     [ESectionFields.WorkspaceRef]: 'projects/1/contracts/1/workspaces/2',
   },
   {
-    [ICommonFields.Id]: '4',
+    [ECommonFields.Id]: '4',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [ESectionFields.Title]: 'התקנת מחיצות',
     [ESectionFields.Description]: '',

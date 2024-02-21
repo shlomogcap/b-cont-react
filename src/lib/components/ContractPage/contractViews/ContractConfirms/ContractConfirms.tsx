@@ -28,6 +28,7 @@ import dayjs from 'dayjs';
 const TITLE = 'סטטוס אישורי ביצוע';
 const START = 'אתחול';
 const FINISH = 'יצירת תקופה חדשה';
+const CONFIRM = 'אישור';
 const PERIOD_LABEL = 'חשבון תקופה';
 
 export const ContractConfirms = ({ account }: IContractConfirmsProps) => {
@@ -36,8 +37,10 @@ export const ContractConfirms = ({ account }: IContractConfirmsProps) => {
   const confirmsData = account[EAccountFields.ConfirmFlow];
   const [month, year] = account.period?.split(' ') ?? [];
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
+  console.log(account);
   return (
     <Card title={TITLE}>
+      <Button style={{ justifySelf: 'flex-end' }}>{CONFIRM}</Button>
       {['start', 'finish'].includes(stage!) && (
         <StyledActionsRow>
           {stage === 'start' && <Button>{START}</Button>}

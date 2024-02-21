@@ -1,15 +1,15 @@
 import { ITableRow } from '../components/commons/Table';
-import { ICommonFields } from '../consts/commonFields';
+import { ECommonFields } from '../consts/commonFields';
 import {
   EWorkspaceEntityType,
   EWorkspaceFields,
   IWorkspaceDoc,
 } from '../consts/workspaces';
-import { PATH_FIELD, WithPathField } from './utils';
+import { PATH_FIELD, IWithPathField } from './utils';
 
-export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
+export const MOCK_WORKSPACES_DATA: IWithPathField<IWorkspaceDoc>[] = [
   {
-    [ICommonFields.Id]: '1',
+    [ECommonFields.Id]: '1',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [EWorkspaceFields.Title]: 'בניין 1',
     [EWorkspaceFields.OrderIndex]: 1,
@@ -19,7 +19,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: ['projects/1/contracts/1/workspaces/3'],
   },
   {
-    [ICommonFields.Id]: '2',
+    [ECommonFields.Id]: '2',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [EWorkspaceFields.Title]: 'בניין 2',
     [EWorkspaceFields.OrderIndex]: 2,
@@ -29,7 +29,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: ['projects/1/contracts/1/workspaces/4'],
   },
   {
-    [ICommonFields.Id]: '3',
+    [ECommonFields.Id]: '3',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [EWorkspaceFields.Title]: 'סעיפים',
     [EWorkspaceFields.OrderIndex]: 1,
@@ -39,7 +39,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: [],
   },
   {
-    [ICommonFields.Id]: '4',
+    [ECommonFields.Id]: '4',
     [PATH_FIELD]: 'projects/1/contracts/1',
     [EWorkspaceFields.Title]: 'סעיפים',
     [EWorkspaceFields.OrderIndex]: 1,
@@ -49,7 +49,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: [],
   },
   {
-    [ICommonFields.Id]: '5',
+    [ECommonFields.Id]: '5',
     [PATH_FIELD]: 'projects/1/contracts/2',
     [EWorkspaceFields.Title]: 'איזור עבודה',
     [EWorkspaceFields.OrderIndex]: 1,
@@ -59,7 +59,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: [],
   },
   {
-    [ICommonFields.Id]: '6',
+    [ECommonFields.Id]: '6',
     [PATH_FIELD]: 'projects/1/contracts/2',
     [EWorkspaceFields.Title]: 'סעיפים',
     [EWorkspaceFields.OrderIndex]: 1,
@@ -69,7 +69,7 @@ export const MOCK_WORKSPACES_DATA: WithPathField<IWorkspaceDoc>[] = [
     [EWorkspaceFields.ChildrenRefs]: [],
   },
   {
-    [ICommonFields.Id]: '7',
+    [ECommonFields.Id]: '7',
     [PATH_FIELD]: 'projects/1/contracts/2',
     [EWorkspaceFields.Title]: 'עוד סעיפים',
     [EWorkspaceFields.OrderIndex]: 2,

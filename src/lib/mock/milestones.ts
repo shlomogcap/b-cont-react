@@ -1,13 +1,13 @@
 import { ITableRow } from '../components/commons/Table';
-import { ICommonFields } from '../consts/commonFields';
+import { ECommonFields } from '../consts/commonFields';
 import { EMilestoneFields } from '../consts/milestones';
-import { PATH_FIELD, WithPathField } from './utils';
+import { PATH_FIELD, IWithPathField } from './utils';
 
-export const MOCK_MILESTONES_DATA: WithPathField<
+export const MOCK_MILESTONES_DATA: IWithPathField<
   ITableRow<EMilestoneFields>
 >[] = [
   {
-    [ICommonFields.Id]: '1',
+    [ECommonFields.Id]: '1',
     [PATH_FIELD]: 'projects/1/contracts/1/sections/1',
     [EMilestoneFields.Title]: 'תחילת חציבה',
     [EMilestoneFields.OrderIndex]: 1,
@@ -16,7 +16,7 @@ export const MOCK_MILESTONES_DATA: WithPathField<
     [EMilestoneFields.TotalDone]: 0,
   },
   {
-    [ICommonFields.Id]: '2',
+    [ECommonFields.Id]: '2',
     [PATH_FIELD]: 'projects/1/contracts/1/sections/1',
     [EMilestoneFields.Title]: 'השלמת חורים',
     [EMilestoneFields.OrderIndex]: 2,
@@ -25,7 +25,7 @@ export const MOCK_MILESTONES_DATA: WithPathField<
     [EMilestoneFields.TotalDone]: 0,
   },
   {
-    [ICommonFields.Id]: '3',
+    [ECommonFields.Id]: '3',
     [PATH_FIELD]: 'projects/1/contracts/1/sections/1',
     [EMilestoneFields.Title]: 'השחלת שומרי מקום',
     [EMilestoneFields.OrderIndex]: 3,
@@ -34,7 +34,7 @@ export const MOCK_MILESTONES_DATA: WithPathField<
     [EMilestoneFields.TotalDone]: 0,
   },
   {
-    [ICommonFields.Id]: '4',
+    [ECommonFields.Id]: '4',
     [PATH_FIELD]: 'projects/1/contracts/1/sections/1',
     [EMilestoneFields.Title]: 'סגירת פתחים',
     [EMilestoneFields.OrderIndex]: 4,
