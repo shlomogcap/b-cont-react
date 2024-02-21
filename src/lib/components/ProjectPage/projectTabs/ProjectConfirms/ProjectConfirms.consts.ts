@@ -29,10 +29,10 @@ export const projectConfirmsTableFilters: IFilterItem<EContractFields>[] = [
   {
     type: EFilterItemType.Buttons,
     field: EContractFields.Status,
+    isSingleOption: false,
     options: Object.values(EContractStatus).map((value) => ({
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractStatus[value],
-      isMultiOptional: true,
     })),
     defaultValue: [EContractStatus.Plan],
   },

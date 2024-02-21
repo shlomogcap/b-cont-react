@@ -6,7 +6,6 @@ export enum EFilterItemType {
 export type IFilterItemOption<V extends string = string> = {
   text: string;
   value: V;
-  isMultiOptional: boolean;
 };
 
 export type IDateFilterValue = {
@@ -18,12 +17,14 @@ export type IFilterItem<T extends string = string, V extends string = string> =
   | {
       type: EFilterItemType.Date;
       field: T;
+      isSingleOption?: undefined;
       defaultValue?: IDateFilterValue;
       options?: undefined;
     }
   | {
       type: EFilterItemType.Buttons;
       field: T;
+      isSingleOption?: boolean;
       options: IFilterItemOption<V>[];
       defaultValue?: V[];
     };
@@ -41,6 +42,7 @@ export type IFilterValues =
 export type IFilterButtonsControlProps = {
   label: string;
   field: string;
+  isSingleOption: boolean | undefined;
   options: IFilterItemOption[];
 };
 
@@ -61,7 +63,8 @@ export type IFilterPanelButtonProps<
 > = {
   field: T;
   currentValue: V;
-  isMultiOptional: boolean;
+  isSingleOption: boolean | undefined;
+  buttonsAlignedOnRow: boolean;
 };
 
 export type IStyledFilterProps = {
