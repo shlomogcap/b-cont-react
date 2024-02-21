@@ -7,6 +7,7 @@ import {
 } from './ModalProvider.types';
 import { SwitchRouteModal } from '@/lib/components/SwitchRouteModal';
 import { ContractSectionModal } from '@/lib/components/ContractSectionModal';
+import { TableToolBarModal } from '@/lib/components/TableToolBarModal';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -21,6 +22,8 @@ const renderModal = (modalData: IModalData) => {
       return <SwitchRouteModal {...modalData} />;
     case EModalName.SectionWsForm:
       return <ContractSectionModal {...modalData} />;
+    case EModalName.TableToolbar:
+      return <TableToolBarModal {...modalData} />;
     default:
       return null;
   }

@@ -27,6 +27,8 @@ import {
 import {
   DUMMY_OPTIONS,
   PROJECT_FORM_DEFAULT_VALUES,
+  PROJECT_STATUS_OPTIONS,
+  PROJECT_TYPE_OPTIONS,
 } from './ProjectForm.consts';
 import { IProjectFormProps, IProjectFormValues } from './ProjectForm.types';
 import { useCalcPeriods } from './hooks/useCalcPeriods';
@@ -35,7 +37,11 @@ import { useProjectsContext } from '@/lib/context/projectsContext';
 import { firestore } from '@firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
-import { PROJECT_ID_QUERY, ERoutesNames } from '@/lib/consts/routes';
+import {
+  PROJECT_ID_QUERY,
+  ERoutesNames,
+  PROJECT_TYPE_QUERY,
+} from '@/lib/consts/routes';
 import { toast } from 'react-toastify';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 
@@ -105,12 +111,12 @@ const ProjectFormFields = () => {
         name={EProjectFields.Entrepreneur}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={PROJECT_TYPE_OPTIONS}
         label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.ProjectType]}
         name={EProjectFields.ProjectType}
       />
       <DropdownInput
-        options={DUMMY_OPTIONS}
+        options={PROJECT_STATUS_OPTIONS}
         label={PROJECT_DISPLAY_TEXTS.he.fields[EProjectFields.Status]}
         name={EProjectFields.Status}
       />
@@ -127,8 +133,7 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
     defaultValues: PROJECT_FORM_DEFAULT_VALUES,
     mode: 'onSubmit',
   });
-  const { reset } = form;
-
+  const { reset, watch } = form;
   useEffect(() => {
     if (isEditMode && !isLoading) {
       const project = projects.find((project) => project.id === id);
@@ -157,7 +162,10 @@ export const ProjectForm = ({ id }: IProjectFormProps) => {
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
       router.push({
         pathname: ERoutesNames.Project,
-        query: { [PROJECT_ID_QUERY]: res.id },
+        query: {
+          [PROJECT_ID_QUERY]: res.id,
+          [PROJECT_TYPE_QUERY]: watch(EProjectFields.ProjectType),
+        },
       });
     } catch (err) {
       //TODO: promt error...

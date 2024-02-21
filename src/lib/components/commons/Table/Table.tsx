@@ -13,6 +13,8 @@ import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
 import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
+import { AddItem } from '../../AddItem';
+import { ToolBar } from '../ToolBar';
 
 export const Table = <T extends string = string>({
   rows,
@@ -23,9 +25,12 @@ export const Table = <T extends string = string>({
   className,
   onRowClick,
   tableFilterProps,
+  addItem,
+  toolbar,
 }: ITableProps<T>) => {
   return (
     <StyledTable className={className}>
+      {addItem && <AddItem addItem={addItem} />}
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
@@ -51,6 +56,9 @@ export const Table = <T extends string = string>({
                 }) ?? ''}
               </StyledTableCell>
             ))}
+            {toolbar && row.path && (
+              <ToolBar path={row.path} toolbar={toolbar} title={row?.title} />
+            )}
           </StyledTableDataRow>
         ))}
       {!loading && rows.length === 0 && (

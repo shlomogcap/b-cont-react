@@ -5,6 +5,7 @@ import { EVendorStatus } from './VendorStatus';
 type IDisplayTextMapping = {
   fields: Record<EVendorFields, string>;
   vendorStatus: Record<EVendorStatus, string>;
+  addNewVendor: string;
 };
 
 export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -27,6 +28,7 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorStatus.Active]: 'פעיל',
       [EVendorStatus.NonActive]: 'לא פעיל',
     },
+    addNewVendor: '+ הוסף קבלן',
   },
   en: {
     fields: {
@@ -47,5 +49,6 @@ export const VENDOR_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EVendorStatus.Active]: 'Active',
       [EVendorStatus.NonActive]: 'Not Active',
     },
+    addNewVendor: '+ Add new vendor',
   },
 };

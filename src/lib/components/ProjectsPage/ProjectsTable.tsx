@@ -30,6 +30,10 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
+import {
+  EToolbarButtons,
+  EToolbarText,
+} from '../commons/ToolBar/ToolBar.consts';
 
 export const ProjectsTable = (props: IProjectPageProps) => {
   const form = useForm<IProjectFilterDoc>({
@@ -100,6 +104,20 @@ const ProjectsTableInner = ({ projectType }: IProjectPageProps) => {
           query: { projectId: id, projectType },
         })
       }
+      addItem={{
+        text: PROJECT_DISPLAY_TEXTS.he.getAddNewText(projectType),
+        handleAddItem: () => {
+          router.push({
+            pathname: ERoutesNames.NewProject,
+            query: { projectType },
+          });
+        },
+      }}
+      toolbar={{
+        buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
+        getDisplay: DISPLAY_TEXTS.he.toolbar,
+        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project],
+      }}
     />
   );
 };
