@@ -1,16 +1,18 @@
+import { IGetDisplayTextFunc } from '../components/commons/ToolBar';
+import { EToolbarText } from '../components/commons/ToolBar/ToolBar.consts';
 import { ERoutesNames } from './routes';
 
 export type ILang = 'he' | 'en';
 
 export enum EButtonTexts {
-  Save,
-  Cancel,
-  Add,
-  Delete,
-  Duplicate,
-  AreYouSure,
-  Approve,
-  Abort,
+  Save = 'save',
+  Cancel = 'cancel',
+  Add = 'add',
+  Delete = 'delete',
+  Duplicate = 'duplicate',
+  AreYouSure = 'areYouSure',
+  Approve = 'approve',
+  Abort = 'abort',
 }
 export enum ETableStates {
   NoRows,
@@ -40,11 +42,13 @@ export enum EFilterPanelStates {
 
 type IDisplayTextMapping = {
   toasts: Record<EToastType, string>;
+  getToastError: (arg0: string) => string;
   routeNames: Record<ERoutesNames, string>;
   buttons: Record<EButtonTexts, string>;
   boolean: Record<EBoolean, string>;
   tableStates: Record<ETableStates, string>;
   filterPanel: Record<EFilterPanelStates, string>;
+  toolbar: Record<EToolbarText, IGetDisplayTextFunc>;
 };
 
 export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -58,6 +62,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToastType.SavingDocData]: 'הנתונים נשמרו בהצלחה',
       [EToastType.DeletedDoc]: 'פעולת מחיקה בוצעה בהצלחה',
     },
+    getToastError: (type) => `אירעה שגיאה ב${type}`,
+
     tableStates: {
       [ETableStates.NoRows]: 'לא נמצאו נתונים',
       [ETableStates.Loading]: 'טוען...',
@@ -85,6 +91,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Me]: 'המשתמש שלי',
       [ERoutesNames.Company]: 'פרטי חברה/חברות',
       [ERoutesNames.Budget]: 'פרקים תקציב',
+      [ERoutesNames.NewVendor]: 'קבלן חדש',
+      [ERoutesNames.NewProject]: 'פרויקט חדש',
     },
     filterPanel: {
       [EFilterPanelStates.Active]: 'פעיל',
@@ -95,6 +103,13 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Reset]: 'אפס',
       [EFilterPanelStates.Close]: 'סגור',
       [EFilterPanelStates.Search]: 'חפש...',
+    },
+    toolbar: {
+      [EToolbarText.Duplicate]: (type) => `הוספת עותק של ${type}`,
+      [EToolbarText.DuplicateEnsure]: (name) => `האם ליצור עותק של '${name}'?`,
+      [EToolbarText.Delete]: (type) => `מחיקת ${type}`,
+      [EToolbarText.DeleteEnsure]: (name) => `האם למחוק את '${name}'?`,
+      [EToolbarText.CopyOF]: () => 'עותק של',
     },
   },
   en: {
@@ -107,6 +122,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EToastType.SavingDocData]: 'Data Saved Succesfully',
       [EToastType.DeletedDoc]: 'Item Has Been Deleted Succesfully',
     },
+    getToastError: (type) => `אירעה שגיאה ב${type}`,
     tableStates: {
       [ETableStates.NoRows]: 'No Rows',
       [ETableStates.Loading]: 'Loading...',
@@ -124,6 +140,8 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Me]: 'Me',
       [ERoutesNames.Company]: 'Company',
       [ERoutesNames.Budget]: 'Budget',
+      [ERoutesNames.NewVendor]: 'New Vendor',
+      [ERoutesNames.NewProject]: 'New Project',
     },
     buttons: {
       [EButtonTexts.Save]: 'Save',
@@ -144,6 +162,13 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EFilterPanelStates.Reset]: 'Reset',
       [EFilterPanelStates.Close]: 'Close',
       [EFilterPanelStates.Search]: 'Find...',
+    },
+    toolbar: {
+      [EToolbarText.Duplicate]: (type) => `Add ${type} - Copy`,
+      [EToolbarText.DuplicateEnsure]: (name) => `Create a copy of '${name}'?`,
+      [EToolbarText.Delete]: (type) => `Delete ${type}`,
+      [EToolbarText.DeleteEnsure]: (name) => `Delete '${name}'?`,
+      [EToolbarText.CopyOF]: () => 'Copy of',
     },
   },
 };

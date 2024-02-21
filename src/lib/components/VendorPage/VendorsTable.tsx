@@ -27,6 +27,7 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
+import { EToolbarButtons } from '../commons/ToolBar/ToolBar.consts';
 
 export const VendorsTable = () => {
   const form = useForm<IVendorDoc>({
@@ -108,6 +109,19 @@ const VendorsTableInner = () => {
         displayTexts: VENDOR_DISPLAY_TEXTS.he.fields,
         status: EVendorStatus,
         activeFilters,
+      }}
+      addItem={{
+        text: VENDOR_DISPLAY_TEXTS.he.addNewVendor,
+        handleAddItem: () => {
+          router.push({
+            pathname: ERoutesNames.NewVendor,
+          });
+        },
+      }}
+      toolbar={{
+        buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
+        getDisplay: DISPLAY_TEXTS.he.toolbar,
+        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project],
       }}
     />
   );

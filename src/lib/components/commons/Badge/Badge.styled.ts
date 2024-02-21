@@ -6,8 +6,8 @@ export const StyledBadge = styled.span`
   border-radius: 12px;
   background-color: var(--color-active);
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: -0.5rem;
+  right: -0.5rem;
 `;
 
 export const StyledColumnBadge = styled(StyledBadge)`
