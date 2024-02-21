@@ -7,7 +7,7 @@ import { getEntries } from '../utils/arrayUtils';
 
 export const useFilteredFields = <F extends string = string>(
   watchedFields: IWatchedFields<F>,
-  setActiveFilters: (filters: IActiveFilters<F>) => void,
+  setActiveFilters: (filters: (filters: IActiveFilters<F>) => void) => void,
 ) => {
   useEffect(() => {
     const activeFilterFields: IActiveFilters<F> = {} as IActiveFilters<F>;
@@ -19,6 +19,9 @@ export const useFilteredFields = <F extends string = string>(
         activeFilterFields[field] = true;
       }
     });
-    setActiveFilters({ ...activeFilterFields });
+    setActiveFilters((filters) => ({
+      ...filters,
+      ...activeFilterFields,
+    }));
   }, [watchedFields, setActiveFilters]);
 };

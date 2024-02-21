@@ -60,6 +60,7 @@ export const filterByFilterPanel = <Doc extends {}>(
           }
         case EFilterItemType.Buttons:
           const array = value as string[];
+          if (!array.length) return true;
           return array.includes(String(row[field as keyof Doc]));
         default:
           break;
