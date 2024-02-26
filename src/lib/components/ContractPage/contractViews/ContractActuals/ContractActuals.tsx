@@ -14,6 +14,13 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, firestore } from '@/lib/firebase';
+import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
+import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
+import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
+import { FirebaseError } from 'firebase/app';
 
 //TODO: DISPLAY_TEXTS
 const CHAT_TITLE = 'לוג הערות לחוזה';
@@ -39,13 +46,49 @@ export const ContractActuals = (props: IContractActualsProps) => {
             : prev,
         )
       : null;
-  return isLoading ? (
-    ''
-  ) : (
+
+  const currentStage = currentAccount![EAccountFields.AccountStage];
+  const currentConfirmFlow = confirmFlow.find(
+    (flow) => flow.id === currentStage,
+  );
+  const nextConfirmFlow = confirmFlow.find(
+    (flow) => flow.id === currentConfirmFlow![EConfirmFields.NextConfirm],
+  );
+
+  const handleConfirmAccountStage = async () => {
+    const docRef = doc(firestore, currentAccount![ECommonFields.Path]);
+    const preparedData = {
+      [EAccountFields.ConfirmFlow]: confirmFlow.map((flow) =>
+        flow.id === currentStage
+          ? {
+              ...flow,
+              [EConfirmFields.ConfirmStatus]: EConfirmStatus.Approve,
+              [EConfirmFields.ApprovedAt]: dayjs().toISOString(),
+              [EConfirmFields.ApprovedBy]: auth.currentUser?.email ?? '',
+            }
+          : flow,
+      ),
+      [EAccountFields.AccountStage]: nextConfirmFlow?.id ?? '',
+    };
+    try {
+      await setDoc(docRef, preparedData, { merge: true });
+    } catch (err) {
+      toast.error(
+        err instanceof FirebaseError
+          ? err.message
+          : JSON.stringify(err ?? { error: 'Unexpected Error' }),
+      );
+    }
+  };
+
+  return isLoading ? null : (
     <>
       <StyledRow>
         {currentAccount ? (
-          <ContractConfirms account={currentAccount} />
+          <ContractConfirms
+            account={currentAccount}
+            handleConfirmAccountStage={handleConfirmAccountStage}
+          />
         ) : (
           <Button
             onClick={() =>
@@ -68,6 +111,16 @@ export const ContractActuals = (props: IContractActualsProps) => {
         title={REPORT_TITLE}
         onRowClick={() => alert('TODO: show actuals modal')}
       />
+      <StyledRow>
+        {!['start', 'finish'].includes(currentStage!) && (
+          <Button
+            onClick={handleConfirmAccountStage}
+            style={{ justifySelf: 'center' }}
+          >
+            {currentConfirmFlow?.title}
+          </Button>
+        )}
+      </StyledRow>
     </>
   );
 };

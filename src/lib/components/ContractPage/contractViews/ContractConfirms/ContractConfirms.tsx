@@ -10,7 +10,6 @@ import {
   StyledPeriod,
   StyledPeriodLabel,
 } from './ContractConfirms.styled';
-import { CONFIRMS_DATA } from './ContractConfirms.consts';
 import { StyledActionsRow } from '../ContractPlan/ContractPlan.styled';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
@@ -21,8 +20,12 @@ import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
 import { formatDate } from '@/lib/utils/dateUtils';
 import { CONFIRMS_DISPLAY_TEXTS } from '@/lib/consts/confirms/displayTexts';
 import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
-import { datetimeDueFormat } from '@/lib/utils/datatimeDueFormat';
 import dayjs from 'dayjs';
+import { ECommonFields } from '@/lib/consts/commonFields';
+import { toast } from 'react-toastify';
+import { FirebaseError } from 'firebase/app';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, firestore } from '@/lib/firebase';
 
 //TODO: move to DISPALY_TEXTS
 const TITLE = 'סטטוס אישורי ביצוע';
@@ -31,19 +34,22 @@ const FINISH = 'יצירת תקופה חדשה';
 const CONFIRM = 'אישור';
 const PERIOD_LABEL = 'חשבון תקופה';
 
-export const ContractConfirms = ({ account }: IContractConfirmsProps) => {
+export const ContractConfirms = ({
+  account,
+  handleConfirmAccountStage,
+}: IContractConfirmsProps) => {
   const { showModal } = useModalContext();
   const stage = account[EAccountFields.AccountStage];
   const confirmsData = account[EAccountFields.ConfirmFlow];
   const [month, year] = account.period?.split(' ') ?? [];
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
-  console.log(account);
   return (
     <Card title={TITLE}>
-      <Button style={{ justifySelf: 'flex-end' }}>{CONFIRM}</Button>
       {['start', 'finish'].includes(stage!) && (
         <StyledActionsRow>
-          {stage === 'start' && <Button>{START}</Button>}
+          {stage === 'start' && (
+            <Button onClick={handleConfirmAccountStage}>{START}</Button>
+          )}
           {stage === 'finish' && (
             <Button
               onClick={() =>

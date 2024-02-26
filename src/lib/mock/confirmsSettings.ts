@@ -45,22 +45,9 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
     [EConfirmFields.Due]: 10,
   },
   {
-    [ECommonFields.Id]: 'start',
-    [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 2,
-    [EConfirmFields.UserRole]: [
-      UserRoles.PROJECT_MANAGER,
-      UserRoles.AREA_MANAGER,
-    ],
-    [EConfirmFields.ConfirmType]: EConfirmType.Actual,
-    [EConfirmFields.Title]: 'אתחול ועדכון',
-    [EConfirmFields.NextConfirm]: 'projectManager',
-    [EConfirmFields.Due]: 10,
-  },
-  {
     [ECommonFields.Id]: 'projectManager',
     [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 3,
+    [EConfirmFields.OrderIndex]: 2,
     [EConfirmFields.UserRole]: [
       UserRoles.PROJECT_MANAGER,
       UserRoles.AREA_MANAGER,
@@ -73,7 +60,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
   {
     [ECommonFields.Id]: 'manager',
     [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 4,
+    [EConfirmFields.OrderIndex]: 3,
     [EConfirmFields.UserRole]: [
       UserRoles.COMPANY_ENGINEER,
       UserRoles.CEO_OPERATIONS,
@@ -86,7 +73,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
   {
     [ECommonFields.Id]: 'accounts',
     [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 5,
+    [EConfirmFields.OrderIndex]: 4,
     [EConfirmFields.UserRole]: [
       UserRoles.ACCOUNTS_OPERATIONS,
       UserRoles.ACCOUNTS_ENTREPRENEURSHIP,
@@ -99,7 +86,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
   {
     [ECommonFields.Id]: 'finance',
     [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 6,
+    [EConfirmFields.OrderIndex]: 5,
     [EConfirmFields.UserRole]: [UserRoles.BUDGETER, UserRoles.CEO_FINANCE],
     [EConfirmFields.ConfirmType]: EConfirmType.Billing,
     [EConfirmFields.Title]: 'אישור כספים',
@@ -109,7 +96,7 @@ export const MOCK_CONFIRMS_SETTINGS_DATA: IWithPathField<
   {
     [ECommonFields.Id]: 'SAP',
     [PATH_FIELD]: 'projects/1',
-    [EConfirmFields.OrderIndex]: 7,
+    [EConfirmFields.OrderIndex]: 6,
     [EConfirmFields.UserRole]: [
       UserRoles.ACCOUNTS_OPERATIONS,
       UserRoles.ACCOUNTS_ENTREPRENEURSHIP,
