@@ -52,13 +52,15 @@ export const ContractActuals = (props: IContractActualsProps) => {
     (flow) => flow.id === currentStage,
   );
   const nextConfirmFlow = confirmFlow.find(
-    (flow) => flow.id === currentConfirmFlow![EConfirmFields.NextConfirm],
+    (flow) => flow.id === currentConfirmFlow?.[EConfirmFields.NextConfirm],
   );
 
   const handleConfirmAccountStage = async () => {
     const docRef = doc(firestore, currentAccount![ECommonFields.Path]);
     const preparedData = {
-      [EAccountFields.ConfirmFlow]: confirmFlow.map((flow) =>
+      [EAccountFields.ConfirmFlow]: currentAccount![
+        EAccountFields.ConfirmFlow
+      ]!.map((flow) =>
         flow.id === currentStage
           ? {
               ...flow,
@@ -112,7 +114,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
         onRowClick={() => alert('TODO: show actuals modal')}
       />
       <StyledRow>
-        {!['start', 'finish'].includes(currentStage!) && (
+        {currentStage && !['start', 'end'].includes(currentStage!) && (
           <Button
             onClick={handleConfirmAccountStage}
             style={{ justifySelf: 'center' }}

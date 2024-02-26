@@ -45,12 +45,12 @@ export const ContractConfirms = ({
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   return (
     <Card title={TITLE}>
-      {['start', 'finish'].includes(stage!) && (
+      {['start', 'end'].includes(stage!) && (
         <StyledActionsRow>
           {stage === 'start' && (
             <Button onClick={handleConfirmAccountStage}>{START}</Button>
           )}
-          {stage === 'finish' && (
+          {stage === 'end' && (
             <Button
               onClick={() =>
                 showModal({
