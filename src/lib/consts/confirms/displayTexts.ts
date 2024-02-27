@@ -1,10 +1,14 @@
 import { ILang } from '../displayTexts';
 import { EConfirmFields } from './ConfirmFields';
+import { EConfirmFlowControls } from './ConfirmFlowControls';
 import { EConfirmStatus } from './ConfirmStatus';
 
 type IDisplayTextMapping = {
   fields: Record<EConfirmFields, string>;
   confirmStatus: Record<EConfirmStatus, string>;
+  confirmViewTitle: string;
+  confirmViewControls: Record<EConfirmFlowControls, string>;
+  showPeriodLabel: string;
 };
 
 export const CONFIRMS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -26,6 +30,12 @@ export const CONFIRMS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EConfirmStatus.Approve]: 'אושר',
       [EConfirmStatus.Reject]: 'נדחה',
     },
+    confirmViewTitle: 'סטטוס אישורי ביצוע',
+    showPeriodLabel: 'חשבון תקופה',
+    confirmViewControls: {
+      [EConfirmFlowControls.Start]: 'אתחול',
+      [EConfirmFlowControls.End]: 'יצירת תקופה חדשה',
+    },
   },
   en: {
     fields: {
@@ -44,6 +54,12 @@ export const CONFIRMS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EConfirmStatus.Hold]: 'hold',
       [EConfirmStatus.Approve]: 'approve',
       [EConfirmStatus.Reject]: 'reject',
+    },
+    confirmViewTitle: 'Actual Confirms Status',
+    showPeriodLabel: 'Actuals Period',
+    confirmViewControls: {
+      [EConfirmFlowControls.Start]: 'Start',
+      [EConfirmFlowControls.End]: '+ New Period',
     },
   },
 };

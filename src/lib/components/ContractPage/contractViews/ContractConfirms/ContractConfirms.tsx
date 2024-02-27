@@ -21,18 +21,7 @@ import { formatDate } from '@/lib/utils/dateUtils';
 import { CONFIRMS_DISPLAY_TEXTS } from '@/lib/consts/confirms/displayTexts';
 import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
 import dayjs from 'dayjs';
-import { ECommonFields } from '@/lib/consts/commonFields';
-import { toast } from 'react-toastify';
-import { FirebaseError } from 'firebase/app';
-import { doc, setDoc } from 'firebase/firestore';
-import { auth, firestore } from '@/lib/firebase';
-
-//TODO: move to DISPALY_TEXTS
-const TITLE = 'סטטוס אישורי ביצוע';
-const START = 'אתחול';
-const FINISH = 'יצירת תקופה חדשה';
-const CONFIRM = 'אישור';
-const PERIOD_LABEL = 'חשבון תקופה';
+import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
 
 export const ContractConfirms = ({
   account,
@@ -44,13 +33,21 @@ export const ContractConfirms = ({
   const [month, year] = account.period?.split(' ') ?? [];
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   return (
-    <Card title={TITLE}>
-      {['start', 'end'].includes(stage!) && (
+    <Card title={CONFIRMS_DISPLAY_TEXTS.he.confirmViewTitle}>
+      {[EConfirmFlowControls.Start, EConfirmFlowControls.End].includes(
+        stage as EConfirmFlowControls,
+      ) && (
         <StyledActionsRow>
-          {stage === 'start' && (
-            <Button onClick={handleConfirmAccountStage}>{START}</Button>
+          {stage === EConfirmFlowControls.Start && (
+            <Button onClick={handleConfirmAccountStage}>
+              {
+                CONFIRMS_DISPLAY_TEXTS.he.confirmViewControls[
+                  EConfirmFlowControls.Start
+                ]
+              }
+            </Button>
           )}
-          {stage === 'end' && (
+          {stage === EConfirmFlowControls.End && (
             <Button
               onClick={() =>
                 showModal({
@@ -61,13 +58,19 @@ export const ContractConfirms = ({
                 })
               }
             >
-              {FINISH}
+              {
+                CONFIRMS_DISPLAY_TEXTS.he.confirmViewControls[
+                  EConfirmFlowControls.End
+                ]
+              }
             </Button>
           )}
         </StyledActionsRow>
       )}
       <StyledPeriod>
-        <StyledPeriodLabel>{PERIOD_LABEL}</StyledPeriodLabel>
+        <StyledPeriodLabel>
+          {CONFIRMS_DISPLAY_TEXTS.he.showPeriodLabel}
+        </StyledPeriodLabel>
         <StyledPeriodLabel>{account[EAccountFields.Period]}</StyledPeriodLabel>
       </StyledPeriod>
       <StyledContractConfirms>
