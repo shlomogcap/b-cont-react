@@ -9,13 +9,18 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import {
   CONTRACTS_DISPLAY_TEXTS,
+  EContractFields,
   EContractSectionItem,
+  EContractStatus,
 } from '@/lib/consts/contracts';
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
 import { TriangleArrowIcon } from '@/lib/components/icons/TriangleArrowIcon';
 import { DISPLAY_TEXTS, EButtonTexts } from '@/lib/consts/displayTexts';
 import { ISectionDoc } from '@/lib/consts/sections';
 import { IWorkspaceDoc } from '@/lib/consts/workspaces';
+import { doc, updateDoc } from 'firebase/firestore';
+import { firestore } from '@/lib/firebase';
+import { ECommonFields } from '@/lib/consts/commonFields';
 
 export const ContractPlan = (props: IContractPlanProps) => {
   const { showModal } = useModalContext();
@@ -30,6 +35,14 @@ export const ContractPlan = (props: IContractPlanProps) => {
     contract: contract!,
     workspaces,
   };
+  const isPlanContract =
+    contract?.[EContractFields.Status] === EContractStatus.Plan;
+  const handleChangeToActive = async () => {
+    const docRef = doc(firestore, contract?.[ECommonFields.Path]!);
+    await updateDoc(docRef, {
+      [EContractFields.Status]: EContractStatus.Active,
+    });
+  };
   return (
     <>
       <ReportTable
@@ -43,6 +56,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
                   ...modalProps,
                 })
               }
+              disabled={!isPlanContract}
             >
               {DISPLAY_TEXTS.he.buttons[EButtonTexts.Add]}
             </Button>
@@ -52,6 +66,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
               ).map(([key, text]) => ({
                 text,
                 value: key,
+                disabled: !isPlanContract,
                 onOptionClick: () =>
                   showModal({
                     name: EModalName.SectionWsForm,
@@ -82,6 +97,11 @@ export const ContractPlan = (props: IContractPlanProps) => {
         columns={CONTRACT_SECTIONS_COLUMNS}
         sections={reportSections}
       />
+      <StyledActionsRow>
+        {isPlanContract && (
+          <Button onClick={handleChangeToActive}>Go To Actulas View</Button>
+        )}
+      </StyledActionsRow>
     </>
   );
 };

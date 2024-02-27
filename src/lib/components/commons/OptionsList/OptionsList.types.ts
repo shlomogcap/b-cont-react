@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { ReactNode } from 'react';
 
 type IOptionValue = number | string | boolean;
 
@@ -9,6 +9,7 @@ export type IOnOptionClickArgs<V extends IOptionValue = IOptionValue> = {
 export type IListOption<V extends IOptionValue = IOptionValue> = {
   text: string;
   value: V;
+  disabled?: boolean;
   onOptionClick: (args: IOnOptionClickArgs<V>) => void;
 };
 export type IOptionsListProps = {
@@ -24,4 +25,8 @@ export type IOptionsListContext = {
 
 export type IOptionsListProviderProps = {
   children: ReactNode;
+};
+
+export type IStyledListItemProps = {
+  isDisabled?: boolean;
 };

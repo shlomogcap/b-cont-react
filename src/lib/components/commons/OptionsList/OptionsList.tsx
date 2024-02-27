@@ -100,11 +100,12 @@ const OptionsListInner = ({
       {children}
       {isListOpen && (
         <StyledList ref={popperElement} aria-labelledby={listId}>
-          {options.map(({ value, text, onOptionClick }) => (
+          {options.map(({ value, text, onOptionClick, disabled }) => (
             <StyledListItem
               key={String(value)}
               data-value={value}
-              onClick={() => onOptionClick({ value })}
+              isDisabled={Boolean(disabled)}
+              onClick={() => (disabled ? null : onOptionClick({ value }))}
             >
               {text}
             </StyledListItem>
