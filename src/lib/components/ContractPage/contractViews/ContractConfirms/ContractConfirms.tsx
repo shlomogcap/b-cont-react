@@ -24,6 +24,7 @@ import dayjs from 'dayjs';
 import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
 
 export const ContractConfirms = ({
+  confirmEnabled,
   account,
   handleConfirmAccountStage,
 }: IContractConfirmsProps) => {
@@ -39,7 +40,10 @@ export const ContractConfirms = ({
       ) && (
         <StyledActionsRow>
           {stage === EConfirmFlowControls.Start && (
-            <Button onClick={handleConfirmAccountStage}>
+            <Button
+              disabled={!confirmEnabled}
+              onClick={handleConfirmAccountStage}
+            >
               {
                 CONFIRMS_DISPLAY_TEXTS.he.confirmViewControls[
                   EConfirmFlowControls.Start
@@ -49,6 +53,7 @@ export const ContractConfirms = ({
           )}
           {stage === EConfirmFlowControls.End && (
             <Button
+              disabled={!confirmEnabled}
               onClick={() =>
                 showModal({
                   name: EModalName.PeriodSelectionForm,

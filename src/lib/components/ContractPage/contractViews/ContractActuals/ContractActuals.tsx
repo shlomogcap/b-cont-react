@@ -14,13 +14,20 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '@/lib/firebase';
 import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
 import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
 import dayjs from 'dayjs';
-import { toast } from 'react-toastify';
-import { FirebaseError } from 'firebase/app';
+import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
+import {
+  EContractFields,
+  EContractStage,
+  EContractStatus,
+} from '@/lib/consts/contracts';
+import { showToastError } from '@/lib/utils/showToastError';
+import { useRouter } from 'next/router';
+import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
 
 //TODO: DISPLAY_TEXTS
 const CHAT_TITLE = 'לוג הערות לחוזה';
@@ -32,6 +39,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
   //   accountStage: 'finish',
   //   period: '2020-04',
   // } as IAccountDoc; //TODO: get from context with current account
+  const router = useRouter();
   const { showModal } = useModalContext();
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   const {
@@ -48,6 +56,8 @@ export const ContractActuals = (props: IContractActualsProps) => {
       : null;
 
   const currentStage = currentAccount![EAccountFields.AccountStage];
+  const isActiveContract =
+    contract![EContractFields.Status] === EContractStatus.Active;
   const currentConfirmFlow = confirmFlow.find(
     (flow) => flow.id === currentStage,
   );
@@ -55,6 +65,23 @@ export const ContractActuals = (props: IContractActualsProps) => {
     (flow) => flow.id === currentConfirmFlow?.[EConfirmFields.NextConfirm],
   );
 
+  const handleChangeContractToPlan = async () => {
+    try {
+      const docRef = doc(firestore, contract?.[ECommonFields.Path] as string);
+      await updateDoc(docRef, {
+        [EContractFields.Status]: EContractStatus.Plan,
+      });
+      router.push({
+        pathname: ERoutesNames.Contract,
+        query: {
+          ...router.query,
+          [CONTRACT_STAGE_QUERY]: EContractStage.Plan,
+        },
+      });
+    } catch (err) {
+      showToastError(err);
+    }
+  };
   const handleConfirmAccountStage = async () => {
     const docRef = doc(firestore, currentAccount![ECommonFields.Path]);
     const preparedData = {
@@ -75,11 +102,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
     try {
       await setDoc(docRef, preparedData, { merge: true });
     } catch (err) {
-      toast.error(
-        err instanceof FirebaseError
-          ? err.message
-          : JSON.stringify(err ?? { error: 'Unexpected Error' }),
-      );
+      showToastError(err);
     }
   };
 
@@ -88,6 +111,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
       <StyledRow>
         {currentAccount ? (
           <ContractConfirms
+            confirmEnabled={isActiveContract}
             account={currentAccount}
             handleConfirmAccountStage={handleConfirmAccountStage}
           />
@@ -101,6 +125,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
                 confirmFlow,
               })
             }
+            disabled={!isActiveContract}
           >
             First Account
           </Button>
@@ -114,13 +139,20 @@ export const ContractActuals = (props: IContractActualsProps) => {
         onRowClick={() => alert('TODO: show actuals modal')}
       />
       <StyledRow>
-        {currentStage && !['start', 'end'].includes(currentStage!) && (
-          <Button
-            onClick={handleConfirmAccountStage}
-            style={{ justifySelf: 'center' }}
-          >
-            {currentConfirmFlow?.title}
-          </Button>
+        {currentStage &&
+          ![EConfirmFlowControls.Start, EConfirmFlowControls.End].includes(
+            currentStage as EConfirmFlowControls,
+          ) && (
+            <Button
+              onClick={handleConfirmAccountStage}
+              style={{ justifySelf: 'center' }}
+              disabled={!isActiveContract}
+            >
+              {currentConfirmFlow?.title}
+            </Button>
+          )}
+        {isActiveContract && (
+          <Button onClick={handleChangeContractToPlan}>Go To Plan View</Button>
         )}
       </StyledRow>
     </>

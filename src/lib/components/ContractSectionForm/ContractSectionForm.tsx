@@ -72,6 +72,7 @@ import dayjs from 'dayjs';
 import { ECommonFields } from '@/lib/consts/commonFields';
 import { z } from 'zod';
 import { getEnumMemberOrSelf } from '@/lib/utils/enumUtils';
+import { showToastError } from '@/lib/utils/showToastError';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -127,12 +128,7 @@ const ContractSectionFormInner = ({
         toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
         onSaved?.();
       } catch (err) {
-        toast.error(
-          err instanceof FirebaseError
-            ? err.message
-            : JSON.stringify(err ?? { error: 'Unexpected Error' }),
-        );
-        console.error(err);
+        showToastError(err);
       }
       return;
     }

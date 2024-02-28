@@ -11,6 +11,7 @@ import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
   EContractSectionItem,
+  EContractStage,
   EContractStatus,
 } from '@/lib/consts/contracts';
 import { ButtonMenu } from '@/lib/components/commons/Button/ButtonMenu';
@@ -21,8 +22,13 @@ import { IWorkspaceDoc } from '@/lib/consts/workspaces';
 import { doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { ECommonFields } from '@/lib/consts/commonFields';
+import { useRouter } from 'next/router';
+import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
+import { toast } from 'react-toastify';
+import { FirebaseError } from 'firebase/app';
 
 export const ContractPlan = (props: IContractPlanProps) => {
+  const router = useRouter();
   const { showModal } = useModalContext();
   const {
     data: { contract, sections: contractSections, workspaces },
@@ -38,10 +44,25 @@ export const ContractPlan = (props: IContractPlanProps) => {
   const isPlanContract =
     contract?.[EContractFields.Status] === EContractStatus.Plan;
   const handleChangeToActive = async () => {
-    const docRef = doc(firestore, contract?.[ECommonFields.Path]!);
-    await updateDoc(docRef, {
-      [EContractFields.Status]: EContractStatus.Active,
-    });
+    try {
+      const docRef = doc(firestore, contract?.[ECommonFields.Path]!);
+      await updateDoc(docRef, {
+        [EContractFields.Status]: EContractStatus.Active,
+      });
+      router.push({
+        pathname: ERoutesNames.Contract,
+        query: {
+          ...router.query,
+          [CONTRACT_STAGE_QUERY]: EContractStage.Actual,
+        },
+      });
+    } catch (err) {
+      toast.error(
+        err instanceof FirebaseError
+          ? err.message
+          : JSON.stringify(err ?? { error: 'Unexpected Error' }),
+      );
+    }
   };
   return (
     <>

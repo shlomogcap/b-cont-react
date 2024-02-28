@@ -44,6 +44,7 @@ import { EVendorFields } from '@/lib/consts/vendors';
 import { ECommonFields } from '@/lib/consts/commonFields';
 import { FirebaseError } from 'firebase/app';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
+import { showToastError } from '@/lib/utils/showToastError';
 
 const ContractFormFields = () => {
   const { data: vendors } = useVendorsContext();
@@ -153,12 +154,7 @@ export const ContractForm = ({ id }: IContractFormProps) => {
         await setDoc(docRef, preparedData, { merge: true });
         toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
       } catch (err) {
-        toast.error(
-          err instanceof FirebaseError
-            ? err.message
-            : JSON.stringify(err ?? { error: 'Unexpected Error' }),
-        );
-        console.error(err);
+        showToastError(err);
       }
       return;
     }

@@ -38,6 +38,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { Button } from '../commons/Button';
 import { CONTRACT_WORKSPACE_FORM_DEFAULT_VALUES } from './ContractAddWorkspaceForm.consts';
+import { showToastError } from '@/lib/utils/showToastError';
 
 const ContractAddWorkspaceFormFields = ({
   workspacesOptions,
@@ -108,12 +109,7 @@ export const ContractAddWorkspaceForm = ({
         toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
         onSaved?.(workspace);
       } catch (err) {
-        toast.error(
-          err instanceof FirebaseError
-            ? err.message
-            : JSON.stringify(err ?? { error: 'Unexpected Error' }),
-        );
-        console.error(err);
+        showToastError(err);
       }
       return;
     }
