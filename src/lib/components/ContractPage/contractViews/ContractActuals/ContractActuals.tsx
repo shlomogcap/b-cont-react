@@ -35,10 +35,6 @@ const REPORT_TITLE = 'דוח ביצוע מצטבר';
 const ADD_COMMENT = '+ הוסף הערה חדשה';
 
 export const ContractActuals = (props: IContractActualsProps) => {
-  // const account = {
-  //   accountStage: 'finish',
-  //   period: '2020-04',
-  // } as IAccountDoc; //TODO: get from context with current account
   const router = useRouter();
   const { showModal } = useModalContext();
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
