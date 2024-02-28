@@ -30,15 +30,16 @@ export const DropdownInput = ({ options, ...props }: IDropdownInputProps) => {
     <OptionsList
       options={options.map((o) => ({
         ...o,
+        disabled: props.readOnly,
         onOptionClick: ({ value }) =>
-          setValue(props.name, value, { shouldDirty: true }),
+          !props.readOnly && setValue(props.name, value, { shouldDirty: true }),
       }))}
     >
       <InputControl {...props} inputElement={<input hidden />} />
       <StyledDropdownField readOnly={props.readOnly}>
         <StyledDropdownTag>
           {displayValue}
-          {displayValue && (
+          {displayValue && !props.readOnly && (
             <StyledRemoveIcon
               onClick={(e) => {
                 e.stopPropagation();
