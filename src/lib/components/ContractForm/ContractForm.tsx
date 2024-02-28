@@ -123,7 +123,7 @@ const ContractFormFields = ({ readOnly }: IContractFormProps) => {
         options={CONTRACT_STATUS_OPTIONS}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Status]}
         name={EContractFields.Status}
-        readOnly={readOnly}
+        readOnly
       />
       <TextInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Description]}
