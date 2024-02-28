@@ -42,11 +42,10 @@ import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import { EVendorFields } from '@/lib/consts/vendors';
 import { ECommonFields } from '@/lib/consts/commonFields';
-import { FirebaseError } from 'firebase/app';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
 import { showToastError } from '@/lib/utils/showToastError';
 
-const ContractFormFields = () => {
+const ContractFormFields = ({ readOnly }: IContractFormProps) => {
   const { data: vendors } = useVendorsContext();
   return (
     <>
@@ -54,6 +53,7 @@ const ContractFormFields = () => {
         isRequired
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Title]}
         name={EContractFields.Title}
+        readOnly={readOnly}
       />
       <DropdownInput
         options={vendors.map((v) => ({
@@ -62,34 +62,40 @@ const ContractFormFields = () => {
         }))}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.VendorRef]}
         name={EContractFields.VendorRef}
+        readOnly={readOnly}
       />
       <TextInput
         label={
           CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.BudgetbudgetaryItem]
         }
         name={EContractFields.BudgetbudgetaryItem}
+        readOnly={readOnly}
       />
       <DropdownInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.IsIndexed]}
         name={EContractFields.IsIndexed}
         options={IS_INDEXED_OPTIONS}
+        readOnly={readOnly}
       />
       <NumberInput
         label={
           CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.TotalAgreementSum]
         }
         name={EContractFields.TotalAgreementSum}
+        readOnly={readOnly}
       />
       <NumberInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.PaymentDelay]}
         name={EContractFields.PaymentDelay}
         onlyInteger
         max={365}
+        readOnly={readOnly}
       />
       <DropdownInput
         options={CONTRACT_TYPE_OPTIONS}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.ContractType]}
         name={EContractFields.ContractType}
+        readOnly={readOnly}
       />
       {/* TODO: make percentageInput */}
       <NumberInput
@@ -101,29 +107,34 @@ const ContractFormFields = () => {
           suffix: '%',
         }}
         max={25}
+        readOnly={readOnly}
       />
       <DateInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.SWorkDate]}
         name={EContractFields.SWorkDate}
+        readOnly={readOnly}
       />
       <DateInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.EWorkDate]}
         name={EContractFields.EWorkDate}
+        readOnly={readOnly}
       />
       <DropdownInput
         options={CONTRACT_STATUS_OPTIONS}
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Status]}
         name={EContractFields.Status}
+        readOnly={readOnly}
       />
       <TextInput
         label={CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.Description]}
         name={EContractFields.Description}
+        readOnly={readOnly}
       />
     </>
   );
 };
 
-export const ContractForm = ({ id }: IContractFormProps) => {
+export const ContractForm = ({ id, readOnly }: IContractFormProps) => {
   const isEditMode = Boolean(id);
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
@@ -188,7 +199,7 @@ export const ContractForm = ({ id }: IContractFormProps) => {
   return (
     <FormProvider {...form}>
       <Form>
-        <ContractFormFields />
+        <ContractFormFields readOnly={readOnly} />
         {form.formState.isDirty && (
           <FormFooter>
             <Button onClick={form.handleSubmit(onSubmit, onError)}>

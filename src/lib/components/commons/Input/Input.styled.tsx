@@ -38,10 +38,10 @@ export const InputStyles = css`
 
   &:disabled,
   &:read-only {
-    cursor: context-menu;
-    color: var(--color-gray-1);
-    background: var(--color-bg-3);
-    border-bottom: 0.5px solid var(--color-gray-3);
+    cursor: context-menu !important;
+    color: var(--color-gray-1) !important;
+    background: var(--color-bg-3) !important;
+    border-bottom: 0.5px solid var(--color-gray-3) !important;
   }
 `;
 

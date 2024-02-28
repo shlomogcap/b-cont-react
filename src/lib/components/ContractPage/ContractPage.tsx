@@ -12,6 +12,7 @@ import { useContractContext } from '@/lib/context/contractContext';
 import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
+  EContractStage,
 } from '@/lib/consts/contracts';
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 import { Card } from '../commons/Card';
@@ -72,7 +73,10 @@ export const ContractPage = ({
       ) : (
         <>
           <Card title={CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}>
-            <ContractForm id={contract?.id!} />
+            <ContractForm
+              id={contract?.id!}
+              readOnly={!Boolean(stage === EContractStage.Plan)}
+            />
           </Card>
           {children}
         </>

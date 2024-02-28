@@ -13,7 +13,7 @@ type INumberInputProps = Omit<IInputProps, 'inputElement'> & {
   onlyInteger?: boolean;
   max?: number;
   min?: number;
-  readonly?: boolean;
+  readOnly?: boolean;
 };
 
 const StyledNumericFormat = styled.div`
@@ -28,7 +28,7 @@ export const NumberInput = ({
   onlyInteger,
   max,
   min,
-  readonly,
+  readOnly,
   ...inputControlProps
 }: INumberInputProps) => {
   const { control } = useFormContext();
@@ -64,7 +64,7 @@ export const NumberInput = ({
                   }
                   return isAllowed?.(values) ?? true;
                 }}
-                readOnly={readonly}
+                readOnly={readOnly}
                 {...numericCustomProps}
                 {...fieldProps}
                 onValueChange={({ floatValue }) => {

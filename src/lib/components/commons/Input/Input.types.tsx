@@ -7,4 +7,5 @@ export type IInputProps<T extends string = string> = {
   hideLabel?: boolean;
   inputElement: ReactElement<HTMLInputElement | any>;
   afterChange?: (v: T) => void;
+  readOnly?: boolean;
 };

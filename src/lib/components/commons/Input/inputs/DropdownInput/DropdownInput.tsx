@@ -35,7 +35,7 @@ export const DropdownInput = ({ options, ...props }: IDropdownInputProps) => {
       }))}
     >
       <InputControl {...props} inputElement={<input hidden />} />
-      <StyledDropdownField>
+      <StyledDropdownField readOnly={props.readOnly}>
         <StyledDropdownTag>
           {displayValue}
           {displayValue && (

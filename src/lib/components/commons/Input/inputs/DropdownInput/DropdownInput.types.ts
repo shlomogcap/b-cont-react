@@ -9,3 +9,7 @@ export type IDropdownOption<V extends IDropdownValue = IDropdownValue> = {
 export type IDropdownInputProps = Omit<IInputProps, 'inputElement'> & {
   options: IDropdownOption[];
 };
+
+export type IStyledDropdownFieldProps = {
+  readOnly?: boolean;
+};

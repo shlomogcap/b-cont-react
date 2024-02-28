@@ -11,6 +11,7 @@ export const DateInput = (props: Omit<IInputProps, 'inputElement'>) => {
       {...props}
       inputElement={
         <StyledInputField
+          readOnly={props.readOnly}
           type='date'
           style={{ textAlign: 'center' }}
           value={value ? dayjs(value).format('YYYY-MM-DD') : ''}
