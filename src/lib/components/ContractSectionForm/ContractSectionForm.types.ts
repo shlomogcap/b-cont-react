@@ -16,6 +16,7 @@ export type IContractSectionFormProps = Omit<
 
 export type IContractSectionFormFieldsProps = {
   workspacesOptions: IDropdownOption<string>[];
+  readOnly?: boolean;
 };
 
 //TODO: move to global context - as well as creat this function globally

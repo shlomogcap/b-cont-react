@@ -19,7 +19,7 @@ export const CONTRACT_SECTION_FORM_DEFAULT_VALUES: DefaultValues<ISectionFormVal
     title: '',
     milestones: [],
   };
-export const EMPTY_MILESONE_DEFAULT_VALUES: Omit<IMilestoneDoc, 'id'> = {
+export const EMPTY_MILESONE_DEFAULT_VALUES: DefaultValues<IMilestoneDoc> = {
   title: '----',
   orderIndex: 0,
   price: 0,

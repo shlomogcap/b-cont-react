@@ -27,7 +27,11 @@ import {
 } from '@/lib/consts/contracts';
 import { showToastError } from '@/lib/utils/showToastError';
 import { useRouter } from 'next/router';
-import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
+import {
+  CONTRACT_STAGE_QUERY,
+  ERoutesNames,
+  SECTION_ID_QUERY,
+} from '@/lib/consts/routes';
 
 //TODO: DISPLAY_TEXTS
 const CHAT_TITLE = 'לוג הערות לחוזה';
@@ -132,7 +136,15 @@ export const ContractActuals = (props: IContractActualsProps) => {
         columns={columns}
         sections={prepareContractActualsReport(sections, workspaces)}
         title={REPORT_TITLE}
-        onRowClick={() => alert('TODO: show actuals modal')}
+        onRowClick={({ id }) => {
+          router.push({
+            pathname: ERoutesNames.SectionActual,
+            query: {
+              ...router.query,
+              [SECTION_ID_QUERY]: id,
+            },
+          });
+        }}
       />
       <StyledRow>
         {currentStage &&
