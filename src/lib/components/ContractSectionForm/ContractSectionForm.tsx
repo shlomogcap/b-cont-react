@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase/app';
 import {
   IContractSectionFormProps,
   IHandleSwapOrderIndexFunc,
@@ -45,7 +44,6 @@ import {
   SectionProvider,
   useSectionContext,
 } from '@/lib/context/sectionContext';
-import { MilestonesTable } from './MilestonesTable';
 import { ContractSectionFormFields } from './ContractSectionFormFields';
 import { CopyIcon, DeleteIcon, PlusIcon, PreviewIcon } from '../icons';
 import { Button } from '../commons/Button';
@@ -73,6 +71,7 @@ import { ECommonFields } from '@/lib/consts/commonFields';
 import { z } from 'zod';
 import { getEnumMemberOrSelf } from '@/lib/utils/enumUtils';
 import { showToastError } from '@/lib/utils/showToastError';
+import { MilestonesPlanTable } from '../Milestones';
 
 export const ContractSectionForm = (props: IContractSectionFormProps) => (
   <SectionProvider sectionPath={props.section?.path}>
@@ -226,7 +225,7 @@ const ContractSectionFormInner = ({
       MilestoneDoc.omit({ id: true }).parse(milestoneData);
       await addDoc<IWithCreationFields<IMilestoneDoc>>(
         milestonesRef as any,
-        milestoneData,
+        milestoneData as any,
       );
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
     } catch (err) {
@@ -301,7 +300,7 @@ const ContractSectionFormInner = ({
           workspacesOptions={prepareWorkspaceOptions(workspaces)}
         />
         {isEditMode && milestones.length > 0 && (
-          <MilestonesTable
+          <MilestonesPlanTable
             handleSwapMilestonesOrderIndex={handleSwapMilestonesOrderIndex}
             handleDeleteMilestone={handleDeleteMilestone}
             isLoading={isLoading}

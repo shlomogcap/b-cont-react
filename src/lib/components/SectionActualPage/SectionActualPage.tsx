@@ -22,6 +22,7 @@ import { useSectionContext } from '@/lib/context/sectionContext';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { useContractsNavList } from '@/lib/hooks/useContractsNavList';
 import { ESectionFields } from '@/lib/consts/sections';
+import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 
 export const SectionActualPage = ({
   projectId,
@@ -32,7 +33,7 @@ export const SectionActualPage = ({
   const { data: contracts, isLoading: isLoadingContracts } =
     useProjectContractsContext();
   const {
-    data: { contract, workspaces },
+    data: { contract, workspaces, accounts },
   } = useContractContext();
   const {
     data: { section, milestones },
@@ -41,6 +42,15 @@ export const SectionActualPage = ({
   const isLoading = isLoadingProjects || isLoadingContracts || isLoadingSection;
   const form = useForm({ defaultValues: { section } });
   const project = projectId ? projects.find((p) => p.id === projectId) : null;
+  const currentAccount =
+    accounts.length > 0
+      ? accounts.reduce((prev, curr) =>
+          curr[EAccountFields.PeriodNumber] > prev[EAccountFields.PeriodNumber]
+            ? curr
+            : prev,
+        )
+      : null;
+
   const projectBreadCrumbText = String(project?.title || projectId);
 
   const projectsTypeBreadCrumb = useProjectTypeBreadcrumb(
@@ -94,7 +104,11 @@ export const SectionActualPage = ({
         />
       ) : (
         <FormProvider {...form}>
-          <Card title={`${section?.[ESectionFields.Title]} | חשבון תקופתי`}>
+          <Card
+            title={`${section?.[ESectionFields.Title]} | ${
+              currentAccount?.[EAccountFields.Title] ?? '---'
+            }`}
+          >
             <ContractSectionFormFields
               readOnly
               workspacesOptions={prepareWorkspaceOptions(workspaces)}

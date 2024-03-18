@@ -1,79 +1,36 @@
+import { useFormContext, useWatch } from 'react-hook-form';
+import { IMilestonesTableProps } from '../ContractSectionForm';
+import {
+  ESectionCalculationMethod,
+  ESectionCalculationType,
+  ESectionFields,
+} from '@/lib/consts/sections';
+import {
+  calcTotalMilestones,
+  calcTotalUnitMilestonePlan,
+  useVirtualUnitsArray,
+} from './Milestones.utils';
+import { toNumber } from '@/lib/utils/numberUtils';
 import {
   EMilestoneFields,
   IMilestoneDoc,
   MILESTONES_DISPALY_TEXTS,
 } from '@/lib/consts/milestones';
+import { EmptyState } from '../commons/EmptyState';
+import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import {
-  StyledCellCircelButton,
   StyledGrandTotal,
   StyledHeader,
   StyledIndex,
   StyledMilestonesTable,
   StyledTotal,
   StyledValue,
-} from './ContractSectionForm.styled';
-import { IMilestonesTableProps } from './ContractSectionForm.types';
-import {
-  ESectionCalculationMethod,
-  ESectionCalculationType,
-  ESectionFields,
-} from '@/lib/consts/sections';
-import { useFormContext, useWatch } from 'react-hook-form';
-import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
-import { EmptyState } from '../commons/EmptyState';
-import { NumberInput, TextInput } from '../commons/Input';
-import { toNumber } from '@/lib/utils/numberUtils';
-import { generateNumberArray } from '@/lib/utils/arrayUtils';
-import { useCallback } from 'react';
-import { DeleteIcon } from '../icons';
-import { safeJSONParse } from '@/lib/utils/safeJsonParse';
+} from './Milestones.styled';
 import { sortBy } from 'lodash-es';
-
-const calcTotalMilestones = (
-  ms: IMilestoneDoc[],
-  milestoneValueField: EMilestoneFields,
-): number => ms.reduce((acc, ms) => acc + toNumber(ms[milestoneValueField]), 0);
-
-const useVirtualUnitsArray = ({
-  itemsCount,
-  isPauschal,
-  itemsStartIndex,
-}: {
-  isPauschal: boolean;
-  itemsStartIndex: number;
-  itemsCount: number;
-}) => {
-  const calcArray = useCallback(() => {
-    const startIndex = itemsStartIndex ?? 1;
-    const units = itemsCount || 1;
-    const totalUnits = units + startIndex;
-    return isPauschal ? generateNumberArray(startIndex, totalUnits - 1) : [1];
-  }, [isPauschal, itemsStartIndex, itemsCount]);
-  return calcArray();
-};
-
-export const calcTotalUnitMilestonePlan = ({
-  weight,
-  price,
-  sectionItemsCount,
-  sectionTotalSum,
-  sectionItemPrice,
-  isPauschal,
-  isPercentageSection,
-}: {
-  weight: number;
-  price: number;
-  sectionItemsCount: number;
-  sectionTotalSum: number;
-  sectionItemPrice: number;
-  isPauschal: boolean;
-  isPercentageSection: boolean;
-}) => {
-  if (isPauschal) {
-    return (sectionTotalSum * weight) / 100 / sectionItemsCount;
-  }
-  return isPercentageSection ? sectionItemPrice * (weight / 100) : price;
-};
+import { safeJSONParse } from '@/lib/utils/safeJsonParse';
+import { NumberInput, TextInput } from '../commons/Input';
+import { StyledCellCircelButton } from '../ContractSectionForm/ContractSectionForm.styled';
+import { DeleteIcon } from '../icons';
 
 const MilestoneUnitRow = ({
   isPreviewMode,
@@ -130,7 +87,7 @@ const MilestoneUnitRow = ({
   </>
 );
 
-export const MilestonesTable = ({
+export const MilestonesPlanTable = ({
   isLoading,
   isPreviewMode,
   handleDeleteMilestone,
@@ -221,19 +178,8 @@ export const MilestonesTable = ({
             e.currentTarget.style.border = 'none';
             if (JSON.stringify(ms) !== originalDocString) {
               e.preventDefault();
-              // ms.setIndex(msId)
               const originalDoc =
                 safeJSONParse<IMilestoneDoc>(originalDocString);
-              // alert(
-              //   'TODO: set item index of ' +
-              //     originalDoc.title +
-              //     ' to -> ' +
-              //     e.currentTarget.dataset.orderIndex +
-              //     ' and ' +
-              //     e.currentTarget.dataset.title +
-              //     ' to ' +
-              //     originalDoc.orderIndex,
-              // );
               handleSwapMilestonesOrderIndex({
                 originalDoc: {
                   id: String(originalDoc.id),
