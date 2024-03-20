@@ -44,7 +44,11 @@ export const StyledCell = styled(StyledTableCell)`
   font-size: 1.8rem;
   overflow: visible;
   & ${StyledInputField} {
-    background-color: unset;
+    background-color: unset !important;
+    &:read-only,
+    &:disabled {
+      border: none !important;
+    }
   }
   &:hover ${StyledCellCircelButton} {
     visibility: visible;
@@ -61,6 +65,9 @@ export const StyledValue = styled(StyledCell)`
   background-color: #ff9;
 `;
 
+export const StyledActualValue = styled(StyledCell)`
+  background-color: white;
+`;
 export const StyledTotal = styled(StyledCell)`
   background-color: #6495ed;
   color: white;

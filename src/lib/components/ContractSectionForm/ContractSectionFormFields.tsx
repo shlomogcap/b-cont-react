@@ -52,22 +52,27 @@ const useCalcMilestonesPrice = () => {
 export const ContractSectionFormFields = ({
   workspacesOptions,
   readOnly,
+  fieldsNames,
 }: IContractSectionFormFieldsProps) => {
   const calcTotalSum = useCalcTotalSum();
   const calcMilestonesPrice = useCalcMilestonesPrice();
+  const fields = Object.values(ESectionFields).reduce(
+    (acc, field) => ({ ...acc, [field]: fieldsNames?.[field] ?? field }),
+    {} as Record<ESectionFields, string>,
+  );
   return (
     <StyledContractSectionFormFields>
       <DropdownInput
         options={workspacesOptions}
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.WorkspaceRef]}
-        name={ESectionFields.WorkspaceRef}
+        name={fields[ESectionFields.WorkspaceRef]}
         readOnly={readOnly}
       />
       <Divider />
       <TextInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.Title]}
-        name={ESectionFields.Title}
+        name={fields[ESectionFields.Title]}
         readOnly={readOnly}
       />
       <DropdownInput
@@ -76,31 +81,31 @@ export const ContractSectionFormFields = ({
         label={
           SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationMethod]
         }
-        name={ESectionFields.CalculationMethod}
+        name={fields[ESectionFields.CalculationMethod]}
         readOnly={readOnly}
       />
       <DropdownInput
         isRequired
         options={SECTION_CALULATION_TYPE_OPTIONS}
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.CalculationType]}
-        name={ESectionFields.CalculationType}
+        name={fields[ESectionFields.CalculationType]}
         readOnly={readOnly}
       />
       <TextInput
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.AmountType]}
-        name={ESectionFields.AmountType}
+        name={fields[ESectionFields.AmountType]}
         readOnly={readOnly}
       />
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsStartIndex]}
-        name={ESectionFields.ItemsStartIndex}
+        name={fields[ESectionFields.ItemsStartIndex]}
         readOnly={readOnly}
       />
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemPrice]}
-        name={ESectionFields.ItemPrice}
+        name={fields[ESectionFields.ItemPrice]}
         readOnly={readOnly}
         afterChange={() => {
           calcTotalSum();
@@ -110,20 +115,20 @@ export const ContractSectionFormFields = ({
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.ItemsCount]}
-        name={ESectionFields.ItemsCount}
+        name={fields[ESectionFields.ItemsCount]}
         afterChange={calcTotalSum}
         readOnly={readOnly}
       />
       <NumberInput
         isRequired
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.TotalSum]}
-        name={ESectionFields.TotalSum}
+        name={fields[ESectionFields.TotalSum]}
         numericFormatProps={{ readOnly: true }}
         readOnly={readOnly}
       />
       <TextInput
         label={SECTIONS_DISPALY_TEXTS.he.fields[ESectionFields.Description]}
-        name={ESectionFields.Description}
+        name={fields[ESectionFields.Description]}
         readOnly={readOnly}
       />
     </StyledContractSectionFormFields>

@@ -12,11 +12,13 @@ import { IContractDoc } from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
 import { IWorkspaceDoc } from '../consts/workspaces';
 import { IAccountDoc } from '../consts/accounts/AccountDoc';
+import { IActualDoc } from '../consts/actuals/ActualDoc';
 
 type IContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
   accounts: IAccountDoc[];
+  actuals: IActualDoc[];
   workspaces: IWorkspaceDoc[];
 };
 
@@ -35,6 +37,7 @@ const INITIAL_CONTRACT_DATA = {
   contract: {} as any,
   sections: [],
   accounts: [],
+  actuals: [],
   workspaces: [],
 };
 
@@ -54,6 +57,7 @@ export const ContractProvider = ({
   const [contract, setContract] = useState<IContractData['contract']>(
     {} as any,
   );
+  const [actuals, setActuals] = useState<IContractData['actuals']>([]);
   const [accounts, setAccounts] = useState<IContractData['accounts']>([]);
   const [sections, setSections] = useState<IContractData['sections']>([]);
   const [workspaces, setWorkspaces] = useState<IContractData['workspaces']>([]);
@@ -82,6 +86,12 @@ export const ContractProvider = ({
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
+    const actualsSubscription = onSnapshotHandler({
+      collectionRef: collection(firestore, `${contractPath}/actuals`),
+      setData: setActuals,
+      setIsLoading,
+      setError: (e) => setError((prev) => `${prev}\n${e}`),
+    });
     const sectionsSubscription = onSnapshotHandler({
       collectionRef: collection(firestore, `${contractPath}/sections`),
       setData: setSections,
@@ -99,6 +109,7 @@ export const ContractProvider = ({
       [
         contractSubscription,
         accountsSubscription,
+        actualsSubscription,
         sectionsSubscription,
         workspacesSubscription,
       ].forEach((unsubscribe) => unsubscribe());
@@ -109,6 +120,7 @@ export const ContractProvider = ({
       value={{
         data: {
           accounts,
+          actuals,
           sections,
           contract,
           workspaces,

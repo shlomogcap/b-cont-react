@@ -1,4 +1,4 @@
-import { ISectionDoc } from '@/lib/consts/sections';
+import { ESectionFields, ISectionDoc } from '@/lib/consts/sections';
 import { IContractSectionModalProps } from '../ContractSectionModal';
 import { IDropdownOption } from '../commons/Input/inputs/DropdownInput';
 import { z } from 'zod';
@@ -14,9 +14,12 @@ export type IContractSectionFormProps = Omit<
   onSaved?: IOnSavedFunc;
 };
 
+export type IContractFormFieldsNames = { [key in ESectionFields]?: string };
+
 export type IContractSectionFormFieldsProps = {
   workspacesOptions: IDropdownOption<string>[];
   readOnly?: boolean;
+  fieldsNames?: IContractFormFieldsNames;
 };
 
 //TODO: move to global context - as well as creat this function globally

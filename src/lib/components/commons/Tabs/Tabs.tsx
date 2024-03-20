@@ -29,7 +29,7 @@ export const Tabs = <T extends string>({
         <Tab
           onClick={() => {
             setActiveTab(id);
-            tabsRef.current?.scrollIntoView();
+            tabsRef.current?.scrollIntoView({ block: 'center' });
           }}
           text={text}
           key={id}

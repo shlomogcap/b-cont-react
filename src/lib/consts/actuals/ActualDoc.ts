@@ -21,6 +21,7 @@ export const ActualDoc = z
     }),
     [EActualFields.CurrentTotal]: NUMBER_SCHEMA,
     [EActualFields.SectionRef]: STRING_SCHEMA,
+    [EActualFields.PeriodNumber]: NUMBER_SCHEMA,
     [EActualFields.Unit]: NUMBER_SCHEMA,
     [EActualFields.Value]: NUMBER_SCHEMA,
   })

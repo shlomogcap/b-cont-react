@@ -6,6 +6,7 @@ export enum EActualFields {
   SectionRef = 'sectionRef',
   Unit = 'unit',
   Value = 'value',
+  PeriodNumber = 'periodNumber',
 }
 export enum EActualCalcFields {
   _ActualsValue = '_actualsValue',

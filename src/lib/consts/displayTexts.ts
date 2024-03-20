@@ -93,6 +93,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Budget]: 'פרקים תקציב',
       [ERoutesNames.NewVendor]: 'קבלן חדש',
       [ERoutesNames.NewProject]: 'פרויקט חדש',
+      [ERoutesNames.SectionActual]: 'ביצוע סעיף',
     },
     filterPanel: {
       [EFilterPanelStates.Active]: 'פעיל',
@@ -142,6 +143,7 @@ export const DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [ERoutesNames.Budget]: 'Budget',
       [ERoutesNames.NewVendor]: 'New Vendor',
       [ERoutesNames.NewProject]: 'New Project',
+      [ERoutesNames.SectionActual]: 'Section Actual',
     },
     buttons: {
       [EButtonTexts.Save]: 'Save',
