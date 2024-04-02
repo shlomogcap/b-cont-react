@@ -29,7 +29,6 @@ import {
   ESectionCalculationMethod,
   ESectionFields,
   ISectionDoc,
-  SectionDoc,
 } from '@/lib/consts/sections';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { useEffect, useState } from 'react';
@@ -51,13 +50,22 @@ import { IAccountFormCell, IActualFormCell } from '../Milestones';
 import { FormFooter } from '../commons/Form';
 import { toast } from 'react-toastify';
 import { showToastError } from '@/lib/utils/showToastError';
-import { DocumentReference, doc, writeBatch } from 'firebase/firestore';
+import {
+  DocumentReference,
+  collection,
+  doc,
+  writeBatch,
+} from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { uuid } from '@/lib/utils/uuid';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { MilestoneDoc } from '@/lib/consts/milestones';
+import { EMilestoneFields, MilestoneDoc } from '@/lib/consts/milestones';
+import { IWithCreationFields } from '@/lib/utils/WithFields';
+import { isNotNill } from '@/lib/utils/commonUtils';
+import { ECommonFields } from '@/lib/consts/commonFields';
+import dayjs from 'dayjs';
 
 const actualsMock: IActualDoc[] = [
   {
@@ -69,7 +77,7 @@ const actualsMock: IActualDoc[] = [
       _actualsValue: 0.8,
     },
     value: 80,
-    currentTotal: 40, // 100 * 0.8 * 0.8
+    currentTotal: 40, // 100 * 0.5 * 0.8
     path: 'projects/1/contracts/1/accounts/1',
     sectionRef: 'projects/1/contracts/1/sections/1/milestones/1',
     unit: 1,
@@ -186,25 +194,36 @@ export const SectionActualPage = ({
     });
     try {
       //TODO: batch request to save form values
-      // const batch = writeBatch(firestore);
-      preparedActuals.forEach((actual) => {
-        // [2] think if actuals are under account/{id}/actuals or under contracts/{id}/actuals
-        // const actualDocId = actual?.id || uuid();
-        // const docRef = doc(
-        //   firestore,
-        //   `${currentAccount?.path}/actulas/${actualDocId}`,
-        // );
-        // const dataToSet: IActualDoc = {
-        //   [EActualFields.Value]: Number(actual?.diffValue),
-        //   [EActualFields.PeriodNumber]: currentAccountPeriod,
-        // };
-        // batch.set(docRef, dataToSet, { merge: true });
+      const batch = writeBatch(firestore);
+      preparedActuals.forEach((actualFormCell) => {
+        const docRef = doc(firestore, `${contract?.path}/actulas/${uuid()}`);
+        const milestoneDoc = milestones.find(
+          (ms) => ms.path === actualFormCell?.sectionRef,
+        );
+        const actualDocTitle = [
+          section?.[ESectionFields.Title],
+          milestoneDoc?.[EMilestoneFields.Title],
+          currentAccount?.[EAccountFields.Period],
+          actualFormCell?.unit,
+        ]
+          .filter(isNotNill)
+          .join(' / ');
+        const dataToSet: IWithCreationFields<IActualDoc> = {
+          [EActualFields.Title]: actualDocTitle,
+          [EActualFields.PeriodNumber]: currentAccountPeriod,
+          [EActualFields.SectionRef]: actualFormCell?.sectionRef,
+          [EActualFields.Unit]: Number(actualFormCell?.unit),
+          [EActualFields.Value]: Number(actualFormCell?.diffValue),
+          [EActualFields.CurrentTotal]: Number(actualFormCell?.currentTotal),
+          [EActualFields.Calc]: actualFormCell?.calc!,
+          [ECommonFields.CreatedAt]: dayjs().toISOString(),
+        };
+        batch.set(docRef, dataToSet, { merge: true });
       });
-      // await batch.commit();
+      await batch.commit();
     } catch (err) {
       showToastError(err);
     }
-    console.log(preparedActuals);
   });
 
   return (

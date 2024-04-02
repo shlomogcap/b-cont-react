@@ -25,7 +25,10 @@ import {
 } from './Milestones.styled';
 import { sortBy } from 'lodash-es';
 import { NumberInput } from '../commons/Input';
-import { EActualFields } from '@/lib/consts/actuals/ActualFields';
+import {
+  EActualCalcFields,
+  EActualFields,
+} from '@/lib/consts/actuals/ActualFields';
 import { toInteger } from 'lodash-es';
 
 type IMilestoneUnitRowProps = {
@@ -34,6 +37,7 @@ type IMilestoneUnitRowProps = {
   milestonesTotal: number;
   unit: number | string;
   isPauschal: boolean;
+  sectionPrice: number;
   sectionItemsCount: number;
 };
 
@@ -44,6 +48,7 @@ const MilestoneUnitRow = ({
   unit,
   isPauschal,
   sectionItemsCount,
+  sectionPrice,
 }: IMilestoneUnitRowProps) => {
   const { watch, setValue } = useFormContext();
   return (
@@ -56,6 +61,7 @@ const MilestoneUnitRow = ({
         const percentDone = isPauschal
           ? toInteger(totalActual)
           : toInteger(totalActual / sectionItemsCount) * 100;
+        const milestoneWeight = Number(ms[EMilestoneFields.Weight]) / 100;
         return (
           <StyledActualValue
             key={`body/${ms.id}/${unit}`}
@@ -80,7 +86,18 @@ const MilestoneUnitRow = ({
                 const oldValue: number = watch(`${fieldPath}.oldValue`);
                 const currentValue = toNumber(v);
                 const diff = currentValue - oldValue;
+                const actualsValue = diff / (isPauschal ? 100 : 1);
                 setValue(`${fieldPath}.diffValue`, diff);
+                setValue(`${fieldPath}.calc`, {
+                  [EActualCalcFields._ItemPrice]: sectionPrice,
+                  [EActualCalcFields._Weight]: milestoneWeight,
+                  [EActualCalcFields._Price]: sectionPrice * milestoneWeight,
+                  [EActualCalcFields._ActualsValue]: actualsValue,
+                });
+                setValue(
+                  `${fieldPath}.${EActualFields.CurrentTotal}`,
+                  sectionPrice * milestoneWeight * actualsValue,
+                );
 
                 //TODO: think how to implement this approach of setting value to accounts
                 // const fieldToSet = `accounts.${milestoneColumn}.${0}.${
@@ -205,6 +222,7 @@ export const MilestonesActulasTable = ({
           milestones={watchMilestones}
           isPauschal
           sectionItemsCount={itemsCount}
+          sectionPrice={price}
         />
       ))}
 

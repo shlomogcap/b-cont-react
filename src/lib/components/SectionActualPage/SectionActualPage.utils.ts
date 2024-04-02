@@ -56,10 +56,7 @@ export const transformActualsToFormShape = ({
         currentAccountPeriod,
         sectionRef: ms.path,
         unit,
-      }).map((actual) => ({
-        value: actual.value,
-        period: actual.periodNumber,
-      }));
+      });
       const cumulativeValue = sumBy(relatedActuals, 'value');
       units.push({
         oldValue: cumulativeValue,
@@ -67,7 +64,12 @@ export const transformActualsToFormShape = ({
         value: cumulativeValue,
         sectionRef: ms.path,
         unit,
-        periods: relatedActuals,
+        calc: {} as any,
+        currentTotal: 0,
+        periods: relatedActuals.map((actual) => ({
+          value: actual.value,
+          period: actual.periodNumber,
+        })),
       });
     });
     result.push(units);

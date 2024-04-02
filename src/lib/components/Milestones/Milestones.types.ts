@@ -1,4 +1,6 @@
+import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import { IHandleSwapOrderIndexFunc } from '../ContractSectionForm';
+import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 
 export type IMilestonesProps = {};
 
@@ -25,13 +27,16 @@ export type ICalcTotalUnitMilestonePlanArgs = {
   isPercentageSection: boolean;
 };
 
-export type IActualFormCell = {
-  id?: string;
+export type IActualFormCell = Pick<
+  IActualDoc,
+  | EActualFields.SectionRef
+  | EActualFields.Unit
+  | EActualFields.Value
+  | EActualFields.Calc
+  | EActualFields.CurrentTotal
+> & {
   oldValue: number;
   diffValue: number;
-  value: number;
-  sectionRef: string;
-  unit: number;
   periods: { period: number; value: number }[];
 };
 export type IAccountFormCell = {

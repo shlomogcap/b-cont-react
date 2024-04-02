@@ -6,4 +6,7 @@ export type IWithCommonFields<T extends {}> = T & {
   [key in ECommonFields]?: string;
 };
 
-export type IWithCreationFields<T extends {}> = Omit<T, ECommonFields.Id>;
+export type IWithCreationFields<T extends {}> = Omit<
+  T,
+  ECommonFields.Id | ECommonFields.Path
+>;
