@@ -4,7 +4,11 @@ import { IContractActualsProps } from './ContractActuals.types';
 import { ChatCard } from '@/lib/components/commons/ChatCard';
 import { ReportTable } from '@/lib/components/ReportTable';
 import { StyledRow } from './ContractActuals.styled';
-import { columns } from './ContractActuals.consts';
+import {
+  CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS,
+  EContractActualsButtons,
+  columns,
+} from './ContractActuals.consts';
 import { prepareContractActualsReport } from './ContractActuals.utils';
 import { useContractContext } from '@/lib/context/contractContext';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
@@ -32,11 +36,6 @@ import {
   ERoutesNames,
   SECTION_ID_QUERY,
 } from '@/lib/consts/routes';
-
-//TODO: DISPLAY_TEXTS
-const CHAT_TITLE = 'לוג הערות לחוזה';
-const REPORT_TITLE = 'דוח ביצוע מצטבר';
-const ADD_COMMENT = '+ הוסף הערה חדשה';
 
 export const ContractActuals = (props: IContractActualsProps) => {
   const router = useRouter();
@@ -130,12 +129,19 @@ export const ContractActuals = (props: IContractActualsProps) => {
             First Account
           </Button>
         )}
-        <ChatCard title={CHAT_TITLE} addNewText={ADD_COMMENT} />
+        <ChatCard
+          title={CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.chatBlockTitle}
+          addNewText={
+            CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.buttons[
+              EContractActualsButtons.AddNewComment
+            ]
+          }
+        />
       </StyledRow>
       <ReportTable
         columns={columns}
         sections={prepareContractActualsReport(sections, workspaces)}
-        title={REPORT_TITLE}
+        title={CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.reportTitle}
         onRowClick={({ id }) => {
           router.push({
             pathname: ERoutesNames.SectionActual,

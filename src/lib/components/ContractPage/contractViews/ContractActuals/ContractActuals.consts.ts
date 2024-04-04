@@ -16,12 +16,18 @@ export enum EAdditionsSubtractions {
   Additions,
   Subtractions,
 }
+export enum EContractActualsButtons {
+  AddNewComment,
+}
 
 type IDispalyTexts = Record<
   ILang,
   {
     fields: Record<EContractActualsReportTableFields, string>;
     additionsSubtractions: Record<EAdditionsSubtractions, string>;
+    reportTitle: string;
+    chatBlockTitle: string;
+    buttons: Record<EContractActualsButtons, string>;
   }
 >;
 
@@ -37,6 +43,9 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
       [EContractActualsReportTableFields.ContractBudget]: 'סכום הסכם',
       [EContractActualsReportTableFields.DonePercentage]: '% ביצוע הסכם',
     },
+    reportTitle: 'דוח ביצוע מצטבר',
+    chatBlockTitle: 'לוג הערות לחוזה',
+    buttons: { [EContractActualsButtons.AddNewComment]: '+ הוסף הערה חדשה' },
     additionsSubtractions: {
       [EAdditionsSubtractions.SectionTitle]: 'תוספות וקיזוזים',
       [EAdditionsSubtractions.Additions]: 'תוספות',
@@ -55,6 +64,9 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
       [EContractActualsReportTableFields.ContractBudget]: 'ContractBudget',
       [EContractActualsReportTableFields.DonePercentage]: 'DonePercentage',
     },
+    reportTitle: 'Cumulative Actulas Report',
+    chatBlockTitle: 'Comments Logs',
+    buttons: { [EContractActualsButtons.AddNewComment]: '+ New Comment' },
     additionsSubtractions: {
       [EAdditionsSubtractions.SectionTitle]: 'Additions & Subtractions',
       [EAdditionsSubtractions.Additions]: 'Additions',
