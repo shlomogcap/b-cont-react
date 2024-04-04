@@ -30,7 +30,7 @@ import { toInteger } from 'lodash-es';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 
-export const MilestonesActulasByPeriodTable = ({
+export const MilestonesActualsByPeriodTable = ({
   accounts,
   isLoading,
 }: Pick<IMilestonesTableProps, 'isLoading'> & { accounts: IAccountDoc[] }) => {

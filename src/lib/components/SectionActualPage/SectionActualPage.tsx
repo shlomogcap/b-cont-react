@@ -9,6 +9,7 @@ import {
   DISPLAY_TEXTS,
   EButtonTexts,
   ETableStates,
+  EToastType,
 } from '@/lib/consts/displayTexts';
 import { ERoutesNames } from '@/lib/consts/routes';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
@@ -32,7 +33,7 @@ import {
 } from '@/lib/consts/sections';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { useEffect, useState } from 'react';
-import { MilestonesActulasTable } from '../Milestones/MilestonesActualsTable';
+import { MilestonesActualsTable } from '../Milestones/MilestonesActualsTable';
 import { Button } from '../commons/Button';
 import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import {
@@ -45,7 +46,7 @@ import {
   ACTUAL_TABLE_VIEW_TABS,
   EActualTableView,
 } from './SectionActualPage.consts';
-import { MilestonesActulasByPeriodTable } from '../Milestones/MilestonesActualsByPeriodTable';
+import { MilestonesActualsByPeriodTable } from '../Milestones/MilestonesActualsByPeriodTable';
 import { IAccountFormCell, IActualFormCell } from '../Milestones';
 import { FormFooter } from '../commons/Form';
 import { toast } from 'react-toastify';
@@ -66,41 +67,6 @@ import { IWithCreationFields } from '@/lib/utils/WithFields';
 import { isNotNill } from '@/lib/utils/commonUtils';
 import { ECommonFields } from '@/lib/consts/commonFields';
 import dayjs from 'dayjs';
-
-const actualsMock: IActualDoc[] = [
-  {
-    id: '1',
-    calc: {
-      _itemPrice: 100,
-      _weight: 0.5,
-      _price: 50,
-      _actualsValue: 0.8,
-    },
-    value: 80,
-    currentTotal: 40, // 100 * 0.5 * 0.8
-    path: 'projects/1/contracts/1/accounts/1',
-    sectionRef: 'projects/1/contracts/1/sections/1/milestones/1',
-    unit: 1,
-    title: '01 2024 / milestone 1 / unit 1',
-    periodNumber: 1,
-  },
-  {
-    id: '2',
-    calc: {
-      _itemPrice: 100,
-      _weight: 0.25,
-      _price: 25,
-      _actualsValue: 0.4,
-    },
-    value: 40,
-    currentTotal: 10, // 100 * 0.25 * 0.4
-    path: 'projects/1/contracts/1/accounts/1',
-    sectionRef: 'projects/1/contracts/1/sections/1/milestones/3',
-    unit: 1,
-    title: '01 2024 / milestone 3 / unit 1',
-    periodNumber: 1,
-  },
-];
 
 export const SectionActualPage = ({
   projectId,
@@ -173,7 +139,7 @@ export const SectionActualPage = ({
       actuals: transformActualsToFormShape({
         section: section as ISectionDoc,
         milestones,
-        actuals: actualsMock,
+        actuals,
         currentAccountPeriod,
       }),
       accounts: transformAccountsToFormShape({
@@ -181,22 +147,21 @@ export const SectionActualPage = ({
         currentAccountPeriod,
         section: section as ISectionDoc,
         milestones,
-        actuals: actualsMock,
+        actuals,
       }),
     });
-  }, [reset, section, milestones, currentAccountPeriod, accounts]);
+  }, [reset, section, milestones, currentAccountPeriod, accounts, actuals]);
 
   const onSubmit = handleSubmit(async (formValues) => {
     const preparedActuals = transformActualsFormValuesToAPIShape({
       formValues,
-      actuals: actualsMock,
+      actuals,
       currentAccountPeriod,
     });
     try {
-      //TODO: batch request to save form values
       const batch = writeBatch(firestore);
       preparedActuals.forEach((actualFormCell) => {
-        const docRef = doc(firestore, `${contract?.path}/actulas/${uuid()}`);
+        const docRef = doc(firestore, `${contract?.path}/actuals/${uuid()}`);
         const milestoneDoc = milestones.find(
           (ms) => ms.path === actualFormCell?.sectionRef,
         );
@@ -218,9 +183,11 @@ export const SectionActualPage = ({
           [EActualFields.Calc]: actualFormCell?.calc!,
           [ECommonFields.CreatedAt]: dayjs().toISOString(),
         };
+        console.log(dataToSet);
         batch.set(docRef, dataToSet, { merge: true });
       });
       await batch.commit();
+      toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
     } catch (err) {
       showToastError(err);
     }
@@ -284,16 +251,21 @@ export const SectionActualPage = ({
               </>
             )}
             {activeView === EActualTableView.CumulativeView && (
-              <MilestonesActulasTable isLoading={isLoading} />
+              <MilestonesActualsTable isLoading={isLoading} />
             )}
             {activeView === EActualTableView.PeriodView && (
-              <MilestonesActulasByPeriodTable
+              <MilestonesActualsByPeriodTable
                 isLoading={isLoading}
                 accounts={accounts}
               />
             )}
             <FormFooter>
-              <Button onClick={onSubmit}>
+              <Button
+                onClick={onSubmit}
+                disabled={
+                  form.formState.isSubmitting || !form.formState.isDirty
+                }
+              >
                 {DISPLAY_TEXTS.he.buttons[EButtonTexts.Save]}
               </Button>
             </FormFooter>

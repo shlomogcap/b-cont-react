@@ -120,7 +120,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
       />
       <StyledActionsRow>
         {isPlanContract && (
-          <Button onClick={handleChangeToActive}>Go To Actulas View</Button>
+          <Button onClick={handleChangeToActive}>Go To Actuals View</Button>
         )}
       </StyledActionsRow>
     </>

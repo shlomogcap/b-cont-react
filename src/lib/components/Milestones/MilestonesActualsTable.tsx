@@ -119,7 +119,7 @@ const MilestoneUnitRow = ({
   );
 };
 
-export const MilestonesActulasTable = ({
+export const MilestonesActualsTable = ({
   isLoading,
 }: Pick<IMilestonesTableProps, 'isLoading'>) => {
   const { watch } = useFormContext();
