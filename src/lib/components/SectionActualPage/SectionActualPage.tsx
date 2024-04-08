@@ -35,7 +35,7 @@ import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { useEffect, useState } from 'react';
 import { MilestonesActualsTable } from '../Milestones/MilestonesActualsTable';
 import { Button } from '../commons/Button';
-import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
+import { ActualDoc, IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import {
   transformAccountsToFormShape,
   transformActualsFormValuesToAPIShape,
@@ -51,12 +51,7 @@ import { IAccountFormCell, IActualFormCell } from '../Milestones';
 import { FormFooter } from '../commons/Form';
 import { toast } from 'react-toastify';
 import { showToastError } from '@/lib/utils/showToastError';
-import {
-  DocumentReference,
-  collection,
-  doc,
-  writeBatch,
-} from 'firebase/firestore';
+import { doc, writeBatch } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { uuid } from '@/lib/utils/uuid';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
@@ -183,7 +178,7 @@ export const SectionActualPage = ({
           [EActualFields.Calc]: actualFormCell?.calc!,
           [ECommonFields.CreatedAt]: dayjs().toISOString(),
         };
-        console.log(dataToSet);
+        ActualDoc.omit({ id: true, path: true }).parse(dataToSet);
         batch.set(docRef, dataToSet, { merge: true });
       });
       await batch.commit();
