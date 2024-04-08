@@ -13,22 +13,29 @@ import { IAccountFormCell, IActualFormCell } from '../Milestones';
 import { toNumber } from '@/lib/utils/numberUtils';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 
+type GetRelatedActualsBaseArgs = {
+  unit?: number;
+  currentAccountPeriod: number;
+  sectionRef: string;
+  actuals: IActualDoc[];
+  getByUnit: boolean;
+};
+type GetRelatedActualsArgs =
+  | (GetRelatedActualsBaseArgs & { getByUnit: true; unit: number })
+  | (GetRelatedActualsBaseArgs & { getByUnit: false; unit?: undefined });
+
 const getRelatedActuals = ({
   currentAccountPeriod,
   actuals,
   sectionRef,
   unit,
-}: {
-  unit?: number;
-  currentAccountPeriod: number;
-  sectionRef: string;
-  actuals: IActualDoc[];
-}) =>
+  getByUnit,
+}: GetRelatedActualsArgs) =>
   actuals.filter(
     (actual) =>
       actual[EActualFields.SectionRef] === sectionRef &&
-      (!unit || actual[EActualFields.Unit] === unit) &&
-      actual[EActualFields.PeriodNumber] < currentAccountPeriod,
+      (!getByUnit || actual[EActualFields.Unit] === unit) &&
+      actual[EActualFields.PeriodNumber] <= currentAccountPeriod,
   );
 
 export const transformActualsToFormShape = ({
@@ -37,9 +44,10 @@ export const transformActualsToFormShape = ({
   section,
   currentAccountPeriod,
 }: ITransformActualsToFormShapeArgs) => {
-  if (!section || milestones.length === 0 || actuals.length === 0) {
+  if (!section || milestones.length === 0) {
     return [];
   }
+
   const milestonesSorted = sortBy(milestones, EMilestoneFields.OrderIndex);
   const { itemsCount, itemsStartIndex = 0, calculationMethod } = section;
   const virtualUnitsArray = generateVirtualUnitsArray({
@@ -56,6 +64,7 @@ export const transformActualsToFormShape = ({
         currentAccountPeriod,
         sectionRef: ms.path,
         unit,
+        getByUnit: true,
       });
       const cumulativeValue = sumBy(relatedActuals, 'value');
       units.push({
@@ -102,12 +111,9 @@ export const transformAccountsToFormShape = ({
         actuals,
         currentAccountPeriod: Number(account[EAccountFields.Period]),
         sectionRef: ms.path,
+        getByUnit: false,
       });
       const actualsValue = sumBy(relatedActuals, 'value');
-      console.log(
-        'TODO: calculate all actuals for account regardless of unit ',
-        actualsValue,
-      );
       return {
         value: isPauschal && itemsCount > 1 ? 0 : actualsValue,
         sectionRef: ms.path,

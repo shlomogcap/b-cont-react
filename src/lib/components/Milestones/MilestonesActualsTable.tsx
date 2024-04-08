@@ -83,7 +83,7 @@ const MilestoneUnitRow = ({
               }}
               hideLabel
               afterChange={(v) => {
-                const oldValue: number = watch(`${fieldPath}.oldValue`);
+                const oldValue: number = watch(`${fieldPath}.oldValue`, 0);
                 const currentValue = toNumber(v);
                 const diff = currentValue - oldValue;
                 const actualsValue = diff / (isPauschal ? 100 : 1);
@@ -98,6 +98,7 @@ const MilestoneUnitRow = ({
                   `${fieldPath}.${EActualFields.CurrentTotal}`,
                   sectionPrice * milestoneWeight * actualsValue,
                 );
+                console.log(oldValue, currentValue, diff, actualsValue);
 
                 //TODO: think how to implement this approach of setting value to accounts
                 // const fieldToSet = `accounts.${milestoneColumn}.${0}.${
