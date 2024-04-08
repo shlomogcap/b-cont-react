@@ -13,12 +13,8 @@ import { COMMON_FIELDS_SCHEMA } from '../validation/commonFieldSchema';
 export const SectionDoc = z
   .object({
     [ESectionFields.Title]: TITLE_FIELD_SCHEMA,
-    [ESectionFields.CalculationMethod]: z
-      .nativeEnum(ESectionCalculationMethod)
-      .optional(),
-    [ESectionFields.CalculationType]: z
-      .nativeEnum(ESectionCalculationType)
-      .optional(),
+    [ESectionFields.CalculationMethod]: z.nativeEnum(ESectionCalculationMethod),
+    [ESectionFields.CalculationType]: z.nativeEnum(ESectionCalculationType),
     [ESectionFields.OrderIndex]: OPTIONAL_NUMBER_SCHEMA,
     [ESectionFields.AmountType]: OPTIONAL_STRING_SCHEMA,
     [ESectionFields.ItemsStartIndex]: OPTIONAL_NUMBER_SCHEMA,
