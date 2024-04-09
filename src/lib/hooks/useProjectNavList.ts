@@ -24,22 +24,21 @@ export const useProjectNavList = ({
 }: IUseProjectNavListProps) => {
   const router = useRouter();
   const { closeModal } = useModalContext();
-  return projects
-    .filter(({ id }) => id !== projectId)
-    .map((project) => ({
-      id: String(project.id),
-      text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${
-        project[EProjectFields.Title]
-      }`,
-      onClick: () => {
-        router.push({
-          pathname: ERoutesNames.Project,
-          query: {
-            [PROJECT_ID_QUERY]: project.id,
-            [PROJECT_TYPE_QUERY]: project.projectType,
-          },
-        });
-        closeModal();
-      },
-    }));
+  return projects.map((project) => ({
+    id: String(project.id),
+    selected: project.id === projectId,
+    text: `${PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType]} : ${
+      project[EProjectFields.Title]
+    }`,
+    onClick: () => {
+      router.push({
+        pathname: ERoutesNames.Project,
+        query: {
+          [PROJECT_ID_QUERY]: project.id,
+          [PROJECT_TYPE_QUERY]: project.projectType,
+        },
+      });
+      closeModal();
+    },
+  }));
 };

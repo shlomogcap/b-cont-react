@@ -17,18 +17,17 @@ export const useProjectTypeBreadcrumb = (
       EProjectType.Residential,
       EProjectType.Entrepreneurship,
       EProjectType.PublicSpace,
-    ]
-      .filter((type) => type !== projectType)
-      .map((projectType) => ({
-        id: projectType,
-        text: PROJECT_DISPLAY_TEXTS.he.projectTypes[projectType],
-        onClick: () => {
-          router.push({
-            pathname: pathname ?? router.pathname,
-            query: { [PROJECT_TYPE_QUERY]: projectType },
-          });
-          closeModal();
-        },
-      })),
+    ].map((type) => ({
+      id: type,
+      selected: projectType === type,
+      text: PROJECT_DISPLAY_TEXTS.he.projectTypes[type],
+      onClick: () => {
+        router.push({
+          pathname: pathname ?? router.pathname,
+          query: { [PROJECT_TYPE_QUERY]: type },
+        });
+        closeModal();
+      },
+    })),
   };
 };

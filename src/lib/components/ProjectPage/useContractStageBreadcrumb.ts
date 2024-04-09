@@ -17,18 +17,17 @@ export const useContractStageBreadcrumb = (
       EContractStage.Plan,
       EContractStage.Actual,
       EContractStage.Billing,
-    ]
-      .filter((stage) => stage !== currentStage)
-      .map((stage) => ({
-        id: stage,
-        text: CONTRACTS_DISPLAY_TEXTS.he.contractStage[stage],
-        onClick: () => {
-          router.push({
-            pathname: router.pathname,
-            query: { ...router.query, [CONTRACT_STAGE_QUERY]: stage },
-          });
-          closeModal();
-        },
-      })),
+    ].map((stage) => ({
+      id: stage,
+      selected: stage === currentStage,
+      text: CONTRACTS_DISPLAY_TEXTS.he.contractStage[stage],
+      onClick: () => {
+        router.push({
+          pathname: router.pathname,
+          query: { ...router.query, [CONTRACT_STAGE_QUERY]: stage },
+        });
+        closeModal();
+      },
+    })),
   };
 };

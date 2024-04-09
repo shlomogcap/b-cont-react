@@ -11,13 +11,13 @@ import {
   ETableStates,
   EToastType,
 } from '@/lib/consts/displayTexts';
-import { ERoutesNames } from '@/lib/consts/routes';
+import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
+  EContractStage,
 } from '@/lib/consts/contracts';
-import { PageLayout } from '../PageLayout';
 import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Card } from '../commons/Card';
 import { ContractSectionFormFields } from '../ContractSectionForm/ContractSectionFormFields';
@@ -62,12 +62,15 @@ import { IWithCreationFields } from '@/lib/utils/WithFields';
 import { isNotNill } from '@/lib/utils/commonUtils';
 import { ECommonFields } from '@/lib/consts/commonFields';
 import dayjs from 'dayjs';
+import { FullPageLayout } from '../PageLayout/FullPageLayout';
+import { useRouter } from 'next/router';
 
 export const SectionActualPage = ({
   projectId,
   projectType,
   stage,
 }: ISectionActualPageProps) => {
+  const router = useRouter();
   const [activeView, setActiveView] = useState(EActualTableView.CumulativeView);
   const { data: projects, isLoading: isLoadingProjects } = useProjectsContext();
   const { data: contracts, isLoading: isLoadingContracts } =
@@ -189,9 +192,15 @@ export const SectionActualPage = ({
   });
 
   return (
-    //TODO: change to <FullPageLayout
-    <PageLayout
-      title={title}
+    <FullPageLayout
+      onBackClick={() =>
+        router.push({
+          pathname: ERoutesNames.Contract,
+          query: {
+            ...router.query,
+          },
+        })
+      }
       breadcrubms={[
         APP_BREADCRUMB,
         projectsTypeBreadCrumb,
@@ -267,6 +276,6 @@ export const SectionActualPage = ({
           </Card>
         </FormProvider>
       )}
-    </PageLayout>
+    </FullPageLayout>
   );
 };

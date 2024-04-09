@@ -7,9 +7,9 @@ import { Link } from '../Link';
 export const BlocksGrid = ({ items }: IBlocksGridProps) => {
   return (
     <StyledBlocksGrid>
-      {items.map(({ id, text, icon, href, onClick }) => {
+      {items.map(({ id, text, icon, href, onClick, selected }) => {
         const element = (
-          <StyledIBlockElement key={id} onClick={onClick}>
+          <StyledIBlockElement key={id} onClick={onClick} selected={selected}>
             {icon && React.cloneElement<ISvgIconProps>(icon, { size: 'XL' })}
             {text && <div className='text'>{text}</div>}
           </StyledIBlockElement>

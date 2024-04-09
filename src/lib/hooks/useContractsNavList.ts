@@ -22,21 +22,20 @@ export const useContractsNavList = ({
 }: IUseContractsNavListProps) => {
   const router = useRouter();
   const { closeModal } = useModalContext();
-  return contracts
-    .filter(({ id }) => id !== contractId)
-    .map((contract) => ({
-      id: String(contract.id),
-      text: contract[EContractFields.Title],
-      onClick: () => {
-        router.push({
-          pathname: ERoutesNames.Contract,
-          query: {
-            [PROJECT_ID_QUERY]: projectId,
-            [PROJECT_TYPE_QUERY]: projectType,
-            [CONTRACT_ID_QUERY]: contract.id,
-          },
-        });
-        closeModal();
-      },
-    }));
+  return contracts.map((contract) => ({
+    id: String(contract.id),
+    selected: contract.id === contractId,
+    text: contract[EContractFields.Title],
+    onClick: () => {
+      router.push({
+        pathname: ERoutesNames.Contract,
+        query: {
+          [PROJECT_ID_QUERY]: projectId,
+          [PROJECT_TYPE_QUERY]: projectType,
+          [CONTRACT_ID_QUERY]: contract.id,
+        },
+      });
+      closeModal();
+    },
+  }));
 };

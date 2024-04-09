@@ -6,6 +6,7 @@ type IBlockElement = {
   icon?: ReactElement;
   href?: string;
   onClick?: () => void;
+  selected?: boolean;
 };
 
 export type IBlocksGridProps = {

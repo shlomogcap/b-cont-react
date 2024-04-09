@@ -54,7 +54,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
         )
       : null;
 
-  const currentStage = currentAccount![EAccountFields.AccountStage];
+  const currentStage = currentAccount?.[EAccountFields.AccountStage];
   const isActiveContract =
     contract![EContractFields.Status] === EContractStatus.Active;
   const currentConfirmFlow = confirmFlow.find(

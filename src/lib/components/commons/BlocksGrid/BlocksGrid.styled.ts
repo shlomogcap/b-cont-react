@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { activateButtonMixin } from '../../styles/mixins/activateButton';
 
-export const StyledIBlockElement = styled.div`
+type IStyledIBlockElementProps = { selected?: boolean };
+
+export const StyledIBlockElement = styled.div<IStyledIBlockElementProps>`
   display: grid;
   align-items: center;
   justify-items: center;
@@ -23,6 +25,12 @@ export const StyledIBlockElement = styled.div`
     width: 5rem;
     height: 5rem;
   }
+  ${({ selected }) =>
+    selected &&
+    css`
+      background-color: var(--color-active);
+      color: white;
+    `}
 `;
 
 export const StyledBlocksGrid = styled.nav`
