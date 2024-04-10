@@ -12,13 +12,16 @@ export const FullPageLayout = ({
   className = '',
   breadcrubms,
   children,
-  backTooltipContent = 'Back To Page',
+  backTooltipContent,
   onBackClick,
 }: PropsWithChildren<IFullPageLayoutProps>) => {
   return (
     <StyledFullPageLayout className={className}>
       <StyledFullPageLayoutTopBar>
-        <Tooltip content={backTooltipContent}>
+        <Tooltip
+          content={backTooltipContent}
+          disableTooltip={!backTooltipContent}
+        >
           <StyledArrowIcon direction='right' onClick={onBackClick} size='L' />
         </Tooltip>
         {breadcrubms && <Breadcrumbs breadcrumbs={breadcrubms} />}

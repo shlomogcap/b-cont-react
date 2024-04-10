@@ -3,4 +3,5 @@ export enum EModalName {
   SectionWsForm,
   PeriodSelectionForm,
   TableToolbar,
+  ConfirmationModal,
 }

@@ -43,8 +43,10 @@ import {
 } from './SectionActualPage.utils';
 import { Tabs } from '../commons/Tabs';
 import {
+  ACTUAL_TABLE_VIEW_DISPLAY_TEXT,
   ACTUAL_TABLE_VIEW_TABS,
   EActualTableView,
+  EBackToContractPageAction,
 } from './SectionActualPage.consts';
 import { MilestonesActualsByPeriodTable } from '../Milestones/MilestonesActualsByPeriodTable';
 import { IAccountFormCell, IActualFormCell } from '../Milestones';
@@ -64,6 +66,8 @@ import { ECommonFields } from '@/lib/consts/commonFields';
 import dayjs from 'dayjs';
 import { FullPageLayout } from '../PageLayout/FullPageLayout';
 import { useRouter } from 'next/router';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
 export const SectionActualPage = ({
   projectId,
@@ -71,6 +75,7 @@ export const SectionActualPage = ({
   stage,
 }: ISectionActualPageProps) => {
   const router = useRouter();
+  const { showModal, closeModal } = useModalContext();
   const [activeView, setActiveView] = useState(EActualTableView.CumulativeView);
   const { data: projects, isLoading: isLoadingProjects } = useProjectsContext();
   const { data: contracts, isLoading: isLoadingContracts } =
@@ -193,14 +198,55 @@ export const SectionActualPage = ({
 
   return (
     <FullPageLayout
-      onBackClick={() =>
-        router.push({
-          pathname: ERoutesNames.Contract,
-          query: {
-            ...router.query,
-          },
-        })
-      }
+      onBackClick={() => {
+        const backToContractPage = () =>
+          router.push({
+            pathname: ERoutesNames.Contract,
+            query: {
+              ...router.query,
+            },
+          });
+        if (form.formState.isDirty) {
+          showModal({
+            name: EModalName.ConfirmationModal,
+            content:
+              ACTUAL_TABLE_VIEW_DISPLAY_TEXT.he.backToContractConfirmat.content,
+            actions: [
+              {
+                children:
+                  ACTUAL_TABLE_VIEW_DISPLAY_TEXT.he.backToContractConfirmat
+                    .actions[EBackToContractPageAction.SaveAndClose],
+                onClick: async () => {
+                  await onSubmit();
+                  closeModal();
+                  backToContractPage();
+                },
+                variant: 'primary',
+              },
+              {
+                children:
+                  ACTUAL_TABLE_VIEW_DISPLAY_TEXT.he.backToContractConfirmat
+                    .actions[EBackToContractPageAction.Cancel],
+                onClick: closeModal,
+                variant: 'secondary',
+              },
+              {
+                children:
+                  ACTUAL_TABLE_VIEW_DISPLAY_TEXT.he.backToContractConfirmat
+                    .actions[EBackToContractPageAction.DiscardAndClose],
+                variant: 'danger',
+                onClick: () => {
+                  backToContractPage();
+                  closeModal();
+                },
+              },
+            ],
+          });
+        } else {
+          backToContractPage();
+          closeModal();
+        }
+      }}
       breadcrubms={[
         APP_BREADCRUMB,
         projectsTypeBreadCrumb,
