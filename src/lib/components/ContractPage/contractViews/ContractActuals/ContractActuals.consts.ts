@@ -83,21 +83,43 @@ export const columns: IReportTableProps<EContractActualsReportTableFields>['colu
       },
       {
         field: EContractActualsReportTableFields.AccumulatedTotal,
+        type: 'currency',
+        options: {
+          maximumFractionDigits: 0,
+        },
       },
       {
         field: EContractActualsReportTableFields.AccumelatedDelayCalculated,
+        type: 'currency',
+        options: {
+          maximumFractionDigits: 0,
+        },
       },
       {
         field: EContractActualsReportTableFields.AccumulatedHistory,
+        type: 'currency',
+        options: {
+          maximumFractionDigits: 0,
+        },
       },
       {
         field: EContractActualsReportTableFields.CurrentAccont,
+        type: 'currency',
+        options: {
+          maximumFractionDigits: 0,
+        },
       },
       {
         field: EContractActualsReportTableFields.ContractBudget,
+        type: 'currency',
+        options: {
+          maximumFractionDigits: 0,
+        },
       },
       {
         field: EContractActualsReportTableFields.DonePercentage,
+        type: 'percentage',
+        options: { maximumFractionDigits: 2 },
       },
     ],
     CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.fields,

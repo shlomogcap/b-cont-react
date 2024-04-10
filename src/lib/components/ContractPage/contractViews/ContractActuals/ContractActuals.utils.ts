@@ -1,34 +1,87 @@
 import { IReportTableSection } from '@/lib/components/ReportTable';
-import { ESectionFields, ISectionDoc } from '@/lib/consts/sections';
+import {
+  ESectionActions,
+  ESectionFields,
+  ISectionDoc,
+} from '@/lib/consts/sections';
 import { EWorkspaceFields, IWorkspaceDoc } from '@/lib/consts/workspaces';
-import { sortBy } from 'lodash-es';
+import { sortBy, sumBy } from 'lodash-es';
 import {
   CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS,
   EAdditionsSubtractions,
   EContractActualsReportTableFields,
 } from './ContractActuals.consts';
+import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
+import { getRelatedActuals } from '@/lib/utils/actualsCalculation';
+import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 
 const DEFAULT_WORKSPACE = '(default)';
 
-export const prepareContractActualsReport = (
-  contractSections: ISectionDoc[],
-  workspaces: IWorkspaceDoc[],
-): IReportTableSection<EContractActualsReportTableFields>[] => {
+type IPrepareContractActualsReportArgs = {
+  contractSections: ISectionDoc[];
+  workspaces: IWorkspaceDoc[];
+  actuals: IActualDoc[];
+  currentAccountPeriod: number;
+};
+
+export const prepareContractActualsReport = ({
+  workspaces,
+  contractSections,
+  actuals,
+  currentAccountPeriod,
+}: IPrepareContractActualsReportArgs): IReportTableSection<EContractActualsReportTableFields>[] => {
   const wsMap = new Map(workspaces.map((ws) => [ws.id, ws]));
 
   const injectRows = (
     id: string,
   ): IReportTableSection<EContractActualsReportTableFields> => {
     const workspace = wsMap.get(id);
-    const result: Partial<
-      IReportTableSection<EContractActualsReportTableFields>
-    > = {
+    const result = {
       title: workspace!.title,
-    };
+    } as IReportTableSection<EContractActualsReportTableFields>;
 
-    const rows = contractSections.filter(
-      (row) => row[ESectionFields.WorkspaceRef] === workspace?.path,
-    );
+    const rows = contractSections
+      .filter((row) => row[ESectionFields.WorkspaceRef] === workspace?.path)
+      .map((r) => {
+        const relatedActuals = getRelatedActuals({
+          currentAccountPeriod,
+          actuals,
+          sectionRef: r.path,
+        });
+        const totalActuals = sumBy(relatedActuals, EActualFields.CurrentTotal);
+        const accountTotal = sumBy(
+          relatedActuals.filter(
+            (actual) =>
+              actual[EActualFields.PeriodNumber] === currentAccountPeriod,
+          ),
+          EActualFields.CurrentTotal,
+        );
+        const sectionContractBudget = r[ESectionFields.TotalSum];
+
+        // //TESTME: calc by:  Contract.totalDelay * (Section.currentActuals / Contract.totalActuals)
+        // const totalDelayCalc = parseFloat(totalActuals * delayPercentageCalc)
+        // const currentDelayCalc = parseFloat(currentActuals * delayPercentageCalc)
+
+        // const lastAccountsActuals = section.calcLastTotalActuals({ accountRef })
+        // const lastAccountsDelayCalc = parseFloat(lastAccountsActuals * delayPercentageHistoryCalc)
+        // const percentDone = totalActuals / budget * 100
+
+        // const currentRelease = delayRelease * (totalActuals / contractTotalActuals)
+        // const delayCurrentPariod = totalDelayAccounts>0 ?currentDelayCalc + currentRelease : 0
+        return {
+          ...r,
+          [EContractActualsReportTableFields.Title]: r[ESectionFields.Title],
+          [EContractActualsReportTableFields.AccumulatedTotal]: totalActuals,
+          [EContractActualsReportTableFields.AccumelatedDelayCalculated]: 0,
+          [EContractActualsReportTableFields.AccumulatedHistory]: 0,
+          [EContractActualsReportTableFields.CurrentAccont]:
+            accountTotal /** TODO: subtract delay from total , i.e accountTotal - delayCurrentPariod */,
+          [EContractActualsReportTableFields.ContractBudget]:
+            sectionContractBudget,
+          [EContractActualsReportTableFields.DonePercentage]:
+            totalActuals / sectionContractBudget,
+        };
+      });
     if (rows.length > 0) {
       result.rows = sortBy(rows, EWorkspaceFields.OrderIndex);
     }

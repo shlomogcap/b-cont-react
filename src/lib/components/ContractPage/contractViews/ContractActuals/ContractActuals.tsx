@@ -42,7 +42,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
   const { showModal } = useModalContext();
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   const {
-    data: { contract, accounts, sections, workspaces },
+    data: { contract, accounts, sections, workspaces, actuals },
     isLoading,
   } = useContractContext();
   const currentAccount =
@@ -140,7 +140,14 @@ export const ContractActuals = (props: IContractActualsProps) => {
       </StyledRow>
       <ReportTable
         columns={columns}
-        sections={prepareContractActualsReport(sections, workspaces)}
+        sections={prepareContractActualsReport({
+          contractSections: sections,
+          workspaces,
+          actuals,
+          currentAccountPeriod: Number(
+            currentAccount?.[EAccountFields.PeriodNumber],
+          ),
+        })}
         title={CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.reportTitle}
         onRowClick={({ id }) => {
           router.push({
