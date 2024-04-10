@@ -1,5 +1,3 @@
-import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
-import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 import { EMilestoneFields } from '@/lib/consts/milestones';
 import { sortBy, sumBy } from 'lodash-es';
 import { generateVirtualUnitsArray } from '../Milestones/Milestones.utils';
@@ -12,31 +10,7 @@ import {
 import { IAccountFormCell, IActualFormCell } from '../Milestones';
 import { toNumber } from '@/lib/utils/numberUtils';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
-
-type GetRelatedActualsBaseArgs = {
-  unit?: number;
-  currentAccountPeriod: number;
-  sectionRef: string;
-  actuals: IActualDoc[];
-  getByUnit: boolean;
-};
-type GetRelatedActualsArgs =
-  | (GetRelatedActualsBaseArgs & { getByUnit: true; unit: number })
-  | (GetRelatedActualsBaseArgs & { getByUnit: false; unit?: undefined });
-
-const getRelatedActuals = ({
-  currentAccountPeriod,
-  actuals,
-  sectionRef,
-  unit,
-  getByUnit,
-}: GetRelatedActualsArgs) =>
-  actuals.filter(
-    (actual) =>
-      actual[EActualFields.SectionRef] === sectionRef &&
-      (!getByUnit || actual[EActualFields.Unit] === unit) &&
-      actual[EActualFields.PeriodNumber] <= currentAccountPeriod,
-  );
+import { getRelatedActuals } from '@/lib/utils/actualsCalculation';
 
 export const transformActualsToFormShape = ({
   actuals,
