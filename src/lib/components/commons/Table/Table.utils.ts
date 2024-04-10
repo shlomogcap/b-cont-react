@@ -21,13 +21,28 @@ export const getDisplayValue = ({
 }: IGetDisplayValueProps) => {
   switch (type) {
     case 'number':
-      return Number(value).toLocaleString();
+      return isFinite(value)
+        ? Number(value).toLocaleString(undefined, options)
+        : '';
+    case 'currency':
+      return isFinite(value)
+        ? Number(value).toLocaleString(undefined, {
+            style: 'currency',
+            currency: 'ILS',
+            currencyDisplay: 'symbol',
+            maximumFractionDigits: 0,
+            ...(options ?? {}),
+          })
+        : '';
     case 'percentage':
-      return Number(value).toLocaleString(navigator.languages, {
-        style: 'percent',
-      });
+      return isFinite(value)
+        ? Number(value).toLocaleString(navigator.languages, {
+            style: 'percent',
+            ...(options ?? {}),
+          })
+        : '';
     case 'date':
-      return value ? dayjs(value).format('DD/MM/YYYY') : '';
+      return value ? dayjs(value).format(options?.format ?? 'DD/MM/YYYY') : '';
     case 'list':
       return options?.find(({ value }) => value === value)?.text ?? '';
     default:

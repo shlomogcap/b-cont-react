@@ -9,6 +9,7 @@ type IRowValues<T extends string> = {
 export type ITableColumnType =
   | 'string'
   | 'number'
+  | 'currency'
   | 'percentage'
   | 'date'
   | 'list';
@@ -17,11 +18,22 @@ export type ITableColumnOption = {
   text: string;
   value: string;
 };
+export type ITableColumnOptionForNumber = Intl.NumberFormatOptions;
+export type ITableColumnOptionForDate = { format?: string };
 
 type IGetColumnValueFunctionArgs<T extends string> = {
   row: ITableRow<T>;
   field: T;
 };
+
+type ColumnOptionsMapping =
+  | { type?: undefined; options?: undefined }
+  | { type: 'string'; options?: ITableColumnOption }
+  | { type: 'date'; options?: ITableColumnOptionForDate }
+  | { type: 'number'; options?: ITableColumnOptionForNumber }
+  | { type: 'currency'; options?: ITableColumnOptionForNumber }
+  | { type: 'percentage'; options?: ITableColumnOptionForNumber }
+  | { type: 'list'; options?: ITableColumnOption[] };
 
 type IGetColumnValueFunction<T extends string> = (
   args: IGetColumnValueFunctionArgs<T>,
@@ -31,16 +43,12 @@ export type ITableColumn<T extends string> = {
   field: T;
   fieldPath?: string;
   display?: string;
-  type?: ITableColumnType;
-  options?: ITableColumnOption[];
   getValue?: IGetColumnValueFunction<T>;
-};
+} & ColumnOptionsMapping;
 
 export type IGetDisplayValueProps = {
   value: any;
-  type?: ITableColumnType;
-  options?: ITableColumnOption[];
-};
+} & ColumnOptionsMapping;
 
 export type ITableRow<T extends string> = IWithCommonFields<IRowValues<T>>;
 
