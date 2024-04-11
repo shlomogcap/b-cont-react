@@ -10,6 +10,7 @@ export type IReportTableSection<T extends string> =
       level?: ISectionLevel;
       sections: IReportTableSection<T>[];
       rows?: undefined;
+      onTotalsClick?: (row: Partial<ITableRow<T>>) => void;
     }
   | {
       title: ReactNode;
@@ -17,6 +18,7 @@ export type IReportTableSection<T extends string> =
       level?: ISectionLevel;
       rows: ITableRow<T>[];
       sections?: undefined;
+      onTotalsClick?: (row: Partial<ITableRow<T>>) => void;
     };
 
 type ExtendedTableProps<T extends string> = Omit<
@@ -28,11 +30,12 @@ export type IReportTableProps<T extends string = string> =
   ExtendedTableProps<T> & {
     sections: IReportTableSection<T>[];
     onSectionClick?: (section: Partial<IReportTableSection<T>>) => void;
+    onTotalsClick?: (totalsRow: Partial<ITableRow<T>>) => void;
   };
 
 export type IReportSectionProps<T extends string = string> = Pick<
   IReportTableProps<T>,
-  'columns' | 'loading' | 'onRowClick' | 'onSectionClick'
+  'columns' | 'loading' | 'onRowClick' | 'onSectionClick' | 'onTotalsClick'
 > & {
   section: IReportTableSection<T>;
   depth: number;

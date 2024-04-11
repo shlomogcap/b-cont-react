@@ -71,6 +71,9 @@ export const StyledReportTableTotalsRow = styled(
       border-inline-start: 4px solid ${themeColor};
       background-color: ${themeColor};
       color: white;
+      &:hover {
+        background-color: ${themeColor};
+      }
     `;
   }}
 `;
