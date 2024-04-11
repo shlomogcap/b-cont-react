@@ -26,6 +26,7 @@ type IDispalyTexts = Record<
     fields: Record<EContractActualsReportTableFields, string>;
     additionsSubtractions: Record<EAdditionsSubtractions, string>;
     reportTitle: string;
+    reportTotalsTitle: string;
     chatBlockTitle: string;
     buttons: Record<EContractActualsButtons, string>;
   }
@@ -44,6 +45,7 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
       [EContractActualsReportTableFields.DonePercentage]: '% ביצוע הסכם',
     },
     reportTitle: 'דוח ביצוע מצטבר',
+    reportTotalsTitle: `סה״כ`,
     chatBlockTitle: 'לוג הערות לחוזה',
     buttons: { [EContractActualsButtons.AddNewComment]: '+ הוסף הערה חדשה' },
     additionsSubtractions: {
@@ -65,6 +67,7 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
       [EContractActualsReportTableFields.DonePercentage]: 'DonePercentage',
     },
     reportTitle: 'Cumulative Actulas Report',
+    reportTotalsTitle: 'Total',
     chatBlockTitle: 'Comments Logs',
     buttons: { [EContractActualsButtons.AddNewComment]: '+ New Comment' },
     additionsSubtractions: {

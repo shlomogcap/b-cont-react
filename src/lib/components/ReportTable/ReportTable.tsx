@@ -5,6 +5,7 @@ import {
   StyledReportTableDataRow,
   StyledReportTableHeader,
   StyledReportTableHeaders,
+  StyledReportTableTotalsRow,
   StyledSectionRowTitle,
 } from './ReportTable.styled';
 import { IReportSectionProps, IReportTableProps } from './ReportTable.types';
@@ -56,6 +57,31 @@ const ReportSection = <T extends string>({
             ))}
           </StyledReportTableDataRow>
         ))}
+      {!loading && section?.totals && (
+        <StyledReportTableTotalsRow
+          actionable={Boolean(onRowClick)}
+          level={level}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRowClick?.({ ...section?.totals });
+          }}
+          key={section?.totals.id}
+          templateColumns={columns.map(() => '1fr').join(' ')}
+        >
+          {columns.map(({ field, fieldPath, getValue, ...rest }) => (
+            <StyledTableCell
+              key={`${section?.totals?.id}/${fieldPath ?? field}`}
+            >
+              {getDisplayValue({
+                value:
+                  getValue?.({ row: section?.totals!, field }) ??
+                  section.totals?.[field],
+                ...rest,
+              }) ?? ''}
+            </StyledTableCell>
+          ))}
+        </StyledReportTableTotalsRow>
+      )}
       {!loading &&
         depth <= 3 &&
         section?.sections?.map((section, index) => (

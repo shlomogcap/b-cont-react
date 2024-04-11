@@ -14,23 +14,53 @@ import {
 import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import { getRelatedActuals } from '@/lib/utils/actualsCalculation';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
+import { EContractFields, IContractDoc } from '@/lib/consts/contracts';
+import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
+import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 
 const DEFAULT_WORKSPACE = '(default)';
 
 type IPrepareContractActualsReportArgs = {
+  contract: IContractDoc;
+  accounts: IAccountDoc[];
   contractSections: ISectionDoc[];
   workspaces: IWorkspaceDoc[];
   actuals: IActualDoc[];
-  currentAccountPeriod: number;
+  currentAccount: IAccountDoc;
 };
 
 export const prepareContractActualsReport = ({
+  contract,
+  accounts,
+  currentAccount,
   workspaces,
   contractSections,
   actuals,
-  currentAccountPeriod,
 }: IPrepareContractActualsReportArgs): IReportTableSection<EContractActualsReportTableFields>[] => {
   const wsMap = new Map(workspaces.map((ws) => [ws.id, ws]));
+  const currentAccountPeriod = Number(
+    currentAccount[EAccountFields.PeriodNumber],
+  );
+
+  const relatedAccounts = accounts.filter(
+    (account) => account[EAccountFields.PeriodNumber] <= currentAccountPeriod,
+  );
+  const contractTotalActuals = sumBy(
+    relatedAccounts,
+    EAccountFields.TotalSections,
+  );
+  const contractTotalDelay = sumBy(relatedAccounts, EAccountFields.TotalDelay);
+  const contractTotalDelayRelease = sumBy(
+    relatedAccounts,
+    EAccountFields.DelayRelease,
+  );
+  const contractTotalDelayCalc = contractTotalDelay - contractTotalDelayRelease;
+  const currentAccountDelayCalc =
+    currentAccount[EAccountFields.TotalDelay] -
+    currentAccount[EAccountFields.DelayRelease];
+  const totalHistoryDelayCalc =
+    contractTotalDelayCalc - currentAccountDelayCalc;
+  const contractBudget = contract[EContractFields.TotalAgreementSum]; // TODO:+ additions.sum - subtractions.sum
 
   const injectRows = (
     id: string,
@@ -58,9 +88,9 @@ export const prepareContractActualsReport = ({
         );
         const sectionContractBudget = r[ESectionFields.TotalSum];
 
-        // //TESTME: calc by:  Contract.totalDelay * (Section.currentActuals / Contract.totalActuals)
-        // const totalDelayCalc = parseFloat(totalActuals * delayPercentageCalc)
-        // const currentDelayCalc = parseFloat(currentActuals * delayPercentageCalc)
+        //TESTME: calc by:  Contract.totalDelay * (Section.currentActuals / Contract.totalActuals)
+        const totalDelayCalc = totalActuals * contractTotalDelayCalc;
+        const currentDelayCalc = accountTotal * currentAccountDelayCalc;
 
         // const lastAccountsActuals = section.calcLastTotalActuals({ accountRef })
         // const lastAccountsDelayCalc = parseFloat(lastAccountsActuals * delayPercentageHistoryCalc)
@@ -72,10 +102,12 @@ export const prepareContractActualsReport = ({
           ...r,
           [EContractActualsReportTableFields.Title]: r[ESectionFields.Title],
           [EContractActualsReportTableFields.AccumulatedTotal]: totalActuals,
-          [EContractActualsReportTableFields.AccumelatedDelayCalculated]: 0,
-          [EContractActualsReportTableFields.AccumulatedHistory]: 0,
+          [EContractActualsReportTableFields.AccumelatedDelayCalculated]:
+            totalDelayCalc,
+          [EContractActualsReportTableFields.AccumulatedHistory]:
+            totalActuals - totalHistoryDelayCalc,
           [EContractActualsReportTableFields.CurrentAccont]:
-            accountTotal /** TODO: subtract delay from total , i.e accountTotal - delayCurrentPariod */,
+            accountTotal - currentDelayCalc,
           [EContractActualsReportTableFields.ContractBudget]:
             sectionContractBudget,
           [EContractActualsReportTableFields.DonePercentage]:
@@ -155,9 +187,16 @@ export const prepareContractActualsReport = ({
       },
     ],
     totals: {
-      title: '100_000',
+      [EContractActualsReportTableFields.Title]:
+        CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.reportTotalsTitle,
+      [EContractActualsReportTableFields.AccumulatedTotal]:
+        contractTotalActuals,
+      [EContractActualsReportTableFields.AccumelatedDelayCalculated]: 0,
+      [EContractActualsReportTableFields.AccumulatedHistory]: 0,
+      [EContractActualsReportTableFields.CurrentAccont]: 0,
+      [EContractActualsReportTableFields.ContractBudget]: 0,
+      [EContractActualsReportTableFields.DonePercentage]: 0,
     },
   });
-  // console.log(result);
   return result;
 };

@@ -141,12 +141,12 @@ export const ContractActuals = (props: IContractActualsProps) => {
       <ReportTable
         columns={columns}
         sections={prepareContractActualsReport({
+          contract: contract!,
+          accounts,
+          currentAccount: currentAccount!,
           contractSections: sections,
           workspaces,
           actuals,
-          currentAccountPeriod: Number(
-            currentAccount?.[EAccountFields.PeriodNumber],
-          ),
         })}
         title={CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.reportTitle}
         onRowClick={({ id }) => {

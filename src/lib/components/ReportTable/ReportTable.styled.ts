@@ -62,3 +62,15 @@ export const StyledReportTableDataRow = styled(
   border-inline-start: 4px solid
     ${({ level }) => SECTION_COLORS[getPrevLevel(level)].title};
 `;
+export const StyledReportTableTotalsRow = styled(
+  StyledTableDataRow,
+)<StyledRowLevelProps>`
+  ${({ level }) => {
+    const themeColor = SECTION_COLORS[getPrevLevel(level)].totals;
+    return css`
+      border-inline-start: 4px solid ${themeColor};
+      background-color: ${themeColor};
+      color: white;
+    `;
+  }}
+`;
