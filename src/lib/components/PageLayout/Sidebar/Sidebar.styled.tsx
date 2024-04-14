@@ -4,15 +4,16 @@ import { highlightRowMixin } from '../../styles/mixins/highlightRow';
 import { EBreakpoints, TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
 
 export const StyledSidebar = styled.aside`
-  grid-column: sidebar / center-start;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 15rem 1fr;
   font: inherit;
   background-color: var(--color-white);
-  height: calc(100vh - ${TOP_BAR_HEIGHT});
+  height: 100%;
   padding-top: 2rem;
-
+  position: fixed;
+  inset-block-start: 0;
+  margin-block-start: ${TOP_BAR_HEIGHT};
   .hr {
     border-bottom: 0.5px solid var(--color-non-active);
     border-radius: 5px;

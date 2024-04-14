@@ -7,16 +7,16 @@ export const StyledPageLayout = styled.div`
   .page {
     display: grid;
     position: relative;
-    grid-template-columns: [sidebar] 7rem [center-start] 1fr [center-end];
-    @media only screen and (min-width: ${EBreakpoints.BigDesktop}) {
-      grid-template-columns: [sidebar] 30rem [center-start] 1fr [center-end];
-    }
   }
   main.content {
+    margin-inline-start: 15rem;
     padding: 3rem;
     display: grid;
     gap: 1rem;
     align-content: flex-start;
     margin-bottom: ${FOOTER_HEIGHT};
+    @media only screen and (max-width: ${EBreakpoints.BigDesktop}) {
+      margin-inline-start: 5rem;
+    }
   }
 `;

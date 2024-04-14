@@ -103,7 +103,7 @@ export const prepareContractActualsReport = ({
           [EContractActualsReportTableFields.AccumelatedDelayCalculated]:
             totalDelayCalc,
           [EContractActualsReportTableFields.AccumulatedHistory]:
-            totalActuals - totalHistoryDelayCalc,
+            totalActuals - accountTotal - totalHistoryDelayCalc,
           [EContractActualsReportTableFields.CurrentAccount]:
             accountTotal - currentDelayCalc,
           [EContractActualsReportTableFields.ContractBudget]:
