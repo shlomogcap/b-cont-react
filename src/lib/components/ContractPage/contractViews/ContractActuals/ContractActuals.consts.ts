@@ -7,14 +7,14 @@ export enum EContractActualsReportTableFields {
   AccumulatedTotal = 'accumulatedTotal',
   AccumelatedDelayCalculated = 'accumelatedDelayCalculated',
   AccumulatedHistory = 'accumulatedHistory',
-  CurrentAccont = 'currentAccont',
+  CurrentAccount = 'CurrentAccount',
   ContractBudget = 'contractBudget',
   DonePercentage = 'donePercentage',
 }
 export enum EAdditionsSubtractions {
-  SectionTitle,
-  Additions,
-  Subtractions,
+  SectionTitle = 'sectionTitle',
+  Additions = 'additions',
+  Subtractions = 'subtractions',
 }
 export enum EContractActualsButtons {
   AddNewComment,
@@ -40,7 +40,7 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
       [EContractActualsReportTableFields.AccumelatedDelayCalculated]:
         'עיכבון מצטבר',
       [EContractActualsReportTableFields.AccumulatedHistory]: 'תקופות קודמות',
-      [EContractActualsReportTableFields.CurrentAccont]: 'חשבון נוכחי',
+      [EContractActualsReportTableFields.CurrentAccount]: 'חשבון נוכחי',
       [EContractActualsReportTableFields.ContractBudget]: 'סכום הסכם',
       [EContractActualsReportTableFields.DonePercentage]: '% ביצוע הסכם',
     },
@@ -62,7 +62,7 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
         'AccumelatedDelayCalculated',
       [EContractActualsReportTableFields.AccumulatedHistory]:
         'AccumulatedHistory',
-      [EContractActualsReportTableFields.CurrentAccont]: 'CurrentAccont',
+      [EContractActualsReportTableFields.CurrentAccount]: 'CurrentAccount',
       [EContractActualsReportTableFields.ContractBudget]: 'ContractBudget',
       [EContractActualsReportTableFields.DonePercentage]: 'DonePercentage',
     },
@@ -106,7 +106,7 @@ export const columns: IReportTableProps<EContractActualsReportTableFields>['colu
         },
       },
       {
-        field: EContractActualsReportTableFields.CurrentAccont,
+        field: EContractActualsReportTableFields.CurrentAccount,
         type: 'currency',
         options: {
           maximumFractionDigits: 0,
