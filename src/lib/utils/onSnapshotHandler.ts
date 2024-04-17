@@ -1,9 +1,9 @@
-import { CollectionReference, Query, onSnapshot } from 'firebase/firestore';
+import { CollectionReference, onSnapshot } from 'firebase/firestore';
 import { Dispatch, SetStateAction } from 'react';
 import { toast } from 'react-toastify';
 
 type IOnSnapshotHanderArgs = {
-  queryRef: CollectionReference | Query;
+  collectionRef: CollectionReference;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   setData: Dispatch<SetStateAction<any[]>>;
   setError: Dispatch<SetStateAction<string>>;
@@ -11,14 +11,14 @@ type IOnSnapshotHanderArgs = {
 };
 
 export const onSnapshotHandler = ({
-  queryRef,
+  collectionRef,
   setIsLoading,
   setData,
   setError,
   generalErrorMessage = '',
 }: IOnSnapshotHanderArgs) =>
   onSnapshot(
-    queryRef,
+    collectionRef,
     (snapshot) => {
       setIsLoading(true);
 

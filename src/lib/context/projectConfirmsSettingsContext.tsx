@@ -38,13 +38,13 @@ export const ProjectConfirmsSettingsProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   useEffect(() => {
-    const queryRef = collection(
+    const collectionRef = collection(
       firestore,
       `projects/${projectId}/confirmsSettings`,
     );
 
     const unsubscribe = onSnapshotHandler({
-      queryRef,
+      collectionRef,
       setIsLoading,
       setData,
       setError,

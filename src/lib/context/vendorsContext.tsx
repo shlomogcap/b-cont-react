@@ -34,10 +34,10 @@ export const VendorsProvider = ({
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const queryRef = collection(firestore, 'vendors');
+    const collectionRef = collection(firestore, 'vendors');
 
     const unsubscribe = onSnapshotHandler({
-      queryRef,
+      collectionRef,
       setIsLoading,
       setData,
       setError,

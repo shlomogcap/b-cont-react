@@ -6,13 +6,7 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import {
-  collection,
-  collectionGroup,
-  getDocs,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, query, where } from 'firebase/firestore';
 import { EContractFields, IContractDoc } from '../consts/contracts';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IAccountDoc } from '../consts/accounts/AccountDoc';
@@ -62,10 +56,13 @@ export const ProjectContractsProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   useEffect(() => {
-    const queryRef = collection(firestore, `projects/${projectId}/contracts`);
+    const collectionRef = collection(
+      firestore,
+      `projects/${projectId}/contracts`,
+    );
 
     const unsubscribe = onSnapshotHandler({
-      queryRef,
+      collectionRef,
       setIsLoading,
       setData: setContractsData,
       setError,
@@ -88,12 +85,12 @@ export const ProjectContractsProvider = ({
           contract[EContractFields.CurrentAccountPeriod],
         ),
       );
-      onSnapshotHandler({
-        queryRef: accountDocQuery,
-        setData: setContractsLastAccounts,
-        setError,
-        setIsLoading,
-      });
+      // onSnapshotHandler({
+      //   collectionRef: accountDocQuery,
+      //   setData: setContractsLastAccounts,
+      //   setError,
+      //   setIsLoading,
+      // });
     });
   }, [contracts]);
 
