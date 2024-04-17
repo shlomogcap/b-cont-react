@@ -53,7 +53,7 @@ export const projectContractsTableFilters: IFilterItem<EContractFields>[] = [
       value,
       text: CONTRACTS_DISPLAY_TEXTS.he.contractStatus[value],
     })),
-    defaultValue: [EContractStatus.Plan],
+    defaultValue: [EContractStatus.Plan, EContractStatus.Active],
   },
   {
     type: EFilterItemType.Buttons,
