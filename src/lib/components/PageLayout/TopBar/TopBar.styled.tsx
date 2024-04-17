@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { StyledBreadcrumbs } from '../Breadcrubms/Breadcrumbs.styled';
 import { TOP_BAR_HEIGHT } from '../../../consts/stylesConsts';
 import { Logo } from '../Logo';
+import { StyledUserAvatar } from '../UserAvatar/UserAvatar.styled';
 
 export const StyledTopBar = styled.div`
   box-shadow: var(--box-shadow-light);
@@ -30,19 +31,10 @@ export const StyledTopBar = styled.div`
       color: var(--color-active);
     }
   }
-  & .user-box {
+  & ${StyledUserAvatar} {
     grid-column: 4;
-    //TODO: replace with userImage
-    border-radius: 50%;
-    padding: 2rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: red;
     margin-inline-end: 0.5rem;
-    color: white;
+    cursor: pointer;
   }
   & ${StyledBreadcrumbs} {
     grid-column: 1/-1;
