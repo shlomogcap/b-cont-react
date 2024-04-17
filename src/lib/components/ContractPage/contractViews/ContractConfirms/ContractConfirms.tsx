@@ -29,9 +29,10 @@ export const ContractConfirms = ({
   handleConfirmAccountStage,
 }: IContractConfirmsProps) => {
   const { showModal } = useModalContext();
-  const stage = account[EAccountFields.AccountStage];
+  const stage =
+    account[EAccountFields.AccountStage] ?? EConfirmFlowControls.Start;
   const confirmsData = account[EAccountFields.ConfirmFlow];
-  const [month, year] = account.period?.split(' ') ?? [];
+  const [month, year] = account[EAccountFields.Period]?.split(' ') ?? [];
   const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   return (
     <Card title={CONFIRMS_DISPLAY_TEXTS.he.confirmViewTitle}>
@@ -58,6 +59,7 @@ export const ContractConfirms = ({
                 showModal({
                   name: EModalName.PeriodSelectionForm,
                   lastPeriod: `${year}-${Number(month) - 1}-1`,
+                  lastPeriodNumber: account[EAccountFields.PeriodNumber],
                   periodUnit: EPeriodUnit.M,
                   confirmFlow,
                 })

@@ -93,12 +93,12 @@ const MilestoneUnitRow = ({
                   [EActualCalcFields._Weight]: milestoneWeight,
                   [EActualCalcFields._Price]: sectionPrice * milestoneWeight,
                   [EActualCalcFields._ActualsValue]: actualsValue,
+                  [EActualCalcFields._ModelId]: '',
                 });
                 setValue(
                   `${fieldPath}.${EActualFields.CurrentTotal}`,
                   sectionPrice * milestoneWeight * actualsValue,
                 );
-                console.log(oldValue, currentValue, diff, actualsValue);
 
                 //TODO: think how to implement this approach of setting value to accounts
                 // const fieldToSet = `accounts.${milestoneColumn}.${0}.${

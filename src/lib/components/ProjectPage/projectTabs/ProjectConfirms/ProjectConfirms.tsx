@@ -41,6 +41,7 @@ import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
 import { sortBy } from 'lodash-es';
+import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 
 export const ProjectConfirms = (_: IProjectConfirmsProps) => {
   const form = useForm<IProjectConfirmsFilterDoc>({
@@ -56,7 +57,10 @@ export const ProjectConfirms = (_: IProjectConfirmsProps) => {
 };
 
 const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
-  const { data: contracts, isLoading } = useProjectContractsContext();
+  const {
+    data: { contracts, contractAccountMap },
+    isLoading,
+  } = useProjectContractsContext();
   const { data: confirms } = useProjectConfirmsSettingsContext();
   const { data: vendors } = useVendorsContext();
   const router = useRouter();
@@ -97,11 +101,26 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
       field: EContractFields.CurrentAccountPeriod,
       display:
         CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.CurrentAccountPeriod],
+      getValue: ({ row }) =>
+        contractAccountMap[String(row.path)]?.[0]?.[EAccountFields.Period],
     },
-    ...sortBy(confirms, EConfirmFields.OrderIndex).map((c) => ({
-      field: c.id as any,
-      display: c.title,
-    })),
+    ...sortBy(confirms, EConfirmFields.OrderIndex).map(
+      (c) =>
+        ({
+          field: c.id as any,
+          display: c.title,
+          getValue: ({ row }) => {
+            const currentAccount = contractAccountMap[String(row.path)]?.[0];
+            return currentAccount?.[EAccountFields.ConfirmFlow]?.find(
+              (confirm) => confirm.id === c.id,
+            )?.approvedAt;
+          },
+          type: 'date',
+          options: {
+            format: 'DD/MM/YY',
+          },
+        } as ITableColumn<any>),
+    ),
     {
       field: EContractFields.ActualsStatus,
       display: CONTRACTS_DISPLAY_TEXTS.he.fields[EContractFields.ActualsStatus],

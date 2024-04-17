@@ -96,7 +96,8 @@ export const ContractActuals = (props: IContractActualsProps) => {
             }
           : flow,
       ),
-      [EAccountFields.AccountStage]: nextConfirmFlow?.id ?? '',
+      [EAccountFields.AccountStage]:
+        nextConfirmFlow?.id ?? EConfirmFlowControls.End,
     };
     try {
       await setDoc(docRef, preparedData, { merge: true });
@@ -116,14 +117,18 @@ export const ContractActuals = (props: IContractActualsProps) => {
           />
         ) : (
           <Button
-            onClick={() =>
+            onClick={() => {
+              const [month, year] =
+                String(currentAccount?.[EAccountFields.Period]).split(' ') ??
+                [];
               showModal({
                 name: EModalName.PeriodSelectionForm,
-                lastPeriod: '',
+                lastPeriod: `${year}-${Number(month) - 1}-1`,
+                lastPeriodNumber: currentAccount?.[EAccountFields.PeriodNumber],
                 periodUnit: EPeriodUnit.M,
                 confirmFlow,
-              })
-            }
+              });
+            }}
             disabled={!isActiveContract}
           >
             First Account
@@ -159,7 +164,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
           });
         }}
       />
-      <StyledRow>
+      <StyledRow style={{ justifyContent: 'flex-end' }}>
         {currentStage &&
           ![EConfirmFlowControls.Start, EConfirmFlowControls.End].includes(
             currentStage as EConfirmFlowControls,

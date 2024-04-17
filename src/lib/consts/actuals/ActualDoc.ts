@@ -12,13 +12,15 @@ export const ActualDoc = z
   .object({
     [EActualFields.Title]: TITLE_FIELD_SCHEMA,
     [EActualFields.Description]: OPTIONAL_STRING_SCHEMA,
-    [EActualFields.Calc]: z.object({
-      [EActualCalcFields._ModelId]: STRING_SCHEMA,
-      [EActualCalcFields._ActualsValue]: NUMBER_SCHEMA,
-      [EActualCalcFields._ItemPrice]: NUMBER_SCHEMA,
-      [EActualCalcFields._Weight]: NUMBER_SCHEMA,
-      [EActualCalcFields._Price]: NUMBER_SCHEMA,
-    }),
+    [EActualFields.Calc]: z
+      .object({
+        [EActualCalcFields._ModelId]: STRING_SCHEMA,
+        [EActualCalcFields._ActualsValue]: NUMBER_SCHEMA,
+        [EActualCalcFields._ItemPrice]: NUMBER_SCHEMA,
+        [EActualCalcFields._Weight]: NUMBER_SCHEMA,
+        [EActualCalcFields._Price]: NUMBER_SCHEMA,
+      })
+      .optional(),
     [EActualFields.CurrentTotal]: NUMBER_SCHEMA,
     [EActualFields.SectionRef]: STRING_SCHEMA,
     [EActualFields.PeriodNumber]: NUMBER_SCHEMA,

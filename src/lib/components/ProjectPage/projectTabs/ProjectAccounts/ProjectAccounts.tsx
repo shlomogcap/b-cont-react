@@ -42,7 +42,9 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
 };
 
 const ProjectAccountsInner = (props: IProjectAccountsProps) => {
-  const { data: contracts } = useProjectContractsContext();
+  const {
+    data: { contracts },
+  } = useProjectContractsContext();
   const { data: vendors } = useVendorsContext();
 
   const projectAccountsColumns = fieldsNamesToColumns(

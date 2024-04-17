@@ -28,6 +28,8 @@ import { firestore } from '@/lib/firebase';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { toast } from 'react-toastify';
 import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
+import { showToastError } from '@/lib/utils/showToastError';
+import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
 
 export const PeriodSelectionModal = ({
   lastPeriod,
@@ -38,6 +40,7 @@ export const PeriodSelectionModal = ({
   const router = useRouter();
   const form = useForm<IAccountDoc>({
     defaultValues: {
+      accountStage: EConfirmFlowControls.Start,
       period: dayjs(lastPeriod || undefined)
         .add(1, 'months')
         .set('date', 1)
@@ -76,8 +79,7 @@ export const PeriodSelectionModal = ({
       closeModal();
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
     } catch (err) {
-      //TODO: promt error message in general way...
-      toast.error(JSON.stringify(err));
+      showToastError(err);
     }
   };
   const onError: SubmitErrorHandler<IAccountDoc> = (errors) => {

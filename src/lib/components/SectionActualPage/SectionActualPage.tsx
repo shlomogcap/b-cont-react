@@ -11,12 +11,11 @@ import {
   ETableStates,
   EToastType,
 } from '@/lib/consts/displayTexts';
-import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
+import { ERoutesNames } from '@/lib/consts/routes';
 import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
-  EContractStage,
 } from '@/lib/consts/contracts';
 import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Card } from '../commons/Card';
@@ -78,8 +77,10 @@ export const SectionActualPage = ({
   const { showModal, closeModal } = useModalContext();
   const [activeView, setActiveView] = useState(EActualTableView.CumulativeView);
   const { data: projects, isLoading: isLoadingProjects } = useProjectsContext();
-  const { data: contracts, isLoading: isLoadingContracts } =
-    useProjectContractsContext();
+  const {
+    data: { contracts },
+    isLoading: isLoadingContracts,
+  } = useProjectContractsContext();
   const {
     data: { contract, workspaces, accounts, actuals },
   } = useContractContext();
@@ -179,7 +180,7 @@ export const SectionActualPage = ({
         const dataToSet: IWithCreationFields<IActualDoc> = {
           [EActualFields.Title]: actualDocTitle,
           [EActualFields.PeriodNumber]: currentAccountPeriod,
-          [EActualFields.SectionRef]: actualFormCell?.sectionRef,
+          [EActualFields.SectionRef]: String(actualFormCell?.sectionRef),
           [EActualFields.Unit]: Number(actualFormCell?.unit),
           [EActualFields.Value]: Number(actualFormCell?.diffValue),
           [EActualFields.CurrentTotal]: Number(actualFormCell?.currentTotal),

@@ -6,17 +6,19 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection, query, where } from 'firebase/firestore';
-import { EContractFields, IContractDoc } from '../consts/contracts';
+import { collection } from 'firebase/firestore';
+import { IContractDoc } from '../consts/contracts';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IAccountDoc } from '../consts/accounts/AccountDoc';
+import { groupBy, sortBy } from 'lodash-es';
+import { extractParentPath } from '../utils/urlUtils';
 import { EAccountFields } from '../consts/accounts/AccountFields';
 
-type IContractLastAccountData = { [contractId: string]: IAccountDoc };
+type IContractLastAccountData = { [contractId: string]: IAccountDoc[] };
 
 type IProjectContractData = {
   contracts: IContractDoc[];
-  contractLastAccount: IContractLastAccountData;
+  contractAccountMap: IContractLastAccountData;
 };
 
 type IProjectContractsContext = {
@@ -30,7 +32,7 @@ type IProjectContractsProviderProps = {
 };
 
 const ProjectContractsContext = createContext<IProjectContractsContext>({
-  data: { contracts: [], contractLastAccount: {} },
+  data: { contracts: [], contractAccountMap: {} },
   isLoading: false,
   error: '',
 });
@@ -38,8 +40,9 @@ const ProjectContractsContext = createContext<IProjectContractsContext>({
 const prepareContractLastAccountMap = (
   accounts: IAccountDoc[],
 ): IContractLastAccountData => {
-  console.log(accounts);
-  return {};
+  return groupBy(sortBy(accounts, EAccountFields.PeriodNumber), (acc) =>
+    extractParentPath(acc.path),
+  ) as any;
 };
 
 export const useProjectContractsContext = () =>
@@ -72,26 +75,18 @@ export const ProjectContractsProvider = ({
   }, [projectId]);
 
   useEffect(() => {
-    contracts.forEach(async (contract) => {
+    for (const contract of contracts) {
       const accountCollectionRef = collection(
         firestore,
         `${contract.path}/accounts`,
       );
-      const accountDocQuery = query(
-        accountCollectionRef,
-        where(
-          EAccountFields.Period,
-          '==',
-          contract[EContractFields.CurrentAccountPeriod],
-        ),
-      );
-      // onSnapshotHandler({
-      //   collectionRef: accountDocQuery,
-      //   setData: setContractsLastAccounts,
-      //   setError,
-      //   setIsLoading,
-      // });
-    });
+      onSnapshotHandler({
+        collectionRef: accountCollectionRef,
+        setData: setContractsLastAccounts,
+        setError,
+        setIsLoading,
+      });
+    }
   }, [contracts]);
 
   return (
@@ -99,7 +94,7 @@ export const ProjectContractsProvider = ({
       value={{
         data: {
           contracts,
-          contractLastAccount: prepareContractLastAccountMap(
+          contractAccountMap: prepareContractLastAccountMap(
             contractsLastAccounts,
           ),
         },

@@ -55,7 +55,10 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
 };
 
 const ProjectContractsInner = (props_: IProjectContractsProps) => {
-  const { data: rows, isLoading } = useProjectContractsContext();
+  const {
+    data: { contracts },
+    isLoading,
+  } = useProjectContractsContext();
   const { data: vendors } = useVendorsContext();
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
@@ -109,7 +112,7 @@ const ProjectContractsInner = (props_: IProjectContractsProps) => {
     <Table
       loading={isLoading}
       columns={contractTableColumns}
-      rows={rows
+      rows={contracts
         .filter((r) => filterByFilterPanel(r, watchedFields as any))
         .filter((r) =>
           filterBySearch(r, searchFields, searchValue, getVendorDetails),

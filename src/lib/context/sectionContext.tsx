@@ -59,9 +59,9 @@ export const SectionProvider = ({
           setSection(null);
         } else {
           setSection({
+            ...(snapshot.data() as ISectionDoc),
             path: snapshot.ref.path,
             id: snapshot.id,
-            ...(snapshot.data() as ISectionDoc),
           });
         }
       },
