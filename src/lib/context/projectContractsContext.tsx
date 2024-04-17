@@ -6,19 +6,27 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection, query, where } from 'firebase/firestore';
+import {
+  collection,
+  collectionGroup,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { EContractFields, IContractDoc } from '../consts/contracts';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
 import { IAccountDoc } from '../consts/accounts/AccountDoc';
 import { EAccountFields } from '../consts/accounts/AccountFields';
 
+type IContractLastAccountData = { [contractId: string]: IAccountDoc };
+
 type IProjectContractData = {
-  contract: IContractDoc[];
-  lastAccount: IAccountDoc;
+  contracts: IContractDoc[];
+  contractLastAccount: IContractLastAccountData;
 };
 
 type IProjectContractsContext = {
-  data: IProjectContractData[];
+  data: IProjectContractData;
   isLoading: boolean;
   error: string;
 };
@@ -28,10 +36,17 @@ type IProjectContractsProviderProps = {
 };
 
 const ProjectContractsContext = createContext<IProjectContractsContext>({
-  data: [],
+  data: { contracts: [], contractLastAccount: {} },
   isLoading: false,
   error: '',
 });
+
+const prepareContractLastAccountMap = (
+  accounts: IAccountDoc[],
+): IContractLastAccountData => {
+  console.log(accounts);
+  return {};
+};
 
 export const useProjectContractsContext = () =>
   useContext(ProjectContractsContext);
@@ -40,7 +55,10 @@ export const ProjectContractsProvider = ({
   projectId,
   children,
 }: PropsWithChildren<IProjectContractsProviderProps>) => {
-  const [data, setData] = useState<IContractDoc[]>([]);
+  const [contracts, setContractsData] = useState<IContractDoc[]>([]);
+  const [contractsLastAccounts, setContractsLastAccounts] = useState<
+    IAccountDoc[]
+  >([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   useEffect(() => {
@@ -49,7 +67,7 @@ export const ProjectContractsProvider = ({
     const unsubscribe = onSnapshotHandler({
       queryRef,
       setIsLoading,
-      setData,
+      setData: setContractsData,
       setError,
     });
 
@@ -57,7 +75,7 @@ export const ProjectContractsProvider = ({
   }, [projectId]);
 
   useEffect(() => {
-    data.forEach((contract) => {
+    contracts.forEach(async (contract) => {
       const accountCollectionRef = collection(
         firestore,
         `${contract.path}/accounts`,
@@ -72,15 +90,26 @@ export const ProjectContractsProvider = ({
       );
       onSnapshotHandler({
         queryRef: accountDocQuery,
-        setData,
+        setData: setContractsLastAccounts,
         setError,
         setIsLoading,
       });
     });
-  }, [data]);
+  }, [contracts]);
 
   return (
-    <ProjectContractsContext.Provider value={{ data, isLoading, error }}>
+    <ProjectContractsContext.Provider
+      value={{
+        data: {
+          contracts,
+          contractLastAccount: prepareContractLastAccountMap(
+            contractsLastAccounts,
+          ),
+        },
+        isLoading,
+        error,
+      }}
+    >
       {children}
     </ProjectContractsContext.Provider>
   );
