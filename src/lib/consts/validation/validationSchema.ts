@@ -20,7 +20,7 @@ export const NUMBER_SCHEMA = z.preprocess(
 export const STRING_SCHEMA = z.string();
 
 export const PASSWORD_SCHEMA = STRING_SCHEMA.refine(
-  (v) => v.length < PASSWORD_MIN_LENGTH,
+  (v) => v.length >= PASSWORD_MIN_LENGTH,
   {
     message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`,
   },
