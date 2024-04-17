@@ -10,6 +10,7 @@ import { ContractSectionModal } from '@/lib/components/ContractSectionModal';
 import { PeriodSelectionModal } from '@/lib/components/PeriodSelectionModal';
 import { TableToolBarModal } from '@/lib/components/TableToolBarModal';
 import { ConfirmationModal } from '@/lib/components/commons/ConfirmationModal';
+import { LoginModal } from '@/lib/components/LoginModal';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -30,6 +31,8 @@ const renderModal = (modalData: IModalData) => {
       return <TableToolBarModal {...modalData} />;
     case EModalName.ConfirmationModal:
       return <ConfirmationModal {...modalData} />;
+    case EModalName.LoginModal:
+      return <LoginModal {...modalData} />;
     default:
       return null;
   }

@@ -5,6 +5,7 @@ import { IContractSectionModalData } from '@/lib/components/ContractSectionModal
 import { IPeriodSelectionModalData } from '@/lib/components/PeriodSelectionModal';
 import { ITableToolBarModalData } from '@/lib/components/TableToolBarModal';
 import { IConfirmationModalData } from '@/lib/components/commons/ConfirmationModal';
+import { ILoginModalData } from '@/lib/components/LoginModal';
 
 export type IModalProviderProps = {
   children?: ReactNode;
@@ -21,4 +22,5 @@ export type IModalData = { name: EModalName } & (
   | IPeriodSelectionModalData
   | ITableToolBarModalData
   | IConfirmationModalData
+  | ILoginModalData
 );

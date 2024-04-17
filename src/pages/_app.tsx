@@ -7,8 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { VendorsProvider } from '@/lib/context/vendorsContext';
 import { UsersProvider } from '@/lib/context/usersContext';
 import { ModalProvider } from '@/lib/context/ModalProvider';
+import { LoginModal } from '@/lib/components/LoginModal';
+import { useAuth } from '@/lib/hooks/useAuth';
+import { UserProvider } from '@/lib/context/userContext';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { user, loading, error } = useAuth();
   return (
     <>
       <Head>
@@ -19,14 +23,17 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyle dir='rtl' />
       <ModalProvider>
-        <UsersProvider>
-          <ProjectsProvider>
-            <VendorsProvider>
-              <ToastContainer position='top-center' closeOnClick={false} />
-              <Component {...pageProps} />
-            </VendorsProvider>
-          </ProjectsProvider>
-        </UsersProvider>
+        <UserProvider value={{ data: user, isLoading: loading, error }}>
+          <UsersProvider>
+            <ProjectsProvider>
+              <VendorsProvider>
+                <ToastContainer position='top-center' closeOnClick={false} />
+                {loading ? 'Loading...' : <Component {...pageProps} />}
+                {!user && !loading && <LoginModal {...({} as any)} />}
+              </VendorsProvider>
+            </ProjectsProvider>
+          </UsersProvider>
+        </UserProvider>
       </ModalProvider>
     </>
   );

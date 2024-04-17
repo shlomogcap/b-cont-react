@@ -4,4 +4,5 @@ export enum EModalName {
   PeriodSelectionForm,
   TableToolbar,
   ConfirmationModal,
+  LoginModal,
 }
