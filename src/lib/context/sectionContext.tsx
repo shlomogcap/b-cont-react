@@ -59,15 +59,15 @@ export const SectionProvider = ({
           setSection(null);
         } else {
           setSection({
-            path: snapshot.ref.path,
-            id: snapshot.id,
             ...(snapshot.data() as ISectionDoc),
+            id: snapshot.id,
+            path: snapshot.ref.path,
           });
         }
       },
     );
     const milestonesSubscription = onSnapshotHandler({
-      collectionRef: collection(firestore, `${sectionPath}/milestones`),
+      queryRef: collection(firestore, `${sectionPath}/milestones`),
       setData: setMilestones,
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),

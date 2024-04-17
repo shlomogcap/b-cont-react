@@ -34,10 +34,10 @@ export const ProjectsProvider = ({
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const collectionRef = collection(firestore, 'projects');
+    const queryRef = collection(firestore, 'projects');
 
     const unsubscribe = onSnapshotHandler({
-      collectionRef,
+      queryRef,
       setIsLoading,
       setData,
       setError,

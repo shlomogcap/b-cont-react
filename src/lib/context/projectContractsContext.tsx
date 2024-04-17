@@ -6,12 +6,19 @@ import {
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection } from 'firebase/firestore';
-import { IContractDoc } from '../consts/contracts';
+import { collection, query, where } from 'firebase/firestore';
+import { EContractFields, IContractDoc } from '../consts/contracts';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
+import { IAccountDoc } from '../consts/accounts/AccountDoc';
+import { EAccountFields } from '../consts/accounts/AccountFields';
+
+type IProjectContractData = {
+  contract: IContractDoc[];
+  lastAccount: IAccountDoc;
+};
 
 type IProjectContractsContext = {
-  data: IContractDoc[];
+  data: IProjectContractData[];
   isLoading: boolean;
   error: string;
 };
@@ -37,13 +44,10 @@ export const ProjectContractsProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   useEffect(() => {
-    const collectionRef = collection(
-      firestore,
-      `projects/${projectId}/contracts`,
-    );
+    const queryRef = collection(firestore, `projects/${projectId}/contracts`);
 
     const unsubscribe = onSnapshotHandler({
-      collectionRef,
+      queryRef,
       setIsLoading,
       setData,
       setError,
@@ -51,6 +55,29 @@ export const ProjectContractsProvider = ({
 
     return () => unsubscribe();
   }, [projectId]);
+
+  useEffect(() => {
+    data.forEach((contract) => {
+      const accountCollectionRef = collection(
+        firestore,
+        `${contract.path}/accounts`,
+      );
+      const accountDocQuery = query(
+        accountCollectionRef,
+        where(
+          EAccountFields.Period,
+          '==',
+          contract[EContractFields.CurrentAccountPeriod],
+        ),
+      );
+      onSnapshotHandler({
+        queryRef: accountDocQuery,
+        setData,
+        setError,
+        setIsLoading,
+      });
+    });
+  }, [data]);
 
   return (
     <ProjectContractsContext.Provider value={{ data, isLoading, error }}>

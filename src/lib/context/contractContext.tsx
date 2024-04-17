@@ -81,25 +81,25 @@ export const ContractProvider = ({
       },
     );
     const accountsSubscription = onSnapshotHandler({
-      collectionRef: collection(firestore, `${contractPath}/accounts`),
+      queryRef: collection(firestore, `${contractPath}/accounts`),
       setData: setAccounts,
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
     const actualsSubscription = onSnapshotHandler({
-      collectionRef: collection(firestore, `${contractPath}/actuals`),
+      queryRef: collection(firestore, `${contractPath}/actuals`),
       setData: setActuals,
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
     const sectionsSubscription = onSnapshotHandler({
-      collectionRef: collection(firestore, `${contractPath}/sections`),
+      queryRef: collection(firestore, `${contractPath}/sections`),
       setData: setSections,
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
     const workspacesSubscription = onSnapshotHandler({
-      collectionRef: collection(firestore, `${contractPath}/workspaces`),
+      queryRef: collection(firestore, `${contractPath}/workspaces`),
       setData: setWorkspaces,
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),

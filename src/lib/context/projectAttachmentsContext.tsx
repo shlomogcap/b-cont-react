@@ -37,13 +37,10 @@ export const ProjectOddJobsProvider = ({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   useEffect(() => {
-    const collectionRef = collection(
-      firestore,
-      `projects/${projectId}/attachments`,
-    );
+    const queryRef = collection(firestore, `projects/${projectId}/attachments`);
 
     const unsubscribe = onSnapshotHandler({
-      collectionRef,
+      queryRef,
       setIsLoading,
       setData,
       setError,
