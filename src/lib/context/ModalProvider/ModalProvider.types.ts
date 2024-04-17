@@ -6,6 +6,7 @@ import { IPeriodSelectionModalData } from '@/lib/components/PeriodSelectionModal
 import { ITableToolBarModalData } from '@/lib/components/TableToolBarModal';
 import { IConfirmationModalData } from '@/lib/components/commons/ConfirmationModal';
 import { ILoginModalData } from '@/lib/components/LoginModal';
+import { IEditUserFormModalData } from '@/lib/components/EditUserForm';
 
 export type IModalProviderProps = {
   children?: ReactNode;
@@ -23,4 +24,5 @@ export type IModalData = { name: EModalName } & (
   | ITableToolBarModalData
   | IConfirmationModalData
   | ILoginModalData
+  | IEditUserFormModalData
 );

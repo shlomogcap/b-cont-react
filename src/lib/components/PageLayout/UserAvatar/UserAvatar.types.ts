@@ -1,1 +1,3 @@
-export type IUserAvatarProps = {};
+export type IUserAvatarProps = {
+  onClick?: () => void;
+};

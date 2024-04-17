@@ -5,4 +5,5 @@ export enum EModalName {
   TableToolbar,
   ConfirmationModal,
   LoginModal,
+  EditUserForm,
 }

@@ -11,6 +11,7 @@ import { PeriodSelectionModal } from '@/lib/components/PeriodSelectionModal';
 import { TableToolBarModal } from '@/lib/components/TableToolBarModal';
 import { ConfirmationModal } from '@/lib/components/commons/ConfirmationModal';
 import { LoginModal } from '@/lib/components/LoginModal';
+import { EditUserModal } from '@/lib/components/EditUserForm/EditUserForm';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -33,6 +34,8 @@ const renderModal = (modalData: IModalData) => {
       return <ConfirmationModal {...modalData} />;
     case EModalName.LoginModal:
       return <LoginModal {...modalData} />;
+    case EModalName.EditUserForm:
+      return <EditUserModal {...modalData} />;
     default:
       return null;
   }

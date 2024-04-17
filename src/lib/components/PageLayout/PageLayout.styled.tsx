@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { EBreakpoints, FOOTER_HEIGHT } from '../../consts/stylesConsts';
+import {
+  EBreakpoints,
+  FOOTER_HEIGHT,
+  TOP_BAR_HEIGHT,
+} from '../../consts/stylesConsts';
 
 export const StyledPageLayout = styled.div`
   min-width: fit-content;
@@ -7,6 +11,7 @@ export const StyledPageLayout = styled.div`
   .page {
     display: grid;
     position: relative;
+    min-height: calc(100vh - ${TOP_BAR_HEIGHT});
   }
   main.content {
     margin-inline-start: 15rem;

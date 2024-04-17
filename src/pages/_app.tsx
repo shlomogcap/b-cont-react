@@ -22,19 +22,19 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <GlobalStyle dir='rtl' />
-      <ModalProvider>
-        <UserProvider value={{ data: user, isLoading: loading, error }}>
-          <UsersProvider>
-            <ProjectsProvider>
-              <VendorsProvider>
+      <UserProvider value={{ data: user, isLoading: loading, error }}>
+        <UsersProvider>
+          <ProjectsProvider>
+            <VendorsProvider>
+              <ModalProvider>
                 <ToastContainer position='top-center' closeOnClick={false} />
                 {loading ? 'Loading...' : <Component {...pageProps} />}
                 {!user && !loading && <LoginModal {...({} as any)} />}
-              </VendorsProvider>
-            </ProjectsProvider>
-          </UsersProvider>
-        </UserProvider>
-      </ModalProvider>
+              </ModalProvider>
+            </VendorsProvider>
+          </ProjectsProvider>
+        </UsersProvider>
+      </UserProvider>
     </>
   );
 }
