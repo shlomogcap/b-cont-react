@@ -7,7 +7,7 @@ import {
   StyledTableDataRow,
   StyledTableTotals,
 } from './Table.styled';
-import { ITableProps } from './Table.types';
+import { ITableColumn, ITableProps, ITableRow } from './Table.types';
 import { EmptyState } from '../EmptyState';
 import { DISPLAY_TEXTS, ETableStates } from '@/lib/consts/displayTexts';
 import { getDisplayValue } from './Table.utils';
@@ -16,17 +16,24 @@ import { Badge } from '../Badge';
 import { AddItem } from '../../AddItem';
 import { ToolBar } from '../ToolBar';
 import { Tooltip } from '../Tooltip';
-import { ReactNode } from 'react';
 
-const TableCell = ({
-  displayText,
-  tooltipContent,
-}: {
-  displayText: string;
-  tooltipContent?: ReactNode;
-}) => {
+type ITableCellProps<T extends string = string> = {
+  column: ITableColumn<T>;
+  row: ITableRow<T>;
+};
+
+const TableCell = <T extends string = string>({
+  column,
+  row,
+}: ITableCellProps<T>) => {
+  const { field, getValue, getTooltipContent, ...rest } = column;
+  const displayText =
+    getDisplayValue({
+      value: getValue?.({ row, field }) ?? row?.[field],
+      ...rest,
+    }) ?? '';
   return (
-    <Tooltip content={tooltipContent || displayText}>
+    <Tooltip content={getTooltipContent?.({ row, field }) ?? displayText}>
       <StyledTableCell>{displayText}</StyledTableCell>
     </Tooltip>
   );
@@ -69,19 +76,13 @@ export const Table = <T extends string = string>({
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
-            {columns.map(({ field, fieldPath, getValue, ...rest }) => {
-              const displayText =
-                getDisplayValue({
-                  value: getValue?.({ row, field }) ?? row?.[field],
-                  ...rest,
-                }) ?? '';
-              return (
-                <TableCell
-                  key={`${row.id}/${fieldPath ?? field}`}
-                  displayText={displayText}
-                />
-              );
-            })}
+            {columns.map((column) => (
+              <TableCell
+                key={`${row.id}/${column.fieldPath ?? column.field}`}
+                column={column}
+                row={row}
+              />
+            ))}
             {toolbar && row.path && (
               <ToolBar path={row.path} toolbar={toolbar} title={row?.title} />
             )}

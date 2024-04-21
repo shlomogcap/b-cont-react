@@ -1,7 +1,6 @@
 import { IWithCommonFields } from '@/lib/utils/WithFields';
 import { ReactNode } from 'react';
 import { IFilterPanelProps } from '../FilterPanel';
-import { EToolbarButtons, EToolbarText } from '../ToolBar/ToolBar.consts';
 import { IToolbarSettings } from '../ToolBar';
 
 type IRowValues<T extends string> = {
@@ -39,11 +38,15 @@ type ColumnOptionsMapping =
 type IGetColumnValueFunction<T extends string> = (
   args: IGetColumnValueFunctionArgs<T>,
 ) => string | number;
+type IGetColumnTooltipContentFunction<T extends string> = (
+  args: IGetColumnValueFunctionArgs<T>,
+) => ReactNode;
 
 export type ITableColumn<T extends string> = {
   field: T;
   fieldPath?: string;
   display?: string;
+  getTooltipContent?: IGetColumnTooltipContentFunction<T>;
   getValue?: IGetColumnValueFunction<T>;
 } & ColumnOptionsMapping;
 

@@ -2,7 +2,11 @@ import {
   IProjectConfirmsFilterDoc,
   IProjectConfirmsProps,
 } from './ProjectConfirms.types';
-import { ITableColumn, Table } from '@/lib/components/commons/Table';
+import {
+  ITableColumn,
+  Table,
+  getDisplayValue,
+} from '@/lib/components/commons/Table';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
 import { VENDOR_DISPLAY_TEXTS, EVendorFields } from '@/lib/consts/vendors';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
@@ -118,6 +122,22 @@ const ProjectConfirmsInner = (_: IProjectConfirmsProps) => {
           type: 'date',
           options: {
             format: 'DD/MM/YY',
+          },
+          getTooltipContent: ({ row }) => {
+            const currentAccount = contractAccountMap[String(row.path)]?.[0];
+            const currentConfirm = currentAccount?.[
+              EAccountFields.ConfirmFlow
+            ]?.find((confirm) => confirm.id === c.id);
+            return currentConfirm?.approvedAt
+              ? [
+                  `Approved By: ${currentConfirm?.approvedBy}`,
+                  `Approved At: ${getDisplayValue({
+                    value: currentConfirm.approvedAt,
+                    type: 'date',
+                    options: { format: 'DD/MM/YYYY HH:mm:ss' },
+                  })}`,
+                ].join('\n')
+              : '';
           },
         } as ITableColumn<any>),
     ),
