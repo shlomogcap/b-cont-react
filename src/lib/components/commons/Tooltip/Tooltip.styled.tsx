@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const StyledTooltipWrapper = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: normal;
+`;
+
 export const StyledTooltipArrow = styled.div`
   position: absolute;
   content: '';

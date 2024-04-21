@@ -5,6 +5,7 @@ import {
   StyledTooltip,
   StyledTooltipArrow,
   StyledTooltipContent,
+  StyledTooltipWrapper,
 } from './Tooltip.styled';
 
 export const Tooltip = ({
@@ -90,7 +91,7 @@ export const Tooltip = ({
   }, [tooltipIsOpen]);
 
   return (
-    <div
+    <StyledTooltipWrapper
       ref={referenceElement}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -98,12 +99,17 @@ export const Tooltip = ({
       <StyledTooltip
         ref={popperElement}
         role='tooltip'
-        style={{ display: tooltipIsOpen && !disableTooltip ? 'block' : 'none' }}
+        style={{
+          display:
+            tooltipIsOpen && !disableTooltip && Boolean(content)
+              ? 'block'
+              : 'none',
+        }}
       >
         <StyledTooltipContent>{content}</StyledTooltipContent>
         <StyledTooltipArrow ref={arrowElement} />
       </StyledTooltip>
       {children}
-    </div>
+    </StyledTooltipWrapper>
   );
 };

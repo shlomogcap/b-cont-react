@@ -15,6 +15,22 @@ import { FilterPanel } from '../FilterPanel';
 import { Badge } from '../Badge';
 import { AddItem } from '../../AddItem';
 import { ToolBar } from '../ToolBar';
+import { Tooltip } from '../Tooltip';
+import { ReactNode } from 'react';
+
+const TableCell = ({
+  displayText,
+  tooltipContent,
+}: {
+  displayText: string;
+  tooltipContent?: ReactNode;
+}) => {
+  return (
+    <Tooltip content={tooltipContent || displayText}>
+      <StyledTableCell>{displayText}</StyledTableCell>
+    </Tooltip>
+  );
+};
 
 export const Table = <T extends string = string>({
   rows,
@@ -35,10 +51,15 @@ export const Table = <T extends string = string>({
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
         {columns.map(({ field, display, fieldPath }) => (
-          <StyledTableHeader key={`headers/${fieldPath ?? field}`}>
-            {tableFilterProps?.activeFilters[field] && <Badge columnBadge />}
-            {display ?? field}
-          </StyledTableHeader>
+          <Tooltip
+            key={`headers/${fieldPath ?? field}`}
+            content={display ?? field}
+          >
+            <StyledTableHeader>
+              {tableFilterProps?.activeFilters[field] && <Badge columnBadge />}
+              {display ?? field}
+            </StyledTableHeader>
+          </Tooltip>
         ))}
       </StyledTableHeaders>
       {!loading &&
@@ -48,14 +69,19 @@ export const Table = <T extends string = string>({
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
-            {columns.map(({ field, fieldPath, getValue, ...rest }) => (
-              <StyledTableCell key={`${row.id}/${fieldPath ?? field}`}>
-                {getDisplayValue({
+            {columns.map(({ field, fieldPath, getValue, ...rest }) => {
+              const displayText =
+                getDisplayValue({
                   value: getValue?.({ row, field }) ?? row?.[field],
                   ...rest,
-                }) ?? ''}
-              </StyledTableCell>
-            ))}
+                }) ?? '';
+              return (
+                <TableCell
+                  key={`${row.id}/${fieldPath ?? field}`}
+                  displayText={displayText}
+                />
+              );
+            })}
             {toolbar && row.path && (
               <ToolBar path={row.path} toolbar={toolbar} title={row?.title} />
             )}

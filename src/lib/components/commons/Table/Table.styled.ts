@@ -29,8 +29,8 @@ export const StyledTableCell = styled.div`
   line-height: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;
-  position: relative;
   overflow-wrap: normal;
+  position: relative;
   color: inherit;
 `;
 
