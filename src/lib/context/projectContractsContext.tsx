@@ -14,7 +14,7 @@ import { groupBy, sortBy } from 'lodash-es';
 import { extractParentPath } from '../utils/urlUtils';
 import { EAccountFields } from '../consts/accounts/AccountFields';
 
-type IContractLastAccountData = { [contractId: string]: IAccountDoc[] };
+export type IContractLastAccountData = { [contractId: string]: IAccountDoc[] };
 
 type IProjectContractData = {
   contracts: IContractDoc[];

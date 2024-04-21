@@ -7,7 +7,6 @@ import {
   EProjectAccountsFields,
   PROJECT_ACCOUNTS_DISPLAY_TEXTS,
 } from '@/lib/consts/accounts';
-import { MOCK_PROJECTS_ACCOUNTS_DATA } from '@/lib/mock/projectAccounts';
 import { useProjectContractsContext } from '@/lib/context/projectContractsContext';
 import { FALLBACK_BROKEN_REF_TEXT } from '@/lib/consts/fallbackText';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
@@ -27,6 +26,7 @@ import {
   projectAccountsTableFilters,
 } from './ProjectAccounts.consts';
 import { EContractStatus } from '@/lib/consts/contracts';
+import { prepareProjectAccountsRows } from './ProjectAccounts.utils';
 
 export const ProjectAccounts = (props: IProjectAccountsProps) => {
   const form = useForm<IProjectAccountsFilterDoc>({
@@ -43,7 +43,7 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
 
 const ProjectAccountsInner = (props: IProjectAccountsProps) => {
   const {
-    data: { contracts },
+    data: { contracts, contractAccountMap },
   } = useProjectContractsContext();
   const { data: vendors } = useVendorsContext();
 
@@ -51,9 +51,6 @@ const ProjectAccountsInner = (props: IProjectAccountsProps) => {
     [
       {
         field: EProjectAccountsFields.Contract,
-        getValue: ({ row, field }) =>
-          contracts.find(({ id }) => row[field] === id)?.title ??
-          FALLBACK_BROKEN_REF_TEXT,
       },
       {
         field: EProjectAccountsFields.Vendor,
@@ -94,9 +91,9 @@ const ProjectAccountsInner = (props: IProjectAccountsProps) => {
     }
     return [contract.title];
   };
-  const rows = MOCK_PROJECTS_ACCOUNTS_DATA.filter((r) =>
-    filterByFilterPanel(r, watchedFields as any),
-  ).filter((r) => filterBySearch(r, searchFields, searchValue, getContract));
+  const rows = prepareProjectAccountsRows({ contracts, contractAccountMap })
+    .filter((r) => filterByFilterPanel(r, watchedFields as any))
+    .filter((r) => filterBySearch(r, searchFields, searchValue, getContract));
 
   return (
     <Table
