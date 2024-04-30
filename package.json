@@ -44,7 +44,6 @@
     "@types/firebase": "^3.2.1",
     "@types/lodash-es": "^4.17.7",
     "@types/styled-components": "^5.1.26",
-    "babel-plugin-styled-components": "^2.1.1",
     "prettier": "2.8.8"
   }
 }
