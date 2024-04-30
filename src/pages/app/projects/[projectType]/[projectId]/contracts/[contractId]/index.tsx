@@ -5,18 +5,16 @@ import {
   PROJECT_ID_QUERY,
   PROJECT_TYPE_QUERY,
 } from '@/lib/consts/routes';
-import { firestore } from '@/lib/firebase';
 import { replaceQueryParams } from '@/lib/utils/replaceParams';
-import { doc, getDoc } from 'firebase/firestore';
+import admin from '@/lib/firebase/admin';
 import { GetServerSideProps } from 'next';
 
 export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
-  const contractRef = doc(
-    firestore,
-    `projects/${query.projectId}/contracts/${query.contractId}`,
-  );
-  const contract = await getDoc(contractRef);
-  if (!contract.exists()) {
+  const contract = await admin
+    .firestore()
+    .doc(`projects/${query.projectId}/contracts/${query.contractId}`)
+    .get();
+  if (!contract.exists) {
     return {
       notFound: true,
     };
