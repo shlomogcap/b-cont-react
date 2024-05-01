@@ -2,7 +2,12 @@ import { useRouter } from 'next/router';
 
 export default function SectionPlan() {
   const { query } = useRouter();
-  const { projectId, contractId, sectionId, ...search } = query;
+  const {
+    projectId: _projectId,
+    contractId: _contractId,
+    sectionId: _sectionId,
+    ...search
+  } = query;
   return (
     <div>
       Section Plan <br />

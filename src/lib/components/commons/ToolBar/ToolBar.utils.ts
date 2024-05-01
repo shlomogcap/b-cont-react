@@ -3,7 +3,6 @@ import { firestore } from '@/lib/firebase';
 import { addDoc, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { EToolbarText } from './ToolBar.consts';
-import { IGetDisplayTextFunc } from './ToolBar.types';
 
 const TOAST_TEXTS = DISPLAY_TEXTS.he.toasts;
 const TOOLBAR_TEXTS = DISPLAY_TEXTS.he.toolbar;

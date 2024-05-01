@@ -75,7 +75,7 @@ export const ContractPage = ({
           <Card title={CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}>
             <ContractForm
               id={contract?.id!}
-              readOnly={!Boolean(stage === EContractStage.Plan)}
+              readOnly={!(stage === EContractStage.Plan)}
             />
           </Card>
           {children}

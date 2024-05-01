@@ -1,5 +1,5 @@
 import { EProjectFields } from '@/lib/consts/projects';
-import { useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { IProjectFormValues } from '../ProjectForm.types';
 import dayjs from 'dayjs';
 

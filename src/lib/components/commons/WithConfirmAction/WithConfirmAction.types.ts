@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement } from 'react';
 import { IButtonProps } from '../Button';
 
 export type IWithConfirmActionProps = {

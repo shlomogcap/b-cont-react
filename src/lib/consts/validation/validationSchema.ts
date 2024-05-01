@@ -13,7 +13,7 @@ export const TITLE_FIELD_SCHEMA = z
 
 export const INTEGER_SCHEMA = z.coerce.number().int().positive();
 export const NUMBER_SCHEMA = z.preprocess(
-  (v) => Number(String(v).replace(/[^\d\.-]/g, '')),
+  (v) => Number(String(v).replace(/[^\d.-]/g, '')),
   z.coerce.number(),
 );
 

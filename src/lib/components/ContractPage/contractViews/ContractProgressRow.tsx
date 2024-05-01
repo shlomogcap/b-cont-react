@@ -1,7 +1,6 @@
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { StyledContractPageRow } from '../ContractPage.styled';
 import { FirstAccountButton } from './FirstAccountButton';
-import { IConfirmDoc } from '@/lib/consts/confirms/ConfirmDoc';
 import { ContractConfirms } from './ContractConfirms';
 import { ChatCard } from '../../commons/ChatCard';
 import {

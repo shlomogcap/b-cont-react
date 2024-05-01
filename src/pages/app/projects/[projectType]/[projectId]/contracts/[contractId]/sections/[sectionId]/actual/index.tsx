@@ -10,11 +10,9 @@ import {
 } from '@/lib/consts/routes';
 import { ContractProvider } from '@/lib/context/contractContext';
 import { ProjectContractsProvider } from '@/lib/context/projectContractsContext';
-import { ProjectsProvider } from '@/lib/context/projectsContext';
 import { SectionProvider } from '@/lib/context/sectionContext';
 import { queryParamsValues } from '@/lib/utils/queryParamToString';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 
 type ISectionActualRouteProps = {
   projectId: string;

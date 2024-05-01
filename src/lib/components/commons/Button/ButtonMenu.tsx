@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { OptionsList } from '../OptionsList';
 import { useOptionsListContext } from '../OptionsList/OptionsList.provider';
-import { StyledButton, StyledButtonMenuButton } from './Button.styled';
+import { StyledButtonMenuButton } from './Button.styled';
 import { IButtonMenuButtonProps, IButtonMenuProps } from './Button.types';
 
 const ButtonMenuButton = ({

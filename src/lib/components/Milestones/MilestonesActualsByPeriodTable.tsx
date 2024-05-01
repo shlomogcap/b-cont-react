@@ -1,7 +1,6 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IMilestonesTableProps } from '../ContractSectionForm';
 import {
-  ESectionCalculationMethod,
   ESectionCalculationType,
   ESectionFields,
 } from '@/lib/consts/sections';

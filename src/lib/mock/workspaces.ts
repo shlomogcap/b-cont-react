@@ -1,7 +1,5 @@
-import { ITableRow } from '../components/commons/Table';
 import { ECommonFields } from '../consts/commonFields';
 import {
-  EWorkspaceEntityType,
   EWorkspaceFields,
   IWorkspaceDoc,
 } from '../consts/workspaces';

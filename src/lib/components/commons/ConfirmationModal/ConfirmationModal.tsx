@@ -1,5 +1,4 @@
 import { Button } from '../Button';
-import { StyledFormFooter } from '../Form/Form.styled';
 import {
   StyledConfirmationModal,
   StyledConfirmationModalActions,

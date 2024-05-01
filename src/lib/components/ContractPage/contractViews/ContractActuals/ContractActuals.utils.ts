@@ -1,6 +1,5 @@
 import { IReportTableSection } from '@/lib/components/ReportTable';
 import {
-  ESectionActions,
   ESectionFields,
   ISectionDoc,
 } from '@/lib/consts/sections';
@@ -18,7 +17,6 @@ import { EContractFields, IContractDoc } from '@/lib/consts/contracts';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import {
-  avgByRows,
   sumByRows,
 } from '@/lib/components/ReportTable/ReportTable.utils';
 

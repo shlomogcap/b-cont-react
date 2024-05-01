@@ -32,7 +32,6 @@ import {
 import { useFilteredFields } from '@/lib/hooks/useFilteredFields';
 import {
   EToolbarButtons,
-  EToolbarText,
 } from '../commons/ToolBar/ToolBar.consts';
 
 export const ProjectsTable = (props: IProjectPageProps) => {

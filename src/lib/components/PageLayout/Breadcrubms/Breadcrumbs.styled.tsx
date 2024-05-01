@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { StyledSvgIcon } from '../../icons/SvgIcon/SvgIcon.styled';
 import { TriangleArrowIcon } from '../../icons/TriangleArrowIcon';
 import { IStyledBreadcrumbProps } from './Breadcrumbs.types';
 

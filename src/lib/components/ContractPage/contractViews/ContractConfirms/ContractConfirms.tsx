@@ -15,7 +15,6 @@ import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
-import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
 import { formatDate } from '@/lib/utils/dateUtils';
 import { CONFIRMS_DISPLAY_TEXTS } from '@/lib/consts/confirms/displayTexts';

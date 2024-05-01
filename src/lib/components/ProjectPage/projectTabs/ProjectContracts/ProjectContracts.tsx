@@ -1,5 +1,4 @@
 import {
-  ITableColumn,
   Table,
   fieldsNamesToColumns,
 } from '@/lib/components/commons/Table';

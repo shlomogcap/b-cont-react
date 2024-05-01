@@ -30,7 +30,6 @@ import {
   EToastType,
 } from '../../consts/displayTexts';
 import { toast } from 'react-toastify';
-import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';

@@ -2,7 +2,6 @@ import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls'
 import { StyledContractPageRow } from '../ContractPage.styled';
 import { Button } from '../../commons/Button';
 import { useContractContext } from '@/lib/context/contractContext';
-import { IConfirmDoc } from '@/lib/consts/confirms/ConfirmDoc';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 

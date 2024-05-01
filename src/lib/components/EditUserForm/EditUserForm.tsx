@@ -1,4 +1,4 @@
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '../commons/Button';
 import { Form, FormFooter } from '../commons/Form';
 import { StyledEditUserModal } from './EditUserForm.styled';

@@ -6,7 +6,6 @@ import {
 } from '../commons/Input/inputs/DropdownInput/DropdownInput.styled';
 import { StyledListItem } from '../commons/OptionsList/OptionsList.styled';
 import { StyledModalBox } from '../commons/Modal/Modal.styled';
-import { StyledForm } from '../commons/Form/Form.styled';
 
 export const StyledPeriodSelectionModal = styled(Modal)`
   & ${StyledModalBox} {

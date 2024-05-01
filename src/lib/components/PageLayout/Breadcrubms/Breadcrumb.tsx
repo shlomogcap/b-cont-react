@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { StyledBreadcrumb, StyledNavListArrow } from './Breadcrumbs.styled';
 import { IBreadcrumbProps } from './Breadcrumbs.types';
-import { TriangleArrowIcon } from '../../icons/TriangleArrowIcon';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
