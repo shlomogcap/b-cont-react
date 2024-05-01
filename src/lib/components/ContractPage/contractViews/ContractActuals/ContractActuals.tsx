@@ -1,9 +1,7 @@
-import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { ContractConfirms } from '../ContractConfirms';
 import { IContractActualsProps } from './ContractActuals.types';
 import { ChatCard } from '@/lib/components/commons/ChatCard';
 import { ReportTable } from '@/lib/components/ReportTable';
-import { StyledRow } from './ContractActuals.styled';
 import {
   CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS,
   EContractActualsButtons,
@@ -36,11 +34,14 @@ import {
   ERoutesNames,
   SECTION_ID_QUERY,
 } from '@/lib/consts/routes';
+import { FirstAccountButton } from '../FirstAccountButton';
+import { StyledContractPageRow } from '../../ContractPage.styled';
+import { ContractProgressRow } from '../ContractProgressRow';
 
 export const ContractActuals = (props: IContractActualsProps) => {
   const router = useRouter();
-  const { showModal } = useModalContext();
-  const { data: confirmFlow } = useProjectConfirmsSettingsContext();
+  const { data: confirmFlow, handleConfirmAccountStage } =
+    useProjectConfirmsSettingsContext();
   const {
     data: { contract, accounts, sections, workspaces, actuals },
     isLoading,
@@ -60,9 +61,6 @@ export const ContractActuals = (props: IContractActualsProps) => {
   const currentConfirmFlow = confirmFlow.find(
     (flow) => flow.id === currentStage,
   );
-  const nextConfirmFlow = confirmFlow.find(
-    (flow) => flow.id === currentConfirmFlow?.[EConfirmFields.NextConfirm],
-  );
 
   const handleChangeContractToPlan = async () => {
     try {
@@ -81,68 +79,14 @@ export const ContractActuals = (props: IContractActualsProps) => {
       showToastError(err);
     }
   };
-  const handleConfirmAccountStage = async () => {
-    const docRef = doc(firestore, currentAccount![ECommonFields.Path]);
-    const preparedData = {
-      [EAccountFields.ConfirmFlow]: currentAccount![
-        EAccountFields.ConfirmFlow
-      ]!.map((flow) =>
-        flow.id === currentStage
-          ? {
-              ...flow,
-              [EConfirmFields.ConfirmStatus]: EConfirmStatus.Approve,
-              [EConfirmFields.ApprovedAt]: dayjs().toISOString(),
-              [EConfirmFields.ApprovedBy]: auth.currentUser?.email ?? '',
-            }
-          : flow,
-      ),
-      [EAccountFields.AccountStage]:
-        nextConfirmFlow?.id ?? EConfirmFlowControls.End,
-    };
-    try {
-      await setDoc(docRef, preparedData, { merge: true });
-    } catch (err) {
-      showToastError(err);
-    }
-  };
 
   return isLoading ? null : (
     <>
-      <StyledRow>
-        {currentAccount ? (
-          <ContractConfirms
-            confirmEnabled={isActiveContract}
-            account={currentAccount}
-            handleConfirmAccountStage={handleConfirmAccountStage}
-          />
-        ) : (
-          <Button
-            onClick={() => {
-              const [month, year] =
-                String(currentAccount?.[EAccountFields.Period]).split(' ') ??
-                [];
-              showModal({
-                name: EModalName.PeriodSelectionForm,
-                lastPeriod: `${year}-${Number(month) - 1}-1`,
-                lastPeriodNumber: currentAccount?.[EAccountFields.PeriodNumber],
-                periodUnit: EPeriodUnit.M,
-                confirmFlow,
-              });
-            }}
-            disabled={!isActiveContract}
-          >
-            First Account
-          </Button>
-        )}
-        <ChatCard
-          title={CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.chatBlockTitle}
-          addNewText={
-            CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.buttons[
-              EContractActualsButtons.AddNewComment
-            ]
-          }
-        />
-      </StyledRow>
+      <ContractProgressRow
+        confirmFlow={confirmFlow}
+        currentAccount={currentAccount!}
+        isActiveContract={isActiveContract}
+      />
       <ReportTable
         columns={columns}
         sections={prepareContractActualsReport({
@@ -164,13 +108,15 @@ export const ContractActuals = (props: IContractActualsProps) => {
           });
         }}
       />
-      <StyledRow style={{ justifyContent: 'flex-end' }}>
+      <StyledContractPageRow style={{ justifyContent: 'flex-end' }}>
         {currentStage &&
           ![EConfirmFlowControls.Start, EConfirmFlowControls.End].includes(
             currentStage as EConfirmFlowControls,
           ) && (
             <Button
-              onClick={handleConfirmAccountStage}
+              onClick={() =>
+                handleConfirmAccountStage({ confirmFlow, currentAccount })
+              }
               style={{ justifySelf: 'center' }}
               disabled={!isActiveContract}
             >
@@ -180,7 +126,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
         {isActiveContract && (
           <Button onClick={handleChangeContractToPlan}>Go To Plan View</Button>
         )}
-      </StyledRow>
+      </StyledContractPageRow>
     </>
   );
 };

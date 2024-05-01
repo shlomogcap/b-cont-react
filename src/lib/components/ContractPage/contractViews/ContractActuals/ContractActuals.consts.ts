@@ -18,6 +18,7 @@ export enum EAdditionsSubtractions {
 }
 export enum EContractActualsButtons {
   AddNewComment,
+  CreateFirstAccount,
 }
 
 type IDispalyTexts = Record<
@@ -47,7 +48,10 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
     reportTitle: 'דוח ביצוע מצטבר',
     reportTotalsTitle: `סה״כ`,
     chatBlockTitle: 'לוג הערות לחוזה',
-    buttons: { [EContractActualsButtons.AddNewComment]: '+ הוסף הערה חדשה' },
+    buttons: {
+      [EContractActualsButtons.AddNewComment]: '+ הוסף הערה חדשה',
+      [EContractActualsButtons.CreateFirstAccount]: 'צור חשבון',
+    },
     additionsSubtractions: {
       [EAdditionsSubtractions.SectionTitle]: 'תוספות וקיזוזים',
       [EAdditionsSubtractions.Additions]: 'תוספות',
@@ -69,7 +73,10 @@ export const CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
     reportTitle: 'Cumulative Actulas Report',
     reportTotalsTitle: 'Total',
     chatBlockTitle: 'Comments Logs',
-    buttons: { [EContractActualsButtons.AddNewComment]: '+ New Comment' },
+    buttons: {
+      [EContractActualsButtons.AddNewComment]: '+ New Comment',
+      [EContractActualsButtons.CreateFirstAccount]: 'Add Account',
+    },
     additionsSubtractions: {
       [EAdditionsSubtractions.SectionTitle]: 'Additions & Subtractions',
       [EAdditionsSubtractions.Additions]: 'Additions',
