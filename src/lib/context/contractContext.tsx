@@ -1,18 +1,27 @@
 import {
   PropsWithChildren,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from 'react';
 import { firestore } from '@firebase';
-import { collection, doc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { onSnapshotHandler } from '../utils/onSnapshotHandler';
-import { IContractDoc } from '../consts/contracts';
+import {
+  EContractFields,
+  EContractStage,
+  EContractStatus,
+  IContractDoc,
+} from '../consts/contracts';
 import { ISectionDoc } from '../consts/sections';
 import { IWorkspaceDoc } from '../consts/workspaces';
 import { IAccountDoc } from '../consts/accounts/AccountDoc';
 import { IActualDoc } from '../consts/actuals/ActualDoc';
+import { CONTRACT_STAGE_QUERY, ERoutesNames } from '../consts/routes';
+import { showToastError } from '../utils/showToastError';
+import { useRouter } from 'next/router';
 
 type IContractData = {
   contract: IContractDoc | null;
@@ -20,6 +29,7 @@ type IContractData = {
   accounts: IAccountDoc[];
   actuals: IActualDoc[];
   workspaces: IWorkspaceDoc[];
+  handleChangeContractToPlan: () => void;
 };
 
 type IContractContext = {
@@ -39,6 +49,7 @@ const INITIAL_CONTRACT_DATA = {
   accounts: [],
   actuals: [],
   workspaces: [],
+  handleChangeContractToPlan: () => null,
 };
 
 const ContractContext = createContext<IContractContext>({
@@ -54,6 +65,8 @@ export const ContractProvider = ({
   contractId,
   children,
 }: PropsWithChildren<IContractProviderProps>) => {
+  const router = useRouter();
+
   const [contract, setContract] = useState<IContractData['contract']>(
     {} as any,
   );
@@ -65,6 +78,25 @@ export const ContractProvider = ({
   const [error, setError] = useState('');
 
   const contractPath = `/projects/${projectId}/contracts/${contractId}`;
+
+  const handleChangeContractToPlan = useCallback(async () => {
+    try {
+      const docRef = doc(firestore, contractPath);
+      await updateDoc(docRef, {
+        [EContractFields.Status]: EContractStatus.Plan,
+      });
+      router.push({
+        pathname: ERoutesNames.Contract,
+        query: {
+          ...router.query,
+          [CONTRACT_STAGE_QUERY]: EContractStage.Plan,
+        },
+      });
+    } catch (err) {
+      showToastError(err);
+    }
+  }, [contractPath, router]);
+
   useEffect(() => {
     const contractSubscription = onSnapshot(
       doc(firestore, contractPath),
@@ -124,6 +156,7 @@ export const ContractProvider = ({
           sections,
           contract,
           workspaces,
+          handleChangeContractToPlan,
         },
         isLoading,
         error,
