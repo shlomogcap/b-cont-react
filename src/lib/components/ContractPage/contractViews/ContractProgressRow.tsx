@@ -9,15 +9,18 @@ import {
   EContractActualsButtons,
 } from './ContractActuals/ContractActuals.consts';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
+import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 
 type IContractProgressRowProps = {
   currentAccount: IAccountDoc;
   isActiveContract: boolean;
+  confirmType: EConfirmType;
 };
 
 export const ContractProgressRow = ({
   currentAccount,
   isActiveContract,
+  confirmType,
 }: IContractProgressRowProps) => {
   const { handleConfirmAccountStage, data: confirmFlow } =
     useProjectConfirmsSettingsContext();
@@ -25,6 +28,7 @@ export const ContractProgressRow = ({
     <StyledContractPageRow>
       {currentAccount ? (
         <ContractConfirms
+          confirmType={confirmType}
           confirmEnabled={isActiveContract}
           account={currentAccount}
           handleConfirmAccountStage={() =>

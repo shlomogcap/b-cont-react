@@ -13,11 +13,12 @@ import {
 import { ContractPlan } from '@/lib/components/ContractPage/contractViews/ContractPlan';
 import { ContractActuals } from '@/lib/components/ContractPage/contractViews/ContractActuals';
 import { ProjectConfirmsSettingsProvider } from '@/lib/context/projectConfirmsSettingsContext';
+import { ContractBilling } from '@/lib/components/ContractPage/contractViews/ContractBilling';
 
 const CONTRACT_STAGE_PAGE: Record<EContractStage, ReactElement> = {
   [EContractStage.Plan]: <ContractPlan />,
   [EContractStage.Actual]: <ContractActuals />,
-  [EContractStage.Billing]: <ContractPlan />,
+  [EContractStage.Billing]: <ContractBilling />,
 };
 
 export const getServerSideProps = getContractRouteServerSideProps;

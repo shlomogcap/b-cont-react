@@ -7,29 +7,12 @@ import {
 import { prepareContractActualsReport } from './ContractActuals.utils';
 import { useContractContext } from '@/lib/context/contractContext';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
-import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
-import { auth, firestore } from '@/lib/firebase';
-import { EConfirmStatus } from '@/lib/consts/confirms/ConfirmStatus';
-import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
-import dayjs from 'dayjs';
-import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
-import {
-  EContractFields,
-  EContractStage,
-  EContractStatus,
-} from '@/lib/consts/contracts';
-import { showToastError } from '@/lib/utils/showToastError';
+import { EContractFields, EContractStatus } from '@/lib/consts/contracts';
 import { useRouter } from 'next/router';
-import {
-  CONTRACT_STAGE_QUERY,
-  ERoutesNames,
-  SECTION_ID_QUERY,
-} from '@/lib/consts/routes';
-import { FirstAccountButton } from '../FirstAccountButton';
-import { StyledContractPageRow } from '../../ContractPage.styled';
+import { ERoutesNames, SECTION_ID_QUERY } from '@/lib/consts/routes';
 import { ContractProgressRow } from '../ContractProgressRow';
 import { ContractActionsRow } from '../ContractActionsRow';
+import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 
 export const ContractActuals = (props: IContractActualsProps) => {
   const router = useRouter();
@@ -55,6 +38,7 @@ export const ContractActuals = (props: IContractActualsProps) => {
       <ContractProgressRow
         currentAccount={currentAccount!}
         isActiveContract={isActiveContract}
+        confirmType={EConfirmType.Actual}
       />
       <ReportTable
         columns={columns}

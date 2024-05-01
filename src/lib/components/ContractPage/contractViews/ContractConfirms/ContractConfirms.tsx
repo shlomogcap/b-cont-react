@@ -24,6 +24,7 @@ import dayjs from 'dayjs';
 import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
 
 export const ContractConfirms = ({
+  confirmType,
   confirmEnabled,
   account,
   handleConfirmAccountStage,
@@ -82,9 +83,7 @@ export const ContractConfirms = ({
       </StyledPeriod>
       <StyledContractConfirms>
         {confirmsData
-          ?.filter(
-            (confirmItem) => confirmItem.confirmType === EConfirmType.Actual,
-          )
+          ?.filter((confirmItem) => confirmItem.confirmType === confirmType)
           .sort((a, b) => a.orderIndex - b.orderIndex)
           .map((confirmItem, ind) => {
             const dueDate = dayjs()
