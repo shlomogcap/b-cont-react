@@ -33,7 +33,6 @@ import { ContractActionsRow } from '../ContractActionsRow';
 
 export const ContractActuals = (props: IContractActualsProps) => {
   const router = useRouter();
-  const { data: confirmFlow } = useProjectConfirmsSettingsContext();
   const {
     data: { contract, accounts, sections, workspaces, actuals },
     isLoading,
@@ -54,7 +53,6 @@ export const ContractActuals = (props: IContractActualsProps) => {
   return isLoading ? null : (
     <>
       <ContractProgressRow
-        confirmFlow={confirmFlow}
         currentAccount={currentAccount!}
         isActiveContract={isActiveContract}
       />
@@ -80,7 +78,6 @@ export const ContractActuals = (props: IContractActualsProps) => {
         }}
       />
       <ContractActionsRow
-        confirmFlow={confirmFlow}
         currentAccount={currentAccount!}
         currentStage={currentStage!}
         isActiveContract={isActiveContract}

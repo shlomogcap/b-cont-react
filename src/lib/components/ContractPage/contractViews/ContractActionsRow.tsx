@@ -8,21 +8,20 @@ import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirms
 
 type IContractActionsRowProps = {
   isActiveContract: boolean;
-  confirmFlow: IConfirmDoc[];
   currentAccount: IAccountDoc;
   currentStage: string;
 };
 
 export const ContractActionsRow = ({
   isActiveContract,
-  confirmFlow,
   currentAccount,
   currentStage,
 }: IContractActionsRowProps) => {
   const {
     data: { handleChangeContractToPlan },
   } = useContractContext();
-  const { handleConfirmAccountStage } = useProjectConfirmsSettingsContext();
+  const { handleConfirmAccountStage, data: confirmFlow } =
+    useProjectConfirmsSettingsContext();
   const currentConfirmFlow = confirmFlow.find(
     (flow) => flow.id === currentStage,
   );

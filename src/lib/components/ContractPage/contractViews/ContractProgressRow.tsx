@@ -13,15 +13,14 @@ import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirms
 type IContractProgressRowProps = {
   currentAccount: IAccountDoc;
   isActiveContract: boolean;
-  confirmFlow: IConfirmDoc[];
 };
 
 export const ContractProgressRow = ({
   currentAccount,
   isActiveContract,
-  confirmFlow,
 }: IContractProgressRowProps) => {
-  const { handleConfirmAccountStage } = useProjectConfirmsSettingsContext();
+  const { handleConfirmAccountStage, data: confirmFlow } =
+    useProjectConfirmsSettingsContext();
   return (
     <StyledContractPageRow>
       {currentAccount ? (
