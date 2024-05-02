@@ -10,12 +10,11 @@ import {
   EContractBillingReportTableFields,
 } from './ContractBilling.consts';
 import { ReportTable } from '@/lib/components/ReportTable';
-import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
+import { fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { prepareContractBillingReport } from './ContractBilling.utils';
 import { AccountForm } from '@/lib/components/AccountForm';
 import { Card } from '@/lib/components/commons/Card';
-import { EPaymentFields } from '@/lib/consts/payments/PaymentFields';
-import { PAYMENTS_DISPLAY_TEXTS } from '@/lib/consts/payments/displayTexts';
+import { PaymentsTable } from './PaymentsTable';
 
 export const ContractBilling = (_props: IContractBillingProps) => {
   const {
@@ -94,19 +93,7 @@ export const ContractBilling = (_props: IContractBillingProps) => {
           <AccountForm readOnly={false} account={currentAccount!} />
         </Card>
         <Card>
-          <Table
-            columns={fieldsNamesToColumns(
-              [
-                EPaymentFields.PaymentDate,
-                EPaymentFields.PaymentChannel,
-                EPaymentFields.PaymentType,
-                EPaymentFields.PaymentIdentifier,
-                EPaymentFields.Sum,
-              ],
-              PAYMENTS_DISPLAY_TEXTS.he.fields,
-            )}
-            rows={[]}
-          />
+          <PaymentsTable />
         </Card>
       </div>
       <ContractActionsRow

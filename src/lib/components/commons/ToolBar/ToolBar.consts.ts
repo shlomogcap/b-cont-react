@@ -3,7 +3,7 @@ export enum EToolbarText {
   Delete = 'delete',
   DuplicateEnsure = 'duplicateEnsure',
   DeleteEnsure = 'deleteEnsure',
-  CopyOF = 'copyOf,',
+  CopyOF = 'copyOf',
 }
 
 export enum EToolbarButtons {
