@@ -1,1 +1,1 @@
-export type IContractActualsProps = {};
+export type IContractActualsProps = object;

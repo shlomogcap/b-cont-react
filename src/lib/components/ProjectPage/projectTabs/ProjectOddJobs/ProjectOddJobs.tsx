@@ -5,7 +5,7 @@ import { EOddJobsFields } from '@/lib/consts/oddJobs/OddJobsFields';
 import { ODD_JOBS_DISPLAY_TEXTS } from '@/lib/consts/oddJobs/displayTexts';
 import { ODD_JOBS_STATUS_OPTIONS } from './ProjectOddJobs.consts';
 
-export const ProjectOddJobs = (props: IProjectOddJobsProps) => {
+export const ProjectOddJobs = (_props: IProjectOddJobsProps) => {
   const { isLoading, data: oddJobs } = useProjectOddJobsContext();
   const columns: ITableColumn<EOddJobsFields>[] = [
     {

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
-import { getFullPathNoQuery } from '../utils/getFullPathNoQuery';
+import { getFullPathNoQuery } from '../utils/urlUtils';
 
 type IUseQueryParam = {
   key: string;

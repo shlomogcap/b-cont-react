@@ -7,14 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "npm:outdated": "npx -y npm-check-updates",
     "component": "./create-component.sh",
     "exports": "./export-index.sh",
     "prepare": "husky"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
   },
   "engines": {
     "node": ">=18.0.0",

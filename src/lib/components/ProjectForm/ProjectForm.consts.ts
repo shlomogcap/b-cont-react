@@ -1,3 +1,4 @@
+import { DefaultValues } from 'react-hook-form';
 import { IDropdownInputProps } from '../commons/Input/inputs/DropdownInput';
 import { IProjectFormValues } from './ProjectForm.types';
 import {
@@ -39,7 +40,7 @@ export const PROJECT_STATUS_OPTIONS: IDropdownInputProps['options'] = [
   },
 ];
 
-export const PROJECT_FORM_DEFAULT_VALUES: IProjectFormValues = {
+export const PROJECT_FORM_DEFAULT_VALUES: DefaultValues<IProjectFormValues> = {
   [EProjectFields.Title]: '',
   [EProjectFields.Address]: '',
   // [ProjectFields.SDate]: '',

@@ -37,7 +37,7 @@ import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export const ProjectContracts = (props_: IProjectContractsProps) => {
+export const ProjectContracts = (_props: IProjectContractsProps) => {
   const form = useForm<IProjectContractsFilterDoc>({
     resolver: zodResolver(projectContractsFilterSchema),
     defaultValues: getDefaultFilterValues(projectContractsTableFilters),
@@ -50,7 +50,7 @@ export const ProjectContracts = (props_: IProjectContractsProps) => {
   );
 };
 
-const ProjectContractsInner = (props_: IProjectContractsProps) => {
+const ProjectContractsInner = (_props: IProjectContractsProps) => {
   const {
     data: { contracts },
     isLoading,

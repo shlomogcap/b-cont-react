@@ -3,6 +3,7 @@ export enum EWorkspaceFields {
   OrderIndex = 'orderIndex',
   Description = 'description',
   Parent = 'parent',
+  EntityType = 'entityType',
   InstrumentRef = 'instrumentRef',
   ChildrenRefs = 'childrenRefs',
 }

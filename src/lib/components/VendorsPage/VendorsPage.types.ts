@@ -1,1 +1,1 @@
-export type IVendorsPageProps = {};
+export type IVendorsPageProps = object;

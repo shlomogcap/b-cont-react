@@ -75,7 +75,7 @@ const ReportSection = <T extends string>({
             >
               {getDisplayValue({
                 value:
-                  getValue?.({ row: section?.totals!, field }) ??
+                  getValue?.({ row: section.totals!, field }) ??
                   section.totals?.[field],
                 ...rest,
               }) ?? ''}

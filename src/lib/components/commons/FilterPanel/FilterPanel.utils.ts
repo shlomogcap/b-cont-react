@@ -77,7 +77,9 @@ export const filterBySearch = <T extends object, F extends keyof T>(
 ) => {
   return searchValue.trim().length >= 2
     ? tableSearchFields.some((field) =>
-        String(getValue?.(r[field]) ?? r[field])?.includes(searchValue),
+        String(getValue?.(r[field] as string) ?? r[field])?.includes(
+          searchValue,
+        ),
       )
     : true;
 };

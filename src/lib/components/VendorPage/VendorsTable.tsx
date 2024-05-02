@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Table, fieldsNamesToColumns } from '../commons/Table';
+import { ITableColumn, Table, fieldsNamesToColumns } from '../commons/Table';
 import { useVendorsContext } from '@/lib/context/vendorsContext';
 import {
   VENDOR_DISPLAY_TEXTS,
@@ -27,7 +27,10 @@ import {
   useSearchableContext,
 } from '../commons/SearchBar/searchableContext';
 import { EVendorStatus } from '@/lib/consts/vendors/VendorStatus';
-import { EToolbarButtons } from '../commons/ToolBar/ToolBar.consts';
+import {
+  EToolbarButtons,
+  EToolbarText,
+} from '../commons/ToolBar/ToolBar.consts';
 
 export const VendorsTable = () => {
   const form = useForm<IVendorDoc>({
@@ -66,7 +69,7 @@ const VendorsTableInner = () => {
       },
     ],
     VENDOR_DISPLAY_TEXTS.he.fields,
-  );
+  ) as ITableColumn<EVendorFields>[];
 
   const [activeFilters, setActiveFilters] = useState(
     Object.values(vendorsTableColumns).reduce(
@@ -121,7 +124,7 @@ const VendorsTableInner = () => {
       toolbar={{
         buttons: [EToolbarButtons.Duplicate, EToolbarButtons.Delete],
         getDisplay: DISPLAY_TEXTS.he.toolbar,
-        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project],
+        type: DISPLAY_TEXTS.he.routeNames[ERoutesNames.Project] as EToolbarText,
       }}
     />
   );

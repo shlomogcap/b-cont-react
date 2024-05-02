@@ -1,3 +1,3 @@
-export { LoginModal } from './EditUserForm';
+export { EditUserModal } from './EditUserForm';
 
 export * from './EditUserForm.types';

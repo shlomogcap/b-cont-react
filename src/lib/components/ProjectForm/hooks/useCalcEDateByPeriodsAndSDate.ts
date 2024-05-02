@@ -15,7 +15,7 @@ export const useCalcEDateByPeriodsAndSDate = () => {
     }
     setValue(
       EProjectFields.EDate,
-      dayjs(sDate).add(Number(periods), 'months').toDate(),
+      dayjs(sDate).add(Number(periods), 'months').format('YYYY-MM-DD'),
     );
   };
 };

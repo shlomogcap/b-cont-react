@@ -2,7 +2,7 @@ import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import { IHandleSwapOrderIndexFunc } from '../ContractSectionForm';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 
-export type IMilestonesProps = {};
+export type IMilestonesProps = object;
 
 export type IMilestonesTableProps = {
   isLoading: boolean;

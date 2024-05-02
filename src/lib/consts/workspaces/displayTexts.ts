@@ -1,11 +1,11 @@
-import { Lang } from '../displayTexts';
+import { ILang } from '../displayTexts';
 import { EWorkspaceFields } from './WorkspaceFields';
 
 type DisplayTextMapping = {
   fields: Record<EWorkspaceFields, string>;
 };
 
-export const WORKSPACES_DISPALY_TEXTS: Record<Lang, DisplayTextMapping> = {
+export const WORKSPACES_DISPALY_TEXTS: Record<ILang, DisplayTextMapping> = {
   he: {
     fields: {
       [EWorkspaceFields.Title]: 'איזור עבודה',

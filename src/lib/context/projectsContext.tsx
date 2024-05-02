@@ -16,7 +16,7 @@ type IProjectsContext = {
   error: string;
 };
 
-type IProjectsProviderProps = {};
+type IProjectsProviderProps = object;
 
 const ProjectsContext = createContext<IProjectsContext>({
   data: [],

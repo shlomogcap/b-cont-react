@@ -119,7 +119,7 @@ const ResetUserPassword = () => {
   );
 };
 
-export const EditUserModal = (props: IEditUserFormModalData) => {
+export const EditUserModal = (_props: IEditUserFormModalData) => {
   const [activeTab, setActiveTab] = useState(EEditUserTabs.Info);
   return (
     <StyledEditUserModal title={EDIT_USER_DISPLAY_TEXTS.he.title}>

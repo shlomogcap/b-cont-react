@@ -12,11 +12,7 @@ import {
   EToastType,
 } from '@/lib/consts/displayTexts';
 import { ERoutesNames } from '@/lib/consts/routes';
-import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
-import {
-  CONTRACTS_DISPLAY_TEXTS,
-  EContractFields,
-} from '@/lib/consts/contracts';
+import { EContractFields } from '@/lib/consts/contracts';
 import { APP_BREADCRUMB } from '@/lib/consts/breadcrumbs';
 import { Card } from '../commons/Card';
 import { ContractSectionFormFields } from '../ContractSectionForm/ContractSectionFormFields';
@@ -119,9 +115,6 @@ export const SectionActualPage = ({
     ERoutesNames.ProjectsWithType,
   );
   const contractStageBreadcrumb = useContractStageBreadcrumb(stage);
-  const title = `${
-    PROJECT_DISPLAY_TEXTS.he.projectTypes[project?.projectType!]
-  } / ${CONTRACTS_DISPLAY_TEXTS.he.contractPagesTitle[stage]}`;
 
   const projectsNavList = useProjectNavList({
     projects,
@@ -182,7 +175,8 @@ export const SectionActualPage = ({
           [EActualFields.Unit]: Number(actualFormCell?.unit),
           [EActualFields.Value]: Number(actualFormCell?.diffValue),
           [EActualFields.CurrentTotal]: Number(actualFormCell?.currentTotal),
-          [EActualFields.Calc]: actualFormCell?.calc!,
+          [EActualFields.Calc]:
+            actualFormCell?.calc ?? ({} as IActualDoc['calc']),
           [ECommonFields.CreatedAt]: dayjs().toISOString(),
         };
         ActualDoc.omit({ id: true, path: true }).parse(dataToSet);

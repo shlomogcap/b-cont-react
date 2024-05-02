@@ -1,1 +1,1 @@
-export type IContractBillingProps = {};
+export type IContractBillingProps = object;
