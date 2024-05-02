@@ -16,7 +16,7 @@ type IUsersContext = {
   error: string;
 };
 
-type IUsersProviderProps = {};
+type IUsersProviderProps = object;
 
 const UsersContext = createContext<IUsersContext>({
   data: [],

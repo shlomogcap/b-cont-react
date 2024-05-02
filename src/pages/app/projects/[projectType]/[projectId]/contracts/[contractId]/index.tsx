@@ -9,7 +9,7 @@ import { replaceQueryParams } from '@/lib/utils/replaceParams';
 import admin from '@/lib/firebase/admin';
 import { GetServerSideProps } from 'next';
 
-export const getServerSideProps: GetServerSideProps<{}> = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const contract = await admin
     .firestore()
     .doc(`projects/${query.projectId}/contracts/${query.contractId}`)

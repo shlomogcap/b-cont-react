@@ -16,7 +16,7 @@ type IVendorsContext = {
   error: string;
 };
 
-type IVendorsProviderProps = {};
+type IVendorsProviderProps = object;
 
 const VendorsContext = createContext<IVendorsContext>({
   data: [],

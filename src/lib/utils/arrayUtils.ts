@@ -6,5 +6,5 @@ export const getNextIndex = <T extends Record<string, any>, K extends keyof T>(
 export const generateNumberArray = (from: number, to: number) =>
   Array.from({ length: to - from + 1 }, (_, index) => from + index);
 
-export const getEntries = <T extends {}>(obj: T) =>
+export const getEntries = <T extends object>(obj: T) =>
   Object.entries(obj) as Array<[keyof T, T[keyof T]]>;

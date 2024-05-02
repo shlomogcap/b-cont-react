@@ -10,7 +10,11 @@
     "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "npm:outdated": "npx -y npm-check-updates",
     "component": "./create-component.sh",
-    "exports": "./export-index.sh"
+    "exports": "./export-index.sh",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -24,8 +28,7 @@
     "@types/react-dom": "18.2.4",
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
-    "eslint": "8.40.0",
-    "eslint-config-next": "^13.4.1",
+    "eslint": "8.56.0",
     "firebase": "^9.22.1",
     "firebase-admin": "^12.1.0",
     "lodash-es": "^4.17.21",
@@ -44,6 +47,11 @@
     "@types/firebase": "^3.2.1",
     "@types/lodash-es": "^4.17.7",
     "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "eslint-config-next": "^13.4.1",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "prettier": "2.8.8"
   }
 }

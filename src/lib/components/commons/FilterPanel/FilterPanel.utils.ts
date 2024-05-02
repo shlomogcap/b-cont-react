@@ -34,7 +34,7 @@ export const getDefaultFilterValues = (filters: IFilterItem[]) => {
   );
 };
 
-export const filterByFilterPanel = <Doc extends {}>(
+export const filterByFilterPanel = <Doc extends object>(
   row: Doc,
   filterFields: Record<string, IFilterValues>,
 ) => {
@@ -69,7 +69,7 @@ export const filterByFilterPanel = <Doc extends {}>(
   );
 };
 
-export const filterBySearch = <T extends {}, F extends keyof T>(
+export const filterBySearch = <T extends object, F extends keyof T>(
   r: T,
   tableSearchFields: F[],
   searchValue: string,

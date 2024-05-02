@@ -92,7 +92,7 @@ export const datetimeDueFormat = (
   }
   let d = String(date);
   let m = String(month);
-  let y = String(year);
+  const y = String(year);
 
   if (month < 10) {
     m = '0' + m;
@@ -159,7 +159,7 @@ export const datetimeDueFormat = (
   if (useHours) {
     const hours = dateObj.get('hour');
     const minutes = dateObj.get('minutes');
-    let h = String(hours);
+    const h = String(hours);
     let mm = String(minutes);
     if (minutes < 10) {
       mm = '0' + mm;

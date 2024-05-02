@@ -39,7 +39,10 @@ export const NumberInput = ({
     <Controller
       control={control}
       name={inputControlProps.name}
-      render={({ field: { onBlur, ...fieldProps }, fieldState: { error } }) => (
+      render={({
+        field: { onBlur: _onBlur, ...fieldProps },
+        fieldState: { error },
+      }) => (
         <StyledInputControl hasError={Boolean(error?.message)}>
           <InputControlLabel error={error} {...inputControlProps} />
           <Tooltip
