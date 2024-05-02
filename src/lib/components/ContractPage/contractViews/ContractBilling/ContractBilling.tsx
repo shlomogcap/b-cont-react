@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { IContractBillingProps } from './ContractBilling.types';
 import { useContractContext } from '@/lib/context/contractContext';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
@@ -13,9 +12,9 @@ import {
 import { ReportTable } from '@/lib/components/ReportTable';
 import { fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { prepareContractBillingReport } from './ContractBilling.utils';
+import { AccountForm } from '@/lib/components/AccountForm';
 
-export const ContractBilling = (props: IContractBillingProps) => {
-  const router = useRouter();
+export const ContractBilling = (_props: IContractBillingProps) => {
   const {
     data: { contract, accounts, sections, workspaces, actuals },
     isLoading,
@@ -81,6 +80,25 @@ export const ContractBilling = (props: IContractBillingProps) => {
         //   });
         // }}
       />
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'max-content 1fr',
+          columnGap: '1rem',
+        }}
+      >
+        <div
+          style={{
+            background: 'white',
+            maxHeight: '70vh',
+            overflowY: 'scroll',
+            padding: '2rem',
+          }}
+        >
+          <AccountForm readOnly={false} account={currentAccount!} />
+        </div>
+        <div style={{ background: 'red' }}>PAYEMNTS PLACEHOLDER</div>
+      </div>
       <ContractActionsRow
         currentAccount={currentAccount!}
         currentStage={currentStage!}

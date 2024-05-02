@@ -8,7 +8,7 @@ import { useRef } from 'react';
 import { useOverflowed } from '@/lib/hooks/useOverflowed';
 import { Tooltip } from '../../Tooltip';
 
-type INumberInputProps = Omit<IInputProps, 'inputElement'> & {
+export type INumberInputProps = Omit<IInputProps, 'inputElement'> & {
   numericFormatProps?: NumericFormatProps;
   onlyInteger?: boolean;
   max?: number;

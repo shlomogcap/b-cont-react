@@ -31,7 +31,7 @@ export const MilestonesActualsByPeriodTable = ({
   isLoading,
 }: Pick<IMilestonesTableProps, 'isLoading'> & { accounts: IAccountDoc[] }) => {
   const { watch } = useFormContext();
-  const [calculationType, calculationMethod, price, itemsCount, totalSum] =
+  const [calculationType, _calculationMethod, price, itemsCount, totalSum] =
     useWatch({
       name: [
         `section.${ESectionFields.CalculationType}`,
@@ -110,7 +110,6 @@ export const MilestonesActualsByPeriodTable = ({
 
       {/* ROWS */}
       {accounts.map((account, accountRow) => {
-        const period = account[EAccountFields.PeriodNumber];
         return (
           <>
             <StyledIndex>{account[EAccountFields.Period]}</StyledIndex>
