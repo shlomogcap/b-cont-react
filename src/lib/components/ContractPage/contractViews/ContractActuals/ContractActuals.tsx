@@ -10,11 +10,11 @@ import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { EContractFields, EContractStatus } from '@/lib/consts/contracts';
 import { useRouter } from 'next/router';
 import { ERoutesNames, SECTION_ID_QUERY } from '@/lib/consts/routes';
-import { ContractProgressRow } from '../ContractProgressRow';
-import { ContractActionsRow } from '../ContractActionsRow';
+import { ContractProgressRow } from '../../ContractProgressRow';
+import { ContractActionsRow } from '../../ContractActionsRow';
 import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 
-export const ContractActuals = (props: IContractActualsProps) => {
+export const ContractActuals = (_props: IContractActualsProps) => {
   const router = useRouter();
   const {
     data: { contract, accounts, sections, workspaces, actuals },

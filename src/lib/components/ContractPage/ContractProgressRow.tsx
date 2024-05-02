@@ -1,12 +1,12 @@
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
-import { StyledContractPageRow } from '../ContractPage.styled';
+import { StyledContractPageRow } from './ContractPage.styled';
 import { FirstAccountButton } from './FirstAccountButton';
 import { ContractConfirms } from './ContractConfirms';
-import { ChatCard } from '../../commons/ChatCard';
+import { ChatCard } from '../commons/ChatCard';
 import {
   CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS,
   EContractActualsButtons,
-} from './ContractActuals/ContractActuals.consts';
+} from './contractViews/ContractActuals/ContractActuals.consts';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 

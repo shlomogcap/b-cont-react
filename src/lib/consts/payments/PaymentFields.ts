@@ -3,6 +3,7 @@ export enum EPaymentFields {
   Description = 'description',
   PaymentChannel = 'paymentChannel',
   PaymentType = 'paymentType',
-  PaymentIdentity = 'paymentIdentity',
+  PaymentIdentifier = 'paymentIdentifier',
+  AccountRef = 'accountRef',
   Sum = 'sum',
 }

@@ -12,7 +12,7 @@ export const PaymentDoc = z
     [EPaymentFields.PaymentDate]: STRING_SCHEMA,
     [EPaymentFields.Description]: OPTIONAL_STRING_SCHEMA,
     [EPaymentFields.PaymentChannel]: STRING_SCHEMA,
-    [EPaymentFields.PaymentIdentity]: STRING_SCHEMA,
+    [EPaymentFields.PaymentIdentifier]: STRING_SCHEMA,
     [EPaymentFields.PaymentType]: STRING_SCHEMA,
     [EPaymentFields.Sum]: NUMBER_SCHEMA,
   })

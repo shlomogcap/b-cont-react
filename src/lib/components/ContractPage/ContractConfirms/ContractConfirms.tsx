@@ -10,7 +10,7 @@ import {
   StyledPeriod,
   StyledPeriodLabel,
 } from './ContractConfirms.styled';
-import { StyledActionsRow } from '../ContractPlan/ContractPlan.styled';
+import { StyledActionsRow } from '../contractViews/ContractPlan/ContractPlan.styled';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';

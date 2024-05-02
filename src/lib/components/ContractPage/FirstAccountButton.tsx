@@ -1,5 +1,5 @@
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
-import { Button } from '../../commons/Button';
+import { Button } from '../commons/Button';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 import { EPeriodUnit } from '@/lib/consts/accounts/PeriodUnit';
@@ -7,7 +7,7 @@ import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import {
   CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS,
   EContractActualsButtons,
-} from './ContractActuals/ContractActuals.consts';
+} from './contractViews/ContractActuals/ContractActuals.consts';
 import { IConfirmDoc } from '@/lib/consts/confirms/ConfirmDoc';
 
 type FirstAccountButtonProps = {

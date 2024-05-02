@@ -2,8 +2,8 @@ import { IContractBillingProps } from './ContractBilling.types';
 import { useContractContext } from '@/lib/context/contractContext';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { EContractFields, EContractStatus } from '@/lib/consts/contracts';
-import { ContractProgressRow } from '../ContractProgressRow';
-import { ContractActionsRow } from '../ContractActionsRow';
+import { ContractProgressRow } from '../../ContractProgressRow';
+import { ContractActionsRow } from '../../ContractActionsRow';
 import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 import {
   CONTRACT_BILLING_REPORT_DISPLAY_TEXTS,
@@ -15,6 +15,7 @@ import { prepareContractBillingReport } from './ContractBilling.utils';
 import { AccountForm } from '@/lib/components/AccountForm';
 import { Card } from '@/lib/components/commons/Card';
 import { EPaymentFields } from '@/lib/consts/payments/PaymentFields';
+import { PAYMENTS_DISPLAY_TEXTS } from '@/lib/consts/payments/displayTexts';
 
 export const ContractBilling = (_props: IContractBillingProps) => {
   const {
@@ -99,16 +100,10 @@ export const ContractBilling = (_props: IContractBillingProps) => {
                 EPaymentFields.PaymentDate,
                 EPaymentFields.PaymentChannel,
                 EPaymentFields.PaymentType,
-                EPaymentFields.PaymentIdentity,
+                EPaymentFields.PaymentIdentifier,
                 EPaymentFields.Sum,
               ],
-              {
-                paymentDate: 'Payment Date',
-                paymentChannel: 'Payment Channel',
-                paymentType: 'Payment Type',
-                paymentIdentity: 'Payment Identity',
-                sum: 'Sum',
-              },
+              PAYMENTS_DISPLAY_TEXTS.he.fields,
             )}
             rows={[]}
           />

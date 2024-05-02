@@ -22,11 +22,13 @@ import { IActualDoc } from '../consts/actuals/ActualDoc';
 import { CONTRACT_STAGE_QUERY, ERoutesNames } from '../consts/routes';
 import { showToastError } from '../utils/showToastError';
 import { useRouter } from 'next/router';
+import { IPaymentDoc } from '../consts/payments/PaymentDoc';
 
 type IContractData = {
   contract: IContractDoc | null;
   sections: ISectionDoc[];
   accounts: IAccountDoc[];
+  payments: IPaymentDoc[];
   actuals: IActualDoc[];
   workspaces: IWorkspaceDoc[];
   handleChangeContractToPlan: () => void;
@@ -48,6 +50,7 @@ const INITIAL_CONTRACT_DATA = {
   sections: [],
   accounts: [],
   actuals: [],
+  payments: [],
   workspaces: [],
   handleChangeContractToPlan: () => null,
 };
@@ -72,6 +75,7 @@ export const ContractProvider = ({
   );
   const [actuals, setActuals] = useState<IContractData['actuals']>([]);
   const [accounts, setAccounts] = useState<IContractData['accounts']>([]);
+  const [payments, setPayments] = useState<IContractData['payments']>([]);
   const [sections, setSections] = useState<IContractData['sections']>([]);
   const [workspaces, setWorkspaces] = useState<IContractData['workspaces']>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -118,6 +122,12 @@ export const ContractProvider = ({
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
+    const paymentSubscription = onSnapshotHandler({
+      collectionRef: collection(firestore, `${contractPath}/payments`),
+      setData: setPayments,
+      setIsLoading,
+      setError: (e) => setError((prev) => `${prev}\n${e}`),
+    });
     const actualsSubscription = onSnapshotHandler({
       collectionRef: collection(firestore, `${contractPath}/actuals`),
       setData: setActuals,
@@ -141,6 +151,7 @@ export const ContractProvider = ({
       [
         contractSubscription,
         accountsSubscription,
+        paymentSubscription,
         actualsSubscription,
         sectionsSubscription,
         workspacesSubscription,
@@ -153,6 +164,7 @@ export const ContractProvider = ({
         data: {
           accounts,
           actuals,
+          payments,
           sections,
           contract,
           workspaces,

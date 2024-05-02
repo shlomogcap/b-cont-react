@@ -17,7 +17,7 @@ import {
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 import { Card } from '../commons/Card';
 import { ContractForm } from '../ContractForm';
-import { PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
+import { EProjectType, PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
 
 export const ContractPage = ({
   projectId,
@@ -39,7 +39,7 @@ export const ContractPage = ({
   );
   const contractStageBreadcrumb = useContractStageBreadcrumb(stage);
   const title = `${
-    PROJECT_DISPLAY_TEXTS.he.projectTypes[project?.projectType!]
+    PROJECT_DISPLAY_TEXTS.he.projectTypes[project?.projectType as EProjectType]
   } / ${CONTRACTS_DISPLAY_TEXTS.he.contractPagesTitle[stage]}`;
 
   const projectsNavList = useProjectNavList({
@@ -74,7 +74,7 @@ export const ContractPage = ({
         <>
           <Card title={CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}>
             <ContractForm
-              id={contract?.id!}
+              id={contract?.id as string}
               readOnly={!(stage === EContractStage.Plan)}
             />
           </Card>
