@@ -8,6 +8,7 @@ export default function ProjectRoute() {
   const { query } = useRouter();
   return (
     <NewProjectPage
+      projectId=''
       projectType={queryParamToString(query, PROJECT_TYPE_QUERY)}
     />
   );

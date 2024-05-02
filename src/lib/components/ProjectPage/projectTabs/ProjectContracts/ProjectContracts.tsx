@@ -1,7 +1,4 @@
-import {
-  Table,
-  fieldsNamesToColumns,
-} from '@/lib/components/commons/Table';
+import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import {
   IProjectContractsFilterDoc,
   IProjectContractsProps,

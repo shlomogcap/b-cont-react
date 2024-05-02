@@ -1,9 +1,6 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { IMilestonesTableProps } from '../ContractSectionForm';
-import {
-  ESectionCalculationType,
-  ESectionFields,
-} from '@/lib/consts/sections';
+import { ESectionCalculationType, ESectionFields } from '@/lib/consts/sections';
 import { calcTotalMilestones } from './Milestones.utils';
 import { toNumber } from '@/lib/utils/numberUtils';
 import {

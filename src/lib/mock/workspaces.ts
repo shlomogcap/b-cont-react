@@ -1,8 +1,5 @@
 import { ECommonFields } from '../consts/commonFields';
-import {
-  EWorkspaceFields,
-  IWorkspaceDoc,
-} from '../consts/workspaces';
+import { EWorkspaceFields, IWorkspaceDoc } from '../consts/workspaces';
 import { PATH_FIELD, IWithPathField } from './utils';
 
 export const MOCK_WORKSPACES_DATA: IWithPathField<IWorkspaceDoc>[] = [

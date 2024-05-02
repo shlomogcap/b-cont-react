@@ -1,8 +1,5 @@
 import { IReportTableSection } from '@/lib/components/ReportTable';
-import {
-  ESectionFields,
-  ISectionDoc,
-} from '@/lib/consts/sections';
+import { ESectionFields, ISectionDoc } from '@/lib/consts/sections';
 import { EWorkspaceFields, IWorkspaceDoc } from '@/lib/consts/workspaces';
 import { sortBy, sumBy } from 'lodash-es';
 import {
@@ -16,9 +13,7 @@ import { EActualFields } from '@/lib/consts/actuals/ActualFields';
 import { EContractFields, IContractDoc } from '@/lib/consts/contracts';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
-import {
-  sumByRows,
-} from '@/lib/components/ReportTable/ReportTable.utils';
+import { sumByRows } from '@/lib/components/ReportTable/ReportTable.utils';
 
 const DEFAULT_WORKSPACE = '(default)';
 
@@ -65,7 +60,7 @@ export const prepareContractActualsReport = ({
     currentAccount[EAccountFields.DelayRelease];
   const totalHistoryDelayCalc =
     contractTotalDelayCalc - currentAccountDelayCalc;
-  const contractBudget = contract[EContractFields.TotalAgreementSum]; // TODO:+ additions.sum - subtractions.sum
+  // const contractBudget = contract[EContractFields.TotalAgreementSum]; // TODO:+ additions.sum - subtractions.sum
 
   const injectRows = (
     id: string,
