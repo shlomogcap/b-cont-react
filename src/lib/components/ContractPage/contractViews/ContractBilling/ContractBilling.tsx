@@ -10,9 +10,11 @@ import {
   EContractBillingReportTableFields,
 } from './ContractBilling.consts';
 import { ReportTable } from '@/lib/components/ReportTable';
-import { fieldsNamesToColumns } from '@/lib/components/commons/Table';
+import { Table, fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { prepareContractBillingReport } from './ContractBilling.utils';
 import { AccountForm } from '@/lib/components/AccountForm';
+import { Card } from '@/lib/components/commons/Card';
+import { EPaymentFields } from '@/lib/consts/payments/PaymentFields';
 
 export const ContractBilling = (_props: IContractBillingProps) => {
   const {
@@ -87,17 +89,30 @@ export const ContractBilling = (_props: IContractBillingProps) => {
           columnGap: '1rem',
         }}
       >
-        <div
-          style={{
-            background: 'white',
-            maxHeight: '70vh',
-            overflowY: 'scroll',
-            padding: '2rem',
-          }}
-        >
+        <Card>
           <AccountForm readOnly={false} account={currentAccount!} />
-        </div>
-        <div style={{ background: 'red' }}>PAYEMNTS PLACEHOLDER</div>
+        </Card>
+        <Card>
+          <Table
+            columns={fieldsNamesToColumns(
+              [
+                EPaymentFields.PaymentDate,
+                EPaymentFields.PaymentChannel,
+                EPaymentFields.PaymentType,
+                EPaymentFields.PaymentIdentity,
+                EPaymentFields.Sum,
+              ],
+              {
+                paymentDate: 'Payment Date',
+                paymentChannel: 'Payment Channel',
+                paymentType: 'Payment Type',
+                paymentIdentity: 'Payment Identity',
+                sum: 'Sum',
+              },
+            )}
+            rows={[]}
+          />
+        </Card>
       </div>
       <ContractActionsRow
         currentAccount={currentAccount!}
