@@ -7,6 +7,7 @@ import { ITableToolBarModalData } from '@/lib/components/TableToolBarModal';
 import { IConfirmationModalData } from '@/lib/components/commons/ConfirmationModal';
 import { ILoginModalData } from '@/lib/components/LoginModal';
 import { IEditUserFormModalData } from '@/lib/components/EditUserForm';
+import { IPaymentFormModalData } from '@/lib/components/PaymentForm';
 
 export type IModalProviderProps = {
   children?: ReactNode;
@@ -25,4 +26,5 @@ export type IModalData = { name: EModalName } & (
   | IConfirmationModalData
   | ILoginModalData
   | IEditUserFormModalData
+  | IPaymentFormModalData
 );

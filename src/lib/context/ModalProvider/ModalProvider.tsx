@@ -12,6 +12,7 @@ import { TableToolBarModal } from '@/lib/components/TableToolBarModal';
 import { ConfirmationModal } from '@/lib/components/commons/ConfirmationModal';
 import { LoginModal } from '@/lib/components/LoginModal';
 import { EditUserModal } from '@/lib/components/EditUserForm/EditUserForm';
+import { PaymentFormModal } from '@/lib/components/PaymentForm/PaymentForm';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -36,6 +37,8 @@ const renderModal = (modalData: IModalData) => {
       return <LoginModal {...modalData} />;
     case EModalName.EditUserForm:
       return <EditUserModal {...modalData} />;
+    case EModalName.PaymentForm:
+      return <PaymentFormModal {...modalData} />;
     default:
       return null;
   }

@@ -6,4 +6,5 @@ export enum EModalName {
   ConfirmationModal,
   LoginModal,
   EditUserForm,
+  PaymentForm,
 }

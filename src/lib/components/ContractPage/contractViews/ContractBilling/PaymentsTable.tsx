@@ -4,8 +4,11 @@ import { EPaymentFields } from '@/lib/consts/payments/PaymentFields';
 import { PAYMENTS_DISPLAY_TEXTS } from '@/lib/consts/payments/displayTexts';
 import { useContractContext } from '@/lib/context/contractContext';
 import { StyledActionsRow } from '../ContractPlan/ContractPlan.styled';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
 export const PaymentsTable = () => {
+  const { showModal } = useModalContext();
   const {
     data: { payments },
   } = useContractContext();
@@ -13,7 +16,15 @@ export const PaymentsTable = () => {
     <Table
       title={
         <StyledActionsRow>
-          <Button>+</Button>
+          <Button
+            onClick={() =>
+              showModal({
+                name: EModalName.PaymentForm,
+              })
+            }
+          >
+            +
+          </Button>
         </StyledActionsRow>
       }
       columns={fieldsNamesToColumns(
