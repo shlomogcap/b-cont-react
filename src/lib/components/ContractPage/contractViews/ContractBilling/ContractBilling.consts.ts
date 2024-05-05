@@ -1,4 +1,14 @@
+import {
+  PAYMENT_CHANNEL_OPTIONS,
+  PAYMENT_TYPE_OPTIONS,
+} from '@/lib/components/PaymentForm/PaymentForm.consts';
+import {
+  ITableColumnOption,
+  fieldsNamesToColumns,
+} from '@/lib/components/commons/Table';
 import { ILang } from '@/lib/consts/displayTexts';
+import { EPaymentFields } from '@/lib/consts/payments/PaymentFields';
+import { PAYMENTS_DISPLAY_TEXTS } from '@/lib/consts/payments/displayTexts';
 
 export enum EContractBillingReportTableFields {
   PeriodNumber = 'PeriodNumber',
@@ -89,3 +99,22 @@ export const CONTRACT_BILLING_REPORT_DISPLAY_TEXTS: IDispalyTexts = {
     chatBlockTitle: '',
   },
 };
+
+export const PAYMENTS_TABLE_COLUMNS = fieldsNamesToColumns(
+  [
+    { field: EPaymentFields.PaymentDate, type: 'date' },
+    {
+      field: EPaymentFields.PaymentChannel,
+      type: 'list',
+      options: PAYMENT_CHANNEL_OPTIONS as ITableColumnOption[],
+    },
+    {
+      field: EPaymentFields.PaymentType,
+      type: 'list',
+      options: PAYMENT_TYPE_OPTIONS as ITableColumnOption[],
+    },
+    EPaymentFields.PaymentIdentifier,
+    { field: EPaymentFields.Sum, type: 'currency' },
+  ],
+  PAYMENTS_DISPLAY_TEXTS.he.fields,
+);

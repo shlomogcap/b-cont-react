@@ -33,6 +33,7 @@ import { useRouter } from 'next/router';
 import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
 import { prepareFormData } from '@/lib/utils/prepareFormData';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 
 const PaymentFormFields = ({
   readOnly,
@@ -78,12 +79,13 @@ const PaymentFormFields = ({
 };
 
 export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
+  const { closeModal } = useModalContext();
   const router = useRouter();
   const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
   const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
   const isEditMode = Boolean(payment);
   const form = useForm<IPaymentDoc>({
-    resolver: zodResolver(PaymentDoc),
+    resolver: zodResolver(PaymentDoc.omit({ id: true, path: true })),
     mode: 'onSubmit',
   });
   const { reset } = form;
@@ -105,6 +107,7 @@ export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
           isEditMode ? EToastType.SavingDocData : EToastType.AddingNewDoc
         ],
       );
+      closeModal();
     } catch (err) {
       showToastError(err);
     }
@@ -125,7 +128,7 @@ export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
   return (
     <FormProvider {...form}>
       <Form>
-        <PaymentFormFields readOnly={readOnly} />;
+        <PaymentFormFields readOnly={readOnly} />
         {form.formState.isDirty && (
           <FormFooter>
             <Button onClick={form.handleSubmit(onSubmit, onError)}>
