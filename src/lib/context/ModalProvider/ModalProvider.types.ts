@@ -8,6 +8,7 @@ import { IConfirmationModalData } from '@/lib/components/commons/ConfirmationMod
 import { ILoginModalData } from '@/lib/components/LoginModal';
 import { IEditUserFormModalData } from '@/lib/components/EditUserForm';
 import { IPaymentFormModalData } from '@/lib/components/PaymentForm';
+import { IContractCommentFormData } from '@/lib/components/ContractCommentForm';
 
 export type IModalProviderProps = {
   children?: ReactNode;
@@ -27,4 +28,5 @@ export type IModalData = { name: EModalName } & (
   | ILoginModalData
   | IEditUserFormModalData
   | IPaymentFormModalData
+  | IContractCommentFormData
 );

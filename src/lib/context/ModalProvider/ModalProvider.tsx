@@ -13,6 +13,7 @@ import { ConfirmationModal } from '@/lib/components/commons/ConfirmationModal';
 import { LoginModal } from '@/lib/components/LoginModal';
 import { EditUserModal } from '@/lib/components/EditUserForm/EditUserForm';
 import { PaymentFormModal } from '@/lib/components/PaymentForm/PaymentForm';
+import { ContractCommentFormModal } from '@/lib/components/ContractCommentForm/ContractCommentForm';
 
 const ModalContext = createContext<IModalContext>({
   showModal: () => null,
@@ -39,6 +40,8 @@ const renderModal = (modalData: IModalData) => {
       return <EditUserModal {...modalData} />;
     case EModalName.PaymentForm:
       return <PaymentFormModal {...modalData} />;
+    case EModalName.ContractCommentForm:
+      return <ContractCommentFormModal {...modalData} />;
     default:
       return null;
   }

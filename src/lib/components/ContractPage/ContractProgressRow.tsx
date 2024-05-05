@@ -9,6 +9,8 @@ import {
 } from './contractViews/ContractActuals/ContractActuals.consts';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
+import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
+import { EModalName } from '@/lib/context/ModalProvider/ModalName';
 
 type IContractProgressRowProps = {
   currentAccount: IAccountDoc;
@@ -21,6 +23,7 @@ export const ContractProgressRow = ({
   isActiveContract,
   confirmType,
 }: IContractProgressRowProps) => {
+  const { showModal } = useModalContext();
   const { handleConfirmAccountStage, data: confirmFlow } =
     useProjectConfirmsSettingsContext();
   return (
@@ -50,6 +53,9 @@ export const ContractProgressRow = ({
           CONTRACT_ACTUALS_REPORT_DISPLAY_TEXTS.he.buttons[
             EContractActualsButtons.AddNewComment
           ]
+        }
+        handleAddItem={() =>
+          showModal({ name: EModalName.ContractCommentForm })
         }
       />
     </StyledContractPageRow>
