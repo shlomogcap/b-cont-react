@@ -9,12 +9,22 @@ export const ChatCard = ({
   className,
   addNewText = '+',
   handleAddItem,
+  handleItemClicked,
+  handleTogglePinned,
+  items = MOCK_CHATS,
 }: IChatCardProps) => {
   return (
     <Card title={title} className={className}>
       <StyledChatContainer>
-        {MOCK_CHATS.map((item, ind) => (
-          <ChatBubble key={ind} {...item} />
+        {items.map((item, ind) => (
+          <ChatBubble
+            key={ind}
+            {...item}
+            onItemClick={() => handleItemClicked?.(item)}
+            togglePinned={() =>
+              handleTogglePinned?.({ path: item.path!, pinned: item.pinned! })
+            }
+          />
         ))}
         {handleAddItem && (
           <StyledChatBubbleAdd onClick={handleAddItem}>

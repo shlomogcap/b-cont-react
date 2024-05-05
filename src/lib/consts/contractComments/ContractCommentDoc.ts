@@ -11,7 +11,7 @@ export const ContractCommentDoc = z
     [EContractCommentFields.Title]: STRING_SCHEMA,
     [EContractCommentFields.Description]: OPTIONAL_STRING_SCHEMA,
     [EContractCommentFields.Pinned]: z.boolean(),
-    [EContractCommentFields.AccountRef]: STRING_SCHEMA,
+    [EContractCommentFields.AccountRef]: OPTIONAL_STRING_SCHEMA,
   })
   .merge(COMMON_FIELDS_SCHEMA);
 

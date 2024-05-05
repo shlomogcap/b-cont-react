@@ -42,10 +42,11 @@ export const StyledPinIcon = styled(PinIcon)<{ pinned: boolean }>`
   ${({ pinned }) =>
     pinned
       ? css`
-          fill: var(--color-active);
+          color: var(--color-active);
+          stroke: var(--color-active);
         `
       : css`
-          fill: none;
+          color: transparent;
           stroke: var(--color-non-active);
         `}
 `;

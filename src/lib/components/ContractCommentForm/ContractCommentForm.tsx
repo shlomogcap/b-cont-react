@@ -63,6 +63,7 @@ export const ContractCommentFormFields = ({
 export const ContractCommentForm = ({
   readOnly,
   comment,
+  accountRef,
 }: IContractCommentFormProps) => {
   const { closeModal } = useModalContext();
   const router = useRouter();
@@ -70,6 +71,10 @@ export const ContractCommentForm = ({
   const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
   const isEditMode = Boolean(comment);
   const form = useForm<IContractCommentDoc>({
+    defaultValues: {
+      [EContractCommentFields.AccountRef]: accountRef,
+      [EContractCommentFields.Pinned]: false,
+    },
     resolver: zodResolver(ContractCommentDoc.omit({ id: true, path: true })),
     mode: 'onSubmit',
   });
