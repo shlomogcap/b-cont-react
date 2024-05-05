@@ -10,7 +10,11 @@ import {
 } from 'react-hook-form';
 import { Form, FormFooter } from '../commons/Form';
 import { Button } from '../commons/Button';
-import { DISPLAY_TEXTS, EButtonTexts } from '@/lib/consts/displayTexts';
+import {
+  DISPLAY_TEXTS,
+  EButtonTexts,
+  EToastType,
+} from '@/lib/consts/displayTexts';
 import { IPaymentDoc, PaymentDoc } from '@/lib/consts/payments/PaymentDoc';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
@@ -20,6 +24,15 @@ import {
   PAYMENT_CHANNEL_OPTIONS,
   PAYMENT_TYPE_OPTIONS,
 } from './PaymentForm.consts';
+import { showToastError } from '@/lib/utils/showToastError';
+import { doc, setDoc } from 'firebase/firestore';
+import { firestore } from '@/lib/firebase';
+import { uuid } from '@/lib/utils/uuid';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { queryParamToString } from '@/lib/utils/queryParamToString';
+import { CONTRACT_ID_QUERY, PROJECT_ID_QUERY } from '@/lib/consts/routes';
+import { prepareFormData } from '@/lib/utils/prepareFormData';
 
 const PaymentFormFields = ({
   readOnly,
@@ -65,6 +78,10 @@ const PaymentFormFields = ({
 };
 
 export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
+  const router = useRouter();
+  const projectId = queryParamToString(router.query, PROJECT_ID_QUERY);
+  const contractId = queryParamToString(router.query, CONTRACT_ID_QUERY);
+  const isEditMode = Boolean(payment);
   const form = useForm<IPaymentDoc>({
     resolver: zodResolver(PaymentDoc),
     mode: 'onSubmit',
@@ -73,7 +90,26 @@ export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
   useEffect(() => {
     reset(payment);
   }, [payment, reset]);
-  const onSubmit: SubmitHandler<IPaymentDoc> = async (_values) => {};
+  const onSubmit: SubmitHandler<IPaymentDoc> = async (formData) => {
+    try {
+      const docRef = doc(
+        firestore,
+        `projects/${projectId}/contracts/${contractId}/payments/${
+          payment?.id ?? uuid()
+        }`,
+      );
+      const preparedData = prepareFormData(formData);
+      await setDoc(docRef, preparedData, { merge: true });
+      toast.success(
+        DISPLAY_TEXTS.he.toasts[
+          isEditMode ? EToastType.SavingDocData : EToastType.AddingNewDoc
+        ],
+      );
+    } catch (err) {
+      showToastError(err);
+    }
+    return;
+  };
   const onError: SubmitErrorHandler<IPaymentDoc> = (errors) => {
     console.table(
       Object.entries(errors).reduce(
@@ -81,6 +117,7 @@ export const PaymentForm = ({ readOnly, payment }: IPaymentFormProps) => {
         {},
       ),
     );
+    showToastError(errors, PAYMENTS_DISPLAY_TEXTS.he.fields);
   };
   const abortChanges = () => {
     form.reset();
