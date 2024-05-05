@@ -2,14 +2,22 @@ import { ReactNode } from 'react';
 
 type ITogglePinnedFunc = (args: { path: string; pinned: boolean }) => void;
 
-export type IChatCardProps = {
+export type IChatItem = {
+  path: string;
+  pinned: boolean;
+  title: string;
+  description?: string;
+  [key: string]: unknown;
+};
+
+export type IChatCardProps<T extends IChatItem> = {
   title: ReactNode;
   className?: string;
   addNewText: string;
   handleAddItem?: () => void;
-  handleItemClicked?: (item?: object) => void;
+  handleItemClicked?: (item?: T) => void;
   handleTogglePinned?: ITogglePinnedFunc;
-  items: any[];
+  items: T[];
 };
 
 export type IChatBubbleProps = {

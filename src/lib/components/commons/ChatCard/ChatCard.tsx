@@ -1,18 +1,17 @@
 import { Card } from '../Card';
 import { StyledChatBubbleAdd, StyledChatContainer } from './ChatCard.styled';
-import { IChatCardProps } from './ChatCard.types';
-import { MOCK_CHATS } from './ChatCard.consts';
+import { IChatCardProps, IChatItem } from './ChatCard.types';
 import { ChatBubble } from './ChatBubble';
 
-export const ChatCard = ({
+export const ChatCard = <T extends IChatItem>({
   title,
   className,
   addNewText = '+',
   handleAddItem,
   handleItemClicked,
   handleTogglePinned,
-  items = MOCK_CHATS,
-}: IChatCardProps) => {
+  items,
+}: IChatCardProps<T>) => {
   return (
     <Card title={title} className={className}>
       <StyledChatContainer>
@@ -22,7 +21,7 @@ export const ChatCard = ({
             {...item}
             onItemClick={() => handleItemClicked?.(item)}
             togglePinned={() =>
-              handleTogglePinned?.({ path: item.path!, pinned: item.pinned! })
+              handleTogglePinned?.({ path: item.path, pinned: item.pinned })
             }
           />
         ))}
