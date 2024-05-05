@@ -304,7 +304,10 @@ export const SectionActualPage = ({
             )}
             <FormFooter>
               <Button
-                onClick={onSubmit}
+                onClick={async () => {
+                  await onSubmit();
+                  closeModal();
+                }}
                 disabled={
                   form.formState.isSubmitting || !form.formState.isDirty
                 }
