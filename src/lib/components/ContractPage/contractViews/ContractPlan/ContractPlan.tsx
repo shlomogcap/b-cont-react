@@ -27,7 +27,7 @@ import { CONTRACT_STAGE_QUERY, ERoutesNames } from '@/lib/consts/routes';
 import { toast } from 'react-toastify';
 import { FirebaseError } from 'firebase/app';
 
-export const ContractPlan = (props: IContractPlanProps) => {
+export const ContractPlan = (_props: IContractPlanProps) => {
   const router = useRouter();
   const { showModal } = useModalContext();
   const {
@@ -45,7 +45,7 @@ export const ContractPlan = (props: IContractPlanProps) => {
     contract?.[EContractFields.Status] === EContractStatus.Plan;
   const handleChangeToActive = async () => {
     try {
-      const docRef = doc(firestore, contract?.[ECommonFields.Path]!);
+      const docRef = doc(firestore, contract?.[ECommonFields.Path] as string);
       await updateDoc(docRef, {
         [EContractFields.Status]: EContractStatus.Active,
       });
@@ -120,7 +120,9 @@ export const ContractPlan = (props: IContractPlanProps) => {
       />
       <StyledActionsRow>
         {isPlanContract && (
-          <Button onClick={handleChangeToActive}>Go To Actuals View</Button>
+          <Button onClick={handleChangeToActive}>
+            {CONTRACTS_DISPLAY_TEXTS.he.changeToActualText}
+          </Button>
         )}
       </StyledActionsRow>
     </>

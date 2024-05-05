@@ -1,7 +1,6 @@
 import { EConfirmFlowControls } from '@/lib/consts/confirms/ConfirmFlowControls';
 import { StyledContractPageRow } from './ContractPage.styled';
 import { Button } from '../commons/Button';
-import { useContractContext } from '@/lib/context/contractContext';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { useProjectConfirmsSettingsContext } from '@/lib/context/projectConfirmsSettingsContext';
 
@@ -16,9 +15,6 @@ export const ContractActionsRow = ({
   currentAccount,
   currentStage,
 }: IContractActionsRowProps) => {
-  const {
-    data: { handleChangeContractToPlan },
-  } = useContractContext();
   const { handleConfirmAccountStage, data: confirmFlow } =
     useProjectConfirmsSettingsContext();
   const currentConfirmFlow = confirmFlow.find(
@@ -40,9 +36,6 @@ export const ContractActionsRow = ({
             {currentConfirmFlow?.title}
           </Button>
         )}
-      {isActiveContract && (
-        <Button onClick={handleChangeContractToPlan}>Go To Plan View</Button>
-      )}
     </StyledContractPageRow>
   );
 };

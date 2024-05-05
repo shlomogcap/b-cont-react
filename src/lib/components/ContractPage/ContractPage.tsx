@@ -13,11 +13,16 @@ import {
   CONTRACTS_DISPLAY_TEXTS,
   EContractFields,
   EContractStage,
+  EContractStatus,
 } from '@/lib/consts/contracts';
 import { useContractStageBreadcrumb } from '../ProjectPage/useContractStageBreadcrumb';
 import { Card } from '../commons/Card';
 import { ContractForm } from '../ContractForm';
 import { EProjectType, PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
+import {
+  StyledContratCardTitle,
+  StyledEditContractIcon,
+} from './ContractPage.styled';
 
 export const ContractPage = ({
   projectId,
@@ -28,7 +33,7 @@ export const ContractPage = ({
   const { isLoading } = useProjectsContext();
   const { data: projects } = useProjectsContext();
   const {
-    data: { contract },
+    data: { contract, handleChangeContractToPlan },
   } = useContractContext();
   const project = projectId ? projects.find((p) => p.id === projectId) : null;
   const projectBreadCrumbText = String(project?.title || projectId);
@@ -72,7 +77,19 @@ export const ContractPage = ({
         />
       ) : (
         <>
-          <Card title={CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}>
+          <Card
+            title={
+              <StyledContratCardTitle>
+                {CONTRACTS_DISPLAY_TEXTS.he.contractFormTitle}
+                {contract![EContractFields.Status] ===
+                  EContractStatus.Active && (
+                  <StyledEditContractIcon
+                    onClick={handleChangeContractToPlan}
+                  />
+                )}
+              </StyledContratCardTitle>
+            }
+          >
             <ContractForm
               id={contract?.id as string}
               readOnly={!(stage === EContractStage.Plan)}

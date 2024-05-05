@@ -15,6 +15,8 @@ type IDisplayTextMapping = {
   contractStatus: Record<EContractStatus, string>;
   contractActualsStatus: Record<EContractActualStatus, string>;
   addNewItems: Record<EContractSectionItem, string>;
+  changeToActualText: string;
+  changeToPlanText: string;
 };
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -80,6 +82,8 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EContractActualStatus.DelayReleased]: 'שוחרר עכבון',
       [EContractActualStatus.LackOfClaimsReceived]: 'התקבל העדר תביעות',
     },
+    changeToActualText: 'עבור למסך ביצוע',
+    changeToPlanText: 'עבור למסך עריכת חוזה',
   },
   en: {
     contractFormTitle: 'Contract Details',
@@ -145,5 +149,7 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EContractActualStatus.LackOfClaimsReceived]:
         'A Lack Of Claims Was Received',
     },
+    changeToActualText: 'Go To Contract Actuals View',
+    changeToPlanText: 'Edit Contract Details',
   },
 };
