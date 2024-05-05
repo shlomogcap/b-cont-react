@@ -110,6 +110,8 @@ if the model is change run `tree db` so and update this block (tree represtation
 │       │       │   └── [accountDoc]
 │       │       ├── actuals
 │       │       │   └── [actualDoc]
+│       │       ├── comments
+│       │       │   └── [commentDoc]
 │       │       ├── payments
 │       │       │   └── [paymentDoc]
 │       │       └── sections

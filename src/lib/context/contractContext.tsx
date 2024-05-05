@@ -23,6 +23,7 @@ import { CONTRACT_STAGE_QUERY, ERoutesNames } from '../consts/routes';
 import { showToastError } from '../utils/showToastError';
 import { useRouter } from 'next/router';
 import { IPaymentDoc } from '../consts/payments/PaymentDoc';
+import { IContractCommentDoc } from '../consts/contractComments/ContractCommentDoc';
 
 type IContractData = {
   contract: IContractDoc | null;
@@ -31,6 +32,7 @@ type IContractData = {
   payments: IPaymentDoc[];
   actuals: IActualDoc[];
   workspaces: IWorkspaceDoc[];
+  comments: IContractCommentDoc[];
   handleChangeContractToPlan: () => void;
 };
 
@@ -46,12 +48,13 @@ type IContractProviderProps = {
 };
 
 const INITIAL_CONTRACT_DATA = {
-  contract: {} as any,
+  contract: {} as IContractDoc,
   sections: [],
   accounts: [],
   actuals: [],
   payments: [],
   workspaces: [],
+  comments: [],
   handleChangeContractToPlan: () => null,
 };
 
@@ -71,13 +74,14 @@ export const ContractProvider = ({
   const router = useRouter();
 
   const [contract, setContract] = useState<IContractData['contract']>(
-    {} as any,
+    {} as IContractDoc,
   );
   const [actuals, setActuals] = useState<IContractData['actuals']>([]);
   const [accounts, setAccounts] = useState<IContractData['accounts']>([]);
   const [payments, setPayments] = useState<IContractData['payments']>([]);
   const [sections, setSections] = useState<IContractData['sections']>([]);
   const [workspaces, setWorkspaces] = useState<IContractData['workspaces']>([]);
+  const [comments, setComments] = useState<IContractData['comments']>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -146,6 +150,12 @@ export const ContractProvider = ({
       setIsLoading,
       setError: (e) => setError((prev) => `${prev}\n${e}`),
     });
+    const commentsSubscription = onSnapshotHandler({
+      collectionRef: collection(firestore, `${contractPath}/comments`),
+      setData: setComments,
+      setIsLoading,
+      setError: (e) => setError((prev) => `${prev}\n${e}`),
+    });
 
     return () =>
       [
@@ -155,6 +165,7 @@ export const ContractProvider = ({
         actualsSubscription,
         sectionsSubscription,
         workspacesSubscription,
+        commentsSubscription,
       ].forEach((unsubscribe) => unsubscribe());
   }, [contractPath]);
 
@@ -168,6 +179,7 @@ export const ContractProvider = ({
           sections,
           contract,
           workspaces,
+          comments,
           handleChangeContractToPlan,
         },
         isLoading,
