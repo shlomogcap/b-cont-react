@@ -24,6 +24,7 @@ export type IChatBubbleProps = {
   title: string;
   description?: string;
   createdAt?: string;
+  createdBy?: string;
   pinned?: boolean;
   className?: string;
   togglePinned?: () => void;
