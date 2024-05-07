@@ -2,15 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { MOCK_MILESTONES_DATA } from '@/lib/mock/milestones';
+import { handler } from '../middleware/handler';
 
 type Data = {
   success: boolean;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>,
-) {
+async function seed(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     for (const { id, path, ...data } of MOCK_MILESTONES_DATA) {
       const docRef = doc(firestore, `${path}/milestones/${id}`);
@@ -21,3 +19,4 @@ export default async function handler(
     res.status(400).json({ success: false });
   }
 }
+export default handler(seed);
