@@ -14,7 +14,9 @@ const execMiddleware = async (
   middleware: Middleware[],
   index = 0,
 ) => {
-  if (res.headersSent || !middleware[index]) return;
+  if (res.headersSent || !middleware[index]) {
+    return;
+  }
 
   if (typeof middleware[index] !== 'function') {
     res.status(500).end('Middleware must be a function!');

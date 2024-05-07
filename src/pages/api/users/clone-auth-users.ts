@@ -7,6 +7,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nookies from 'nookies';
 import { handler } from '../middleware/handler';
 import { HttpMethod, method } from '../middleware/method';
+import { isAuthedUser } from '../middleware/isAuthedUser';
 
 type Data = {
   success: boolean;
@@ -20,14 +21,14 @@ const cloneAuthUsers = async (
 ) => {
   try {
     const { token } = nookies.get({ req });
-    const verifiedAuth = await auth().verifyIdToken(token);
+    const verifiedAuthUser = await auth().verifyIdToken(token);
     const usersQuery = await auth().listUsers();
     const preparedUsers = usersQuery.users.map((userData) => ({
       [ECommonFields.Id]: userData.uid,
       [EUserFields.Title]: userData.displayName ?? '',
       [EUserFields.Phone]: userData.phoneNumber ?? '',
       [EUserFields.Email]: userData.email ?? '',
-      [ECommonFields.UpdatedBy]: verifiedAuth.uid,
+      [ECommonFields.UpdatedBy]: verifiedAuthUser.uid,
       [ECommonFields.UpdatedAt]: dayjs().toISOString(),
     }));
     const batch = firestore().batch();
@@ -51,4 +52,8 @@ const cloneAuthUsers = async (
   }
 };
 
-export default handler(method([HttpMethod.Post]), cloneAuthUsers);
+export default handler(
+  isAuthedUser(),
+  method([HttpMethod.Post]),
+  cloneAuthUsers,
+);
