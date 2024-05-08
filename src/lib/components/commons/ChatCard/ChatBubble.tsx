@@ -10,6 +10,7 @@ import {
 import { IChatBubbleProps } from './ChatCard.types';
 import { datetimeDueFormat } from '@/lib/utils/datatimeDueFormat';
 import { Flag } from '../../Flag';
+import { getDisplaydUser } from './ChatCard.utils';
 
 export const ChatBubble = ({
   title,
@@ -20,18 +21,12 @@ export const ChatBubble = ({
   togglePinned,
   className,
   onItemClick,
+  source = '---',
 }: IChatBubbleProps) => {
   const { data: users } = useUsersContext();
-  console.log(users, createdBy);
-
   return (
     <StyledChatBubble className={className}>
-      {/* TODO: isNewFlag */}
-      {/* TODO: userName flag */}
-      <Flag>
-        {users.find((user) => user.id === createdBy)?.email ??
-          '--UNKNOWN USER--'}
-      </Flag>
+      <Flag>{getDisplaydUser(users, createdBy)}</Flag>
       <StyledChatBubbleTitle>
         <span onClick={onItemClick}>{title}</span>
         <StyledPinIcon
@@ -40,7 +35,7 @@ export const ChatBubble = ({
         />
       </StyledChatBubbleTitle>
       <StyledChatBubbleContent>{description}</StyledChatBubbleContent>
-      <StyledChatBubbleStage>2020-01</StyledChatBubbleStage>
+      <StyledChatBubbleStage>{source}</StyledChatBubbleStage>
       <StyledChatBubbleInfo>
         {datetimeDueFormat(createdAt, { useHours: true })}
       </StyledChatBubbleInfo>

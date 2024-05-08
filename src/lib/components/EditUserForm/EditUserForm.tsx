@@ -13,7 +13,7 @@ import {
   EEditUserTabs,
   PASSWORD_RESOLVER_SCHEMA,
 } from './EditUserForm.consts';
-import { auth } from '@/lib/firebase';
+import { auth, firestore } from '@/lib/firebase';
 import { updateProfile, updatePassword } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
@@ -22,6 +22,8 @@ import { DISPLAY_TEXTS, EToastType } from '@/lib/consts/displayTexts';
 import { showToastError } from '@/lib/utils/showToastError';
 import { Tabs } from '../commons/Tabs';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { doc, setDoc } from 'firebase/firestore';
+import { EUserFields } from '@/lib/consts/users';
 
 const EditUserInfo = () => {
   const form = useForm({
@@ -44,6 +46,15 @@ const EditUserInfo = () => {
         await updateProfile(auth.currentUser, {
           displayName: values[EEditUserFields.DisplayName],
         });
+        const docRef = doc(firestore, `users/${auth.currentUser.uid}`);
+        await setDoc(
+          docRef,
+          {
+            [EUserFields.Email]: values[EEditUserFields.Email] ?? '',
+            [EUserFields.Title]: values[EEditUserFields.DisplayName] ?? '',
+          },
+          { merge: true },
+        );
         toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
         closeModal();
       } catch (err) {

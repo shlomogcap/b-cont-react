@@ -7,6 +7,7 @@ export type IChatItem = {
   pinned: boolean;
   title: string;
   description?: string;
+  source?: string;
   [key: string]: unknown;
 };
 
@@ -27,6 +28,7 @@ export type IChatBubbleProps = {
   createdBy?: string;
   pinned?: boolean;
   className?: string;
+  source?: string;
   togglePinned?: () => void;
   onItemClick?: () => void;
 };
