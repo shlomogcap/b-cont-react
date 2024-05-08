@@ -2,6 +2,8 @@ import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { MOCK_CONFIRMS_SETTINGS_DATA } from '@/lib/mock/confirmsSettings';
 import { handler } from '../middleware/handler';
+import { isAuthedUser } from '../middleware/isAuthedUser';
+import { HttpMethod, methodsGuard } from '../middleware/method';
 
 type Data = {
   success: boolean;
@@ -18,4 +20,4 @@ async function seed(req: NextApiRequest, res: NextApiResponse<Data>) {
     res.status(400).json({ success: false });
   }
 }
-export default handler(seed);
+export default handler(methodsGuard([HttpMethod.Get]), isAuthedUser(), seed);

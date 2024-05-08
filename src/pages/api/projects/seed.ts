@@ -2,6 +2,8 @@ import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { handler } from '../middleware/handler';
+import { HttpMethod, methodsGuard } from '../middleware/method';
+import { isAuthedUser } from '../middleware/isAuthedUser';
 
 type Data = {
   success: boolean;
@@ -19,4 +21,4 @@ async function seed(req: NextApiRequest, res: NextApiResponse<Data>) {
   }
 }
 
-export default handler(seed);
+export default handler(methodsGuard([HttpMethod.Get]), isAuthedUser(), seed);

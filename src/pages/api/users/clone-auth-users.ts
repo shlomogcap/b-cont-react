@@ -5,7 +5,7 @@ import { auth, firestore } from 'firebase-admin';
 import { FirebaseError } from 'firebase/app';
 import nookies from 'nookies';
 import { handler } from '../middleware/handler';
-import { HttpMethod, method } from '../middleware/method';
+import { HttpMethod, methodsGuard } from '../middleware/method';
 import { isAuthedUser } from '../middleware/isAuthedUser';
 
 type Data = {
@@ -52,7 +52,7 @@ const cloneAuthUsers = async (
 };
 
 export default handler(
+  methodsGuard([HttpMethod.Post]),
   isAuthedUser(),
-  method([HttpMethod.Post]),
   cloneAuthUsers,
 );

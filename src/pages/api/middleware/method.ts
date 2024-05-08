@@ -8,7 +8,7 @@ export enum HttpMethod {
   Delete = 'DELETE',
 }
 
-export const method =
+export const methodsGuard =
   (allowedMethods: HttpMethod[]): Middleware =>
   async (req: NextApiRequest, res: NextApiResponse, next: NextFunction) => {
     if (allowedMethods.includes(req.method as HttpMethod)) {

@@ -2,6 +2,8 @@ import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { MOCK_WORKSPACES_DATA } from '@/lib/mock/workspaces';
 import { handler } from '../middleware/handler';
+import { isAuthedUser } from '../middleware/isAuthedUser';
+import { HttpMethod, methodsGuard } from '../middleware/method';
 
 type Data = {
   success: boolean;
@@ -19,4 +21,4 @@ async function seed(req: NextApiRequest, res: NextApiResponse<Data>) {
   }
 }
 
-export default handler(seed);
+export default handler(methodsGuard([HttpMethod.Get]), isAuthedUser(), seed);

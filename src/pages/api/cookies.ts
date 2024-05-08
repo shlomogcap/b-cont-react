@@ -1,6 +1,7 @@
 import nookies from 'nookies';
-import { HttpMethod, method } from './middleware/method';
+import { HttpMethod, methodsGuard } from './middleware/method';
 import { handler } from './middleware/handler';
+import { isAuthedUser } from './middleware/isAuthedUser';
 
 type CookiesData = {
   [key: string]: string;
@@ -15,4 +16,8 @@ const getCookies = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   res.status(200).json({ data: cookiesData });
 };
 
-export default handler(method([HttpMethod.Get]), getCookies);
+export default handler(
+  methodsGuard([HttpMethod.Get]),
+  isAuthedUser(),
+  getCookies,
+);
