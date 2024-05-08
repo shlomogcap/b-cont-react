@@ -6,11 +6,10 @@ import { ContractProgressRow } from '../../ContractProgressRow';
 import { ContractActionsRow } from '../../ContractActionsRow';
 import { EConfirmType } from '@/lib/consts/confirms/ConfirmType';
 import {
+  BILLING_REPORT_COLUMNS,
   CONTRACT_BILLING_REPORT_DISPLAY_TEXTS,
-  EContractBillingReportTableFields,
 } from './ContractBilling.consts';
 import { ReportTable } from '@/lib/components/ReportTable';
-import { fieldsNamesToColumns } from '@/lib/components/commons/Table';
 import { prepareContractBillingReport } from './ContractBilling.utils';
 import { AccountForm } from '@/lib/components/AccountForm';
 import { Card } from '@/lib/components/commons/Card';
@@ -42,27 +41,7 @@ export const ContractBilling = (_props: IContractBillingProps) => {
         confirmType={EConfirmType.Billing}
       />
       <ReportTable
-        columns={fieldsNamesToColumns(
-          [
-            EContractBillingReportTableFields.PeriodNumber,
-            EContractBillingReportTableFields.Period,
-            EContractBillingReportTableFields.TotalSections,
-            EContractBillingReportTableFields.TotalAdditionsSubtractions,
-            EContractBillingReportTableFields.AccumulatedTotal,
-            EContractBillingReportTableFields.TotalDelay,
-            EContractBillingReportTableFields.TotalAccountToPay,
-            EContractBillingReportTableFields.IndexedPercent,
-            EContractBillingReportTableFields.TotalIndexed,
-            EContractBillingReportTableFields.TotalAfterIndexed,
-            EContractBillingReportTableFields.VatPercent,
-            EContractBillingReportTableFields.TotalVAT,
-            EContractBillingReportTableFields.TotalBeforeTax,
-            EContractBillingReportTableFields.TaxPercent,
-            EContractBillingReportTableFields.TotalTax,
-            EContractBillingReportTableFields.TotalToPay,
-          ],
-          CONTRACT_BILLING_REPORT_DISPLAY_TEXTS.he.fields,
-        )}
+        columns={BILLING_REPORT_COLUMNS}
         sections={prepareContractBillingReport({
           contract: contract!,
           accounts,

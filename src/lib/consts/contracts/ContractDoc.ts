@@ -25,6 +25,7 @@ export const ContractDoc = z.object({
   [EContractFields.Status]: z.nativeEnum(EContractStatus).optional(),
   [EContractFields.IsIndexed]: OPTIONAL_BOOLEAN_SCHEMA,
   [EContractFields.IndexedFactor]: OPTIONAL_STRING_SCHEMA,
+  [EContractFields.IndexedPercentage]: OPTIONAL_NUMBER_SCHEMA,
   [EContractFields.CalculationMethod]: OPTIONAL_STRING_SCHEMA,
   [EContractFields.SWorkDate]: OPTIONAL_DATE_SCHEMA,
   [EContractFields.NumberOfPeriods]: OPTIONAL_NUMBER_SCHEMA,

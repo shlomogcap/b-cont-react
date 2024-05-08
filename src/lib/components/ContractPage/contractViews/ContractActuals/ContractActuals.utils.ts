@@ -10,7 +10,7 @@ import {
 import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import { getRelatedActuals } from '@/lib/utils/actualsCalculation';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
-import { EContractFields, IContractDoc } from '@/lib/consts/contracts';
+import { IContractDoc } from '@/lib/consts/contracts';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { sumByRows } from '@/lib/components/ReportTable/ReportTable.utils';
@@ -27,7 +27,6 @@ type IPrepareContractActualsReportArgs = {
 };
 
 export const prepareContractActualsReport = ({
-  contract,
   accounts,
   currentAccount,
   workspaces,
@@ -41,10 +40,6 @@ export const prepareContractActualsReport = ({
 
   const contractRelatedAccount = accounts.filter(
     (account) => account[EAccountFields.PeriodNumber] <= currentAccountPeriod,
-  );
-  const contractTotalActuals = sumBy(
-    contractRelatedAccount,
-    EAccountFields.TotalSections,
   );
   const contractTotalDelay = sumBy(
     contractRelatedAccount,

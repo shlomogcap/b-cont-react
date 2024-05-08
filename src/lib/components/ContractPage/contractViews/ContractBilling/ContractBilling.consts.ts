@@ -118,3 +118,67 @@ export const PAYMENTS_TABLE_COLUMNS = fieldsNamesToColumns(
   ],
   PAYMENTS_DISPLAY_TEXTS.he.fields,
 );
+
+export const BILLING_REPORT_COLUMNS = fieldsNamesToColumns(
+  [
+    EContractBillingReportTableFields.PeriodNumber,
+    EContractBillingReportTableFields.Period,
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalSections,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalAdditionsSubtractions,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.AccumulatedTotal,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalDelay,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalAccountToPay,
+    },
+    {
+      type: 'percentage',
+      field: EContractBillingReportTableFields.IndexedPercent,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalIndexed,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalAfterIndexed,
+    },
+    {
+      type: 'percentage',
+      field: EContractBillingReportTableFields.VatPercent,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalVAT,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalBeforeTax,
+    },
+    {
+      type: 'percentage',
+      field: EContractBillingReportTableFields.TaxPercent,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalTax,
+    },
+    {
+      type: 'currency',
+      field: EContractBillingReportTableFields.TotalToPay,
+    },
+  ],
+  CONTRACT_BILLING_REPORT_DISPLAY_TEXTS.he.fields,
+);

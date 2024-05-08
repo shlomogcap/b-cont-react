@@ -10,6 +10,7 @@ export enum EContractFields {
   Status = 'status',
   IsIndexed = 'isIndexed',
   IndexedFactor = 'indexedFactor',
+  IndexedPercentage = 'indexedPercentage',
   CalculationMethod = 'calculationMethod',
   SWorkDate = 'sWorkDate',
   NumberOfPeriods = 'numberOfPeriods',

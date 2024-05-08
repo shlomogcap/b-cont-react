@@ -28,7 +28,7 @@ import {
 import { EContractStatus } from '@/lib/consts/contracts';
 import { prepareProjectAccountsRows } from './ProjectAccounts.utils';
 
-export const ProjectAccounts = (props: IProjectAccountsProps) => {
+export const ProjectAccounts = (_: IProjectAccountsProps) => {
   const form = useForm<IProjectAccountsFilterDoc>({
     resolver: zodResolver(projectAccountsFilterSchema),
     defaultValues: getDefaultFilterValues(projectAccountsTableFilters),
@@ -41,7 +41,7 @@ export const ProjectAccounts = (props: IProjectAccountsProps) => {
   );
 };
 
-const ProjectAccountsInner = (props: IProjectAccountsProps) => {
+const ProjectAccountsInner = (_: IProjectAccountsProps) => {
   const {
     data: { contracts, contractAccountMap },
   } = useProjectContractsContext();
