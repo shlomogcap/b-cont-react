@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { MOCK_CONFIRMS_SETTINGS_DATA } from '@/lib/mock/confirmsSettings';

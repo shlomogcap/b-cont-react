@@ -13,7 +13,7 @@ import {
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-export const LoginModal = (props: ILoginModalData) => {
+export const LoginModal = (_props: ILoginModalData) => {
   const form = useForm({
     defaultValues: { [ELoginFields.Email]: '', [ELoginFields.Password]: '' },
   });

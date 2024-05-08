@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { MOCK_PROJECTS_DATA } from '@/lib/mock/projects';
 import { doc, setDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';

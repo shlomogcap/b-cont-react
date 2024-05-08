@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { Middleware, NextFunction } from './handler';
 
 export enum HttpMethod {

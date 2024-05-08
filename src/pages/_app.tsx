@@ -2,14 +2,14 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import GlobalStyle from './GlobalStyle';
 import { ProjectsProvider } from '@/lib/context/projectsContext';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { VendorsProvider } from '@/lib/context/vendorsContext';
 import { UsersProvider } from '@/lib/context/usersContext';
 import { ModalProvider } from '@/lib/context/ModalProvider';
-import { LoginModal } from '@/lib/components/LoginModal';
+import { ILoginModalData, LoginModal } from '@/lib/components/LoginModal';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { UserProvider } from '@/lib/context/userContext';
+import { ToastContainer } from 'react-toastify';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { user, loading, error } = useAuth();
@@ -29,7 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
               <ModalProvider>
                 <ToastContainer position='top-center' closeOnClick={false} />
                 {loading ? 'Loading...' : <Component {...pageProps} />}
-                {!user && !loading && <LoginModal {...({} as any)} />}
+                {!user && !loading && (
+                  <LoginModal {...({} as ILoginModalData)} />
+                )}
               </ModalProvider>
             </VendorsProvider>
           </ProjectsProvider>

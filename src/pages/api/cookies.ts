@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import nookies from 'nookies';
 import { HttpMethod, method } from './middleware/method';
 import { handler } from './middleware/handler';

@@ -3,7 +3,6 @@ import { EUserFields } from '@/lib/consts/users';
 import dayjs from 'dayjs';
 import { auth, firestore } from 'firebase-admin';
 import { FirebaseError } from 'firebase/app';
-import type { NextApiRequest, NextApiResponse } from 'next';
 import nookies from 'nookies';
 import { handler } from '../middleware/handler';
 import { HttpMethod, method } from '../middleware/method';

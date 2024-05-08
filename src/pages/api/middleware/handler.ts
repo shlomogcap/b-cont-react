@@ -1,5 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
 export type NextFunction = () => void;
 
 export type Middleware = (

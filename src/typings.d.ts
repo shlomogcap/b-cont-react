@@ -1,3 +1,10 @@
+import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
+import { User } from 'firebase/auth';
+import {
+  NextApiRequest as OriginalNextApiRequest,
+  NextApiResponse as OriginalNextApiResponse,
+} from 'next';
+
 declare namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_FIREBASE_API_KEY: string;
@@ -7,4 +14,11 @@ declare namespace NodeJS {
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: string;
     NEXT_PUBLIC_FIREBASE_APP_ID: string;
   }
+}
+
+declare global {
+  interface NextApiRequest extends OriginalNextApiRequest {
+    authedUser?: DecodedIdToken;
+  }
+  interface NextApiResponse<Data = any> extends OriginalNextApiResponse<Data> {}
 }
