@@ -19,6 +19,7 @@ declare namespace NodeJS {
 declare global {
   interface NextApiRequest extends OriginalNextApiRequest {
     authedUser?: DecodedIdToken;
+    authedUsertoken?: string;
   }
   interface NextApiResponse<Data = any> extends OriginalNextApiResponse<Data> {}
 }

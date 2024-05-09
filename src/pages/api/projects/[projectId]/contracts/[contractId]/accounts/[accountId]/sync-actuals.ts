@@ -16,10 +16,19 @@ type Data = {
   error?: string;
 };
 
-async function syncActuals(req: NextApiRequest, res: NextApiResponse<Data>) {
+async function syncAccountActuals(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>,
+) {
   try {
-    console.log('POST accountSyncActuals');
     const { projectId, contractId, accountId } = req.query;
+    console.log(
+      `[START] POST syncAccountActuals(${{
+        projectId,
+        contractId,
+        accountId,
+      }})`,
+    );
     const contractPath = `projects/${projectId}/contracts/${contractId}`;
     const contractQuery = await firestore().doc(contractPath).get();
     const accountQuery = await firestore()
@@ -97,5 +106,5 @@ async function syncActuals(req: NextApiRequest, res: NextApiResponse<Data>) {
 export default handler(
   methodsGuard([HttpMethod.Post]),
   isAuthedUser(),
-  syncActuals,
+  syncAccountActuals,
 );

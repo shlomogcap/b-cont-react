@@ -7,8 +7,10 @@ export const isAuthedUser =
   async (req: NextApiRequest, res: NextApiResponse, next: NextFunction) => {
     try {
       const { token } = nookies.get({ req });
-      const authedUser = await auth().verifyIdToken(token);
+      const tokenFromHeaders = req.headers.authorization?.split(' ')[1];
+      const authedUser = await auth().verifyIdToken(token ?? tokenFromHeaders);
       req.authedUser = authedUser;
+      req.authedUsertoken = token;
       next();
     } catch (err) {
       res.status(401).json({
