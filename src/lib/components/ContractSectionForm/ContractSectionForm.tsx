@@ -9,6 +9,7 @@ import {
   doc,
   writeBatch,
   deleteDoc,
+  CollectionReference,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import {
@@ -224,8 +225,8 @@ const ContractSectionFormInner = ({
     try {
       MilestoneDoc.omit({ id: true, path: true }).parse(milestoneData);
       await addDoc<IWithCreationFields<IMilestoneDoc>>(
-        milestonesRef as any,
-        milestoneData as any,
+        milestonesRef as CollectionReference<IMilestoneDoc>,
+        milestoneData as IMilestoneDoc,
       );
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
     } catch (err) {
