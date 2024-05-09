@@ -61,9 +61,11 @@ import { FullPageLayout } from '../PageLayout/FullPageLayout';
 import { useRouter } from 'next/router';
 import { useModalContext } from '@/lib/context/ModalProvider/ModalProvider';
 import { EModalName } from '@/lib/context/ModalProvider/ModalName';
+import axios from 'axios';
 
 export const SectionActualPage = ({
   projectId,
+  contractId,
   projectType,
   stage,
 }: ISectionActualPageProps) => {
@@ -125,7 +127,7 @@ export const SectionActualPage = ({
     projectId,
     projectType,
     contracts,
-    contractId: contract?.id as string,
+    contractId,
   });
   useEffect(() => {
     reset({
@@ -183,6 +185,9 @@ export const SectionActualPage = ({
         batch.set(docRef, dataToSet, { merge: true });
       });
       await batch.commit();
+      await axios.post(
+        `/api/projects/${projectId}/contracts/${contractId}/sync-actuals`,
+      );
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.SavingDocData]);
     } catch (err) {
       showToastError(err);

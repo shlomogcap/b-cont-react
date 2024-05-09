@@ -16,8 +16,6 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { EContractCommentFields } from '@/lib/consts/contractComments/ContractCommentFields';
 import { IContractCommentDoc } from '@/lib/consts/contractComments/ContractCommentDoc';
-import axios from 'axios';
-import { useRouter } from 'next/router';
 
 type IContractProgressRowProps = {
   currentAccount: IAccountDoc;
@@ -36,31 +34,8 @@ export const ContractProgressRow = ({
   const {
     data: { comments },
   } = useContractContext();
-  const router = useRouter();
   return (
     <StyledContractPageRow>
-      <button
-        onClick={async () => {
-          const { projectId, contractId } = router.query;
-          const result = await axios.post(
-            `/api/projects/${projectId}/contracts/${contractId}/accounts/${currentAccount?.id}/sync-actuals`,
-          );
-          console.log(result.data);
-        }}
-      >
-        Sync Account Actuals
-      </button>
-      <button
-        onClick={async () => {
-          const { projectId, contractId } = router.query;
-          const result = await axios.post(
-            `/api/projects/${projectId}/contracts/${contractId}/sync-actuals`,
-          );
-          console.log(result.data);
-        }}
-      >
-        Sync Contract Actuals
-      </button>
       {currentAccount ? (
         <ContractConfirms
           confirmType={confirmType}

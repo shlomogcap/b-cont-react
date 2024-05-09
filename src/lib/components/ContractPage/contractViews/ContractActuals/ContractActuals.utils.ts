@@ -38,15 +38,15 @@ export const prepareContractActualsReport = ({
     currentAccount[EAccountFields.PeriodNumber],
   );
 
-  const contractRelatedAccount = accounts.filter(
+  const contractRelatedAccounts = accounts.filter(
     (account) => account[EAccountFields.PeriodNumber] <= currentAccountPeriod,
   );
   const contractTotalDelay = sumBy(
-    contractRelatedAccount,
+    contractRelatedAccounts,
     EAccountFields.TotalDelay,
   );
   const contractTotalDelayRelease = sumBy(
-    contractRelatedAccount,
+    contractRelatedAccounts,
     EAccountFields.DelayRelease,
   );
   const contractTotalDelayCalc = contractTotalDelay - contractTotalDelayRelease;

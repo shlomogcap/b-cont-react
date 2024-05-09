@@ -51,6 +51,7 @@ export default function SectionActualRoute({
       <ContractProvider contractId={contractId} projectId={projectId}>
         <SectionProvider sectionPath={sectionPath}>
           <SectionActualPage
+            contractId={contractId}
             projectId={projectId}
             projectType={projectType as EProjectType}
             stage={stage as EContractStage}

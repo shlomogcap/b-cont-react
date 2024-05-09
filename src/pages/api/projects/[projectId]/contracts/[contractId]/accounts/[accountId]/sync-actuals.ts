@@ -36,6 +36,11 @@ async function syncAccountActuals(
       .get();
     const actualsQuery = await firestore()
       .collection(`${contractPath}/actuals`)
+      .where(
+        EActualFields.PeriodNumber,
+        '==',
+        accountQuery?.data()?.[EAccountFields.PeriodNumber],
+      )
       .get();
 
     const contract = {

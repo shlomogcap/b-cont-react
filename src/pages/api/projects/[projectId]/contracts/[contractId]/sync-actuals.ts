@@ -4,10 +4,16 @@ import { isAuthedUser } from '@/pages/api/middleware/isAuthedUser';
 import { HttpMethod, methodsGuard } from '@/pages/api/middleware/method';
 import axios from 'axios';
 import { getAbsoluteApiPath, getAuthorizationHeader } from '@/pages/api/_utils';
+import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
+import { EContractFields } from '@/lib/consts/contracts';
+import { sumBy } from 'lodash-es';
+
+type IResult = { [key in EAccountFields]: number };
 
 type Data = {
   success: boolean;
-  result?: object;
+  result?: IResult[];
+  updated?: object;
   error?: string;
 };
 
@@ -16,7 +22,8 @@ async function syncContractActuals(
   res: NextApiResponse<Data>,
 ) {
   try {
-    const contractAccountsPath = `projects/${req.query.projectId}/contracts/${req.query.contractId}/accounts`;
+    const contractPath = `projects/${req.query.projectId}/contracts/${req.query.contractId}`;
+    const contractAccountsPath = `${contractPath}/accounts`;
     const accountsQuery = await firestore()
       .collection(contractAccountsPath)
       .get();
@@ -30,14 +37,23 @@ async function syncContractActuals(
         headers: getAuthorizationHeader(req),
       });
     });
-    const result = (await Promise.all(accountsSyncPromises)).map(
-      (res) => res.data,
+    const result: IResult[] = (await Promise.all(accountsSyncPromises)).map(
+      (res) => res.data.updated,
     );
-    console.log('RESULT: ', result);
+    console.log('[RESULT]: ', result);
+    const updated = {
+      [EContractFields.TotalActualsSum]: sumBy(
+        result,
+        EAccountFields.AccumulatedTotal,
+      ),
+    };
+    await firestore().doc(contractPath).set(updated, { merge: true });
+    console.log('[UPDATED]: ', updated);
 
     res.status(200).json({
       success: true,
-      result: [],
+      result,
+      updated,
     });
   } catch (e) {
     console.error(e);
