@@ -10,8 +10,10 @@ import { IMilestoneDoc, MilestoneDoc } from '@/lib/consts/milestones';
 import { DefaultValues } from 'react-hook-form';
 import { ISectionFormValues } from './ContractSectionForm.types';
 
-export const SectionFormShape = SectionDoc.merge(
-  z.object({ milestones: z.array(MilestoneDoc) }),
+export const SectionFormShape = SectionDoc.omit({ id: true, path: true }).merge(
+  z.object({
+    milestones: z.array(MilestoneDoc),
+  }),
 );
 
 export const CONTRACT_SECTION_FORM_DEFAULT_VALUES: DefaultValues<ISectionFormValues> =

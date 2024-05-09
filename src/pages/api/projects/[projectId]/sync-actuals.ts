@@ -1,4 +1,4 @@
-import { handler } from '../../../../middleware/handler';
+import { handler } from '../../middleware/handler';
 import { firestore } from 'firebase-admin';
 import { isAuthedUser } from '@/pages/api/middleware/isAuthedUser';
 import { HttpMethod, methodsGuard } from '@/pages/api/middleware/method';
@@ -11,29 +11,27 @@ type Data = {
   error?: string;
 };
 
-async function syncContractActuals(
+async function syncProjectActuals(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
   try {
-    const contractAccountsPath = `projects/${req.query.projectId}/contracts/${req.query.contractId}/accounts`;
-    const accountsQuery = await firestore()
-      .collection(contractAccountsPath)
-      .get();
-    const accountsSyncPromises = accountsQuery.docs.map(({ id }) => {
-      const pathToAccountSyncActualsApi = getAbsoluteApiPath(
+    const contractsPath = `projects/${req.query.projectId}/contracts`;
+    const contractsQuery = await firestore().collection(contractsPath).get();
+    const contractSyncPromises = contractsQuery.docs.map(({ id }) => {
+      const pathToContractSyncActualsApi = getAbsoluteApiPath(
         req,
-        `${contractAccountsPath}/${id}/sync-actuals`,
+        `${contractsPath}/${id}/sync-actuals`,
       );
-      console.log('[CALLING]: POST ' + pathToAccountSyncActualsApi);
-      return axios.post(pathToAccountSyncActualsApi, undefined, {
+      console.log('[CALLING]: POST ' + pathToContractSyncActualsApi);
+      return axios.post(pathToContractSyncActualsApi, undefined, {
         headers: getAuthorizationHeader(req),
       });
     });
-    const result = (await Promise.all(accountsSyncPromises)).map(
+    const result = (await Promise.all(contractSyncPromises)).map(
       (res) => res.data,
     );
-    console.log('RESULT: ', result);
+    console.log('[RESULT]: ', result);
 
     res.status(200).json({
       success: true,
@@ -48,5 +46,5 @@ async function syncContractActuals(
 export default handler(
   methodsGuard([HttpMethod.Post]),
   isAuthedUser(),
-  syncContractActuals,
+  syncProjectActuals,
 );

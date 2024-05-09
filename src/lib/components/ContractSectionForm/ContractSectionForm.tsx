@@ -208,7 +208,7 @@ const ContractSectionFormInner = ({
     setValue(ESectionFields.ItemsCount, oldUnit + 1);
   };
   const handleCreateMilestone = async () => {
-    const contractSectionsPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id!}`;
+    const contractSectionsPath = `projects/${projectId}/contracts/${contractId}/sections/${section?.id}`;
     const milestonesRef = collection(
       firestore,
       `${contractSectionsPath}/milestones`,
@@ -222,7 +222,7 @@ const ContractSectionFormInner = ({
       ),
     };
     try {
-      MilestoneDoc.omit({ id: true }).parse(milestoneData);
+      MilestoneDoc.omit({ id: true, path: true }).parse(milestoneData);
       await addDoc<IWithCreationFields<IMilestoneDoc>>(
         milestonesRef as any,
         milestoneData as any,
