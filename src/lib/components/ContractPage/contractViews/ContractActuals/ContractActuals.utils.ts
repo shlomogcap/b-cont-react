@@ -10,10 +10,12 @@ import {
 import { IActualDoc } from '@/lib/consts/actuals/ActualDoc';
 import { getRelatedActuals } from '@/lib/utils/actualsCalculation';
 import { EActualFields } from '@/lib/consts/actuals/ActualFields';
-import { IContractDoc } from '@/lib/consts/contracts';
+import { EContractFields, IContractDoc } from '@/lib/consts/contracts';
 import { IAccountDoc } from '@/lib/consts/accounts/AccountDoc';
 import { EAccountFields } from '@/lib/consts/accounts/AccountFields';
 import { sumByRows } from '@/lib/components/ReportTable/ReportTable.utils';
+import { EConfirmFields } from '@/lib/consts/confirms/ConfirmFields';
+import { safeDivide } from '@/lib/utils/numberUtils';
 
 const DEFAULT_WORKSPACE = '(default)';
 
@@ -82,8 +84,17 @@ export const prepareContractActualsReport = ({
           EActualFields.CurrentTotal,
         );
         const sectionContractBudget = r[ESectionFields.TotalSum];
-        const totalDelayCalc = totalActuals * contractTotalDelayCalc;
-        const currentDelayCalc = accountTotal * currentAccountDelayCalc;
+        const contractTotalDelayPercentageCalc = safeDivide(
+          contractTotalDelayCalc,
+          totalActuals,
+        );
+        const currnetAccountDelayPercentageCalc = safeDivide(
+          currentAccountDelayCalc,
+          totalActuals,
+        );
+        const totalDelayCalc = totalActuals * contractTotalDelayPercentageCalc;
+        const currentDelayCalc =
+          accountTotal * currnetAccountDelayPercentageCalc;
         return {
           ...r,
           [EContractActualsReportTableFields.Title]: r[ESectionFields.Title],
