@@ -48,14 +48,22 @@ const ReportSection = <T extends string>({
             key={row.id}
             templateColumns={columns.map(() => '1fr').join(' ')}
           >
-            {columns.map(({ field, fieldPath, getValue, ...rest }) => (
-              <StyledTableCell key={`${row.id}/${fieldPath ?? field}`}>
-                {getDisplayValue({
-                  value: getValue?.({ row, field }) ?? row?.[field],
-                  ...rest,
-                }) ?? ''}
-              </StyledTableCell>
-            ))}
+            {columns.map(({ field, fieldPath, getValue, ...rest }) => {
+              const value = getValue?.({ row, field }) ?? row?.[field];
+              return (
+                <StyledTableCell
+                  key={`${row.id}/${fieldPath ?? field}`}
+                  style={{
+                    color: Number(value) < 0 ? 'var(--color-red)' : '',
+                  }}
+                >
+                  {getDisplayValue({
+                    value,
+                    ...rest,
+                  }) ?? ''}
+                </StyledTableCell>
+              );
+            })}
           </StyledReportTableDataRow>
         ))}
       {!loading && section?.totals && (
@@ -69,18 +77,21 @@ const ReportSection = <T extends string>({
           key={section?.totals.id}
           templateColumns={columns.map(() => '1fr').join(' ')}
         >
-          {columns.map(({ field, fieldPath, getValue, ...rest }) => (
-            <StyledTableCell
-              key={`${section?.totals?.id}/${fieldPath ?? field}`}
-            >
-              {getDisplayValue({
-                value:
-                  getValue?.({ row: section.totals!, field }) ??
-                  section.totals?.[field],
-                ...rest,
-              }) ?? ''}
-            </StyledTableCell>
-          ))}
+          {columns.map(({ field, fieldPath, getValue, ...rest }) => {
+            const value =
+              getValue?.({ row: section.totals!, field }) ??
+              section.totals?.[field];
+            return (
+              <StyledTableCell
+                key={`${section?.totals?.id}/${fieldPath ?? field}`}
+              >
+                {getDisplayValue({
+                  value,
+                  ...rest,
+                }) ?? ''}
+              </StyledTableCell>
+            );
+          })}
         </StyledReportTableTotalsRow>
       )}
       {!loading &&

@@ -30,6 +30,7 @@ export const getDisplayValue = ({
             style: 'currency',
             currency: 'ILS',
             currencyDisplay: 'symbol',
+            currencySign: 'accounting',
             maximumFractionDigits: 0,
             ...(options ?? {}),
           })
