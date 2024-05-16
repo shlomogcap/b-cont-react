@@ -107,10 +107,26 @@ export const FilterPanel = ({
   const referenceElement = useRef<SVGSVGElement>(null);
   const popperElement = useRef<HTMLDivElement>(null);
   const popperInstance = useRef<Instance | null>(null);
-  const { reset, formState } = useFormContext();
-  const isFiltersActive = Object.values(activeFilters).some(
-    (value) => value === true,
-  );
+  const { reset, formState, watch } = useFormContext();
+  const numOfButtons = filters.reduce((acc, filter) => {
+    if (filter?.type === 'buttons') {
+      acc += filter?.options.length;
+    }
+    return acc;
+  }, 0);
+  const numOfActiveButtons = Object.values(watch()).reduce((acc, filter) => {
+    if (filter.type === 'buttons') {
+      acc += filter.value.length;
+    }
+    console.log(filter);
+    return acc;
+  }, 0);
+  console.log(numOfActiveButtons);
+  const isFiltersActive =
+    Object.values(activeFilters).some((value) => value === true) &&
+    numOfButtons !== numOfActiveButtons &&
+    numOfActiveButtons !== 0;
+
   const filterIconProps: ISvgIconProps = {
     size: 'M',
     onClick: (e) => {
