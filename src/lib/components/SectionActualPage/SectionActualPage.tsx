@@ -193,17 +193,17 @@ export const SectionActualPage = ({
       showToastError(err);
     }
   });
+  const backToContractPage = () =>
+    router.push({
+      pathname: ERoutesNames.Contract,
+      query: {
+        ...router.query,
+      },
+    });
 
   return (
     <FullPageLayout
       onBackClick={() => {
-        const backToContractPage = () =>
-          router.push({
-            pathname: ERoutesNames.Contract,
-            query: {
-              ...router.query,
-            },
-          });
         if (form.formState.isDirty) {
           showModal({
             name: EModalName.ConfirmationModal,
@@ -311,7 +311,7 @@ export const SectionActualPage = ({
               <Button
                 onClick={async () => {
                   await onSubmit();
-                  closeModal();
+                  backToContractPage();
                 }}
                 disabled={
                   form.formState.isSubmitting || !form.formState.isDirty
