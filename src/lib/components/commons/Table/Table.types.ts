@@ -69,4 +69,8 @@ export type ITableProps<T extends string = string> = {
   className?: string;
   addItem?: { text: string; handleAddItem: () => void };
   toolbar?: IToolbarSettings;
+  exportTable?: {
+    text?: string;
+    handleExport: () => void;
+  };
 };

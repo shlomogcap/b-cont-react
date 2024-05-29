@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { Tabs } from '../commons/Tabs';
 import { PROJECT_VIEW_TABS } from './ProjectPage.consts';
 import { EProjectViews, PROJECT_DISPLAY_TEXTS } from '@/lib/consts/projects';
@@ -16,6 +16,7 @@ import { queryParamToString } from '@/lib/utils/queryParamToString';
 import { useRouter } from 'next/router';
 import { PROJECT_ID_QUERY } from '@/lib/consts/routes';
 import { SearchableContextProvider } from '../commons/SearchBar/searchableContext';
+import { useQueryParam } from '@/lib/hooks/useQueryParam';
 
 const PROJECT_OVERVIEW_TABS_MAP: Record<EProjectViews, ReactElement> = {
   [EProjectViews.Confirms]: <ProjectConfirms />,
@@ -28,9 +29,11 @@ const PROJECT_OVERVIEW_TABS_MAP: Record<EProjectViews, ReactElement> = {
 
 export const ProjectOverview = () => {
   const { query } = useRouter();
-  const [projectViewsActiveTab, setProjectViewsActiveTab] = useState(
-    EProjectViews.Confirms,
-  );
+  const [projectViewsActiveTab, setProjectViewsActiveTab] =
+    useQueryParam<EProjectViews>({
+      key: 'view',
+      initialValue: EProjectViews.Confirms,
+    });
 
   return (
     <>

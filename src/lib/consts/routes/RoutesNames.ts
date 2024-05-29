@@ -16,6 +16,7 @@ export enum ERoutesNames {
   Project = `/app/projects/[${PROJECT_TYPE_QUERY}]/[${PROJECT_ID_QUERY}]`,
   NewProject = `/app/projects/[${PROJECT_TYPE_QUERY}]/new`,
   Vendor = `/app/vendors/[${VENDOR_ID_QUERY}]`,
+  NewContract = `/app/projects/[${PROJECT_TYPE_QUERY}]/[${PROJECT_ID_QUERY}]/contracts/new`,
   Contract = `/app/projects/[${PROJECT_TYPE_QUERY}]/[${PROJECT_ID_QUERY}]/contracts/[${CONTRACT_ID_QUERY}]`,
   SectionActual = `/app/projects/[${PROJECT_TYPE_QUERY}]/[${PROJECT_ID_QUERY}]/contracts/[${CONTRACT_ID_QUERY}]/sections/[${SECTION_ID_QUERY}]/actual`,
   Me = '/app/settings/me',

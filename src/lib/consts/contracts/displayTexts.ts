@@ -6,6 +6,10 @@ import { EContractStage } from './ContractStage';
 import { EContractStatus } from './ContractStatus';
 import { EContractType } from './ContractType';
 
+export enum EContractButtons {
+  Add = 'add',
+}
+
 type IDisplayTextMapping = {
   fields: Record<EContractFields, string>;
   contractFormTitle: string;
@@ -17,6 +21,7 @@ type IDisplayTextMapping = {
   addNewItems: Record<EContractSectionItem, string>;
   changeToActualText: string;
   changeToPlanText: string;
+  buttons: Record<EContractButtons, string>;
 };
 
 export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
@@ -82,6 +87,9 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EContractActualStatus.DelayNotReleased]: 'לא שוחרר עכבון',
       [EContractActualStatus.DelayReleased]: 'שוחרר עכבון',
       [EContractActualStatus.LackOfClaimsReceived]: 'התקבל העדר תביעות',
+    },
+    buttons: {
+      [EContractButtons.Add]: '+ חוזה',
     },
     changeToActualText: 'עבור למסך ביצוע',
     changeToPlanText: 'עבור למסך עריכת חוזה',
@@ -150,6 +158,9 @@ export const CONTRACTS_DISPLAY_TEXTS: Record<ILang, IDisplayTextMapping> = {
       [EContractActualStatus.DelayReleased]: 'Delay Release',
       [EContractActualStatus.LackOfClaimsReceived]:
         'A Lack Of Claims Was Received',
+    },
+    buttons: {
+      [EContractButtons.Add]: '+ Add Contract',
     },
     changeToActualText: 'Go To Contract Actuals View',
     changeToPlanText: 'Edit Contract Details',

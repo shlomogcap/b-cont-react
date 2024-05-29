@@ -178,7 +178,7 @@ export const ContractForm = ({ id, readOnly }: IContractFormProps) => {
       toast.success(DISPLAY_TEXTS.he.toasts[EToastType.AddingNewDoc]);
       router.push({
         pathname: ERoutesNames.Project,
-        query: { [PROJECT_ID_QUERY]: res.id },
+        query: { ...router.query, [PROJECT_ID_QUERY]: res.id },
       });
     } catch (err) {
       //TODO: promt error...

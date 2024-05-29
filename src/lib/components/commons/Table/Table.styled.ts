@@ -9,6 +9,15 @@ export const StyledTable = styled(StyledCard)`
   min-height: 30rem;
 `;
 
+export const StyledTableActionsRow = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: flex-end;
+  grid-column-gap: 0.2rem;
+  padding-block-end: 0.5rem;
+  height: 5rem;
+`;
+
 type IStyledTableRowProps = {
   templateColumns?: string;
 };

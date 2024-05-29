@@ -5,6 +5,7 @@ import {
 } from './ProjectContracts.types';
 import {
   CONTRACTS_DISPLAY_TEXTS,
+  EContractButtons,
   EContractFields,
   EContractStatus,
 } from '@/lib/consts/contracts';
@@ -103,16 +104,32 @@ const ProjectContractsInner = (_props: IProjectContractsProps) => {
     }
     return [vendor.title, vendor.companExternalNumber];
   };
+  const handeAddContract = () => {
+    router.push({
+      pathname: ERoutesNames.NewContract,
+      query: { ...router.query },
+    });
+  };
+  const rows = contracts
+    .filter((r) => filterByFilterPanel(r, watchedFields as any))
+    .filter((r) =>
+      filterBySearch(r, searchFields, searchValue, getVendorDetails),
+    );
 
   return (
     <Table
       loading={isLoading}
       columns={contractTableColumns}
-      rows={contracts
-        .filter((r) => filterByFilterPanel(r, watchedFields as any))
-        .filter((r) =>
-          filterBySearch(r, searchFields, searchValue, getVendorDetails),
-        )}
+      addItem={{
+        text: CONTRACTS_DISPLAY_TEXTS.he.buttons[EContractButtons.Add],
+        handleAddItem: handeAddContract,
+      }}
+      exportTable={{
+        text: '',
+        handleExport: () =>
+          alert(`TODO: download data: \n${JSON.stringify(rows, null, 2)}`),
+      }}
+      rows={rows}
       onRowClick={({ id }) =>
         router.push({
           pathname: ERoutesNames.Contract,

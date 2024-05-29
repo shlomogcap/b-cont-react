@@ -6,6 +6,7 @@ import {
   StyledTableHeaders,
   StyledTableDataRow,
   StyledTableTotals,
+  StyledTableActionsRow,
 } from './Table.styled';
 import { ITableColumn, ITableProps, ITableRow } from './Table.types';
 import { EmptyState } from '../EmptyState';
@@ -16,6 +17,8 @@ import { Badge } from '../Badge';
 import { AddItem } from '../../AddItem';
 import { ToolBar } from '../ToolBar';
 import { Tooltip } from '../Tooltip';
+import { Button } from '../Button';
+import { DownloadIcon } from '../../icons/DownloadIcon';
 
 type ITableCellProps<T extends string = string> = {
   column: ITableColumn<T>;
@@ -47,13 +50,22 @@ export const Table = <T extends string = string>({
   loading,
   className,
   onRowClick,
+  exportTable,
   tableFilterProps,
   addItem,
   toolbar,
 }: ITableProps<T>) => {
   return (
     <StyledTable className={className}>
-      {addItem && <AddItem addItem={addItem} />}
+      <StyledTableActionsRow>
+        {addItem && <AddItem addItem={addItem} />}
+        {exportTable && (
+          <Button onClick={() => exportTable.handleExport()} size='L'>
+            {exportTable.text}
+            <DownloadIcon style={{ color: 'white' }} />
+          </Button>
+        )}
+      </StyledTableActionsRow>
       {tableFilterProps && <FilterPanel {...tableFilterProps} />}
       {title && <StyledTableBar>{title}</StyledTableBar>}
       <StyledTableHeaders templateColumns={columns.map(() => '1fr').join(' ')}>
